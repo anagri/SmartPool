@@ -1,0 +1,5 @@
+<project name="smartpool" basedir=".">
+    <target name="default">
+        <echo message="Hello SmartPool"/>
+    </target>
+</project>
