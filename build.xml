@@ -1,5 +1,221 @@
-<project name="smartpool" basedir=".">
-    <target name="default">
-        <echo message="Hello SmartPool"/>
+<?xml version="1.0"?>
+
+<project name="SmartPool" basedir="." default="usage">
+    <property file="build.properties"/>
+    <property name="name" value="SmartPool"/>
+    <property name="src.dir" value="src"/>
+    <property name="test.dir" value="test"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="test.lib.dir" value="test-lib"/>
+    <property name="web.dir" value="web"/>
+    <property name="build.dir" value="build"/>
+    <property name="src.build.dir" value="${build.dir}/classes"/>
+    <property name="test.build.dir" value="${build.dir}/test-classes"/>
+    <property name="web.build.dir" value="${build.dir}/web"/>
+    <property name="junit.reports.dir" value="${build.dir}/junit-reports"/>
+
+    <path id="src-classpath">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+        <!-- We need the servlet API classes: -->
+        <!--  * for Tomcat 5/6 use servlet-api.jar -->
+        <!--  * for other app servers - check the docs -->
+        <fileset dir="${appserver.lib}">
+            <include name="servlet*.jar"/>
+        </fileset>
+    </path>
+
+    <path id="test-classpath">
+        <path refid="src-classpath"/>
+        <pathelement path="${src.build.dir}"/>
+        <fileset dir="${test.lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${deploy.path}/${name}"/>
     </target>
+
+    <target name="usage">
+        <echo message=""/>
+        <echo message="${name} build file"/>
+        <echo message="-----------------------------------"/>
+        <echo message=""/>
+        <echo message="Available targets are:"/>
+        <echo message=""/>
+        <echo message="test      --> Run the test"/>
+        <echo message="build     --> Build the application"/>
+        <echo message="deploy    --> Deploy application as directory"/>
+        <echo message="deploywar --> Deploy application as a WAR file"/>
+        <echo message="install   --> Install application in Tomcat"/>
+        <echo message="reload    --> Reload application in Tomcat"/>
+        <echo message="start     --> Start Tomcat application"/>
+        <echo message="stop      --> Stop Tomcat application"/>
+        <echo message="list      --> List Tomcat applications"/>
+        <echo message=""/>
+    </target>
+
+    <target name="build" description="Compile main source tree java files">
+        <mkdir dir="${src.build.dir}"/>
+        <javac destdir="${src.build.dir}" source="1.6" target="1.6" debug="true"
+               deprecation="false" optimize="false" failonerror="true">
+            <src path="${src.dir}"/>
+            <classpath refid="src-classpath"/>
+        </javac>
+    </target>
+
+    <target name="build-test" description="Compile test tree java files">
+        <mkdir dir="${test.build.dir}"/>
+        <javac destdir="${test.build.dir}" source="1.6" target="1.6" debug="true"
+               deprecation="false" optimize="false" failonerror="true">
+            <src path="${test.dir}"/>
+            <classpath refid="test-classpath"/>
+        </javac>
+    </target>
+
+    <target name="test" depends="build, build-test" description="Runs all the tests">
+        <delete dir="${junit.reports.dir}"/>
+        <mkdir dir="${junit.reports.dir}"/>
+        <junit printsummary="yes" dir="${test.build.dir}" failureProperty="test.failed">
+            <classpath>
+                <path path="${src.build.dir}"/>
+                <path path="${test.build.dir}"/>
+                <fileset dir="${lib.dir}">
+                    <include name="*.jar"/>
+                </fileset>
+                <fileset dir="${test.lib.dir}">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+            <batchtest fork="yes" todir="${junit.reports.dir}">
+                <formatter type="xml"/>
+                <fileset dir="${test.build.dir}">
+                    <include name="**/*Test.class"/>
+                </fileset>
+            </batchtest>
+        </junit>
+        <fail if="test.failed">
+            test.failed=${test.failed}
+            ***********************************************************
+            ***********************************************************
+            ****  One or more tests failed!  Check the output ...  ****
+            ***********************************************************
+            ***********************************************************
+        </fail>
+    </target>
+
+    <target name="prepare-war" depends="build" description="Copies web resources, libraries and classes to output folders">
+        <mkdir dir="${web.build.dir}"/>
+        <copy todir="${web.build.dir}">
+            <fileset dir="${web.dir}">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+        <copy todir="${web.build.dir}/WEB-INF/classes">
+            <fileset dir="${src.build.dir}">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+        <copy todir="${web.build.dir}/WEB-INF/lib">
+            <fileset dir="${lib.dir}">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="deploy" depends="prepare-war" description="Deploy application">
+        <copy todir="${deploy.path}/${name}">
+            <fileset dir="${web.build.dir}">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="deploywar" depends="build" description="Deploy application as a WAR file">
+        <war destfile="${name}.war"
+             webxml="${src.dir}/WEB-INF/web.xml">
+            <fileset dir="${src.dir}">
+                <include name="**/*.*"/>
+            </fileset>
+        </war>
+        <copy todir="${deploy.path}" preservelastmodified="true">
+            <fileset dir=".">
+                <include name="*.war"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <!-- ============================================================== -->
+    <!-- Tomcat tasks - remove these if you don't have Tomcat installed -->
+    <!-- ============================================================== -->
+
+    <path id="catalina-ant-classpath">
+        <!-- We need the Catalina jars for Tomcat -->
+        <!--  * for other app servers - check the docs -->
+        <fileset dir="${appserver.lib}">
+            <include name="catalina-ant.jar"/>
+            <include name="tomcat-coyote.jar"/>
+            <include name="tomcat-util.jar"/>
+        </fileset>
+        <fileset dir="${appserver.home}/bin">
+            <include name="tomcat-juli.jar"/>
+        </fileset>
+    </path>
+
+    <taskdef name="install" classname="org.apache.catalina.ant.DeployTask">
+        <classpath refid="catalina-ant-classpath"/>
+    </taskdef>
+    <taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask">
+        <classpath refid="catalina-ant-classpath"/>
+    </taskdef>
+    <taskdef name="list" classname="org.apache.catalina.ant.ListTask">
+        <classpath refid="catalina-ant-classpath"/>
+    </taskdef>
+    <taskdef name="start" classname="org.apache.catalina.ant.StartTask">
+        <classpath refid="catalina-ant-classpath"/>
+    </taskdef>
+    <taskdef name="stop" classname="org.apache.catalina.ant.StopTask">
+        <classpath refid="catalina-ant-classpath"/>
+    </taskdef>
+
+    <target name="install" description="Install application in Tomcat">
+        <install url="${tomcat.manager.url}"
+                 username="${tomcat.manager.username}"
+                 password="${tomcat.manager.password}"
+                 path="/${name}"
+                 war="${name}"/>
+    </target>
+
+    <target name="reload" description="Reload application in Tomcat">
+        <reload url="${tomcat.manager.url}"
+                username="${tomcat.manager.username}"
+                password="${tomcat.manager.password}"
+                path="/${name}"/>
+    </target>
+
+    <target name="start" description="Start Tomcat application">
+        <start url="${tomcat.manager.url}"
+               username="${tomcat.manager.username}"
+               password="${tomcat.manager.password}"
+               path="/${name}"/>
+    </target>
+
+    <target name="stop" description="Stop Tomcat application">
+        <stop url="${tomcat.manager.url}"
+              username="${tomcat.manager.username}"
+              password="${tomcat.manager.password}"
+              path="/${name}"/>
+    </target>
+
+    <target name="list" description="List Tomcat applications">
+        <list url="${tomcat.manager.url}"
+              username="${tomcat.manager.username}"
+              password="${tomcat.manager.password}"/>
+    </target>
+
+    <!-- End Tomcat tasks -->
+
 </project>

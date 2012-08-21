@@ -11,8 +11,8 @@
       <root url="jar://$PROJECT_DIR$/lib/jdbc-2.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jdbc-mysql.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jstl-2.4.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/junit-4.8.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/mockito-core-1.8.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/test-lib/junit-4.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/test-lib/mockito-core-1.8.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/org.springframework.asm-3.0.2.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/org.springframework.beans-3.0.2.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/org.springframework.context-3.0.2.RELEASE.jar!/" />
@@ -30,14 +30,13 @@
       <root url="jar://$PROJECT_DIR$/lib/selenium-java-2.24.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/selenium-remote-driver-2.24.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/selenium-server-2.24.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/servlet-api-2.5.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/slf4j-jcl-1.6.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/standard-1.1.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/lib/mockito-core-1.8.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/test-lib/mockito-core-1.8.4.jar!/" />
     </SOURCES>
   </library>
 </component>
