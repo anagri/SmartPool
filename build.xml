@@ -134,13 +134,30 @@
         </copy>
     </target>
 
-    <target name="deploy-war" depends="prepare-war" description="Deploy application as a WAR file">
+    <target name="war" depends="deploy" description="creates the war file">
         <war destfile="${name}.war"
              webxml="${web.build.dir}/WEB-INF/web.xml">
             <fileset dir="${web.build.dir}">
                 <include name="**/*.*"/>
             </fileset>
         </war>
+    </target>
+
+    <target name="copy-resources">
+        <copy todir="${deploy.path}/${name}">
+            <fileset dir="${web.dir}">
+                <include name="**/*"/>
+                <exclude name="WEB-INF/**/*"/>
+            </fileset>
+        </copy>
+        <copy todir="${deploy.path}/${name}/WEB-INF/jsp">
+            <fileset dir="${web.dir}/WEB-INF/jsp">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="deploy-war" depends="war" description="Deploy application as a WAR file">
         <copy todir="${deploy.path}" preservelastmodified="true" file="${name}.war"/>
     </target>
 
@@ -182,14 +199,16 @@
                  username="${tomcat.manager.username}"
                  password="${tomcat.manager.password}"
                  path="/${name}"
-                 war="${name}"/>
+                 war="${name}.war"/>
     </target>
 
     <target name="reload" description="Reload application in Tomcat">
+        <antcall target="copy-resources"/>
         <reload url="${tomcat.manager.url}"
                 username="${tomcat.manager.username}"
                 password="${tomcat.manager.password}"
-                path="/${name}"/>
+                path="/${name}"
+                />
     </target>
 
     <target name="start" description="Start Tomcat application">
