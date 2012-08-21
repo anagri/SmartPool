@@ -1,0 +1,7 @@
+create database dummy;
+
+use dummy;
+
+create table DummyTime(
+id int,
+name varchar(20));

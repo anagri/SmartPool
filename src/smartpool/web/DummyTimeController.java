@@ -7,7 +7,7 @@ import smartpool.service.TimeService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class TimeController implements Controller {
+public class DummyTimeController implements Controller {
 
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {

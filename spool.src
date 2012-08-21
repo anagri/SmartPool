@@ -1,0 +1,11 @@
+create database dummy;
+
+use dummy;
+
+create table DummyTime(
+id int,
+name varchar(20));
+
+insert into DummyTime values(1,'Alisha');
+insert into DummyTime values(2,'Charming');
+insert into DummyTime values(3,'Ishak');
