@@ -16,7 +16,7 @@ public class MyBatisConnectionFactory {
 
 		try {
 
-			String resource = "DummySqlMapConfig.xml";
+			String resource = "smartpool/common/DummySqlMapConfig.xml";
 			Reader reader = Resources.getResourceAsReader(resource);
 
 			if (sqlSessionFactory == null) {

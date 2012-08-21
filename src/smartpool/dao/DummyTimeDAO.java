@@ -18,10 +18,7 @@ class DummyTimeDAO {
 	
 
 	public List<DummyTime> selectAll(){
-
 		SqlSession session = sqlSessionFactory.openSession();
-
-		
 		try {
             List<DummyTime> list= session.selectList("DummyTime.getAll");
             return list;

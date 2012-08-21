@@ -1,4 +1,4 @@
-<project name="smartpool" basedir=".">
+<project name="SmartPool" basedir=".">
     <target name="default">
         <echo message="Hello SmartPool"/>
     </target>
