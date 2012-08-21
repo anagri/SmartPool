@@ -7,10 +7,7 @@
         <element id="directory" name="classes">
           <element id="module-output" name="smartpool" />
         </element>
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="spring-3.1.0" />
-          <element id="library" level="project" name="spring-mvc-3.0.0.RELEASE" />
-        </element>
+        <element id="directory" name="lib" />
       </element>
     </root>
   </artifact>
