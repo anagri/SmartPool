@@ -134,18 +134,14 @@
         </copy>
     </target>
 
-    <target name="deploywar" depends="build" description="Deploy application as a WAR file">
+    <target name="deploy-war" depends="prepare-war" description="Deploy application as a WAR file">
         <war destfile="${name}.war"
-             webxml="${src.dir}/WEB-INF/web.xml">
-            <fileset dir="${src.dir}">
+             webxml="${web.build.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.build.dir}">
                 <include name="**/*.*"/>
             </fileset>
         </war>
-        <copy todir="${deploy.path}" preservelastmodified="true">
-            <fileset dir=".">
-                <include name="*.war"/>
-            </fileset>
-        </copy>
+        <copy todir="${deploy.path}" preservelastmodified="true" file="${name}.war"/>
     </target>
 
     <!-- ============================================================== -->
