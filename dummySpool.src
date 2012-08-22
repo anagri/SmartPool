@@ -1,6 +1,9 @@
+drop database if exists dummy;
 create database dummy;
 
 use dummy;
+
+drop table if exists DummyTime;
 
 create table DummyTime(
 id int,
@@ -9,3 +12,4 @@ name varchar(20));
 insert into DummyTime values(1,'Alisha');
 insert into DummyTime values(2,'Charming');
 insert into DummyTime values(3,'Ishak');
+
