@@ -1,6 +1,4 @@
-.idea/workspace.xml
-.idea/misc.xml
-.idea/tasks.xml
+.idea/**
 out/
 web/WEB-INF/classes/
 build
