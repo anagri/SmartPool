@@ -34,7 +34,7 @@
         </fileset>
     </path>
 
-    <target name="clean">
+    <target name="cleanByAnt">
         <delete dir="${build.dir}"/>
         <delete dir="${deploy.path}/${name}"/>
     </target>
@@ -58,7 +58,7 @@
         <echo message=""/>
     </target>
 
-    <target name="build" description="Compile main source tree java files">
+    <target name="buildByAnt" description="Compile main source tree java files">
         <mkdir dir="${src.build.dir}"/>
         <javac destdir="${src.build.dir}" source="1.6" target="1.6" debug="true"
                deprecation="false" optimize="false" failonerror="true">
@@ -76,7 +76,7 @@
         </javac>
     </target>
 
-    <target name="test" depends="build, build-test" description="Runs all the tests">
+    <target name="testByAnt" depends="buildByAnt, build-test" description="Runs all the tests">
         <delete dir="${junit.reports.dir}"/>
         <mkdir dir="${junit.reports.dir}"/>
         <junit printsummary="yes" dir="${test.build.dir}" failureProperty="test.failed">
@@ -107,7 +107,7 @@
         </fail>
     </target>
 
-    <target name="prepare-war" depends="build" description="Copies web resources, libraries and classes to output folders">
+    <target name="prepare-war" depends="buildByAnt" description="Copies web resources, libraries and classes to output folders">
         <mkdir dir="${web.build.dir}"/>
         <copy todir="${web.build.dir}">
             <fileset dir="${web.dir}">
