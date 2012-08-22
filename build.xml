@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<project name="SmartPool" basedir=".">
-    <target name="default">
-        <echo message="Hello SmartPool"/>
-    </target>
-=======
 <?xml version="1.0"?>
 
 <project name="SmartPool" basedir="." default="usage">
