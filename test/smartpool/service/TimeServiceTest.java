@@ -1,11 +1,12 @@
 package smartpool.service;
 
-/**
- * Created with IntelliJ IDEA.
- * User: twer
- * Date: 8/22/12
- * Time: 8:56 AM
- * To change this template use File | Settings | File Templates.
- */
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+
 public class TimeServiceTest {
+    @Test
+    public void testTrue() throws Exception {
+        assertTrue(true);
+    }
 }
