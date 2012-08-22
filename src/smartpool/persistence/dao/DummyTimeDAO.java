@@ -1,4 +1,4 @@
-package smartpool.dao;
+package smartpool.persistence.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

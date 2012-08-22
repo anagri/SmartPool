@@ -1,4 +1,4 @@
-package smartpool.dao;
+package smartpool.persistence.dao;
 
 import junit.framework.Assert;
 import org.junit.Ignore;
