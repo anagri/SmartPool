@@ -4,5 +4,7 @@
 out/
 web/WEB-INF/classes/
 build
+output/
 .idea/gradle.xml
 smartpool.iml
+SmartPool.war
