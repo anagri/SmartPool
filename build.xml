@@ -60,7 +60,7 @@
 
     <target name="buildByAnt" description="Compile main source tree java files">
         <mkdir dir="${src.build.dir}"/>
-        <javac destdir="${src.build.dir}" source="1.6" target="1.6" debug="true"
+    <javac destdir="${src.build.dir}" source="1.6" target="1.6" debug="true"
                deprecation="false" optimize="false" failonerror="true">
             <src path="${src.dir}"/>
             <classpath refid="src-classpath"/>
@@ -134,7 +134,7 @@
         </copy>
     </target>
 
-    <target name="war" depends="deploy" description="creates the war file">
+    <target name="ant-war" depends="deploy" description="creates the war file">
         <war destfile="${name}.war"
              webxml="${web.build.dir}/WEB-INF/web.xml">
             <fileset dir="${web.build.dir}">
@@ -157,7 +157,7 @@
         </copy>
     </target>
 
-    <target name="deploy-war" depends="war" description="Deploy application as a WAR file">
+    <target name="deploy-war" depends="ant-war" description="Deploy application as a WAR file">
         <copy todir="${deploy.path}" preservelastmodified="true" file="${name}.war"/>
     </target>
 

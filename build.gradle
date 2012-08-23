@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'war'
 
 repositories {
     mavenCentral()
@@ -24,14 +25,18 @@ project.ext {
     springSecurityVersion = "3.0.2.RELEASE"
 }
 
+war {
+    from 'web'
+}
+
 dependencies{
 
-    compile "org.springframework:spring-tx:$project.ext['springVersion']",
-            "org.springframework:spring-orm:$project.ext['springVersion']",
-            "org.springframework:spring-jdbc:$project.ext['springVersion']",
-            "org.springframework:spring-webmvc:$project.ext['springVersion']",
-            "org.springframework.security:spring-security-web:$project.ext['springSecurityVersion']",
-            "org.springframework.security:spring-security-config:$project.ext['springSecurityVersion']",
+    compile "org.springframework:spring-tx:$project.springVersion",
+            "org.springframework:spring-orm:$project.springVersion",
+            "org.springframework:spring-jdbc:$project.springVersion",
+            "org.springframework:spring-webmvc:$project.springVersion",
+            "org.springframework.security:spring-security-web:$project.springSecurityVersion",
+            "org.springframework.security:spring-security-config:$project.springSecurityVersion",
             "javax.servlet:servlet-api:2.5",
             "org.mybatis:mybatis:3.1.1"
 
