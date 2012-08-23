@@ -19,20 +19,22 @@ sourceSets {
         }
     }
 }
-springVersion = "3.0.5.RELEASE"
-springSecurityVersion = "3.0.5.RELEASE"
+project.ext {
+    springVersion = "3.0.5.RELEASE"
+    springSecurityVersion = "3.0.2.RELEASE"
+}
 
 dependencies{
 
-    compile "org.springframework:spring-tx:$springVersion",
-            "org.springframework:spring-orm:$springVersion",
-            "org.springframework:spring-jdbc:$springVersion",
-            "org.springframework:spring-webmvc:$springVersion",
-            "org.springframework.security:spring-security-web:$springSecurityVersion",
-            "org.springframework.security:spring-security-config:$springSecurityVersion",
+    compile "org.springframework:spring-tx:$project.ext['springVersion']",
+            "org.springframework:spring-orm:$project.ext['springVersion']",
+            "org.springframework:spring-jdbc:$project.ext['springVersion']",
+            "org.springframework:spring-webmvc:$project.ext['springVersion']",
+            "org.springframework.security:spring-security-web:$project.ext['springSecurityVersion']",
+            "org.springframework.security:spring-security-config:$project.ext['springSecurityVersion']",
             "javax.servlet:servlet-api:2.5",
             "org.mybatis:mybatis:3.1.1"
 
-    testCompile group: 'junit', name:'junit', version:'4.10'
+    testCompile "junit:junit:4.10"
 
 }
