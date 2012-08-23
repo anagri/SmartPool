@@ -5,6 +5,8 @@ out/
 output/
 web/WEB-INF/classes/
 build
+*.ipr
+*.iws
 output/
 .idea/gradle.xml
 smartpool.iml
