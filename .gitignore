@@ -2,6 +2,7 @@
 .gradle/**
 .gradle/**/**/*.bin
 out/
+output/
 web/WEB-INF/classes/
 build
 output/
