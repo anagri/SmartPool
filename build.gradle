@@ -50,6 +50,7 @@ dependencies{
             "org.jasig.cas:cas-client-core:$project.casClientVersion",
             "joda-time:joda-time:2.1",
             "javax.servlet:jstl:1.2",
+            "org.seleniumhq.selenium:selenium-java:2.24.1",
             "commons-codec:commons-codec:1.4",
             "commons-logging:commons-logging:1.1",
             "org.apache.santuario:xmlsec:1.4.0",
