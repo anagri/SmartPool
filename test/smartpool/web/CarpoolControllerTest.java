@@ -11,7 +11,9 @@ import smartpool.service.CarpoolBuilder;
 import smartpool.service.CarpoolService;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -34,7 +36,9 @@ public class CarpoolControllerTest {
         carpoolController = new CarpoolController(carpoolService);
         when(carpoolService.findCarpoolBy("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
-        when(carpoolService.findCarpoolByLocation("Diamond District")).thenReturn(expectedCarpool);
+        ArrayList<Carpool> carpools = new ArrayList<Carpool>();
+        carpools.add(expectedCarpool);
+        when(carpoolService.findCarpoolByLocation("Diamond District")).thenReturn(carpools);
     }
 
     @Test
@@ -53,7 +57,8 @@ public class CarpoolControllerTest {
     @Test
     public void shouldSearchForCarpool(){
         carpoolController.searchByLocation("Diamond District",model);
-        assertThat(model.containsValue(expectedCarpool),equalTo(true));
+        List<Carpool> searchResult = (List<Carpool>) model.get("searchResult");
+        assertThat(searchResult.contains(expectedCarpool),equalTo(true));
     }
 
     @Test

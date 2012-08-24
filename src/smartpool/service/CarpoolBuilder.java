@@ -10,14 +10,25 @@ import smartpool.domain.Status;
 import java.util.ArrayList;
 
 public class CarpoolBuilder {
-    private static final ArrayList<BuddyProfile> buddyProfiles = new ArrayList<BuddyProfile>();
+    private static final ArrayList<BuddyProfile> BUDDIES_CARPOOL_1 = new ArrayList<BuddyProfile>();
     static {
-        buddyProfiles.add(BuddyProfileBuilder.buddyProfile_1);
-        buddyProfiles.get(0).setPickupPoint("Diamond District");
-        buddyProfiles.get(0).setPickupTime("0830");
-        buddyProfiles.add(BuddyProfileBuilder.buddyProfile_2);
-        buddyProfiles.get(1).setPickupPoint("Mars");
-        buddyProfiles.get(1).setPickupTime("0930");
+        BUDDIES_CARPOOL_1.add(BuddyProfileBuilder.buddyProfile_1);
+        BUDDIES_CARPOOL_1.get(0).setPickupPoint("Diamond District");
+        BUDDIES_CARPOOL_1.get(0).setPickupTime("0830");
+        BUDDIES_CARPOOL_1.add(BuddyProfileBuilder.buddyProfile_2);
+        BUDDIES_CARPOOL_1.get(1).setPickupPoint("Mars");
+        BUDDIES_CARPOOL_1.get(1).setPickupTime("0930");
     }
-    public static Carpool CARPOOL_1 = new Carpool("carpool-1", LocalDate.now(), "Diamond District", CabType.COMPANY, 100, LocalTime.now(), Status.RUNNING, buddyProfiles);
+    private static final ArrayList<BuddyProfile> BUDDIES_CARPOOL_2 = new ArrayList<BuddyProfile>();
+    static {
+        BUDDIES_CARPOOL_2.add(BuddyProfileBuilder.buddyProfile_3);
+        BUDDIES_CARPOOL_2.get(0).setPickupPoint("Chinchpokhli");
+        BUDDIES_CARPOOL_2.get(0).setPickupTime("0830");
+        BUDDIES_CARPOOL_2.add(BuddyProfileBuilder.buddyProfile_4);
+        BUDDIES_CARPOOL_2.get(1).setPickupPoint("Pluto");
+        BUDDIES_CARPOOL_2.get(1).setPickupTime("0930");
+    }
+
+    public static Carpool CARPOOL_1 = new Carpool("carpool-1", LocalDate.now(), "Diamond District", CabType.COMPANY, 100, LocalTime.now(), Status.RUNNING, BUDDIES_CARPOOL_1);
+    public static final Carpool CARPOOL_2 = new Carpool("Domlur-1", LocalDate.now(), "Domlur", CabType.COMPANY, 100, LocalTime.now(), Status.PENDING, BUDDIES_CARPOOL_2);
 }

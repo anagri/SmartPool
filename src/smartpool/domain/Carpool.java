@@ -57,4 +57,13 @@ public class Carpool {
     public ArrayList<BuddyProfile> getBuddyProfiles() {
         return buddyProfiles;
     }
+    public String getStartPoint(){
+        return buddyProfiles.get(0).getPickupPoint();
+    }
+    public String getStartTime(){
+        return buddyProfiles.get(0).getPickupTime();
+    }
+    public int buddyCount(){
+        return buddyProfiles.size();
+    }
 }
