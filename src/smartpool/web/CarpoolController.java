@@ -3,14 +3,12 @@ package smartpool.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import smartpool.domain.Carpool;
 import smartpool.service.CarpoolService;
 
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class CarpoolController {
@@ -22,17 +20,9 @@ public class CarpoolController {
         this.carpoolService = carpoolService;
     }
 
-    @RequestMapping(value = "/viewcarpool/{name}", method = RequestMethod.GET)
-    public String viewCarpool(@PathVariable String name, ModelMap model){
-        Carpool carpool = carpoolService.findCarpoolBy(name);
-        model.put("carpool",carpool);
-
-        return "carpool/view";
-    }
-
-    public String searchByLocation(String location, ModelMap model) {
-        Carpool carpool = carpoolService.findCarpoolByLocation(location);
-        model.put("carpool1",carpool);
-        return "carpool/search";
+    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
+        String carpoolName = request.getParameter("name");
+        Carpool carpool = carpoolService.findCarpoolBy(carpoolName);
+        return new ModelAndView("carpool/view", "carpool", carpool);
     }
 }

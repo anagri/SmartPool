@@ -23,7 +23,7 @@
     </target>
 
     <target name="deploy" description="Deploy application to local servers">
-        <copy todir="${deploy.path}" file="${war.file}"/>
+        <copy todir="${deploy.path}/${name}" file="${war.file}"/>
     </target>
 
     <!-- ============================================================== -->

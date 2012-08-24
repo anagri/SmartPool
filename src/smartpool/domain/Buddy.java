@@ -1,6 +1,7 @@
 package smartpool.domain;
 
 public class Buddy {
+<<<<<<< Updated upstream
 
     String username, name, address, contactNumber, emailId, pickupTime;
     String[] preferredPickupPoints;
@@ -40,7 +41,10 @@ public class Buddy {
     public int hashCode() {
         return username != null ? username.hashCode() : 0;
     }
-
+=======
+    String username, name, address, contact_number, email_id, pickup_time;
+    String[] preferred_pickup_points;
+>>>>>>> Stashed changes
 
     public String getUsername() {
         return username;
@@ -66,6 +70,7 @@ public class Buddy {
         this.address = address;
     }
 
+<<<<<<< Updated upstream
     public String getContactNumber() {
         return contactNumber;
     }
@@ -96,5 +101,37 @@ public class Buddy {
 
     public void setPreferredPickupPoints(String[] preferredPickupPoints) {
         this.preferredPickupPoints = preferredPickupPoints;
+=======
+    public String getContact_number() {
+        return contact_number;
+    }
+
+    public void setContact_number(String contact_number) {
+        this.contact_number = contact_number;
+    }
+
+    public String getEmail_id() {
+        return email_id;
+    }
+
+    public void setEmail_id(String email_id) {
+        this.email_id = email_id;
+    }
+
+    public String getPickup_time() {
+        return pickup_time;
+    }
+
+    public void setPickup_time(String pickup_time) {
+        this.pickup_time = pickup_time;
+    }
+
+    public String[] getPreferred_pickup_points() {
+        return preferred_pickup_points;
+    }
+
+    public void setPreferred_pickup_points(String[] preferred_pickup_points) {
+        this.preferred_pickup_points = preferred_pickup_points;
+>>>>>>> Stashed changes
     }
 }

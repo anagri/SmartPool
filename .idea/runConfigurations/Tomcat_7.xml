@@ -67,7 +67,9 @@
       </SHUTDOWN>
     </ConfigurationWrapper>
     <method>
-      <option name="BuildArtifacts" enabled="true" />
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="smartpool_exploded" />
+      </option>
     </method>
   </configuration>
 </component>

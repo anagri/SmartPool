@@ -20,6 +20,5 @@ public class CarpoolTest {
     public void shouldStartACarpool() {
         assertEquals("carpool-1", carpool.name());
         assertEquals(LocalDate.now(), carpool.startDate());
-        assertEquals(CabType.COMPANY, carpool.cabType);
     }
 }
