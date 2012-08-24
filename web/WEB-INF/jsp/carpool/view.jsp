@@ -7,9 +7,9 @@
 </head>
 
 <body>
-    <h1>Carpool ${carpool.name()}</h1>
+    <h1>Carpool ${carpool.name}</h1>
 
-    <h2>Date Started: ${carpool.startDate()}</h2>
+    <h2>Date Started: ${carpool.startDate}</h2>
 </body>
 
 </html>
