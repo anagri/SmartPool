@@ -3,25 +3,26 @@ package smartpool.common;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import smartpool.data.BuddyMapper;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 
 public class MyBatisConnectionFactory {
-
 	private static SqlSessionFactory sqlSessionFactory;
-
 	static {
 
 		try {
 
-			String resource = "smartpool/common/DummySqlMapConfig.xml";
-			Reader reader = Resources.getResourceAsReader(resource);
+			String resource = "SqlMapConfig.xml";
+            Reader reader = Resources.getResourceAsReader(resource);
 
 			if (sqlSessionFactory == null) {
-				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+                sqlSessionFactory.getConfiguration().addMapper(BuddyMapper.class);
 			}
+
 		}
 
 		catch (FileNotFoundException fileNotFoundException) {
@@ -30,6 +31,11 @@ public class MyBatisConnectionFactory {
 		catch (IOException iOException) {
 			iOException.printStackTrace();
 		}
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
 	}
 
 	public static SqlSessionFactory getSqlSessionFactory() {

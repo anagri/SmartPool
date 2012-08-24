@@ -6,7 +6,7 @@ import smartpool.domain.Carpool;
 @Service
 public class CarpoolService {
     public Carpool findCarpoolBy(String name) {
-        if ("carpool-1".equals(name)){
+        if (CarpoolBuilder.CARPOOL_1.getName().equals(name)){
             return CarpoolBuilder.CARPOOL_1;
         }
         return null;

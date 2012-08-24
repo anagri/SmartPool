@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS `buddies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `buddies` (
-  `username` varchar(11) ,
+  `username` varchar(11) NOT NULL DEFAULT '',
   `name` varchar(20) NOT NULL,
   `address` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `buddies` (
   `preferred_pickup_time` time DEFAULT NULL,
   `carpoolid` int(11) DEFAULT NULL,
   PRIMARY KEY (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,11 +51,10 @@ CREATE TABLE `buddies` (
 
 LOCK TABLES `buddies` WRITE;
 /*!40000 ALTER TABLE `buddies` DISABLE KEYS */;
-INSERT INTO `buddies` VALUES (1,'Prithvi Nambiar','H-81, Diamond District, Bangalore','prithvin@thoughtworks.com',"1234567890",NULL,NULL,NULL,NULL,NULL),(2,'Ayush Tulsyan','H-81, Diamond District, Bangalore','ayusht@thoughtworks.com',"1234567890",NULL,NULL,NULL,NULL,NULL),(3,'Suganthi T','L-82, Diamond District, Bangalore','suganthit@thoughtworks.com',"1234567890",NULL,NULL,NULL,NULL,NULL),(4,'Arnav Kumar','M-58, Diamond District, Bangalore','arnavku@thoughtworks.com',"1234567890",NULL,NULL,NULL,NULL,NULL),(5,'Isha Khanna','H-71, Diamond District, Bangalore','ishak@thoughtworks.com',"0987654321",NULL,NULL,NULL,NULL,NULL),(6,'Md Ali Ejaz','C-82, Diamond District, Bangalore','mdalie@thoughtworks.com',"0987654321",NULL,NULL,NULL,NULL,NULL),(7,'Samuel Michael Squir','P-81, Diamond District, Bangalore','ssquire@thoughtworks.com',"0987654321",NULL,NULL,NULL,NULL,NULL),(8,'Govind Menon','P-81, Diamond District, Bangalore','govindm@thoughtworks.com',"1234567890",NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `buddies` VALUES ('1','Prithvi Nambiar','H-81, Diamond District, Bangalore','prithvin@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),('2','Ayush Tulsyan','H-81, Diamond District, Bangalore','ayusht@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),('4','Arnav Kumar','M-58, Diamond District, Bangalore','arnavku@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),('5','Isha Khanna','H-71, Diamond District, Bangalore','ishak@thoughtworks.com','0987654321',NULL,NULL,NULL,NULL,NULL),('6','Md Ali Ejaz','C-82, Diamond District, Bangalore','mdalie@thoughtworks.com','0987654321',NULL,NULL,NULL,NULL,NULL),('7','Samuel Michael Squir','P-81, Diamond District, Bangalore','ssquire@thoughtworks.com','0987654321',NULL,NULL,NULL,NULL,NULL),('8','Govind Menon','P-81, Diamond District, Bangalore','govindm@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),('suganthk','Suganthi T','L-82, Diamond District, Bangalore','suganthit@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `buddies` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
@@ -64,3 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+-- Dump completed on 2012-08-24 12:41:46
