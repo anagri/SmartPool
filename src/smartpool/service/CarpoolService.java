@@ -11,4 +11,8 @@ public class CarpoolService {
         }
         return null;
     }
+
+    public Carpool findCarpoolByLocation(String location) {
+        return null;
+    }
 }

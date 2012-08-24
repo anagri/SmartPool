@@ -15,14 +15,9 @@ public class MyBatisConnectionFactory {
 
 		try {
 
-<<<<<<< Updated upstream
 			String resource = "SqlMapConfig.xml";
             Reader reader = Resources.getResourceAsReader(resource);
-=======
-			String resource = "smartpool/common/SqlMapConfig.xml";
-			Reader reader = Resources.getResourceAsReader(resource);
 
->>>>>>> Stashed changes
 			if (sqlSessionFactory == null) {
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
                 sqlSessionFactory.getConfiguration().addMapper(BuddyMapper.class);

@@ -1,6 +1,5 @@
 package smartpool.persistence.dao;
 
-<<<<<<< Updated upstream
 import junit.framework.Assert;
 import org.junit.Test;
 import smartpool.domain.Buddy;
@@ -21,13 +20,5 @@ public class BuddyDaoTest {
     }
 
 
-=======
-import org.junit.Test;
 
-public class BuddyDaoTest {
-    @Test
-    public void testSelectBuddy() throws Exception {
-
-    }
->>>>>>> Stashed changes
 }

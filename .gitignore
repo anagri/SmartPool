@@ -10,4 +10,5 @@ build
 output/
 .idea/gradle.xml
 smartpool.iml
+SmartPool.iml
 SmartPool.war
