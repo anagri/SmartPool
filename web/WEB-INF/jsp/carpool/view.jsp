@@ -9,7 +9,7 @@
 <body>
     <h1>Carpool ${carpool.getName()}</h1>
 
-    <h2>Date Started: ${carpool.getStartDate()}</h2>
+    <h2>Date Started: ${carpool.getStartDate().toString("dd/MM/yyyy") }</h2>
 
     <h2>Buddy List</h2>
     <table>
@@ -34,9 +34,11 @@
     </table>
     <h2>Cab Type: ${carpool.getCabType()}</h2>
     <h2>Totoal Cab Charges: ${carpool.getTotalCharge()}</h2>
-    <h2>Office Pick-up Time: ${carpool.getOfficePickupTime()}</h2>
+    <h2>Office Pick-up Time: ${carpool.getOfficePickupTime().toString("hh:mma")}</h2>
     <h2>Status: ${carpool.getStatus()}</h2>
 
+
+<input type="button" value="Join Carpool"/>
 </body>
 
 </html>
