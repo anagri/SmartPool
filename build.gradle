@@ -48,7 +48,12 @@ dependencies{
             "org.mybatis:mybatis:3.1.1",
             "org.jasig.cas:cas-client-core:$project.casClientVersion",
             "joda-time:joda-time:2.1",
-            "javax.servlet:jstl:1.2"
+            "javax.servlet:jstl:1.2",
+            "commons-codec:commons-codec:1.4",
+            "commons-logging:commons-logging:1.1",
+            "org.apache.santuario:xmlsec:1.4.0",
+            "log4j:log4j:1.2.17",
+            "org.opensaml:opensaml:1.1"
 
     testCompile "junit:junit:4.10",
                 "org.mockito:mockito-core:1.8.4"
