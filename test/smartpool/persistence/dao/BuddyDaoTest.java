@@ -7,9 +7,9 @@ import smartpool.domain.Buddy;
 public class BuddyDaoTest {
     @Test
     public void shouldGetBuddyByUserName(){
-        Buddy expectedBuddy = new Buddy("suganthk");
+        Buddy expectedBuddy = new Buddy("1");
         BuddyDao buddyDao = new BuddyDao();
-        Assert.assertEquals(expectedBuddy, buddyDao.selectBuddy("suganthk"));
+        Assert.assertEquals(expectedBuddy, buddyDao.selectBuddy("1"));
     }
 
     @Test

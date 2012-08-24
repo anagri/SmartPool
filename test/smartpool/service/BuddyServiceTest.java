@@ -7,8 +7,8 @@ import smartpool.domain.Buddy;
 public class BuddyServiceTest {
     @Test
     public void shouldGetBuddyFromBuddyDao() throws Exception {
-        Buddy expectedBuddy=new Buddy("suganthk");
+        Buddy expectedBuddy=new Buddy("1");
         BuddyService buddyService=new BuddyService();
-        Assert.assertEquals(expectedBuddy,buddyService.getBuddy("suganthk"));
+        Assert.assertEquals(expectedBuddy,buddyService.getBuddy("1"));
     }
 }
