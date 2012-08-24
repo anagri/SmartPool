@@ -20,7 +20,7 @@ public class CarpoolController {
         this.carpoolService = carpoolService;
     }
 
-    @RequestMapping(value = "/viewcarpool.htm/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewcarpool/{name}", method = RequestMethod.GET)
     public String viewCarpool(@PathVariable String name, ModelMap model){
         Carpool carpool = carpoolService.findCarpoolBy(name);
         model.put("carpool",carpool);
