@@ -17,30 +17,21 @@ public class BuddyDao {
 
     public BuddyDao(){
         sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();
-        System.out.println("BuddyDao");
     }
 
 
     public Buddy selectBuddy(String username){
-        System.out.println("select buddy");
-
         SqlSession session = sqlSessionFactory.openSession();
-        System.out.println("factory ready");
         try {
             BuddyMapper mapper = session.getMapper(BuddyMapper.class);
-            System.out.println("calling select buddy");
             Buddy buddy=mapper.selectBuddy(username);
-            System.out.println("buddy"+buddy);
             return buddy;
         } finally {
             session.close();
         }
     }
     public Buddy selectAllBuddies(){
-        System.out.println("select buddy");
-
         SqlSession session = sqlSessionFactory.openSession();
-        System.out.println("factory ready");
         try {
             BuddyMapper mapper = session.getMapper(BuddyMapper.class);
             List<Buddy> buddy=mapper.selectAll();
