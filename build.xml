@@ -22,7 +22,7 @@
         <echo message=""/>
     </target>
 
-    <target name="deploy" description="Deploy application to local servers">
+    <target name="deploy" description="Deploy application to local servers" depends="war">
         <copy todir="${deploy.path}" file="${war.file}"/>
     </target>
 
