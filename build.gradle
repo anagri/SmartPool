@@ -46,6 +46,7 @@ dependencies{
             "org.springframework.security:spring-security-cas:$project.springSecurityCasVersion",
             "javax.servlet:servlet-api:2.5",
             "org.mybatis:mybatis:3.1.1",
+            "mysql:mysql-connector-java:5.1.21",
             "org.jasig.cas:cas-client-core:$project.casClientVersion",
             "joda-time:joda-time:2.1",
             "javax.servlet:jstl:1.2"
