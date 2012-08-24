@@ -32,6 +32,10 @@
       <sourceFolder url="file://$MODULE_DIR$/properties" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <sourceFolder url="file://$MODULE_DIR$/resource" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/properties" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/out/artifacts/smartpool_war_exploded" />
       <excludeFolder url="file://$MODULE_DIR$/out/artifacts/war_file" />
       <excludeFolder url="file://$MODULE_DIR$/out/production" />
