@@ -7,7 +7,6 @@ import smartpool.common.MyBatisConnectionFactory;
 import smartpool.data.BuddyMapper;
 import smartpool.domain.Buddy;
 
-<<<<<<< Updated upstream
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -32,27 +31,11 @@ public class BuddyDao {
             System.out.println("calling select buddy");
             Buddy buddy=mapper.selectBuddy(username);
             System.out.println("buddy"+buddy);
-=======
-public class BuddyDao {
-    private SqlSessionFactory sqlSessionFactory;
-
-    public BuddyDao(){
-        sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();
-    }
-
-
-    public Buddy selectBuddy(){
-        SqlSession session = sqlSessionFactory.openSession();
-        try {
-            BuddyMapper mapper = session.getMapper(BuddyMapper.class);
-            Buddy buddy=mapper.selectBuddy();
->>>>>>> Stashed changes
             return buddy;
         } finally {
             session.close();
         }
     }
-<<<<<<< Updated upstream
     public Buddy selectAllBuddies(){
         System.out.println("select buddy");
 
@@ -66,7 +49,5 @@ public class BuddyDao {
             session.close();
         }
     }
-=======
->>>>>>> Stashed changes
 }
 

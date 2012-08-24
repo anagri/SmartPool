@@ -2,43 +2,62 @@ package smartpool.web;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.ui.ModelMap;
 import smartpool.domain.Carpool;
 import smartpool.service.CarpoolBuilder;
 import smartpool.service.CarpoolService;
 
-import javax.servlet.http.HttpServletRequest;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CarpoolControllerTest {
 
     private CarpoolController carpoolController;
     @Mock
-    private HttpServletRequest httpServletRequest;
-    @Mock
     private CarpoolService carpoolService;
+    private ModelMap model;
+    private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
 
     @Before
     public void setUp() throws Exception {
-        initMocks(this);
         carpoolController = new CarpoolController(carpoolService);
-        when(httpServletRequest.getParameter("name")).thenReturn("carpool");
-        when(carpoolService.findCarpoolBy("carpool")).thenReturn(CarpoolBuilder.CARPOOL_1);
+        when(carpoolService.findCarpoolBy("carpool")).thenReturn(expectedCarpool);
+        model = new ModelMap();
+        when(carpoolService.findCarpoolByLocation("Diamond District")).thenReturn(expectedCarpool);
     }
 
     @Test
     public void shouldRedirectToViewCarpool() throws Exception {
-        assertEquals(carpoolController.handleRequest(httpServletRequest, null).getViewName(), "carpool/view");
+        assertEquals(carpoolController.viewCarpool("carpool", model), "carpool/view");
     }
 
     @Test
     public void shouldHaveCarpoolInstanceInModel() throws Exception {
-        Carpool carpoolExpected = CarpoolBuilder.CARPOOL_1;
-        Carpool carpoolActual = (Carpool) carpoolController.handleRequest(httpServletRequest, null).getModel().get("carpool");
+        carpoolController.viewCarpool("carpool", model);
+        Carpool carpoolActual = (Carpool) model.get("carpool");
 
-        assertEquals(carpoolActual, carpoolExpected);
+        assertEquals(expectedCarpool, carpoolActual);
+    }
+
+    @Test
+    public void shouldSearchForCarpool(){
+        carpoolController.searchByLocation("Diamond District",model);
+        assertThat(model.containsValue(expectedCarpool),equalTo(true));
+    }
+
+    @Test
+    public void shouldRedirectToViewSearchCarpool() throws Exception {
+        assertThat(carpoolController.searchByLocation("Diamond District", model), equalTo("carpool/search"));
     }
 }
