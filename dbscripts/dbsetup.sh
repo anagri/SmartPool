@@ -1,1 +1,2 @@
-mysql -u root -e "source dbscripts/SmartPoolDB.sql"
+#!/bin/sh
+mysql -e "source dbscripts/SmartPoolDB.sql"
