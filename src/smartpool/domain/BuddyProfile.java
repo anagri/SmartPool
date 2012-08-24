@@ -1,11 +1,13 @@
 package smartpool.domain;
 
 public class BuddyProfile {
-    public final String name;
-    public final String address;
-    public final String contactNumber;
-    public final String emailId;
-    public final String preferredPickUpPoint;
+    private String name;
+    private String address;
+    private String contactNumber;
+    private String emailId;
+    private String preferredPickUpPoint;
+    private String pickupPoint;
+    private String pickupTime;
 
     public BuddyProfile(String name, String address, String contactNumber, String emailId, String preferredPickUpPoint) {
         this.name = name;
@@ -13,5 +15,25 @@ public class BuddyProfile {
         this.contactNumber = contactNumber;
         this.emailId = emailId;
         this.preferredPickUpPoint = preferredPickUpPoint;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPickupPoint() {
+        return pickupPoint;
+    }
+
+    public String getPickupTime() {
+        return pickupTime;
+    }
+
+    public void setPickupPoint(String pickupPoint) {
+        this.pickupPoint = pickupPoint;
+    }
+
+    public void setPickupTime(String pickupTime) {
+        this.pickupTime = pickupTime;
     }
 }
