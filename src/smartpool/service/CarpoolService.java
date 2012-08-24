@@ -15,4 +15,7 @@ public class CarpoolService {
     public Carpool findCarpoolByLocation(String location) {
         return null;
     }
+
+    public static class JoinCarPoolService {
+    }
 }
