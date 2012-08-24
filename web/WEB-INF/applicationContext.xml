@@ -6,14 +6,17 @@
          xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
-    <!--service: homepage -->
+    <!--serverName: homepage -->
     <b:bean
             name="authenticationFilter"
             class="org.jasig.cas.client.authentication.AuthenticationFilter"
             p:casServerLoginUrl="https://castest.thoughtworks.com/cas/login"
             p:renew="false"
             p:gateway="false"
-            p:service="http://localhost:9090/SmartPool/" />
-    </b:beans>
+            p:serverName="http://localhost:9090">
+    </b:bean>
+
+
+</b:beans>
 
 
