@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import smartpool.domain.Carpool;
 import smartpool.service.CarpoolService;
 
+import java.util.Map;
+
 @Controller
 public class CarpoolController {
 
@@ -26,5 +28,11 @@ public class CarpoolController {
         model.put("carpool",carpool);
 
         return "carpool/view";
+    }
+
+    public String searchByLocation(String location, ModelMap model) {
+        Carpool carpool = carpoolService.findCarpoolByLocation(location);
+        model.put("carpool1",carpool);
+        return "carpool/search";
     }
 }

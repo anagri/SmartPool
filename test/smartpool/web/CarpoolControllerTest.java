@@ -10,7 +10,14 @@ import smartpool.domain.Carpool;
 import smartpool.service.CarpoolBuilder;
 import smartpool.service.CarpoolService;
 
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,6 +34,7 @@ public class CarpoolControllerTest {
         carpoolController = new CarpoolController(carpoolService);
         when(carpoolService.findCarpoolBy("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
+        when(carpoolService.findCarpoolByLocation("Diamond District")).thenReturn(expectedCarpool);
     }
 
     @Test
@@ -40,5 +48,16 @@ public class CarpoolControllerTest {
         Carpool carpoolActual = (Carpool) model.get("carpool");
 
         assertEquals(expectedCarpool, carpoolActual);
+    }
+
+    @Test
+    public void shouldSearchForCarpool(){
+        carpoolController.searchByLocation("Diamond District",model);
+        assertThat(model.containsValue(expectedCarpool),equalTo(true));
+    }
+
+    @Test
+    public void shouldRedirectToViewSearchCarpool() throws Exception {
+        assertThat(carpoolController.searchByLocation("Diamond District", model), equalTo("carpool/search"));
     }
 }
