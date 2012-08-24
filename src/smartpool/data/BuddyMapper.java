@@ -1,14 +1,18 @@
 package smartpool.data;
-import org.apache.ibatis.annotations.*;
 
-public class BuddyMapper {
-    @Select(SELECT_BY_ID)
-    @Results(value = {
-            @Result(property="id"),
-            @Result(property="name", column="CONTACT_NAME"),
-            @Result(property="phone", column="CONTACT_PHONE"),
-            @Result(property="email", column="CONTACT_EMAIL")
-    })
-    Contact selectById(int id);
+import org.apache.ibatis.annotations.Select;
+import smartpool.domain.Buddy;
 
+import java.util.List;
+
+public interface BuddyMapper {
+
+    static final String SELECT_BUDDY = "select username, name, phone as contactNumber, email as emailId, address from buddies where username=#{username}";
+    static final String SELECT_ALL="select * from buddies";
+
+    @Select(SELECT_ALL)
+    List<Buddy> selectAll();
+
+    @Select(SELECT_BUDDY)
+   Buddy selectBuddy(String username);
 }

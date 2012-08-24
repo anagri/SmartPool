@@ -1,8 +1,53 @@
 package smartpool.domain;
 
 public class Buddy {
-    private String name, address, contact_number, email, pickup_time;
-    private String[] pickup_points;
+
+    String username, name, address, contactNumber, emailId, pickupTime;
+    String[] preferredPickupPoints;
+
+    public Buddy(){
+    }
+
+
+
+    public Buddy(String username) {
+        this.username=username;
+    }
+
+    public Buddy(String username,String name, String contactNumber, String emailId,String address)
+    {
+        System.out.println("buddy create");
+        this.username=username;
+        this.name=name;
+        this.address=address;
+        this.emailId=emailId;
+        this.contactNumber=contactNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Buddy buddy = (Buddy) o;
+
+        if (username != null ? !username.equals(buddy.username) : buddy.username != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return username != null ? username.hashCode() : 0;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getName() {
         return name;
@@ -20,35 +65,35 @@ public class Buddy {
         this.address = address;
     }
 
-    public String getContact_number() {
-        return contact_number;
+    public String getContactNumber() {
+        return contactNumber;
     }
 
-    public void setContact_number(String contact_number) {
-        this.contact_number = contact_number;
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 
-    public String getPickup_time() {
-        return pickup_time;
+    public String getPickupTime() {
+        return pickupTime;
     }
 
-    public void setPickup_time(String pickup_time) {
-        this.pickup_time = pickup_time;
+    public void setPickupTime(String pickupTime) {
+        this.pickupTime = pickupTime;
     }
 
-    public String[] getPickup_points() {
-        return pickup_points;
+    public String[] getPreferredPickupPoints() {
+        return preferredPickupPoints;
     }
 
-    public void setPickup_points(String[] pickup_points) {
-        this.pickup_points = pickup_points;
+    public void setPreferredPickupPoints(String[] preferredPickupPoints) {
+        this.preferredPickupPoints = preferredPickupPoints;
     }
 }
