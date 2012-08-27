@@ -12,12 +12,6 @@ public class BuddyService {
         return buddy;
     }
 
-
-//    public String getUserNameFromCAS(){
-//       // String ident = (String) request.getSession().getAttribute(CASFilter.CAS_FILTER_USER);
-//        return request.getRemoteUser();
-//    }
-
     public String getUserName(){
         return "1";
     }

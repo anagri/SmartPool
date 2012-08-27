@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
-import smartpool.persistence.dao.RequestDao;
 import smartpool.service.BuddyService;
 
 @Controller
@@ -31,7 +30,6 @@ public class JoinCarPoolController {
 
     @RequestMapping(value = "/carpool/{name}/join", method = RequestMethod.POST)
     public String submitUserDetails(@PathVariable String name, @ModelAttribute("request")JoinRequest joinRequest){
-        new RequestDao().insertRequest(joinRequest);
         return "carpool/view";
     }
 
