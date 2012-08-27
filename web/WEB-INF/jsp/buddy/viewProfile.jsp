@@ -11,7 +11,7 @@
                         <label>Name</label>
                     </span>
                     <span id="nameTextBox">
-                        <input name="name" type="textbox" value="${buddyProfile.userName()}"/> <br/>
+                        <input name="name" type="textbox" value="${buddyProfile.username}"/> <br/>
                     </span>
         </div>
         <div class="buttonContainer">
