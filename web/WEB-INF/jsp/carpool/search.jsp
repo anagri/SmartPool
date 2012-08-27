@@ -11,7 +11,7 @@
             <input type="text" name="query" />
             <input type="submit" value="Search" />
         </form>
-        <table border="1">
+        <table class="carpools" style="border: 1px;">
             <tr>
                 <td>Name</td>
                 <td>Start Point</td>
@@ -21,7 +21,7 @@
             </tr>
             <c:forEach var="carpool" items="${searchResult}" varStatus="typeStatus">
                 <tr>
-                    <td>${carpool.getName()}</td>
+                    <td><a href="../viewcarpool/${carpool.getName()}">${carpool.getName()}</a></td>
                     <td>${carpool.getStartPoint()}</td>
                     <td>${carpool.getStartTime()}</td>
                     <td>${carpool.buddyCount()}</td>

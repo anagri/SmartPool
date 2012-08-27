@@ -9,9 +9,8 @@ import java.util.List;
 @Service
 public class CarpoolService {
     public Carpool findCarpoolBy(String name) {
-        if (CarpoolBuilder.CARPOOL_1.getName().equals(name)){
-            return CarpoolBuilder.CARPOOL_1;
-        }
+        if (CarpoolBuilder.CARPOOL_1.getName().equals(name)) return CarpoolBuilder.CARPOOL_1;
+        if(CarpoolBuilder.CARPOOL_2.getName().equals(name)) return CarpoolBuilder.CARPOOL_2;
         return null;
     }
 

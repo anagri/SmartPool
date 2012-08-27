@@ -1,6 +1,8 @@
 .idea/**
+**.lock
+**.bin
+**.properties
 .gradle/**
-.gradle/**/**/*.bin
 out/
 output/
 web/WEB-INF/classes/
