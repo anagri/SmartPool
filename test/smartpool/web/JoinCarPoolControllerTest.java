@@ -19,11 +19,10 @@ public class JoinCarPoolControllerTest {
      joinCarPoolController=new JoinCarPoolController(buddyService);
     }
 
-
     @Test
     public void shouldReturnView(){
         ModelMap model = new ModelMap();
-        assertThat(joinCarPoolController.joinCarPool("1", model),equalTo("carpool/JoinRequest"));
+        assertThat(joinCarPoolController.getUserDetails("1", model),equalTo("carpool/JoinRequest"));
     }
 
 }

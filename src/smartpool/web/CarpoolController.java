@@ -12,7 +12,6 @@ import smartpool.domain.Carpool;
 import smartpool.service.CarpoolService;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class CarpoolController {
@@ -24,13 +23,15 @@ public class CarpoolController {
         this.carpoolService = carpoolService;
     }
 
-    @RequestMapping(value = "/viewcarpool/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/carpool/{name}", method = RequestMethod.GET)
     public String viewCarpool(@PathVariable String name, ModelMap model){
         Carpool carpool = carpoolService.findCarpoolBy(name);
         model.put("carpool",carpool);
 
         return "carpool/view";
     }
+
+
 
     @RequestMapping(value = "/carpool/", method = RequestMethod.GET)
     public String searchByLocation(ModelMap model){
