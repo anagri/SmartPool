@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="layout.css" />
 </head>
 <body>
-<form name="view_profile" action="">
+<form name="view_profile" action="." method="GET">
 
     <div class="mainContainer">
         <div class="subContainer">
@@ -12,7 +12,7 @@
                         <label>Name</label>
                     </span>
                     <span id="nameTextBox">
-                        <input name="name" type="textbox" value=#{buddy.getName()} /> <br />
+                        <input name="name" type="textbox" value=${buddy.getName()} readonly /> <br />
                     </span>
         </div>
         <div class="subContainer">
@@ -20,7 +20,7 @@
                         <label>Address</label>
                     </span>
                     <span id="addressTextBox">
-                        <textarea name="address" rows="5" cols="30" value=#{buddy.getAddress()}> </textarea> <br />
+                        <textarea name="address" rows="5" cols="30" value=${buddy.getAddress()} readonly> </textarea> <br />
                     </span>
         </div>
         <div class="subContainer">
@@ -28,7 +28,7 @@
                         <label>Contact Number</label>
                      </span>
                      <span id="contactNumberTextBox">
-                        <input name="contactNumber" type="textbox" value=#{buddy.getContactNumber()} /> <br />
+                        <input name="contactNumber" type="textbox" value=${buddy.getContactNumber()} readonly /> <br />
                     </span>
         </div>
         <div class="subContainer">
@@ -36,7 +36,7 @@
                         <label>Email ID</label>
                     </span>
                     <span id="emailIdTextBox">
-                        <input name="emailId" type="textbox" value=#{buddy.getEmailId()}/> <br />
+                        <input name="emailId" type="textbox" value=${buddy.getEmailId()} readonly/> <br />
                     </span>
         </div>
         <div class="subContainer">
@@ -56,7 +56,7 @@
                     </span>
         </div>
         <div class="buttonContainer">
-            <button align="right" name="submit">Submit</button>
+            <button align="right" name="submit" method="POST">Submit</button>
             <button align="right" disabled="disabled">EDIT</button>
         </div>
     </div>

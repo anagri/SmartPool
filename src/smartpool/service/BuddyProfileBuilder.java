@@ -8,4 +8,5 @@ public class BuddyProfileBuilder {
     public static BuddyProfile buddyProfile_3 = new BuddyProfile("Ironman", "N/A", "N/A", "N/A", "N/A");
     public static BuddyProfile buddyProfile_4 = new BuddyProfile("hulk", "N/A", "N/A", "N/A", "N/A");
 
+
 }
