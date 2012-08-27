@@ -55,7 +55,9 @@ dependencies{
             "commons-logging:commons-logging:1.1",
             "org.apache.santuario:xmlsec:1.4.0",
             "log4j:log4j:1.2.17",
-            "org.opensaml:opensaml:1.1"
+            "org.opensaml:opensaml:1.1",
+            "cas:casclient:2.0.11"
+            //"edu.yale.its.tp.cas:com.springsource.edu.yale.its.tp.cas:2.0.11"
 
     testCompile "junit:junit:4.10",
                 "org.mockito:mockito-core:1.8.4"
