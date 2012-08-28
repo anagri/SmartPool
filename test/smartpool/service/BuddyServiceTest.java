@@ -8,8 +8,8 @@ public class BuddyServiceTest {
 
     @Test
     public void shouldGetBuddyFromBuddyDao() throws Exception {
-        Buddy expectedBuddy = new Buddy("1");
+        Buddy expectedBuddy = new Buddy("prithvin");
         BuddyService buddyService = new BuddyService();
-        Assert.assertEquals(expectedBuddy, buddyService.getBuddy("1"));
+        Assert.assertEquals(expectedBuddy, buddyService.getBuddy("prithvin"));
     }
 }
