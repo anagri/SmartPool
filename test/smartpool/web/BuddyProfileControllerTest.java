@@ -23,22 +23,22 @@ public class BuddyProfileControllerTest {
     public void setUp(){
         initMocks(this);
 
-        buddy = new Buddy("prithvi","Prithvi", "Bangalore", "9123456789", "a@b.c");
+        buddy = new Buddy("Prithvi");
         buddyProfileController = new BuddyProfileController(buddyProfileService);
 
-        when(buddyProfileService.findBuddyProfile(1)).thenReturn(buddy);
+        when(buddyProfileService.getBuddy("1")).thenReturn(buddy);
     }
 
     @Test
     public void shouldReturnView(){
         ModelMap model = new ModelMap();
-        assertThat(buddyProfileController.viewProfile(1, model),equalTo("viewProfile"));
+        assertThat(buddyProfileController.viewProfile("1", model),equalTo("buddy/viewProfile"));
     }
 
     @Test
     public void shouldPutDomainObjectInModel(){
         ModelMap model = new ModelMap();
-        buddyProfileController.viewProfile(1, model);
+        buddyProfileController.viewProfile("1", model);
         assertThat((Buddy) model.get("buddyProfile"),equalTo(buddy));
     }
 }

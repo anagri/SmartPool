@@ -1,0 +1,58 @@
+.mainContainer {
+    position: relative;
+    left: 50px;
+}
+
+.subContainer {
+    width: 200px;
+    clear: both;
+}
+
+#userNameLabel, #nameLabel, #addressLabel, #contactLabel, #emailIdLabel, #pickupPointLabel {
+    float: left;
+}
+
+#userNameTextBox, #nameTextBox, #addressTextBox, #contactNumberTextBox, #emailIdTextBox, #pickupPointTextBox {
+    margin-left: 300px;
+    float: left;
+    height: 20px;
+    width: 200px;
+}
+
+#userNameLabel, #userNameTextBox {
+    position: absolute;
+    top: 50px;
+
+}
+
+#nameLabel, #nameTextBox {
+    position: absolute;
+    top: 100px;
+}
+
+#addressLabel, #addressTextBox {
+    position: absolute;
+    top: 150px;
+    height: 200px;
+}
+
+#contactNumberLabel, #contactNumberTextBox {
+    position: absolute;
+    top: 250px;
+}
+
+#emailIdLabel, #emailIdTextBox {
+    position: absolute;
+    top: 300px;
+}
+
+#pickupPointLabel, #pickupPointTextBox {
+    position: absolute;
+    top: 350px;
+}
+
+.buttonContainer {
+    margin-left: 400px;
+    position: absolute;
+    top: 400px;
+}

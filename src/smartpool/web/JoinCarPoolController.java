@@ -17,13 +17,12 @@ public class JoinCarPoolController {
 
     @Autowired
     public JoinCarPoolController(BuddyService buddyService) {
-        this.buddyService=buddyService;
+        this.buddyService = buddyService;
     }
 
     @RequestMapping(value = "/carpool/{name}/join", method = RequestMethod.GET)
     public String getUserDetails(@PathVariable String name, ModelMap model){
-        String userName = buddyService.getUserName();
-        Buddy buddy=buddyService.buildBuddy(userName);
+        Buddy buddy=buddyService.buildBuddy("1");
         model.put("buddy",buddy);
         return "carpool/JoinRequest";
     }

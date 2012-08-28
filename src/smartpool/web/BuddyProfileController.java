@@ -15,13 +15,12 @@ public class BuddyProfileController {
 
     @Autowired
     public BuddyProfileController(BuddyService buddyService) {
-
         this.buddyService = buddyService;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String viewProfile(@PathVariable int id, ModelMap model) {
-        model.addAttribute("buddyProfile",buddyService.findBuddyProfile(id));
-        return "viewProfile";
+    @RequestMapping(value = "/{userName}", method = RequestMethod.GET)
+    public String viewProfile(@PathVariable String userName, ModelMap model) {
+        model.addAttribute("buddyProfile", buddyService.getBuddy(userName));
+        return "buddy/viewProfile";
     }
 }

@@ -1,8 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Tomcat 7" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7">
-    <option name="UPDATING_POLICY" value="restart-server" />
+    <option name="OPEN_IN_BROWSER_URL" value="http://localhost:9090/" />
+    <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
+    <option name="UPDATING_POLICY" value="redeploy-artifacts" />
     <deployment>
-      <artifact name="smartpool_exploded">
+      <artifact name="SmartPool:war exploded">
         <settings>
           <option name="CONTEXT_PATH" value="/" />
         </settings>
@@ -67,7 +69,9 @@
       </SHUTDOWN>
     </ConfigurationWrapper>
     <method>
-      <option name="BuildArtifacts" enabled="true" />
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="SmartPool:war exploded" />
+      </option>
     </method>
   </configuration>
 </component>

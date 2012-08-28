@@ -1,5 +1,6 @@
 package smartpool.service;
 
+import edu.yale.its.tp.cas.client.filter.CASFilter;
 import org.springframework.stereotype.Service;
 import smartpool.domain.Buddy;
 import smartpool.persistence.dao.BuddyDao;
@@ -8,11 +9,20 @@ import smartpool.persistence.dao.BuddyDao;
 public class BuddyService {
 
     public Buddy getBuddy(String username) {
-        Buddy buddy=new BuddyDao().selectBuddy(username);
+        Buddy buddy = new BuddyDao().selectBuddy(username);
         return buddy;
     }
 
+<<<<<<< HEAD
     public String getUserName(){
+=======
+
+    public String getUserNameFromCAS() {
+        return CASFilter.CAS_FILTER_USER;
+    }
+
+    public String getUserName() {
+>>>>>>> 3b571108602a01a42b940a20ed902bb19cbb0918
         return "1";
     }
 
@@ -22,6 +32,6 @@ public class BuddyService {
     }
 
     public Buddy buildBuddy(String userName) {
-          return BuddyBuilder.getBuddy(userName);
+        return BuddyBuilder.getBuddy(userName);
     }
 }
