@@ -6,16 +6,19 @@ import smartpool.domain.Buddy;
 
 public class BuddyDaoTest {
     @Test
-    public void shouldGetBuddyByUserName() {
-        Buddy expectedBuddy = new Buddy("prithvin");
+    public void shouldGetBuddyByUserName(){
+        Buddy expectedBuddy = new Buddy("1");
         BuddyDao buddyDao = new BuddyDao();
-        Assert.assertEquals(expectedBuddy, buddyDao.selectBuddy("prithvin"));
+        Assert.assertEquals(expectedBuddy, buddyDao.selectBuddy("1"));
     }
 
     @Test
-    public void shouldGetFirstBuddy() {
-        Buddy expectedBuddy = new Buddy("arnavku");
+    public void shouldGetFirstBuddy(){
+        Buddy expectedBuddy = new Buddy("1");
         BuddyDao buddyDao = new BuddyDao();
         Assert.assertEquals(expectedBuddy, buddyDao.selectAllBuddies());
     }
+
+
+
 }
