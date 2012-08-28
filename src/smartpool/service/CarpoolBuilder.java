@@ -2,7 +2,7 @@ package smartpool.service;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import smartpool.domain.BuddyProfile;
+import smartpool.domain.Buddy;
 import smartpool.domain.CabType;
 import smartpool.domain.Carpool;
 import smartpool.domain.Status;
@@ -10,21 +10,21 @@ import smartpool.domain.Status;
 import java.util.ArrayList;
 
 public class CarpoolBuilder {
-    private static final ArrayList<BuddyProfile> BUDDIES_CARPOOL_1 = new ArrayList<BuddyProfile>();
+    private static final ArrayList<Buddy> BUDDIES_CARPOOL_1 = new ArrayList<Buddy>();
     static {
-        BUDDIES_CARPOOL_1.add(BuddyProfileBuilder.buddyProfile_1);
+        BUDDIES_CARPOOL_1.add(BuddyBuilder.buddy_1);
         BUDDIES_CARPOOL_1.get(0).setPickupPoint("Diamond District");
         BUDDIES_CARPOOL_1.get(0).setPickupTime("0830");
-        BUDDIES_CARPOOL_1.add(BuddyProfileBuilder.buddyProfile_2);
+        BUDDIES_CARPOOL_1.add(BuddyBuilder.buddy_2);
         BUDDIES_CARPOOL_1.get(1).setPickupPoint("Mars");
         BUDDIES_CARPOOL_1.get(1).setPickupTime("0930");
     }
-    private static final ArrayList<BuddyProfile> BUDDIES_CARPOOL_2 = new ArrayList<BuddyProfile>();
+    private static final ArrayList<Buddy> BUDDIES_CARPOOL_2 = new ArrayList<Buddy>();
     static {
-        BUDDIES_CARPOOL_2.add(BuddyProfileBuilder.buddyProfile_3);
+        BUDDIES_CARPOOL_2.add(BuddyBuilder.buddy_3);
         BUDDIES_CARPOOL_2.get(0).setPickupPoint("Chinchpokhli");
         BUDDIES_CARPOOL_2.get(0).setPickupTime("0830");
-        BUDDIES_CARPOOL_2.add(BuddyProfileBuilder.buddyProfile_4);
+        BUDDIES_CARPOOL_2.add(BuddyBuilder.buddy_4);
         BUDDIES_CARPOOL_2.get(1).setPickupPoint("Pluto");
         BUDDIES_CARPOOL_2.get(1).setPickupTime("0930");
     }

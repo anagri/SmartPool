@@ -3,7 +3,7 @@ package smartpool.domain;
 public class Buddy {
 
     int id;
-    String username, name, address, contactNumber, emailId, pickupTime;
+    String username, name, address, contactNumber, emailId, pickupTime,pickupPoint;
     String[] preferredPickupPoints;
 
     public Buddy(){
@@ -97,5 +97,13 @@ public class Buddy {
 
     public void setPreferredPickupPoints(String[] preferredPickupPoints) {
         this.preferredPickupPoints = preferredPickupPoints;
+    }
+
+    public String getPickupPoint() {
+        return pickupPoint;
+    }
+
+    public void setPickupPoint(String pickupPoint) {
+        this.pickupPoint = pickupPoint;
     }
 }

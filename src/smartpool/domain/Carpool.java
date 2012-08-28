@@ -15,12 +15,12 @@ public class Carpool {
     final int totalCabCharges;
     final LocalTime officePickupTime;
     final Status status;
-    final ArrayList<BuddyProfile> buddyProfiles;
+    final ArrayList<Buddy> buddyProfiles;
     private final int capacity;
     private final ArrayList<String> routePlan;
     private LocalTime officeETA;
 
-    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officePickupTime, Status status, ArrayList<BuddyProfile> buddyProfiles, int capacity, ArrayList<String> routePlan) {
+    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officePickupTime, Status status, ArrayList<Buddy> buddyProfiles, int capacity, ArrayList<String> routePlan) {
         this.name = name;
         this.startDate = startDate;
         this.pickupPoint = pickupPoint;
@@ -58,7 +58,7 @@ public class Carpool {
         return status;
     }
 
-    public ArrayList<BuddyProfile> getBuddyProfiles() {
+    public ArrayList<Buddy> getBuddyProfiles() {
         return buddyProfiles;
     }
 

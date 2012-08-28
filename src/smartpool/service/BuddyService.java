@@ -13,16 +13,13 @@ public class BuddyService {
         return buddy;
     }
 
-<<<<<<< HEAD
-    public String getUserName(){
-=======
+
 
     public String getUserNameFromCAS() {
         return CASFilter.CAS_FILTER_USER;
     }
 
     public String getUserName() {
->>>>>>> 3b571108602a01a42b940a20ed902bb19cbb0918
         return "1";
     }
 

@@ -3,7 +3,6 @@ package smartpool.common;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import smartpool.data.BuddyMapper;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,7 +19,7 @@ public class MyBatisConnectionFactory {
 
 			if (sqlSessionFactory == null) {
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-                sqlSessionFactory.getConfiguration().addMapper(BuddyMapper.class);
+                sqlSessionFactory.getConfiguration().addMappers("smartpool.data");
 			}
 
 		}
