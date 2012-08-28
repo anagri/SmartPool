@@ -3,11 +3,9 @@ package smartpool.web;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.ModelMap;
-import smartpool.domain.JoinRequest;
 import smartpool.service.BuddyService;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
@@ -28,9 +26,6 @@ public class JoinCarPoolControllerTest {
 
         assertThat(joinCarPoolController.getUserDetails("1", model),equalTo("carpool/joinRequest"));
     }
-    @Test
-    public void shouldRedirectToViewCarpool() throws Exception {
-        assertEquals(joinCarPoolController.submitUserDetails("carpool-1",new JoinRequest("1","carpool-1","now","now"),model), "redirect:../../carpool/carpool-1");
-    }
+
 
 }
