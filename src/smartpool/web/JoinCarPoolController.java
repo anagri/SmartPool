@@ -12,6 +12,8 @@ import smartpool.domain.JoinRequest;
 import smartpool.persistence.dao.JoinRequestDao;
 import smartpool.service.BuddyService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class JoinCarPoolController {
     private BuddyService buddyService;
@@ -23,13 +25,13 @@ public class JoinCarPoolController {
     }
 
     @RequestMapping(value = "carpool/{name}/join", method = RequestMethod.GET)
-    public String getUserDetails(@PathVariable String name, ModelMap model){
-
+    public String getUserDetails(@PathVariable String name, ModelMap model, HttpServletRequest request){
         String carpoolName = name;
-        userName = buddyService.getUserName();
-        Buddy buddy=buddyService.buildBuddy(userName);
+         userName = buddyService.getUserNameFromCAS(request);
+        Buddy buddy = buddyService.getBuddy(userName);
         model.put("buddy",buddy);
         model.put("carpoolName",carpoolName);
+        model.put("casUserName", userName);
         return "carpool/joinRequest";
     }
 

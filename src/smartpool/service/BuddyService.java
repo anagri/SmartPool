@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import smartpool.domain.Buddy;
 import smartpool.persistence.dao.BuddyDao;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Service
 public class BuddyService {
 
@@ -13,10 +16,10 @@ public class BuddyService {
         return buddy;
     }
 
-
-
-    public String getUserNameFromCAS() {
-        return CASFilter.CAS_FILTER_USER;
+    public String getUserNameFromCAS(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        System.out.println(session.getAttribute(CASFilter.CAS_FILTER_USER));
+        return (String) session.getAttribute(CASFilter.CAS_FILTER_USER);
     }
 
     public String getUserName() {
@@ -24,7 +27,6 @@ public class BuddyService {
     }
 
     public Object findBuddyProfile(int id) {
-
         return null;
     }
 

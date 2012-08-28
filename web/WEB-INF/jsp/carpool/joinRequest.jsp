@@ -4,8 +4,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/layout.css" />
 </head>
 <body>
-
-
+                               ${casUserName}
 <form name="joinRequest" method="post">
 
     <div class="mainContainer">
