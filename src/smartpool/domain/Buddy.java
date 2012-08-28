@@ -2,6 +2,7 @@ package smartpool.domain;
 
 public class Buddy {
 
+    int id;
     String username, name, address, contactNumber, emailId, pickupTime;
     String[] preferredPickupPoints;
 

@@ -7,43 +7,47 @@ import java.util.ArrayList;
 
 public class Carpool {
     final String name;
+
     final LocalDate startDate;
+
     final String pickupPoint;
     final CabType cabType;
-    final int totalCharge;
+    final int totalCabCharges;
     final LocalTime officePickupTime;
     final Status status;
     final ArrayList<BuddyProfile> buddyProfiles;
+    private final int capacity;
+    private final ArrayList<String> routePlan;
+    private LocalTime officeETA;
 
-    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCharge, LocalTime officePickupTime, Status status, ArrayList<BuddyProfile> buddyProfiles) {
+    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officePickupTime, Status status, ArrayList<BuddyProfile> buddyProfiles, int capacity, ArrayList<String> routePlan) {
         this.name = name;
         this.startDate = startDate;
         this.pickupPoint = pickupPoint;
         this.cabType = cabType;
-        this.totalCharge = totalCharge;
+        this.totalCabCharges = totalCabCharges;
+        this.officeETA = officeETA;
         this.officePickupTime = officePickupTime;
         this.status = status;
         this.buddyProfiles = buddyProfiles;
+        this.capacity = capacity;
+        this.routePlan = routePlan;
     }
 
     public String getName() {
         return name;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public String getPickupPoint() {
-        return pickupPoint;
+    public LocalTime getOfficeETA(){
+        return officeETA;
     }
 
     public CabType getCabType() {
         return cabType;
     }
 
-    public int getTotalCharge() {
-        return totalCharge;
+    public int getTotalCabCharges() {
+        return totalCabCharges;
     }
 
     public LocalTime getOfficePickupTime() {
@@ -57,6 +61,7 @@ public class Carpool {
     public ArrayList<BuddyProfile> getBuddyProfiles() {
         return buddyProfiles;
     }
+
     public String getStartPoint(){
         return buddyProfiles.get(0).getPickupPoint();
     }
@@ -65,5 +70,16 @@ public class Carpool {
     }
     public int buddyCount(){
         return buddyProfiles.size();
+    }
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public ArrayList<String> getRoutePlan() {
+        return routePlan;
     }
 }
