@@ -1,51 +1,58 @@
-
-.mainContainer{
-    position: relative;left:50px;
+.mainContainer {
+    position: relative;
+    left: 50px;
 }
 
-.subContainer{
+.subContainer {
     width: 200px;
     clear: both;
 }
 
-#nameLabel,#addressLabel,#contactLabel,#emailIdLabel,#pickupPointLabel{
+#userNameLabel, #nameLabel, #addressLabel, #contactLabel, #emailIdLabel, #pickupPointLabel {
     float: left;
 }
 
-#nameTextBox,#addressTextBox,#contactNumberTextBox,#emailIdTextBox,#pickupPointTextBox{
+#userNameTextBox, #nameTextBox, #addressTextBox, #contactNumberTextBox, #emailIdTextBox, #pickupPointTextBox {
     margin-left: 300px;
     float: left;
+    height: 20px;
+    width: 200px;
 }
 
-#nameLabel,#nameTextBox{
+#userNameLabel, #userNameTextBox {
     position: absolute;
-    top:50px;
+    top: 50px;
 
 }
 
-#addressLabel,#addressTextBox{
+#nameLabel, #nameTextBox {
     position: absolute;
-    top:150px;
+    top: 100px;
 }
 
-#contactNumberLabel,#contactNumberTextBox{
+#addressLabel, #addressTextBox {
     position: absolute;
-    top:290px;
+    top: 150px;
+    height: 200px;
 }
 
-#emailIdLabel,#emailIdTextBox{
+#contactNumberLabel, #contactNumberTextBox {
     position: absolute;
-    top:350px;
+    top: 250px;
 }
 
-#pickupPointLabel,#pickupPointTextBox{
+#emailIdLabel, #emailIdTextBox {
     position: absolute;
-    top:450px;
+    top: 300px;
 }
 
+#pickupPointLabel, #pickupPointTextBox {
+    position: absolute;
+    top: 350px;
+}
 
-.buttonContainer{
+.buttonContainer {
     margin-left: 400px;
     position: absolute;
-    top: 550px;
+    top: 400px;
 }

@@ -9,16 +9,16 @@ import smartpool.persistence.dao.BuddyDao;
 public class BuddyService {
 
     public Buddy getBuddy(String username) {
-        Buddy buddy=new BuddyDao().selectBuddy(username);
+        Buddy buddy = new BuddyDao().selectBuddy(username);
         return buddy;
     }
 
 
-    public String getUserNameFromCAS(){
+    public String getUserNameFromCAS() {
         return CASFilter.CAS_FILTER_USER;
     }
 
-    public String getUserName(){
+    public String getUserName() {
         return "1";
     }
 
@@ -28,6 +28,6 @@ public class BuddyService {
     }
 
     public Buddy buildBuddy(String userName) {
-          return BuddyBuilder.getBuddy(userName);
+        return BuddyBuilder.getBuddy(userName);
     }
 }
