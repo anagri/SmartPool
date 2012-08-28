@@ -15,53 +15,30 @@ public class BuddyDao {
     private HttpServletRequest request;
 
 
-    public BuddyDao() {
+    public BuddyDao(){
         sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();
     }
 
 
-    public Buddy selectBuddy(String username) {
+    public Buddy selectBuddy(String username){
         SqlSession session = sqlSessionFactory.openSession();
         try {
             BuddyMapper mapper = session.getMapper(BuddyMapper.class);
-            Buddy buddy = mapper.selectBuddy(username);
+            Buddy buddy=mapper.selectBuddy(username);
             return buddy;
         } finally {
             session.close();
         }
     }
-
-    public Buddy selectAllBuddies() {
+    public Buddy selectAllBuddies(){
         SqlSession session = sqlSessionFactory.openSession();
         try {
             BuddyMapper mapper = session.getMapper(BuddyMapper.class);
-
-            List<Buddy> buddyList = mapper.selectAll();
-            return buddyList.get(0);
+            List<Buddy> buddy=mapper.selectAll();
+            return buddy.get(0);
         } finally {
             session.close();
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BuddyDao buddyDao = (BuddyDao) o;
-
-        if (request != null ? !request.equals(buddyDao.request) : buddyDao.request != null) return false;
-        if (sqlSessionFactory != null ? !sqlSessionFactory.equals(buddyDao.sqlSessionFactory) : buddyDao.sqlSessionFactory != null)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = sqlSessionFactory != null ? sqlSessionFactory.hashCode() : 0;
-        result = 31 * result + (request != null ? request.hashCode() : 0);
-        return result;
     }
 }
 
