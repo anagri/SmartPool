@@ -26,19 +26,19 @@ public class BuddyProfileControllerTest {
         buddy = new Buddy("Prithvi");
         buddyProfileController = new BuddyProfileController(buddyProfileService);
 
-        when(buddyProfileService.getBuddy("prithvin")).thenReturn(buddy);
+        when(buddyProfileService.getBuddy("1")).thenReturn(buddy);
     }
 
     @Test
     public void shouldReturnView(){
         ModelMap model = new ModelMap();
-        assertThat(buddyProfileController.viewProfile("prithvin", model),equalTo("buddy/viewProfile"));
+        assertThat(buddyProfileController.viewProfile("1", model),equalTo("buddy/viewProfile"));
     }
 
     @Test
     public void shouldPutDomainObjectInModel(){
         ModelMap model = new ModelMap();
-        buddyProfileController.viewProfile("prithvin", model);
+        buddyProfileController.viewProfile("1", model);
         assertThat((Buddy) model.get("buddyProfile"),equalTo(buddy));
     }
 }
