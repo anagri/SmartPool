@@ -21,7 +21,7 @@
             </tr>
             <c:forEach var="carpool" items="${searchResult}" varStatus="typeStatus">
                 <tr>
-                    <td><a href="../viewcarpool/${carpool.getName()}">${carpool.getName()}</a></td>
+                    <td><a href="../carpool/${carpool.getName()}">${carpool.getName()}</a></td>
                     <td>${carpool.getStartPoint()}</td>
                     <td>${carpool.getStartTime()}</td>
                     <td>${carpool.buddyCount()}</td>

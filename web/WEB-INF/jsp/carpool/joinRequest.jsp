@@ -1,12 +1,22 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="layout.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/layout.css" />
 </head>
 <body>
-<form name="view_profile" action="." method="GET">
+
+
+<form name="joinRequest" method="post">
 
     <div class="mainContainer">
+        <div class="subContainer">
+                    <span id="carpoolName">
+                        <label>Name</label>
+                    </span>
+                    <span id="carpoolNameBox">
+                        <input name="carpoolName" type="textbox" value=${carpoolName} readonly /> <br />
+                    </span>
+        </div>
         <div class="subContainer">
                     <span id="nameLabel">
                         <label>Name</label>
@@ -44,7 +54,7 @@
                         <label>Preferred Pick Up Point</label>
                     </span>
                     <span id="pickupPointTextBox">
-                        <input name="pickupTime" type="textbox" /> <br />
+                        <input name="pickupPoint" type="textbox" /> <br />
                     </span>
         </div>
         <div class="subContainer">
@@ -56,7 +66,7 @@
                     </span>
         </div>
         <div class="buttonContainer">
-            <button align="right" name="submit" method="POST">Submit</button>
+            <button align="right" name="submit" type="submit">Submit</button>
             <button align="right" disabled="disabled">EDIT</button>
         </div>
     </div>

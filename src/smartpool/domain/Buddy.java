@@ -9,8 +9,6 @@ public class Buddy {
     public Buddy(){
     }
 
-
-
     public Buddy(String username) {
         this.username=username;
     }
@@ -83,6 +81,9 @@ public class Buddy {
         this.emailId = emailId;
     }
 
+    public String getPickupPoint() {
+        return pickupPoint;
+    }
     public String getPickupTime() {
         return pickupTime;
     }
@@ -97,10 +98,6 @@ public class Buddy {
 
     public void setPreferredPickupPoints(String[] preferredPickupPoints) {
         this.preferredPickupPoints = preferredPickupPoints;
-    }
-
-    public String getPickupPoint() {
-        return pickupPoint;
     }
 
     public void setPickupPoint(String pickupPoint) {

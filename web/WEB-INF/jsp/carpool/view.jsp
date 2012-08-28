@@ -53,6 +53,7 @@
         </div>
         <input type="button" value="Join"/>
     </div>
+
 </body>
 
 </html>

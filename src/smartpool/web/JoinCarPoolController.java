@@ -9,29 +9,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
+import smartpool.persistence.dao.JoinRequestDao;
 import smartpool.service.BuddyService;
 
 @Controller
 public class JoinCarPoolController {
     private BuddyService buddyService;
+    String userName;
 
     @Autowired
     public JoinCarPoolController(BuddyService buddyService) {
         this.buddyService = buddyService;
     }
 
-    @RequestMapping(value = "/carpool/{name}/join", method = RequestMethod.GET)
+    @RequestMapping(value = "carpool/{name}/join", method = RequestMethod.GET)
     public String getUserDetails(@PathVariable String name, ModelMap model){
-        Buddy buddy=buddyService.buildBuddy("1");
+
+        String carpoolName = name;
+        userName = buddyService.getUserName();
+        Buddy buddy=buddyService.buildBuddy(userName);
         model.put("buddy",buddy);
-        return "carpool/JoinRequest";
+        model.put("carpoolName",carpoolName);
+        return "carpool/joinRequest";
     }
 
-    @RequestMapping(value = "/carpool/{name}/join", method = RequestMethod.POST)
-    public String submitUserDetails(@PathVariable String name, @ModelAttribute("request")JoinRequest joinRequest){
-        return "carpool/view";
+    @RequestMapping(value = "carpool/{name}/join", method = RequestMethod.POST)
+    public String submitUserDetails(@PathVariable String name, @ModelAttribute("request")JoinRequest joinRequest, ModelMap model){
+        JoinRequestDao joinRequestDao=new JoinRequestDao();
+        joinRequest.setUsername(userName);
+        joinRequestDao.sendJoinRequest(joinRequest);
+        model.put("request",joinRequest);
+        return "redirect:../../carpool/"+name;
     }
-
-
-
 }
