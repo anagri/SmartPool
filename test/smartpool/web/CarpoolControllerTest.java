@@ -77,6 +77,6 @@ public class CarpoolControllerTest {
     @Test
     public void shouldInsertIntoDBWhenPostedOnCreate() throws Exception {
         carpoolController.create("name",model);
-        verify(carpoolService).insert("name");
+        verify(carpoolService).insert(new Carpool("name"));
     }
 }

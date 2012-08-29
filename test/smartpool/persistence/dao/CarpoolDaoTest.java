@@ -28,13 +28,10 @@ public class CarpoolDaoTest {
 
     @Test
     public void shouldInsertIntoDatabase() throws Exception {
-
         CarpoolDao carpoolDao = new CarpoolDao(mockSqlSessionFactory);
-        carpoolDao.insert("name");
-
         Carpool carpool = new Carpool("name");
+        carpoolDao.insert(carpool);
         verify(mockCarpoolMapper).insert(carpool);
-
     }
 
     @Test

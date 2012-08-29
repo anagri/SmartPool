@@ -58,7 +58,7 @@ public class CarpoolServiceTest {
 
     @Test
     public void shouldInsertIntoDatabase(){
-        carpoolService.insert("name");
-        verify(carpoolDao).insert("name");
+        carpoolService.insert(new Carpool("name"));
+        verify(carpoolDao).insert(new Carpool("name"));
     }
 }

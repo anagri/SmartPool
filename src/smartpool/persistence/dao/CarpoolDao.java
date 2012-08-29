@@ -18,11 +18,11 @@ public class CarpoolDao {
         this(MyBatisConnectionFactory.getSqlSessionFactory());
     }
 
-    public void insert(String name) {
+    public void insert(Carpool carpool) {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         CarpoolMapper carpoolMapper = sqlSession.getMapper(CarpoolMapper.class);
-        carpoolMapper.insert(new Carpool(name));
+        carpoolMapper.insert(carpool);
         sqlSession.commit();
         sqlSession.close();
     }

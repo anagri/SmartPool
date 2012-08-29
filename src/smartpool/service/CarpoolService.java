@@ -36,8 +36,8 @@ public class CarpoolService {
         return result;
     }
 
-    public void insert(String name) {
-        carpoolDao.insert(name);
+    public void insert(Carpool carpool) {
+        carpoolDao.insert(carpool);
     }
 
     public static class JoinCarPoolService {
