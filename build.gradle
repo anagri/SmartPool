@@ -35,9 +35,9 @@ project.ext {
 }
 
 def environments = [
-    dev: [protocol: "http", port: 9090, hostName: "localhost", applicationName: "smartpool"],
-    qa: [protocol: "http", port: 9090, hostName: "10.10.15.121", applicationName: "smartpool-test"],
-    uat: [protocol: "http", port: 9090, hostName: "10.10.15.121", applicationName: "smartpool"]
+    dev: [hostName: "localhost", port: 9090, applicationName: "smartpool"],
+    qa: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-test"],
+    uat: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool"]
 ]
 
 environments.each{env, settings ->
@@ -46,8 +46,7 @@ environments.each{env, settings ->
         baseName environments[env].applicationName
         eachFile {
             if (it.name == 'web.xml') {
-                def path  = String.format("%s://%s:%s/%s", settings.protocol, settings.hostName, settings.port, settings.applicationName)
-                it.expand(smartpoolServerName: path)
+                it.expand(smartpoolServerName: String.format("%s:%s", settings.hostName, settings.port))
             }
         }
     }
