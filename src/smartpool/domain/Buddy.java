@@ -2,11 +2,30 @@ package smartpool.domain;
 
 public class Buddy {
 
-    int id;
-    String username, name, address, contactNumber, emailId, pickupTime,pickupPoint;
-    String[] preferredPickupPoints;
+    private String username, name, address, contactNumber, emailId, pickupTime,pickupPoint;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public String getUserName() {
+        return username;
+    }
 
     public Buddy() {
+
     }
 
     public Buddy(String username) {
@@ -38,47 +57,6 @@ public class Buddy {
         return username != null ? username.hashCode() : 0;
     }
 
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
     public String getPickupPoint() {
         return pickupPoint;
     }
@@ -88,14 +66,6 @@ public class Buddy {
 
     public void setPickupTime(String pickupTime) {
         this.pickupTime = pickupTime;
-    }
-
-    public String[] getPreferredPickupPoints() {
-        return preferredPickupPoints;
-    }
-
-    public void setPreferredPickupPoints(String[] preferredPickupPoints) {
-        this.preferredPickupPoints = preferredPickupPoints;
     }
 
     public void setPickupPoint(String pickupPoint) {

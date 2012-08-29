@@ -22,15 +22,4 @@ public class BuddyService {
         return (String) session.getAttribute(CASFilter.CAS_FILTER_USER);
     }
 
-    public String getUserName() {
-        return "1";
-    }
-
-    public Object findBuddyProfile(int id) {
-        return null;
-    }
-
-    public Buddy buildBuddy(String userName) {
-        return BuddyBuilder.getBuddy(userName);
-    }
 }

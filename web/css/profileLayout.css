@@ -3,7 +3,14 @@
     left: 50px;
 }
 
-.subContainer {
+.subContainer_Label {
+    width: 200px;
+    clear: both;
+}
+
+.subContainer_Text {
+    position: absolute;
+    left: 200px;
     width: 200px;
     clear: both;
 }
@@ -33,7 +40,6 @@
 #addressLabel, #addressTextBox {
     position: absolute;
     top: 150px;
-    height: 200px;
 }
 
 #contactNumberLabel, #contactNumberTextBox {

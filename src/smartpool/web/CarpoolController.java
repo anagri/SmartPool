@@ -24,23 +24,23 @@ public class CarpoolController {
     }
 
     @RequestMapping(value = "/carpool/{name}", method = RequestMethod.GET)
-    public String viewCarpool(@PathVariable String name, ModelMap model){
+    public String viewCarpool(@PathVariable String name, ModelMap model) {
         Carpool carpool = carpoolService.getByName(name);
-        model.put("carpool",carpool);
+        model.put("carpool", carpool);
 
         return "carpool/view";
     }
 
 
-
     @RequestMapping(value = "/carpool/", method = RequestMethod.GET)
-    public String searchByLocation(ModelMap model){
-        return searchByLocation("",model);
+    public String searchByLocation(ModelMap model) {
+        return searchByLocation("", model);
     }
+
     @RequestMapping(value = "/carpool/search", method = RequestMethod.GET)
     public String searchByLocation(@RequestParam String query, ModelMap model) {
         List<Carpool> carpools = carpoolService.findCarpoolByLocation(query);
-        model.put("searchResult",carpools);
+        model.put("searchResult", carpools);
         return "carpool/search";
     }
 
@@ -52,6 +52,6 @@ public class CarpoolController {
     @RequestMapping(value = "/carpool/create", method = RequestMethod.POST)
     public String create(String name, ModelMap model) {
         carpoolService.insert(name);
-        return "redirect:/carpool/"+name;
+        return viewCarpool(name,model);
     }
 }

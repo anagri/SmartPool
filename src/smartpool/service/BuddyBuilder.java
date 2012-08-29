@@ -8,11 +8,4 @@ public class BuddyBuilder extends Buddy {
     public static Buddy buddy_3 = new Buddy("3", "Luka", "N/A", "N/A", "N/A");
     public static Buddy buddy_4 = new Buddy("4", "Geetha", "N/A", "N/A", "N/A");
 
-    public static Buddy getBuddy(String userName) {
-        if(BuddyBuilder.buddy_1.getUsername().equals(userName))
-            return BuddyBuilder.buddy_1;
-        else if(BuddyBuilder.buddy_2.getUsername().equals(userName))
-            return BuddyBuilder.buddy_2;
-        return null;
-    }
 }
