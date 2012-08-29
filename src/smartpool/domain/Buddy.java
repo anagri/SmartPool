@@ -14,7 +14,6 @@ public class Buddy {
     }
 
     public Buddy(String username, String name, String contactNumber, String emailId, String address) {
-        System.out.println("buddy create");
         this.username = username;
         this.name = name;
         this.address = address;
