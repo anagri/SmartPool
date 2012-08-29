@@ -11,6 +11,10 @@ import java.util.List;
 public class CarpoolService {
     private final CarpoolDao carpoolDao;
 
+    public CarpoolService(){
+        carpoolDao = new CarpoolDao();
+    }
+
     public CarpoolService(CarpoolDao carpoolDao) {
 
         this.carpoolDao = carpoolDao;

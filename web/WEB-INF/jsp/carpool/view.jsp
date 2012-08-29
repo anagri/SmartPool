@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
 
-                <c:forEach var="buddy" items="${carpool.getBuddyProfiles()}" varStatus="sequence">
+                <c:forEach var="buddy" items="${carpool.getBuddies()}" varStatus="sequence">
                     <tr>
                         <td>${sequence.index + 1}</td>
                         <td><a href="../buddyProfile/1">${buddy.getName()}</a></td>
