@@ -6,9 +6,7 @@ repositories {
     mavenCentral()
 }
 
-setEnvironment()
-
-defaultTasks 'clean', 'idea', 'setup_database', 'test', 'printEnvironment','war','assemble', 'deploy'
+defaultTasks 'clean', 'idea', 'setup_database', 'test', 'devWar', 'assemble', 'deploy'
 
 ant.importBuild 'build.xml'
 
@@ -37,30 +35,23 @@ project.ext {
 }
 
 def environments = [
-        dev:     [serverName : 'http://localhost:9090'],
-        test :   [serverName : 'http://10.10.15.121:9090']
+    dev: [protocol: "http", port: 9090, hostName: "localhost", applicationName: "smartpool"],
+    qa: [protocol: "http", port: 9090, hostName: "10.10.15.121", applicationName: "smartpool-test"],
+    uat: [protocol: "http", port: 9090, hostName: "10.10.15.121", applicationName: "smartpool"]
 ]
 
-def setEnvironment() {
-    def environment = hasProperty('env') ? env : 'dev'
-    setProperty 'env', environment
-}
-
-task printEnvironment << {
-    println("The Environment is : $env")
-    println("The Server is : ${environments[env].serverName}")
-}
-
-war {
-    from 'web'
-    baseName 'smartpool'
-    eachFile {
-        if (it.name == 'web.xml') {
-            it.expand(smartpoolServerName: environments[env].serverName)
+environments.each{env, settings ->
+    task "${env}War"(type:War){
+        from 'web'
+        baseName environments[env].applicationName
+        eachFile {
+            if (it.name == 'web.xml') {
+                def path  = String.format("%s://%s:%s/%s", settings.protocol, settings.hostName, settings.port, settings.applicationName)
+                it.expand(smartpoolServerName: path)
+            }
         }
     }
 }
-
 
 dependencies {
 
