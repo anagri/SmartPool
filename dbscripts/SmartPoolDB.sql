@@ -47,13 +47,7 @@ UNLOCK TABLES;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `carpool` (
-  `name` varchar(15) NOT NULL DEFAULT '',
-  `start_location` varchar(20) DEFAULT NULL,
-  `start_time` varchar(10) DEFAULT NULL,
-  `buddy1` varchar(20) DEFAULT NULL,
-  `buddy2` varchar(20) DEFAULT NULL,
-  `buddy3` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`name`)
+  `name` varchar(15) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -63,7 +57,7 @@ CREATE TABLE `carpool` (
 
 LOCK TABLES `carpool` WRITE;
 /*!40000 ALTER TABLE `carpool` DISABLE KEYS */;
-INSERT INTO `carpool` VALUES ('carpool-1','Whitefield','8.00','1','2','3');
+-- INSERT INTO `carpool` VALUES ('carpool-1','Whitefield','8.00','1','2','3');
 /*!40000 ALTER TABLE `carpool` ENABLE KEYS */;
 UNLOCK TABLES;
 

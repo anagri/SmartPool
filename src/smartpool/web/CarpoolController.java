@@ -43,4 +43,15 @@ public class CarpoolController {
         model.put("searchResult",carpools);
         return "carpool/search";
     }
+
+    @RequestMapping(value = "/carpool/create", method = RequestMethod.GET)
+    public String create() {
+        return "carpool/create";
+    }
+
+    @RequestMapping(value = "/carpool/create", method = RequestMethod.POST)
+    public String create(String name, ModelMap model) {
+        carpoolService.insert(name);
+        return viewCarpool(name,model);
+    }
 }

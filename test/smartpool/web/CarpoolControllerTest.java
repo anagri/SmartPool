@@ -10,16 +10,13 @@ import smartpool.domain.Carpool;
 import smartpool.service.CarpoolBuilder;
 import smartpool.service.CarpoolService;
 
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -28,6 +25,7 @@ public class CarpoolControllerTest {
     private CarpoolController carpoolController;
     @Mock
     private CarpoolService carpoolService;
+
     private ModelMap model;
     private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
 
@@ -64,5 +62,21 @@ public class CarpoolControllerTest {
     @Test
     public void shouldRedirectToViewSearchCarpool() throws Exception {
         assertThat(carpoolController.searchByLocation("Diamond District", model), equalTo("carpool/search"));
+    }
+
+    @Test
+    public void shouldRedirectToCreateCarpool() throws Exception {
+        assertThat(carpoolController.create(),equalTo("carpool/create"));
+    }
+
+    @Test
+    public void shouldRedirectToViewCarpoolWhenPostedOnCreate(){
+        assertThat(carpoolController.create("name",model),equalTo(carpoolController.viewCarpool("name",model)));
+    }
+
+    @Test
+    public void shouldInsertIntoDBWhenPostedOnCreate() throws Exception {
+        carpoolController.create("name",model);
+        verify(carpoolService).insert("name");
     }
 }
