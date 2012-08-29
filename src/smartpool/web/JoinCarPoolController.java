@@ -38,6 +38,7 @@ public class JoinCarPoolController {
     @RequestMapping(value = "carpool/{name}/join", method = RequestMethod.POST)
     public String submitUserDetails(@PathVariable String name, @ModelAttribute("request")JoinRequest joinRequest, ModelMap model){
         JoinRequestDao joinRequestDao=new JoinRequestDao();
+        joinRequest.setCarpoolName(name);
         joinRequestDao.sendJoinRequest(joinRequest);
         model.put("request",joinRequest);
         return "redirect:../../carpool/"+name;

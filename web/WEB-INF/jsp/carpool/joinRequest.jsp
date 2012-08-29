@@ -11,6 +11,17 @@
 <form name="joinRequest" method="post">
 
     <div class="mainContainer">
+
+
+        <div class="subContainer">
+                    <span id="usernameLabel">
+                        <label>Name*</label>
+                    </span>
+                    <span id="usernameTextBox">
+                        <input name="username" type="textbox" required="required" value=${buddy.getUsername()} /> <br />
+                    </span>
+        </div>
+
         <div class="subContainer">
                     <span id="nameLabel">
                         <label>Name*</label>
