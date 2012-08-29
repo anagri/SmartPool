@@ -11,6 +11,8 @@ build
 *.ipr
 *.iws
 output/
+lib/**
+*.jar
 .idea/gradle.xml
 smartpool.iml
 SmartPool.iml
