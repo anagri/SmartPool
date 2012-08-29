@@ -30,7 +30,7 @@ public class JoinCarPoolControllerTest {
     }
     @Test
     public void shouldRedirectToViewCarpool() throws Exception {
-        assertEquals(joinCarPoolController.submitUserDetails("carpool-1",new JoinRequest("1","carpool-1","now","now"),model), "redirect:../../carpool/carpool-1");
+        assertEquals(joinCarPoolController.submitUserDetails("carpool-1",new JoinRequest("ishak","carpool-1","here","now"),model), "redirect:../../carpool/carpool-1");
     }
 
 }

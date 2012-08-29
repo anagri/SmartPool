@@ -1,27 +1,22 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/profileLayout.css"/>
+    <title>Join SmartPool: ${carpoolName}</title>
 </head>
 <body>
-                               ${casUserName}
+
+<h1>Join SmartPool: ${carpoolName}</h1>
+
 <form name="joinRequest" method="post">
 
     <div class="mainContainer">
         <div class="subContainer">
-                    <span id="carpoolName">
-                        <label>Name</label>
-                    </span>
-                    <span id="carpoolNameBox">
-                        <input name="carpoolName" type="textbox" value=${carpoolName} readonly /> <br />
-                    </span>
-        </div>
-        <div class="subContainer">
                     <span id="nameLabel">
-                        <label>Name</label>
+                        <label>Name*</label>
                     </span>
                     <span id="nameTextBox">
-                        <input name="name" type="textbox" value=${buddy.getName()} readonly /> <br />
+                        <input name="name" type="textbox" required="required" value=${buddy.getName()} /> <br />
                     </span>
         </div>
         <div class="subContainer">
@@ -29,31 +24,31 @@
                         <label>Address</label>
                     </span>
                     <span id="addressTextBox">
-                        <textarea name="address" rows="5" cols="30" value=${buddy.getAddress()} readonly> </textarea> <br />
+                        <textarea name="address" rows="5" cols="30" value=${buddy.getAddress()} > </textarea> <br />
                     </span>
         </div>
         <div class="subContainer">
                     <span id="contactNumberLabel">
-                        <label>Contact Number</label>
+                        <label>Contact Number*</label>
                      </span>
                      <span id="contactNumberTextBox">
-                        <input name="contactNumber" type="textbox" value=${buddy.getContactNumber()} readonly /> <br />
+                        <input name="contactNumber" type="textbox" required="required" value=${buddy.getContactNumber()}  /> <br />
                     </span>
         </div>
         <div class="subContainer">
                     <span id="emailIdLabel">
-                        <label>Email ID</label>
+                        <label>Email*</label>
                     </span>
                     <span id="emailIdTextBox">
-                        <input name="emailId" type="textbox" value=${buddy.getEmailId()} readonly/> <br />
+                        <input name="emailId" type="textbox" required="required" value=${buddy.getEmailId()}  /> <br />
                     </span>
         </div>
         <div class="subContainer">
                     <span id="pickupPointLabel">
-                        <label>Preferred Pick Up Point</label>
+                        <label>Preferred Pick Up Point*</label>
                     </span>
                     <span id="pickupPointTextBox">
-                        <input name="pickupPoint" type="textbox" /> <br />
+                        <input name="pickupPoint" required="required" type="textbox" /> <br />
                     </span>
         </div>
         <div class="subContainer">

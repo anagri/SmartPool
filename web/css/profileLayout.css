@@ -8,11 +8,11 @@
     clear: both;
 }
 
-#userNameLabel, #nameLabel, #addressLabel, #contactLabel, #emailIdLabel, #pickupPointLabel {
+#userNameLabel, #nameLabel, #addressLabel, #contactLabel, #emailIdLabel, #pickupPointLabel, #pickupTimeLabel {
     float: left;
 }
 
-#userNameTextBox, #nameTextBox, #addressTextBox, #contactNumberTextBox, #emailIdTextBox, #pickupPointTextBox {
+#userNameTextBox, #nameTextBox, #addressTextBox, #contactNumberTextBox, #emailIdTextBox, #pickupPointTextBox, #pickupTimeTextBox {
     margin-left: 300px;
     float: left;
     height: 20px;
@@ -51,8 +51,13 @@
     top: 350px;
 }
 
+#pickupTimeLabel, #pickupTimeTextBox{
+    position: absolute;
+    top: 400px;
+}
+
 .buttonContainer {
     margin-left: 400px;
     position: absolute;
-    top: 400px;
+    top: 450px;
 }

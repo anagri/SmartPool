@@ -27,7 +27,7 @@ public class JoinCarPoolController {
     @RequestMapping(value = "carpool/{name}/join", method = RequestMethod.GET)
     public String getUserDetails(@PathVariable String name, ModelMap model, HttpServletRequest request){
         String carpoolName = name;
-         userName = buddyService.getUserNameFromCAS(request);
+        userName = buddyService.getUserNameFromCAS(request);
         Buddy buddy = buddyService.getBuddy(userName);
         model.put("buddy",buddy);
         model.put("carpoolName",carpoolName);
@@ -38,7 +38,6 @@ public class JoinCarPoolController {
     @RequestMapping(value = "carpool/{name}/join", method = RequestMethod.POST)
     public String submitUserDetails(@PathVariable String name, @ModelAttribute("request")JoinRequest joinRequest, ModelMap model){
         JoinRequestDao joinRequestDao=new JoinRequestDao();
-        joinRequest.setUsername(userName);
         joinRequestDao.sendJoinRequest(joinRequest);
         model.put("request",joinRequest);
         return "redirect:../../carpool/"+name;
