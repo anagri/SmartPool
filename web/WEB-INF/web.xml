@@ -23,7 +23,7 @@
          </init-param>
          <init-param>
          <param-name>edu.yale.its.tp.cas.client.filter.serverName</param-name>
-         <param-value>localhost:9090</param-value>
+         <param-value>${smartpoolServerName}</param-value>
          </init-param>
          </filter>
 
