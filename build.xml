@@ -2,7 +2,7 @@
 
 <project name="SmartPool" default="usage" basedir=".">
     <property file="build.properties"/>
-    <property name="name" value="SmartPool"/>
+    <property name="name" value="smartpool"/>
     <property name="build.dir" value="build"/>
     <property name="web.build.dir" value="${build.dir}/libs"/>
     <property name="war.file" value="${web.build.dir}/${name}.war"/>

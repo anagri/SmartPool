@@ -36,6 +36,7 @@ project.ext {
 
 war {
     from 'web'
+    baseName 'smartpool'
 }
 
 
