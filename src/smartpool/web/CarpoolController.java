@@ -25,7 +25,7 @@ public class CarpoolController {
 
     @RequestMapping(value = "/carpool/{name}", method = RequestMethod.GET)
     public String viewCarpool(@PathVariable String name, ModelMap model){
-        Carpool carpool = carpoolService.findCarpoolBy(name);
+        Carpool carpool = carpoolService.getByName(name);
         model.put("carpool",carpool);
 
         return "carpool/view";
@@ -52,6 +52,6 @@ public class CarpoolController {
     @RequestMapping(value = "/carpool/create", method = RequestMethod.POST)
     public String create(String name, ModelMap model) {
         carpoolService.insert(name);
-        return viewCarpool(name,model);
+        return "redirect:/carpool/"+name;
     }
 }

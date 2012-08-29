@@ -20,10 +20,8 @@ public class CarpoolService {
         this.carpoolDao = carpoolDao;
     }
 
-    public Carpool findCarpoolBy(String name) {
-        if (CarpoolBuilder.CARPOOL_1.getName().equals(name)) return CarpoolBuilder.CARPOOL_1;
-        if(CarpoolBuilder.CARPOOL_2.getName().equals(name)) return CarpoolBuilder.CARPOOL_2;
-        return null;
+    public Carpool getByName(String name) {
+        return carpoolDao.get(name);
     }
 
     public List<Carpool> findCarpoolByLocation(String location) {

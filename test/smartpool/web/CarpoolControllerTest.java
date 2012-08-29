@@ -32,7 +32,7 @@ public class CarpoolControllerTest {
     @Before
     public void setUp() throws Exception {
         carpoolController = new CarpoolController(carpoolService);
-        when(carpoolService.findCarpoolBy("carpool")).thenReturn(expectedCarpool);
+        when(carpoolService.getByName("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
         ArrayList<Carpool> carpools = new ArrayList<Carpool>();
         carpools.add(expectedCarpool);
@@ -71,7 +71,7 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpoolWhenPostedOnCreate(){
-        assertThat(carpoolController.create("name",model),equalTo(carpoolController.viewCarpool("name",model)));
+        assertThat(carpoolController.create("name",model),equalTo("redirect:/carpool/name"));
     }
 
     @Test

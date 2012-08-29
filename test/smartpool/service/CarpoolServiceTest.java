@@ -33,16 +33,15 @@ public class CarpoolServiceTest {
     @Test
     public void shouldFindCarpoolByName() {
         String carpoolName = "carpool-1";
-
-
-        assertThat(carpoolService.findCarpoolBy(carpoolName), equalTo(carpoolExpected));
+        carpoolService.getByName(carpoolName);
+        verify(carpoolDao).get(carpoolName);
     }
 
     @Test
     public void shouldNotFindAnyCarpool() {
         String carpoolName = "carpool-na";
 
-        assertNull(carpoolService.findCarpoolBy(carpoolName));
+        assertNull(carpoolService.getByName(carpoolName));
     }
 
     @Test
