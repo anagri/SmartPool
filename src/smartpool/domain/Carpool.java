@@ -6,7 +6,7 @@ import org.joda.time.LocalTime;
 import java.util.ArrayList;
 
 public class Carpool {
-    final String name;
+    String name;
 
     LocalDate startDate;
 
@@ -19,6 +19,9 @@ public class Carpool {
     int capacity;
     ArrayList<String> routePlan;
     private LocalTime officeETA;
+
+    public Carpool() {
+    }
 
     public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officePickupTime, Status status, ArrayList<Buddy> buddies, int capacity, ArrayList<String> routePlan) {
         this.name = name;

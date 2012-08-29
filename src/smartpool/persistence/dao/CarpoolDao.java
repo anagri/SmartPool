@@ -23,5 +23,24 @@ public class CarpoolDao {
 
         CarpoolMapper carpoolMapper = sqlSession.getMapper(CarpoolMapper.class);
         carpoolMapper.insert(new Carpool(name));
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    public Carpool get(String name) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        CarpoolMapper carpoolMapper = sqlSession.getMapper(CarpoolMapper.class);
+        return carpoolMapper.get(name);
+
+    }
+
+    public void delete(String name) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        CarpoolMapper carpoolMapper = sqlSession.getMapper(CarpoolMapper.class);
+        carpoolMapper.delete(name);
+        sqlSession.commit();
+        sqlSession.close();
     }
 }
