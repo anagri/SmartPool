@@ -4,7 +4,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 import smartpool.domain.Buddy;
 
-public class BuddyDaoTest {
+public class BuddyDaoIT {
     @Test
     public void shouldGetBuddyByUserName(){
         Buddy expectedBuddy = new Buddy("prithvin");

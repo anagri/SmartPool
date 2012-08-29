@@ -5,7 +5,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import smartpool.domain.JoinRequest;
 
-public class JoinRequestDaoTest {
+public class JoinRequestDaoIT {
 
     private JoinRequestDao joinRequestDao;
 
