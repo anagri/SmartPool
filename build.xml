@@ -63,6 +63,7 @@
         <install url="${tomcat.manager.url}"
                  username="${tomcat.manager.username}"
                  password="${tomcat.manager.password}"
+                 update="${tomcat.manager.update}"
                  path="/${name}"
                  war="${war.file}"/>
     </target>
