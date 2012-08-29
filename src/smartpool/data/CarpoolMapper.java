@@ -1,8 +1,6 @@
 package smartpool.data;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import smartpool.domain.Carpool;
 
 public interface CarpoolMapper {
@@ -16,6 +14,16 @@ public interface CarpoolMapper {
     public void insert(Carpool carpool);
 
     @Select(SELECT_BY_NAME)
+    @Results(value = {
+        @Result(property="name", column="name"),
+        @Result(property="startDate", column="start_date"),
+        @Result(property="cabType", column="cab_type"),
+        @Result(property="totalCabCharges", column="total_cab_charge"),
+        @Result(property="officeETA", column="office_eta"),
+        @Result(property="officePickupTime", column="office_etd"),
+        @Result(property="status", column="status"),
+        @Result(property="capacity", column="capacity")
+    })
     public Carpool get(String name);
 
     @Delete(DELETE_BY_NAME)
