@@ -6,6 +6,8 @@ repositories {
     mavenCentral()
 }
 
+setEnvironment()
+
 defaultTasks 'clean', 'idea', 'setup_database', 'test', 'printEnvironment','war','assemble', 'deploy'
 
 ant.importBuild 'build.xml'
@@ -38,6 +40,11 @@ def environments = [
         dev:     [serverName : 'http://localhost:9090'],
         test :   [serverName : 'http://10.10.15.121:9090']
 ]
+
+def setEnvironment() {
+    def environment = hasProperty('env') ? env : 'dev'
+    setProperty 'env', environment
+}
 
 task printEnvironment << {
     println("The Environment is : $env")
