@@ -8,17 +8,17 @@
 
 <h1>Join SmartPool: ${carpoolName}</h1>
 
-<form name="joinRequest" method="post">
+<form name="joinRequest" method="post" onsubmit="alert('Join Carpool Request Sent Successfully'); return true">
 
     <div class="mainContainer">
 
 
         <div class="subContainer">
                     <span id="usernameLabel">
-                        <label>Name*</label>
+                        <label>Username*</label>
                     </span>
                     <span id="usernameTextBox">
-                        <input name="username" type="textbox" required="required" value=${buddy.getUsername()} /> <br />
+                        <input name="username" type="textbox" required="required" value=${buddy.getUsername()} readonly/> <br />
                     </span>
         </div>
 
@@ -71,7 +71,7 @@
                     </span>
         </div>
         <div class="buttonContainer">
-            <button align="right" name="submit" type="submit">Submit</button>
+            <button align="right" name="submit" type="submit" >Submit</button>
             <button align="right" disabled="disabled">EDIT</button>
         </div>
     </div>
