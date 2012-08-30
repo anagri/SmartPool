@@ -1,14 +1,12 @@
 package smartpool;
 
 import com.thoughtworks.selenium.Selenium;
-import com.thoughtworks.selenium.SeleneseTestCase;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverBackedSelenium;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.regex.Pattern;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverBackedSelenium;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -25,7 +23,7 @@ public class CASTest {
 
 	@Test
 	public void testWrongUsernameAndPassword() throws Exception {
-		selenium.open("/cas/login?service=http%3A%2F%2Flocalhost%3A9090%2FSmartPool%2F");
+		selenium.open("/");
 		for (int second = 0;; second++) {
 			if (second >= 60) fail("timeout");
 			try { if (selenium.isElementPresent("id=username")) break; } catch (Exception e) {}
