@@ -16,6 +16,7 @@ import java.util.List;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.hasItems;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -56,7 +57,7 @@ public class CarpoolControllerTest {
     public void shouldSearchForCarpool(){
         carpoolController.searchByLocation("Diamond District",model);
         List<Carpool> searchResult = (List<Carpool>) model.get("searchResult");
-        assertThat(searchResult.contains(expectedCarpool),equalTo(true));
+        assertThat(searchResult, hasItems(expectedCarpool));
     }
 
     @Test
