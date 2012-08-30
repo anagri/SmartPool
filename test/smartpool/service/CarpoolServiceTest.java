@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import smartpool.domain.Carpool;
+import smartpool.persistence.dao.BuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
 
 import java.util.ArrayList;
@@ -28,10 +29,13 @@ public class CarpoolServiceTest {
     @Mock
     RouteService routeService;
 
+    @Mock
+    BuddyDao buddyDao;
+
     @Before
     public void setUp() {
         initMocks(this);
-        carpoolService = new CarpoolService(carpoolDao, routeService);
+        carpoolService = new CarpoolService(carpoolDao, buddyDao, routeService);
         carpoolExpected = CarpoolBuilder.CARPOOL_1;
     }
 

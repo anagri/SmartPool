@@ -31,12 +31,12 @@ public class BuddyDao {
         }
     }
 
-    public Buddy selectAllBuddies() {
+    public List<Buddy> selectAllBuddies() {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             BuddyMapper mapper = session.getMapper(BuddyMapper.class);
             List<Buddy> buddyList = mapper.selectAll();
-            return buddyList.get(0);
+            return buddyList;
         } finally {
             session.close();
         }
@@ -61,6 +61,18 @@ public class BuddyDao {
         int result = sqlSessionFactory != null ? sqlSessionFactory.hashCode() : 0;
         result = 31 * result + (request != null ? request.hashCode() : 0);
         return result;
+    }
+
+
+    public List<Buddy> getBuddyListByCarpoolName(String carpoolName) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            BuddyMapper mapper = session.getMapper(BuddyMapper.class);
+            List<Buddy> buddyList = mapper.selectBuddyListByCarpoolName(carpoolName);
+            return buddyList;
+        } finally {
+            session.close();
+        }
     }
 }
 

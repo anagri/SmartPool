@@ -3,6 +3,7 @@ package smartpool.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import smartpool.domain.Carpool;
+import smartpool.persistence.dao.BuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
 
 import java.util.ArrayList;
@@ -11,11 +12,13 @@ import java.util.List;
 @Service
 public class CarpoolService {
     private final CarpoolDao carpoolDao;
+    private final BuddyDao buddyDao;
     private final RouteService routeService;
 
     @Autowired
-    public CarpoolService(CarpoolDao carpoolDao, RouteService routeService) {
+    public CarpoolService(CarpoolDao carpoolDao, BuddyDao buddyDao, RouteService routeService) {
         this.carpoolDao = carpoolDao;
+        this.buddyDao = buddyDao;
         this.routeService = routeService;
     }
 
@@ -24,8 +27,8 @@ public class CarpoolService {
     }
 
     public Carpool findCarpoolByName(String name) {
-        CarpoolDao carpoolDao = new CarpoolDao();
         Carpool carpool = carpoolDao.get(name);
+        carpool.setBuddies(buddyDao.getBuddyListByCarpoolName("carpool-1"));
         return carpool;
     }
 
@@ -49,11 +52,8 @@ public class CarpoolService {
     }
 
     private List<Carpool> getAllCarpools() {
-
-        CarpoolDao carpoolDao = new CarpoolDao();
         List<Carpool> carpools = carpoolDao.selectAllCarpools();
         return carpools;
-
     }
 
 }
