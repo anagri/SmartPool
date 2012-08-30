@@ -19,7 +19,7 @@ public class CASTest {
     @Before
 	public void setUp() throws Exception {
 		WebDriver driver = new FirefoxDriver();
-		String baseUrl = "https://castest.thoughtworks.com/";
+		String baseUrl = "localhost:9090/smartpool";
 		selenium = new WebDriverBackedSelenium(driver, baseUrl);
 	}
 
