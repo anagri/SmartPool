@@ -28,7 +28,7 @@ public class CarpoolService {
 
     public Carpool findCarpoolByName(String name) {
         Carpool carpool = carpoolDao.get(name);
-        carpool.setBuddies(buddyDao.getBuddyListByCarpoolName("carpool-1"));
+        carpool.setBuddies(buddyDao.getBuddyListByCarpoolName(name));
         return carpool;
     }
 

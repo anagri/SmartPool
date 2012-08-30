@@ -42,9 +42,10 @@ public class CarpoolServiceTest {
     @Test
     public void shouldFindCarpoolByName() {
         String carpoolName = "carpool-1";
-        carpoolService.getByName(carpoolName);
+        when(carpoolDao.get("carpool-1")).thenReturn(new Carpool());
+        Carpool carpoolActual= carpoolService.findCarpoolByName(carpoolName);
         verify(carpoolDao).get(carpoolName);
-        assertNotNull(carpoolService.findCarpoolByName(carpoolName));
+        assertNotNull(carpoolActual);
     }
 
 
@@ -58,6 +59,7 @@ public class CarpoolServiceTest {
     @Test
     public void shouldFindCarpoolsByLocation() {
         when(routeService.getCarpoolNameList("Diamond District")).thenReturn(Arrays.asList("carpool-1"));
+        when(carpoolDao.get("carpool-1")).thenReturn(carpoolExpected);
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Diamond District");
         assertThat(carpools, hasItems(carpoolExpected));
     }
