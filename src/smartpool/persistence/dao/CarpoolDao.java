@@ -6,17 +6,22 @@ import smartpool.common.MyBatisConnectionFactory;
 import smartpool.data.CarpoolMapper;
 import smartpool.domain.Carpool;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 public class CarpoolDao {
-    private final SqlSessionFactory sqlSessionFactory;
 
-    public CarpoolDao(SqlSessionFactory sqlSessionFactory) {
-
-        this.sqlSessionFactory = sqlSessionFactory;
-    }
+    private SqlSessionFactory sqlSessionFactory;
+    private HttpServletRequest request;
 
     public CarpoolDao() {
         this(MyBatisConnectionFactory.getSqlSessionFactory());
     }
+
+    public CarpoolDao(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
+    }
+
 
     public void insert(Carpool carpool) {
         SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -42,5 +47,27 @@ public class CarpoolDao {
         carpoolMapper.delete(name);
         sqlSession.commit();
         sqlSession.close();
+    }
+
+    public List<Carpool> selectAllCarpools() {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            CarpoolMapper mapper = session.getMapper(CarpoolMapper.class);
+            List<Carpool> carpools = mapper.selectAll();
+            return carpools;
+        } finally {
+            session.close();
+        }
+    }
+
+    public List<String> selectCarpoolByLocation(String location) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            CarpoolMapper mapper = session.getMapper(CarpoolMapper.class);
+            List<String> carpools = mapper.selectByLocation(location);
+            return carpools;
+        } finally {
+            session.close();
+        }
     }
 }

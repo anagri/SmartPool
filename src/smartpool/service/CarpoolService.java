@@ -1,3 +1,4 @@
+
 package smartpool.service;
 
 import org.springframework.stereotype.Service;
@@ -24,22 +25,45 @@ public class CarpoolService {
         return carpoolDao.get(name);
     }
 
-    public List<Carpool> findCarpoolByLocation(String location) {
-        List<Carpool> result= new ArrayList<Carpool>();
-        if(location.equals("Diamond District")){
-            result.add(CarpoolBuilder.CARPOOL_1);
+    public Carpool findCarpoolByName(String name)
+    {
+        CarpoolDao carpoolDao = new CarpoolDao();
+        Carpool carpool = carpoolDao.get(name);
+        return carpool;
+    }
+
+    public List<String> findCarpoolByLocation(String location) {
+        CarpoolDao carpoolDao=new CarpoolDao();
+        List<String> carpools = carpoolDao.selectCarpoolByLocation(location);
+        return carpools;
+    }
+
+    public List<Carpool> findAllCarpoolsByLocation(String location)
+    {   List<Carpool> carpools = new ArrayList<Carpool>();
+        if(location.equals(""))
+            carpools = getAllCarpools();
+        else
+        {
+        List<String> carpoolNames= findCarpoolByLocation(location.trim());
+         if(!carpoolNames.isEmpty())
+            for(String name:carpoolNames)
+            {
+                carpools.add(findCarpoolByName(name));
+            }
         }
-        if(location.equals("")){
-            result.add(CarpoolBuilder.CARPOOL_1);
-            result.add(CarpoolBuilder.CARPOOL_2);
-        }
-        return result;
+        return carpools;
     }
 
     public void insert(Carpool carpool) {
         carpoolDao.insert(carpool);
     }
 
-    public static class JoinCarPoolService {
+    private List<Carpool> getAllCarpools() {
+
+        CarpoolDao carpoolDao = new CarpoolDao();
+        List<Carpool> carpools = carpoolDao.selectAllCarpools();
+        return carpools;
+
     }
+
 }

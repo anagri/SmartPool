@@ -1,14 +1,24 @@
 package smartpool.data;
 
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Select;
 import smartpool.domain.Carpool;
+
+import java.util.List;
 
 public interface CarpoolMapper {
 
     static final String INSERT = "insert into carpool (name) values(#{name})";
     static final String SELECT_BY_NAME = "select * from carpool where name = #{name}";
     static final String DELETE_BY_NAME = "delete from carpool where name=#{name}";
+    static final String SELECT_ALL = "select * from carpool";
+    static final String SELECT_BY_LOCATION = "select carpoolName from route where location=#{location}";
 
+    @Select(SELECT_BY_LOCATION)
+    List<String> selectByLocation(String location);
+
+    @Select(SELECT_ALL)
+    List<Carpool> selectAll();
 
     @Insert(INSERT)
     public void insert(Carpool carpool);

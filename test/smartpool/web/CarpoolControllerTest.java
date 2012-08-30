@@ -36,7 +36,7 @@ public class CarpoolControllerTest {
         model = new ModelMap();
         ArrayList<Carpool> carpools = new ArrayList<Carpool>();
         carpools.add(expectedCarpool);
-        when(carpoolService.findCarpoolByLocation("Diamond District")).thenReturn(carpools);
+        when(carpoolService.findAllCarpoolsByLocation("Diamond District")).thenReturn(carpools);
     }
 
     @Test

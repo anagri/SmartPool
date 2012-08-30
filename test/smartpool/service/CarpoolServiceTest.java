@@ -9,7 +9,8 @@ import smartpool.persistence.dao.CarpoolDao;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
@@ -35,7 +36,9 @@ public class CarpoolServiceTest {
         String carpoolName = "carpool-1";
         carpoolService.getByName(carpoolName);
         verify(carpoolDao).get(carpoolName);
+        assertNotNull(carpoolService.findCarpoolByName(carpoolName));
     }
+
 
     @Test
     public void shouldNotFindAnyCarpool() {
@@ -46,14 +49,14 @@ public class CarpoolServiceTest {
 
     @Test
     public void shouldFindCarpoolsByLocation() {
-        List<Carpool> carpools = carpoolService.findCarpoolByLocation("Diamond District");
+        List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Diamond District");
         assertThat(carpools.contains(carpoolExpected),equalTo(true));
     }
 
     @Test
     public void shouldReturnAllCarpoolsWhenSearchStringIsBlank() throws Exception {
-        List<Carpool> carpools = carpoolService.findCarpoolByLocation("");
-        assertThat(carpools.size(),not(0));
+        List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("");
+        assertThat(carpools.size(),is(1));
     }
 
     @Test
