@@ -1,4 +1,5 @@
 .idea/**
+dbscripts/**.orig
 **.lock
 **.bin
 **.properties
