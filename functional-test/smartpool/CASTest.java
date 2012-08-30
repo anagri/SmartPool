@@ -23,7 +23,7 @@ public class CASTest {
 
 	@Test
 	public void testWrongUsernameAndPassword() throws Exception {
-		selenium.open("/");
+		selenium.open("");
 		for (int second = 0;; second++) {
 			if (second >= 60) fail("timeout");
 			try { if (selenium.isElementPresent("id=username")) break; } catch (Exception e) {}
