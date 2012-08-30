@@ -4,6 +4,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Carpool {
     String name;
@@ -15,7 +16,7 @@ public class Carpool {
     int totalCabCharges;
     LocalTime officePickupTime;
     Status status;
-    ArrayList<Buddy> buddies;
+    List<Buddy> buddies;
     int capacity;
     ArrayList<String> routePlan;
     private LocalTime officeETA;
@@ -23,7 +24,7 @@ public class Carpool {
     public Carpool() {
     }
 
-    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officePickupTime, Status status, ArrayList<Buddy> buddies, int capacity, ArrayList<String> routePlan) {
+    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officePickupTime, Status status, List<Buddy> buddies, int capacity, ArrayList<String> routePlan) {
         this.name = name;
         this.startDate = startDate;
         this.pickupPoint = pickupPoint;
@@ -65,7 +66,7 @@ public class Carpool {
         return status;
     }
 
-    public ArrayList<Buddy> getBuddies() {
+    public List<Buddy> getBuddies() {
         return buddies;
     }
 
@@ -88,6 +89,10 @@ public class Carpool {
 
     public ArrayList<String> getRoutePlan() {
         return routePlan;
+    }
+
+    public void setBuddies(List<Buddy> buddies) {
+        this.buddies = buddies;
     }
 
     @Override
