@@ -1,4 +1,3 @@
-
 package smartpool.service;
 
 import org.springframework.stereotype.Service;
@@ -11,43 +10,33 @@ import java.util.List;
 @Service
 public class CarpoolService {
     private final CarpoolDao carpoolDao;
+    private final RouteService routeService;
 
-    public CarpoolService(){
-        carpoolDao = new CarpoolDao();
-    }
-
-    public CarpoolService(CarpoolDao carpoolDao) {
+    public CarpoolService(CarpoolDao carpoolDao, RouteService routeService) {
 
         this.carpoolDao = carpoolDao;
+        this.routeService = routeService;
     }
 
     public Carpool getByName(String name) {
         return carpoolDao.get(name);
     }
 
-    public Carpool findCarpoolByName(String name)
-    {
+    public Carpool findCarpoolByName(String name) {
         CarpoolDao carpoolDao = new CarpoolDao();
         Carpool carpool = carpoolDao.get(name);
         return carpool;
     }
 
-    public List<String> findCarpoolByLocation(String location) {
-        CarpoolDao carpoolDao=new CarpoolDao();
-        List<String> carpools = carpoolDao.selectCarpoolByLocation(location);
-        return carpools;
-    }
-
-    public List<Carpool> findAllCarpoolsByLocation(String location)
-    {   List<Carpool> carpools = new ArrayList<Carpool>();
-        if(location.equals(""))
+    public List<Carpool> findAllCarpoolsByLocation(String location) {
+        location = location.trim();
+        List<Carpool> carpools = new ArrayList<Carpool>();
+        if (location.isEmpty()) {
             carpools = getAllCarpools();
-        else
-        {
-        List<String> carpoolNames= findCarpoolByLocation(location.trim());
-         if(!carpoolNames.isEmpty())
-            for(String name:carpoolNames)
-            {
+        } else {
+            List<String> carpoolNames = routeService.getCarpoolNameList(location);
+
+            for (String name : carpoolNames) {
                 carpools.add(findCarpoolByName(name));
             }
         }

@@ -59,15 +59,4 @@ public class CarpoolDao {
             session.close();
         }
     }
-
-    public List<String> selectCarpoolByLocation(String location) {
-        SqlSession session = sqlSessionFactory.openSession();
-        try {
-            CarpoolMapper mapper = session.getMapper(CarpoolMapper.class);
-            List<String> carpools = mapper.selectByLocation(location);
-            return carpools;
-        } finally {
-            session.close();
-        }
-    }
 }

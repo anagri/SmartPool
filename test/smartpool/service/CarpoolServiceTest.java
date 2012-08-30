@@ -6,14 +6,15 @@ import org.mockito.Mock;
 import smartpool.domain.Carpool;
 import smartpool.persistence.dao.CarpoolDao;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
+import static org.junit.internal.matchers.IsCollectionContaining.hasItems;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class CarpoolServiceTest {
@@ -24,10 +25,13 @@ public class CarpoolServiceTest {
     @Mock
     CarpoolDao carpoolDao;
 
+    @Mock
+    RouteService routeService;
+
     @Before
     public void setUp() {
         initMocks(this);
-        carpoolService = new CarpoolService(carpoolDao);
+        carpoolService = new CarpoolService(carpoolDao, routeService);
         carpoolExpected = CarpoolBuilder.CARPOOL_1;
     }
 
@@ -49,12 +53,21 @@ public class CarpoolServiceTest {
 
     @Test
     public void shouldFindCarpoolsByLocation() {
+        when(routeService.getCarpoolNameList("Diamond District")).thenReturn(Arrays.asList("carpool-1"));
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Diamond District");
-        assertThat(carpools.contains(carpoolExpected),equalTo(true));
+        assertThat(carpools, hasItems(carpoolExpected));
+    }
+
+    @Test
+    public void shouldNotFindCarpoolsByInvalidLocation() {
+        when(routeService.getCarpoolNameList("Invalid Location")).thenReturn(new ArrayList<String>());
+        List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Invalid Location");
+        assertThat(carpools.size(), is(0));
     }
 
     @Test
     public void shouldReturnAllCarpoolsWhenSearchStringIsBlank() throws Exception {
+        when(carpoolDao.selectAllCarpools()).thenReturn(Arrays.asList(new Carpool()));
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("");
         assertThat(carpools.size(),is(1));
     }
