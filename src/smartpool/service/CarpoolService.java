@@ -1,5 +1,6 @@
 package smartpool.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import smartpool.domain.Carpool;
 import smartpool.persistence.dao.CarpoolDao;
@@ -12,8 +13,8 @@ public class CarpoolService {
     private final CarpoolDao carpoolDao;
     private final RouteService routeService;
 
+    @Autowired
     public CarpoolService(CarpoolDao carpoolDao, RouteService routeService) {
-
         this.carpoolDao = carpoolDao;
         this.routeService = routeService;
     }

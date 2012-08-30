@@ -2,6 +2,7 @@ package smartpool.persistence.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Component;
 import smartpool.common.MyBatisConnectionFactory;
 import smartpool.data.CarpoolMapper;
 import smartpool.domain.Carpool;
@@ -9,6 +10,7 @@ import smartpool.domain.Carpool;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@Component
 public class CarpoolDao {
 
     private SqlSessionFactory sqlSessionFactory;

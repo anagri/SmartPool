@@ -2,22 +2,22 @@ package smartpool.persistence.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Component;
 import smartpool.common.MyBatisConnectionFactory;
 import smartpool.data.JoinRequestMapper;
 import smartpool.domain.JoinRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Component
 public class JoinRequestDao {
 
-        private SqlSessionFactory sqlSessionFactory;
-        private HttpServletRequest request;
+    private SqlSessionFactory sqlSessionFactory;
+    private HttpServletRequest request;
 
-
-        public JoinRequestDao(){
-            sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();
-        }
-
+    public JoinRequestDao(){
+        sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();
+    }
 
     public void sendJoinRequest(JoinRequest joinRequest) {
         SqlSession session = sqlSessionFactory.openSession();
@@ -28,6 +28,4 @@ public class JoinRequestDao {
             session.close();
         }
     }
-
-
 }

@@ -3,6 +3,7 @@ package smartpool.persistence.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Component;
 import smartpool.common.MyBatisConnectionFactory;
 import smartpool.data.BuddyMapper;
 import smartpool.domain.Buddy;
@@ -10,15 +11,14 @@ import smartpool.domain.Buddy;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@Component
 public class BuddyDao {
     private SqlSessionFactory sqlSessionFactory;
     private HttpServletRequest request;
 
-
     public BuddyDao() {
         sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();
     }
-
 
     public Buddy selectBuddy(String username) {
         SqlSession session = sqlSessionFactory.openSession();

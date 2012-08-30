@@ -12,8 +12,7 @@ import javax.servlet.http.HttpSession;
 public class BuddyService {
 
     public Buddy getBuddy(String username) {
-        Buddy buddy = new BuddyDao().selectBuddy(username);
-        return buddy;
+        return new BuddyDao().selectBuddy(username);
     }
 
     public String getUserNameFromCAS(HttpServletRequest request) {
