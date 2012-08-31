@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import smartpool.domain.Carpool;
+import smartpool.domain.Status;
 import smartpool.service.CarpoolService;
 
 import java.util.List;
@@ -51,6 +52,7 @@ public class CarpoolController {
         carpool.setStartDate(startDate);
         carpool.setOfficeETA(officeETA);
         carpool.setOfficeETD(officeETD);
+        carpool.setStatus(Status.PENDING);
         carpoolService.insert(carpool);
         return "redirect:/carpool/"+carpool.getName();
     }

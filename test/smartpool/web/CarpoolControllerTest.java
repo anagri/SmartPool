@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import smartpool.domain.Carpool;
+import smartpool.domain.Status;
 import smartpool.service.CarpoolBuilder;
 import smartpool.service.CarpoolService;
 
@@ -77,7 +78,9 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldInsertIntoDBWhenPostedOnCreate() throws Exception {
-        carpoolController.create(new Carpool("name"),"15/06/2012", "10:00", "18:00", model);
-        verify(carpoolService).insert(new Carpool("name"));
+        Carpool carpool = new Carpool("name");
+        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", model);
+        verify(carpoolService).insert(carpool);
+        assertThat(carpool.getStatus(),equalTo(Status.PENDING));
     }
 }
