@@ -27,7 +27,7 @@
                 <c:forEach var="buddy" items="${carpool.getBuddies()}" varStatus="sequence">
                     <tr>
                         <td>${sequence.index + 1}</td>
-                        <td><a href="../buddyProfile/${buddy.getUsername()}">${buddy.getName()}</a></td>
+                        <td><a href="../buddyProfile/${buddy.getUserName()}">${buddy.getName()}</a></td>
                         <td>${buddy.getPickupPoint()}</td>
                         <td>${buddy.getPickupTime()}</td>
                     </tr>

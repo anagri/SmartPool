@@ -16,7 +16,7 @@ public interface CarpoolMapper {
             "#{officeETD, javaType=org.joda.time.LocalTime, jdbcType=TIME, typeHandler=smartpool.data.typeHandler.LocalTimeTypeHandler}," +
             "#{status}" +
             ")";
-    static final String SELECT_BY_NAME = "select name,date_format(start_date, '%d/%m/%Y') \"start_date\", office_eta,office_etd, cab_type,total_cab_charge,status,capacity  from carpool where name = #{name}";
+    static final String SELECT_BY_NAME = "select name,date_format(start_date, '%d/%m/%Y') \"start_date\", office_eta,office_etd, cab_type,total_cab_charge,status,capacity from carpool where name = #{name}";
     static final String DELETE_BY_NAME = "delete from carpool where name=#{name}";
     static final String SELECT_ALL = "select * from carpool";
 

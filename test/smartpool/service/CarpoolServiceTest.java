@@ -103,4 +103,12 @@ public class CarpoolServiceTest {
         carpoolService.insert(carpool);
         verify(buddyDao).addToCarpool(testBuddy, carpool);
     }
+
+    @Test
+    public void shouldReturnBuddyListInCarpool() throws Exception {
+        Carpool carpool = new Carpool("name");
+        when(carpoolDao.get("name")).thenReturn(carpool);
+        carpoolService.getByName("name");
+        verify(buddyDao).getBuddyListByCarpoolName(carpool.getName());
+    }
 }

@@ -26,7 +26,10 @@ public class CarpoolService {
     }
 
     public Carpool getByName(String name) {
-        return carpoolDao.get(name);
+        Carpool carpool = carpoolDao.get(name);
+        System.out.println(carpool);
+        carpool.setBuddies(buddyDao.getBuddyListByCarpoolName(carpool.getName()));
+        return carpool;
     }
 
     public Carpool findCarpoolByName(String name) {
@@ -52,7 +55,7 @@ public class CarpoolService {
         carpoolDao.insert(carpool);
         for (Buddy buddy : carpool.getBuddies()) {
             if(buddy == null) continue;
-            buddyDao.addToCarpool(buddy,carpool);
+            buddyDao.addToCarpool(buddy, carpool);
         }
     }
 
