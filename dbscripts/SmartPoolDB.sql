@@ -63,6 +63,8 @@ INSERT INTO `buddies` VALUES ('arnavku','Arnav Kumar','M-58, Diamond District, B
 ('prithvin','Prithvi Nambiar','H-81, Diamond District, Bangalore','prithvin@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
 ('ssquire','Samuel Michael Squir','P-81, Diamond District, Bangalore','ssquire@thoughtworks.com','0987654321',NULL,NULL,NULL,NULL,NULL),
 ('suganthk','Suganthi T','L-82, Diamond District, Bangalore','suganthit@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
+('test.twu','Test User','Somewhere, Bangalore','test@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
+('nibub','Nibu Baby','#659, Jayanthi Residency, Flat# 301, 1st Main, C Block,AECS Layout, Kundalahalli, Bangalore','nibub@thoughtworks.com','9686190831','Kundalahalli','11:10',NULL,NULL,'carpool-1'),
 ('vfranca','Vitor Franca','F-75, Diamond District, Bangalore','vfranca@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `buddies` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -93,7 +95,7 @@ CREATE TABLE `carpool` (
 
 LOCK TABLES `carpool` WRITE;
 /*!40000 ALTER TABLE `carpool` DISABLE KEYS */;
-INSERT INTO `carpool` VALUES ('carpool-1', '2012-06-02', 'COMPANY', '10:50', '18:30', 'RUNNING', 100, 4);
+INSERT INTO `carpool` VALUES ('carpool-1', '2012-06-02', 'COMPANY', '11:30', '18:30', 'RUNNING', 100, 4);
 /*!40000 ALTER TABLE `carpool` ENABLE KEYS */;
 UNLOCK TABLES;
 

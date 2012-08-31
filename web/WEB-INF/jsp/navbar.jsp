@@ -27,11 +27,14 @@
                     <li><a href="${appName}/carpool/carpool-1" >Carpools</a></li>
                     <li><a href="${appName}/searchCarpool/">Carpool Search</a></li>
                     <li><a href="${appName}/buddyProfile/${casUserName}">My Profile</a></li>
-                    <li><a href="#contact">Notifications</a></li>
+                    <li><a href="#notifications">Notifications</a></li>
                 </ul>
                 <form class="navbar-form pull-right">
                     ${casUserName}
-                    <button type="submit" class="btn" ref="castest.thoughtworks.com/cas/logout">Logout</button>
+                        <%--<form method="post">--%>
+                            <%--<button type="submit" value="https://castest.thoughtworks.com/cas/logout">Logout</button>--%>
+                        <%--</form>--%>
+                    <button type="button" class="btn" onClick="parent.location='https://castest.thoughtworks.com/cas/logout'">Logout</button>
                 </form>
             </div>
         </div>
