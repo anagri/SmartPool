@@ -28,11 +28,10 @@ public class JoinCarPoolController {
 
     @RequestMapping(value = "carpool/{name}/join", method = RequestMethod.GET)
     public String getUserDetails(@PathVariable String name, ModelMap model, HttpServletRequest request){
-        String carpoolName = name;
         userName = buddyService.getUserNameFromCAS(request);
         Buddy buddy = buddyService.getBuddy(userName);
         model.put("buddy",buddy);
-        model.put("carpoolName",carpoolName);
+        model.put("carpoolName", name);
         model.put("casUserName", userName);
         return "carpool/joinRequest";
     }

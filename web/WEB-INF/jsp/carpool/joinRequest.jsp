@@ -63,7 +63,7 @@
         </div>
         <div class="subContainer">
                     <span id="pickupTimeLabel">
-                        <label>Pick Up Time</label>
+                        <label>Pick Up Time (hh:mm)</label>
                     </span>
                     <span id="pickupTimeTextBox">
                         <input name="pickupTime" type="textbox" /> <br />

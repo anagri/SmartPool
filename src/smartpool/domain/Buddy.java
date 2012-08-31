@@ -4,6 +4,21 @@ public class Buddy {
 
     private String username, name, address, contactNumber, emailId, pickupTime,pickupPoint;
 
+    private Buddy() {
+    }
+
+    public Buddy(String username) {
+        this.username = username;
+    }
+
+    public Buddy(String username, String name, String contactNumber, String emailId, String address) {
+        this(username);
+        this.name = name;
+        this.address = address;
+        this.emailId = emailId;
+        this.contactNumber = contactNumber;
+    }
+
     public String getName() {
         return name;
     }
@@ -22,22 +37,6 @@ public class Buddy {
 
     public String getUserName() {
         return username;
-    }
-
-    public Buddy() {
-
-    }
-
-    public Buddy(String username) {
-        this.username = username;
-    }
-
-    public Buddy(String username, String name, String contactNumber, String emailId, String address) {
-        this.username = username;
-        this.name = name;
-        this.address = address;
-        this.emailId = emailId;
-        this.contactNumber = contactNumber;
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Component;
 import smartpool.common.MyBatisConnectionFactory;
 import smartpool.data.JoinRequestMapper;
+import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,16 @@ public class JoinRequestDao {
         try {
             JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
             mapper.insertRequest(joinRequest);
+        } finally {
+            session.close();
+        }
+    }
+
+    public boolean isRequestSent(Buddy buddy, String carpoolName) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
+            return mapper.selectRequestCount(buddy.getUserName(), carpoolName);
         } finally {
             session.close();
         }

@@ -17,7 +17,7 @@ public interface BuddyMapper {
     List<Buddy> selectAll();
 
     @Select(SELECT_BUDDY)
-   Buddy selectBuddy(String username);
+    Buddy selectBuddy(String username);
 
     @Select(SELECT_BUDDY_LIST_BY_CARPOOL_NAME)
     ArrayList<Buddy> selectBuddyListByCarpoolName(String carpoolName);
