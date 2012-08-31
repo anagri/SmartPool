@@ -56,9 +56,6 @@ war {
             it.expand(smartpoolServerName: String.format("%s:%s", settings.hostName, settings.port))
         }
     }
-    doFirst {
-        // ant.replace(file: "${buildDir}/resources/main/SqlMapConfig.xml", token: "smartpool", value: settings.databaseName)
-    }
 }
 
 task prepareEnvironment {
