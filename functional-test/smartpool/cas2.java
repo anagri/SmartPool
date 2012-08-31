@@ -20,7 +20,7 @@ public class cas2 extends SeleneseTestCase {
 
 	@Test
 	public void testCas2() throws Exception {
-		selenium.open("http://10.10.15.121:9090/smartpool-qa");
+		selenium.open("http://localhost:9090/smartpool");
 		selenium.type("id=username", "wrongid");
 		selenium.type("id=password", "lollollol");
 		selenium.click("name=submit");
