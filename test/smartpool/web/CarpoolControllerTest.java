@@ -77,8 +77,7 @@ public class CarpoolControllerTest {
     @Test
     public void shouldRedirectToViewCarpoolWhenPostedOnCreate(){
         assertThat(carpoolController.create(new Carpool("name"),"15/06/2012", "10:00", "18:00", model),equalTo("redirect:/carpool/name"));
-  }
-
+    }
 
     @Test
     public void shouldInsertIntoDBWhenPostedOnCreate() throws Exception {
