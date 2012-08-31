@@ -16,6 +16,9 @@
 
 <center><h1>Welcome to SmartPool!</h1></center>
 
+<center><a href="${appName}/carpool/carpool-1" > Carpool-1 </a></center>
+    
+
 
 
 </body>
