@@ -21,4 +21,7 @@ public class BuddyService {
         return (String) session.getAttribute(CASFilter.CAS_FILTER_USER);
     }
 
+    public Buddy getCurrentBuddy(HttpServletRequest request) {
+        return this.getBuddy(this.getUserNameFromCAS(request));
+    }
 }

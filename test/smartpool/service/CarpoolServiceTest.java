@@ -3,6 +3,7 @@ package smartpool.service;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
 import smartpool.persistence.dao.BuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
@@ -92,5 +93,14 @@ public class CarpoolServiceTest {
         verify(carpoolDao).insert(new Carpool("name"));
     }
 
-
+    @Test
+    public void shouldUpdateBuddyWhileCreatingCarpool() throws Exception {
+        Carpool carpool = new Carpool("name");
+        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
+        Buddy testBuddy = new Buddy("testBuddy");
+        buddies.add(testBuddy);
+        carpool.setBuddies(buddies);
+        carpoolService.insert(carpool);
+        verify(buddyDao).addToCarpool(testBuddy, carpool);
+    }
 }

@@ -17,7 +17,5 @@ public class CarpoolServiceIT {
         List<Carpool> allCarpoolsByLocation = carpoolService.findAllCarpoolsByLocation("Diamond District");
 
         assertEquals("carpool-1", allCarpoolsByLocation.get(0).getName());
-        assertEquals(1, allCarpoolsByLocation.get(0).getBuddies().size());
-
     }
 }

@@ -6,11 +6,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
+import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
 import smartpool.domain.Status;
+import smartpool.service.BuddyService;
 import smartpool.service.CarpoolBuilder;
 import smartpool.service.CarpoolService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,20 +31,30 @@ public class CarpoolControllerTest {
     private CarpoolController carpoolController;
     @Mock
     private CarpoolService carpoolService;
+    @Mock
+    private HttpServletRequest request;
+    @Mock
+    private BuddyService buddyService;
 
     private ModelMap model;
     private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
+
     private ArrayList<Carpool> defaultCarpools;
+    private final Buddy testBuddy = new Buddy("testBuddy");
 
     @Before
     public void setUp() throws Exception {
-        carpoolController = new CarpoolController(carpoolService);
+        carpoolController = new CarpoolController(carpoolService,buddyService);
         when(carpoolService.getByName("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
+
         defaultCarpools = new ArrayList<Carpool>() {{
             add(expectedCarpool);
         }};
         when(carpoolService.findAllCarpoolsByLocation("Diamond District")).thenReturn(defaultCarpools);
+
+        when(buddyService.getCurrentBuddy(request)).thenReturn(testBuddy);
+
     }
 
     @Test
@@ -76,13 +89,13 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpoolWhenPostedOnCreate(){
-        assertThat(carpoolController.create(new Carpool("name"),"15/06/2012", "10:00", "18:00", model),equalTo("redirect:/carpool/name"));
+        assertThat(carpoolController.create(new Carpool("name"),"15/06/2012", "10:00", "18:00", model,request),equalTo("redirect:/carpool/name"));
     }
 
     @Test
     public void shouldInsertIntoDBWhenPostedOnCreate() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", model);
+        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", model,request);
         verify(carpoolService).insert(carpool);
         assertThat(carpool.getStatus(),equalTo(Status.PENDING));
     }
@@ -94,5 +107,10 @@ public class CarpoolControllerTest {
         assertThat((ArrayList<Carpool>) model.get("searchResult"), is(defaultCarpools));
     }
 
-
+    @Test
+    public void shouldAddCurrentBuddyToCarpoolWhileCreating() throws Exception {
+        Carpool carpool = new Carpool("name");
+        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", model,request);
+        assertThat(carpool.getBuddies().contains(testBuddy),equalTo(true));
+    }
 }

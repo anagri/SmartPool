@@ -15,12 +15,11 @@ public class Carpool {
 
     private int totalCabCharges;
     private Status status;
-    private ArrayList<Buddy> buddies;
+    private ArrayList<Buddy> buddies = new ArrayList<Buddy>();
     private int capacity;
     private ArrayList<String> routePlan;
 
     public Carpool() {
-
         status = Status.PENDING;
     }
 

@@ -4,8 +4,14 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import smartpool.domain.Buddy;
+import smartpool.domain.Carpool;
 
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class BuddyDaoIT {
 
@@ -26,13 +32,20 @@ public class BuddyDaoIT {
     @Test
     public void shouldGetFirstBuddy(){
         Buddy expectedBuddy = new Buddy("arnavku");
-        Assert.assertEquals(expectedBuddy, buddyDao.selectAllBuddies().get(0));
+        assertTrue(buddyDao.selectAllBuddies().contains(expectedBuddy));
     }
 
     @Test
     public void shouldGetBuddyListByCarpoolName() {
         List<Buddy> buddyList = buddyDao.getBuddyListByCarpoolName("carpool-1");
-        Assert.assertEquals(1, buddyList.size());
-        Assert.assertEquals("Diamond District", buddyList.get(0).getPickupPoint());
+        assertThat(buddyList.size(),not(0));
+    }
+
+    @Test
+    public void shouldAddBuddyToACarpool() throws Exception {
+        Buddy buddy = new Buddy("vfranca");
+        Carpool carpool = new Carpool("carpool-1");
+        buddyDao.addToCarpool(buddy, carpool);
+        assertThat(buddyDao.getBuddyListByCarpoolName("carpool-1").contains(buddy),equalTo(true));
     }
 }

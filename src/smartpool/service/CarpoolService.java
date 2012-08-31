@@ -2,6 +2,7 @@ package smartpool.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
 import smartpool.persistence.dao.BuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
@@ -49,6 +50,10 @@ public class CarpoolService {
 
     public void insert(Carpool carpool) {
         carpoolDao.insert(carpool);
+        for (Buddy buddy : carpool.getBuddies()) {
+            if(buddy == null) continue;
+            buddyDao.addToCarpool(buddy,carpool);
+        }
     }
 
     private List<Carpool> getAllCarpools() {
