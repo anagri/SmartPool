@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 public class JoinCarPoolController {
     private BuddyService buddyService;
     private JoinRequestService joinRequestService;
-    String userName;
 
     @Autowired
     public JoinCarPoolController(BuddyService buddyService, JoinRequestService joinRequestService) {
@@ -26,13 +25,14 @@ public class JoinCarPoolController {
         this.joinRequestService = joinRequestService;
     }
 
-    @RequestMapping(value = "carpool/{name}/join", method = RequestMethod.GET)
-    public String getUserDetails(@PathVariable String name, ModelMap model, HttpServletRequest request){
-        userName = buddyService.getUserNameFromCAS(request);
+    @RequestMapping(value = "carpool/{carpoolName}/join", method = RequestMethod.GET)
+    public String getUserDetails(@PathVariable String carpoolName, ModelMap model, HttpServletRequest request){
+        String userName = buddyService.getUserNameFromCAS(request);
         Buddy buddy = buddyService.getBuddy(userName);
         model.put("buddy",buddy);
-        model.put("carpoolName", name);
+        model.put("carpoolName", carpoolName);
         model.put("casUserName", userName);
+        model.put("isRequestSent", joinRequestService.isRequestSent(buddy, carpoolName));
         return "carpool/joinRequest";
     }
 
