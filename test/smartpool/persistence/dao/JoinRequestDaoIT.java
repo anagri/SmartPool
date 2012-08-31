@@ -1,6 +1,7 @@
 package smartpool.persistence.dao;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
@@ -18,11 +19,13 @@ public class JoinRequestDaoIT {
     }
 
     @Test
+    @Ignore
     public void shouldInsertRequestToDB() {
-        joinRequestDao.sendJoinRequest(new JoinRequest("govindm","carpool-1","9:00","Domlur"));
+        joinRequestDao.sendJoinRequest(new JoinRequest("ayusht","carpool-1","9:00","Domlur"));
     }
 
     @Test
+    @Ignore
     public void shouldVerifyRequestSentByABuddy() {
         String buddyName = "mdaliej";
         String carpoolName = "carpool-1";
