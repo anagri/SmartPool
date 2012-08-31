@@ -9,6 +9,7 @@ import smartpool.data.BuddyMapper;
 import smartpool.domain.Buddy;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -64,11 +65,11 @@ public class BuddyDao {
     }
 
 
-    public List<Buddy> getBuddyListByCarpoolName(String carpoolName) {
+    public ArrayList<Buddy> getBuddyListByCarpoolName(String carpoolName) {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             BuddyMapper mapper = session.getMapper(BuddyMapper.class);
-            List<Buddy> buddyList = mapper.selectBuddyListByCarpoolName(carpoolName);
+            ArrayList<Buddy> buddyList = mapper.selectBuddyListByCarpoolName(carpoolName);
             return buddyList;
         } finally {
             session.close();

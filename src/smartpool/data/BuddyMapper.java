@@ -3,6 +3,7 @@ package smartpool.data;
 import org.apache.ibatis.annotations.Select;
 import smartpool.domain.Buddy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface BuddyMapper {
@@ -19,5 +20,5 @@ public interface BuddyMapper {
    Buddy selectBuddy(String username);
 
     @Select(SELECT_BUDDY_LIST_BY_CARPOOL_NAME)
-    List<Buddy> selectBuddyListByCarpoolName(String carpoolName);
+    ArrayList<Buddy> selectBuddyListByCarpoolName(String carpoolName);
 }

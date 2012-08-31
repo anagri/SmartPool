@@ -5,10 +5,7 @@ package smartpool.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import smartpool.domain.Carpool;
 import smartpool.service.CarpoolService;
 
@@ -32,7 +29,6 @@ public class CarpoolController {
         return "carpool/view";
     }
 
-
     @RequestMapping(value = "/carpool/", method = RequestMethod.GET)
     public String searchByLocation(ModelMap model) {
         return searchByLocation("", model);
@@ -51,8 +47,11 @@ public class CarpoolController {
     }
 
     @RequestMapping(value = "/carpool/create", method = RequestMethod.POST)
-    public String create(String name, ModelMap model) {
-        carpoolService.insert(new Carpool(name));
-        return "redirect:/carpool/"+name;
+    public String create(@ModelAttribute Carpool carpool, @RequestParam String startDate,@RequestParam String officeETA,@RequestParam String officeETD, ModelMap model) {
+        carpool.setStartDate(startDate);
+        carpool.setOfficeETA(officeETA);
+        carpool.setOfficeETD(officeETD);
+        carpoolService.insert(carpool);
+        return "redirect:/carpool/"+carpool.getName();
     }
 }

@@ -35,7 +35,7 @@
             </table>
             <p><span>Cab Type:</span> ${carpool.getCabType()}</p>
             <p><span>Office ETA:</span> ${carpool.getOfficeETA().toString("h:mm a")}</p>
-            <p><span>Office ETD:</span> ${carpool.getOfficePickupTime().toString("h:mm a")}</p>
+            <p><span>Office ETD:</span> ${carpool.getOfficeETD().toString("h:mm a")}</p>
             <p><span>Status:</span> ${carpool.getStatus()}</p>
 
             <a href="javascript:void(0)" id="moreDetailsButton">More Details</a>

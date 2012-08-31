@@ -2,36 +2,35 @@ package smartpool.domain;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import smartpool.common.Constants;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Carpool {
     String name;
-
     LocalDate startDate;
-
-    String pickupPoint;
     CabType cabType;
-    int totalCabCharges;
-    LocalTime officePickupTime;
-    Status status;
-    List<Buddy> buddies;
-    int capacity;
-    ArrayList<String> routePlan;
-    private LocalTime officeETA;
+    LocalTime officeETA;
+    LocalTime officeETD;
+
+    private int totalCabCharges;
+    private Status status;
+    private ArrayList<Buddy> buddies;
+    private int capacity;
+    private ArrayList<String> routePlan;
 
     public Carpool() {
+
+        status = Status.PENDING;
     }
 
-    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officePickupTime, Status status, List<Buddy> buddies, int capacity, ArrayList<String> routePlan) {
+    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officeETD, Status status, ArrayList<Buddy> buddies, int capacity, ArrayList<String> routePlan) {
         this.name = name;
         this.startDate = startDate;
-        this.pickupPoint = pickupPoint;
         this.cabType = cabType;
         this.totalCabCharges = totalCabCharges;
         this.officeETA = officeETA;
-        this.officePickupTime = officePickupTime;
+        this.officeETD = officeETD;
         this.status = status;
         this.buddies = buddies;
         this.capacity = capacity;
@@ -46,53 +45,76 @@ public class Carpool {
         return name;
     }
 
-    public LocalTime getOfficeETA(){
-        return officeETA;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate == null ? null : LocalDate.parse(startDate, Constants.DATE_FORMATTER);
     }
 
     public CabType getCabType() {
         return cabType;
     }
 
+    public void setCabType(CabType cabType) {
+        this.cabType = cabType;
+    }
+
+    public LocalTime getOfficeETA() {
+        return officeETA;
+    }
+
+    public void setOfficeETA(String officeETA) {
+        this.officeETA =  new  LocalTime(officeETA);
+    }
+
+    public LocalTime getOfficeETD() {
+        return officeETD;
+    }
+
+    public void setOfficeETD(String officeETD) {
+        this.officeETD = new  LocalTime(officeETD);
+    }
+
     public int getTotalCabCharges() {
         return totalCabCharges;
     }
 
-    public LocalTime getOfficePickupTime() {
-        return officePickupTime;
+    public void setTotalCabCharges(int totalCabCharges) {
+        this.totalCabCharges = totalCabCharges;
     }
 
     public Status getStatus() {
         return status;
     }
 
-    public List<Buddy> getBuddies() {
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public ArrayList<Buddy> getBuddies() {
         return buddies;
     }
 
-    public String getStartPoint(){
-        return buddies.get(0).getPickupPoint();
-    }
-    public String getStartTime(){
-        return buddies.get(0).getPickupTime();
-    }
-    public int buddyCount(){
-        return buddies.size();
-    }
-    public LocalDate getStartDate() {
-        return startDate;
+    public void setBuddies(ArrayList<Buddy> buddies) {
+        this.buddies = buddies;
     }
 
     public int getCapacity() {
         return capacity;
     }
 
-    public ArrayList<String> getRoutePlan() {
-        return routePlan;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
-    public void setBuddies(List<Buddy> buddies) {
-        this.buddies = buddies;
+    public ArrayList<String> getRoutePlan() {
+        return routePlan;
     }
 
     @Override
@@ -111,4 +133,5 @@ public class Carpool {
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
     }
+
 }
