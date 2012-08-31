@@ -9,6 +9,8 @@ import smartpool.domain.Status;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 public class CarpoolDaoIT {
 
@@ -21,9 +23,12 @@ public class CarpoolDaoIT {
 
     @Test
     public void shouldInsertNewRowInDB() throws Exception {
-        carpoolDao.insert(new Carpool("name"));
+        Carpool carpool = new Carpool("name");
+        carpool.setStartDate("10/12/2012");
 
-        assertNotNull(carpoolDao.get("name"));
+        carpoolDao.insert(carpool);
+
+         assertThat(carpoolDao.get("name").getStartDate(),equalTo(carpool.getStartDate()));
     }
     @Test
     public void shouldGetCarpoolByName() throws Exception {
