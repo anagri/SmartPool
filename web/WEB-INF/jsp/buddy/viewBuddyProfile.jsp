@@ -1,3 +1,5 @@
+<%@ include file="../navbar.jsp" %>
+
 <html>
 <head>
     <title>${buddyProfile.getName()}'s Profile</title>
@@ -31,9 +33,10 @@
                 </tbody>
             </table>
         </div>
-        <div style="margin-left:200px;top:300px">
+        <br>
+        <br>
+        <div style="margin-left:300px;top:300px">
             <button >Contact ${buddyProfile.getName()}</button>
-            <button disabled="disabled">Edit</button>
         </div>
 
     </div>
