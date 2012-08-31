@@ -9,19 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
-import smartpool.persistence.dao.JoinRequestDao;
 import smartpool.service.BuddyService;
+import smartpool.service.JoinRequestService;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class JoinCarPoolController {
     private BuddyService buddyService;
+    private JoinRequestService joinRequestService;
     String userName;
 
     @Autowired
-    public JoinCarPoolController(BuddyService buddyService) {
+    public JoinCarPoolController(BuddyService buddyService, JoinRequestService joinRequestService) {
         this.buddyService = buddyService;
+        this.joinRequestService = joinRequestService;
     }
 
     @RequestMapping(value = "carpool/{name}/join", method = RequestMethod.GET)
@@ -37,9 +39,8 @@ public class JoinCarPoolController {
 
     @RequestMapping(value = "carpool/{name}/join", method = RequestMethod.POST)
     public String submitUserDetails(@PathVariable String name, @ModelAttribute("request")JoinRequest joinRequest, ModelMap model){
-        JoinRequestDao joinRequestDao=new JoinRequestDao();
         joinRequest.setCarpoolName(name);
-        joinRequestDao.sendJoinRequest(joinRequest);
+        joinRequestService.sendJoinRequest(joinRequest);
         model.put("request",joinRequest);
         return "redirect:../../carpool/"+name;
     }

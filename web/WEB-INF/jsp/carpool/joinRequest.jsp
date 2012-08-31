@@ -1,4 +1,4 @@
-
+<%@ include file="../include.jsp" %>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/profileLayout.css"/>
@@ -12,13 +12,12 @@
 
     <div class="mainContainer">
 
-
         <div class="subContainer">
                     <span id="usernameLabel">
                         <label>Username*</label>
                     </span>
                     <span id="usernameTextBox">
-                        <input name="username" type="textbox" required="required" value=${buddy.getUsername()} readonly/> <br />
+                        <input name="username" type="textbox" required="required" value=${buddy.getUserName()} readonly/> <br />
                     </span>
         </div>
 
