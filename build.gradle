@@ -6,14 +6,18 @@ repositories {
     mavenCentral()
 }
 
-defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble','install','functionalTest'
+defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble', 'install', 'functionalTest'
 
 ant.importBuild 'build.xml'
+
 
 sourceSets {
     main {
         java {
             srcDir 'src'
+        }
+        resources {
+            srcDir 'src/resources'
         }
     }
     test {
@@ -36,20 +40,38 @@ project.ext {
 }
 
 def environments = [
-    dev: [hostName: "localhost", port: 9090, applicationName: "smartpool"],
-    qa: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-qa"],
-    uat: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-uat"]
+        dev: [hostName: "localhost", port: 9090, applicationName: "smartpool", databaseName: "smartpool"],
+        qa: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-qa", databaseName: "smartpoolqa"],
+        uat: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-uat", databaseName: "smartpooluat"]
 ]
 
 war {
     def settings = environments[project['environmentName']]
+    ant.properties['applicationName'] = settings.applicationName
     from 'web'
+    from 'src/resources'
     baseName settings.applicationName
     eachFile {
         if (it.name == 'web.xml') {
             it.expand(smartpoolServerName: String.format("%s:%s", settings.hostName, settings.port))
         }
     }
+    doFirst {
+        // ant.replace(file: "${buildDir}/resources/main/SqlMapConfig.xml", token: "smartpool", value: settings.databaseName)
+    }
+}
+
+task prepareEnvironment {
+    def settings = environments[project['environmentName']]
+
+    doLast {
+        ant.replace(file: "${buildDir}/resources/main/SqlMapConfig.xml", token: "smartpool", value: settings.databaseName)
+
+    }
+}
+
+test {
+    dependsOn prepareEnvironment
 }
 
 dependencies {
@@ -89,7 +111,10 @@ dependencies {
 
 // create a task in gradle to read user, password from property, execute mysql command with SmartPoolDB.sql so that it populates the DB
 task setup_database << {
-    ant.exec(executable: "dbscripts/dbsetup.sh", failifexecutionfails: "true", failonerror: "true")
+    def settings = environments[project['environmentName']]
+    ant.exec(executable: "dbscripts/dbsetup.sh", failifexecutionfails: "true", failonerror: "true") {
+        arg(value: settings.databaseName)
+    }
 }
 
 task functionalTest(type: Test) {

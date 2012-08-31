@@ -2,14 +2,17 @@
 
 <project name="SmartPool" default="usage" basedir=".">
     <property file="build.properties"/>
-    <property name="name" value="smartpool"/>
+    <condition property="applicationName" else="smartpool">
+        <isset property="applicationName"/>
+    </condition>
+    <property name="applicationName" value="${applicationName}"/>
     <property name="build.dir" value="build"/>
     <property name="web.build.dir" value="${build.dir}/libs"/>
-    <property name="war.file" value="${web.build.dir}/${name}.war"/>
+    <property name="war.file" value="${web.build.dir}/${applicationName}.war"/>
 
     <target name="usage">
         <echo message=""/>
-        <echo message="${name} build file"/>
+        <echo message="${applicationName} build file"/>
         <echo message="-----------------------------------"/>
         <echo message=""/>
         <echo message="Available targets are:"/>
@@ -23,7 +26,7 @@
     </target>
 
     <target name="deploy" description="Deploy application to local servers">
-        <copy todir="${deploy.path}" file="${war.file}"/>
+        <copy todir="${deploy.path}" file="${web.build.dir}/${applicationName}.war"/>
     </target>
 
     <!-- ============================================================== -->
@@ -64,15 +67,15 @@
                  username="${tomcat.manager.username}"
                  password="${tomcat.manager.password}"
                  update="${tomcat.manager.update}"
-                 path="/${name}"
-                 war="${war.file}"/>
+                 path="/${applicationName}"
+                 war="${web.build.dir}/${applicationName}.war"/>
     </target>
 
     <target name="reload" description="Reload application in Tomcat">
         <reload url="${tomcat.manager.url}"
                 username="${tomcat.manager.username}"
                 password="${tomcat.manager.password}"
-                path="/${name}"
+                path="/${applicationName}"
                 />
     </target>
 
@@ -80,14 +83,14 @@
         <start url="${tomcat.manager.url}"
                username="${tomcat.manager.username}"
                password="${tomcat.manager.password}"
-               path="/${name}"/>
+               path="/${applicationName}"/>
     </target>
 
     <target name="stop" description="Stop Tomcat application">
         <stop url="${tomcat.manager.url}"
               username="${tomcat.manager.username}"
               password="${tomcat.manager.password}"
-              path="/${name}"/>
+              path="/${applicationName}"/>
     </target>
 
     <target name="list" description="List Tomcat applications">
