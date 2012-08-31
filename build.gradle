@@ -62,6 +62,7 @@ dependencies {
             "org.springframework.security:spring-security-config:$project.springSecurityVersion",
             "org.springframework.security:spring-security-core:$project.springSecurityVersion",
             "org.springframework.security:spring-security-cas:$project.springSecurityCasVersion",
+            "org.apache.commons:commons-lang3:3.1",
             "javax.servlet:servlet-api:2.5",
             "org.mybatis:mybatis:3.1.1",
             "mysql:mysql-connector-java:5.1.21",

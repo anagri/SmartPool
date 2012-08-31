@@ -21,14 +21,14 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class CarpoolServiceTest {
 
     private CarpoolService carpoolService;
-    Carpool carpoolExpected;
+    Carpool expectedCarpool;
+    private List<Carpool> expectedCarpools;
 
     @Mock
     CarpoolDao carpoolDao;
 
     @Mock
     RouteService routeService;
-
     @Mock
     BuddyDao buddyDao;
 
@@ -36,14 +36,15 @@ public class CarpoolServiceTest {
     public void setUp() {
         initMocks(this);
         carpoolService = new CarpoolService(carpoolDao, buddyDao, routeService);
-        carpoolExpected = CarpoolBuilder.CARPOOL_1;
+        expectedCarpool = CarpoolBuilder.CARPOOL_1;
+        expectedCarpools = Arrays.asList(CarpoolBuilder.CARPOOL_1);
     }
 
     @Test
     public void shouldFindCarpoolByName() {
         String carpoolName = "carpool-1";
         when(carpoolDao.get("carpool-1")).thenReturn(new Carpool());
-        Carpool carpoolActual= carpoolService.findCarpoolByName(carpoolName);
+        Carpool carpoolActual = carpoolService.findCarpoolByName(carpoolName);
         verify(carpoolDao).get(carpoolName);
         assertNotNull(carpoolActual);
     }
@@ -59,9 +60,9 @@ public class CarpoolServiceTest {
     @Test
     public void shouldFindCarpoolsByLocation() {
         when(routeService.getCarpoolNameList("Diamond District")).thenReturn(Arrays.asList("carpool-1"));
-        when(carpoolDao.get("carpool-1")).thenReturn(carpoolExpected);
+        when(carpoolDao.get("carpool-1")).thenReturn(expectedCarpool);
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Diamond District");
-        assertThat(carpools, hasItems(carpoolExpected));
+        assertThat(carpools, hasItems(expectedCarpool));
     }
 
     @Test
@@ -73,13 +74,20 @@ public class CarpoolServiceTest {
 
     @Test
     public void shouldReturnAllCarpoolsWhenSearchStringIsBlank() throws Exception {
-        when(carpoolDao.selectAllCarpools()).thenReturn(Arrays.asList(new Carpool()));
+        when(carpoolDao.selectAllCarpools()).thenReturn(expectedCarpools);
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("");
-        assertThat(carpools.size(),is(1));
+        assertThat(carpools, is(expectedCarpools));
     }
 
     @Test
-    public void shouldInsertIntoDatabase(){
+    public void shouldReturnAllCarpoolsWhenSearchStringIsNull() throws Exception {
+        when(carpoolDao.selectAllCarpools()).thenReturn(expectedCarpools);
+        List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation(null);
+        assertThat(carpools, is(expectedCarpools));
+    }
+
+    @Test
+    public void shouldInsertIntoDatabase() {
         carpoolService.insert(new Carpool("name"));
         verify(carpoolDao).insert(new Carpool("name"));
     }

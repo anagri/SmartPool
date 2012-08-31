@@ -11,6 +11,7 @@
             <input type="text" name="query" />
             <input type="submit" value="Search" />
         </form>
+        <c:if test="${searchResult ne null}">
         <table class="carpools" style="border: 1px;">
             <tr>
                 <td>Name</td>
@@ -29,6 +30,7 @@
                 </tr>
             </c:forEach>
         </table>
+        </c:if>
     </body>
 
 </html>

@@ -1,4 +1,3 @@
-
 package smartpool.web;
 
 
@@ -29,16 +28,24 @@ public class CarpoolController {
 
         return "carpool/view";
     }
-
     @RequestMapping(value = "/carpool/", method = RequestMethod.GET)
     public String searchByLocation(ModelMap model) {
         return searchByLocation("", model);
+    }
+
+    @RequestMapping(value = "/carpool/searchCarpool", method = RequestMethod.GET)
+    public String searchCarpool(ModelMap modelMap) {
+        List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Diamond District ");
+        modelMap.put("searchResult", carpools);
+
+        return "carpool/search";
     }
 
     @RequestMapping(value = "/carpool/search", method = RequestMethod.GET)
     public String searchByLocation(@RequestParam String query, ModelMap model) {
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation(query);
         model.put("searchResult", carpools);
+
         return "carpool/search";
     }
 

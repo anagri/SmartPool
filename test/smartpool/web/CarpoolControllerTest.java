@@ -14,6 +14,7 @@ import smartpool.service.CarpoolService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -30,15 +31,17 @@ public class CarpoolControllerTest {
 
     private ModelMap model;
     private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
+    private ArrayList<Carpool> defaultCarpools;
 
     @Before
     public void setUp() throws Exception {
         carpoolController = new CarpoolController(carpoolService);
         when(carpoolService.getByName("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
-        ArrayList<Carpool> carpools = new ArrayList<Carpool>();
-        carpools.add(expectedCarpool);
-        when(carpoolService.findAllCarpoolsByLocation("Diamond District")).thenReturn(carpools);
+        defaultCarpools = new ArrayList<Carpool>() {{
+            add(expectedCarpool);
+        }};
+        when(carpoolService.findAllCarpoolsByLocation("Diamond District")).thenReturn(defaultCarpools);
     }
 
     @Test
@@ -55,8 +58,8 @@ public class CarpoolControllerTest {
     }
 
     @Test
-    public void shouldSearchForCarpool(){
-        carpoolController.searchByLocation("Diamond District",model);
+    public void shouldSearchForCarpool() {
+        carpoolController.searchByLocation("Diamond District", model);
         List<Carpool> searchResult = (List<Carpool>) model.get("searchResult");
         assertThat(searchResult, hasItems(expectedCarpool));
     }
@@ -68,13 +71,14 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldRedirectToCreateCarpool() throws Exception {
-        assertThat(carpoolController.create(),equalTo("carpool/create"));
+        assertThat(carpoolController.create(), equalTo("carpool/create"));
     }
 
     @Test
     public void shouldRedirectToViewCarpoolWhenPostedOnCreate(){
         assertThat(carpoolController.create(new Carpool("name"),"15/06/2012", "10:00", "18:00", model),equalTo("redirect:/carpool/name"));
-    }
+  }
+
 
     @Test
     public void shouldInsertIntoDBWhenPostedOnCreate() throws Exception {
@@ -83,4 +87,13 @@ public class CarpoolControllerTest {
         verify(carpoolService).insert(carpool);
         assertThat(carpool.getStatus(),equalTo(Status.PENDING));
     }
+
+    @Test
+    public void shouldDisplayAllCarpoolsIfQueryIsNull() {
+        when(carpoolService.findAllCarpoolsByLocation(null)).thenReturn(defaultCarpools);
+        carpoolController.searchByLocation(null, model);
+        assertThat((ArrayList<Carpool>) model.get("searchResult"), is(defaultCarpools));
+    }
+
+
 }

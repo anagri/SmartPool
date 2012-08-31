@@ -18,8 +18,9 @@ public class BuddyDaoIT {
 
     @Test
     public void shouldGetBuddyByUserName(){
-        Buddy expectedBuddy = new Buddy("prithvin");
-        Assert.assertEquals(expectedBuddy, buddyDao.selectBuddy("prithvin"));
+        Buddy expectedBuddy = new Buddy("arnavku");
+        Assert.assertEquals(expectedBuddy, buddyDao.selectBuddy("arnavku"));
+        Assert.assertEquals("Diamond District", buddyDao.selectBuddy("arnavku").getPickupPoint());
     }
 
     @Test
@@ -32,5 +33,6 @@ public class BuddyDaoIT {
     public void shouldGetBuddyListByCarpoolName() {
         List<Buddy> buddyList = buddyDao.getBuddyListByCarpoolName("carpool-1");
         Assert.assertEquals(1, buddyList.size());
+        Assert.assertEquals("Diamond District", buddyList.get(0).getPickupPoint());
     }
 }
