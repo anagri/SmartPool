@@ -19,4 +19,8 @@ public class RouteService {
     public List<String> getCarpoolNameList(String location) {
         return routeDao.getCarpoolNameListByLocation(location);
     }
+
+    public List<String> getAllLocation() {
+        return routeDao.getAllLocations();
+    }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @Component
 public class RouteDao {
     private SqlSessionFactory sqlSessionFactory;
+    private SqlSession sqlSession;
 
     public RouteDao() {
         this(MyBatisConnectionFactory.getSqlSessionFactory());
@@ -21,9 +22,14 @@ public class RouteDao {
     }
 
     public List<String> getCarpoolNameListByLocation(String location) {
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
+        sqlSession = sqlSessionFactory.openSession();
         RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
         return routeMapper.getCarpoolNameList(location);
+    }
+
+    public List<String> getAllLocations() {
+        sqlSession = sqlSessionFactory.openSession();
+        RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
+        return routeMapper.getAllLocations();
     }
 }
