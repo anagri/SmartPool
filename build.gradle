@@ -6,7 +6,7 @@ repositories {
     mavenCentral()
 }
 
-defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble', 'deploy', 'functionalTest'
+defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble','install','functionalTest'
 
 ant.importBuild 'build.xml'
 
