@@ -1,2 +1,4 @@
 #!/bin/sh
-mysql -u root -e "source dbscripts/SmartPoolDB.sql"
+DATABASE_NAME=${1-smartpool}
+echo "Creating database ${DATABASE_NAME}"
+sed "s:\`smartpool\`:\`$DATABASE_NAME\`:" < dbscripts/SmartPoolDB.sql | mysql -u root
