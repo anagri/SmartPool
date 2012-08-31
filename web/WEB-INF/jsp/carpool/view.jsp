@@ -52,10 +52,9 @@
                 </c:forEach>
             </ol>
         </div>
-
+        <form method="post">
         <button type="submit" value="Join">Join</button>
         </form>
-        <input type="button" type="submit"  value="Join"/>
     </div>
 
 </body>

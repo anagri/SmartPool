@@ -22,14 +22,15 @@
             <a class="brand" href="${appName}/">SmartPool</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"><a href="${appName}">Home</a></li>
+                    <%--<li class="active"><a href="${appName}">Home</a></li>--%>
                     <li><a href="${appName}/carpool/create">Create Carpool</a></li>
+                    <li><a href="${appName}/carpool/carpool-1" >Carpools</a></li>
                     <li><a href="${appName}/searchCarpool/">Carpool Search</a></li>
                     <li><a href="${appName}/buddyProfile/${casUserName}">My Profile</a></li>
                     <li><a href="#contact">Notifications</a></li>
                 </ul>
                 <form class="navbar-form pull-right">
-                    ${username}
+                    ${casUserName}
                     <button type="submit" class="btn" ref="castest.thoughtworks.com/cas/logout">Logout</button>
                 </form>
             </div>

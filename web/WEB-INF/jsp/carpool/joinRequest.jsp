@@ -1,4 +1,5 @@
 <%@ include file="../include.jsp" %>
+<%@ include file="../navbar.jsp" %>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/profileLayout.css"/>
