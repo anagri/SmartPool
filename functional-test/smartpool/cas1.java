@@ -25,7 +25,7 @@ public class cas1 extends SeleneseTestCase {
 		selenium.type("id=password", "Th0ughtW0rks@12");
 		selenium.click("name=submit");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("Anna's new homepage"));
+		verifyTrue(selenium.isTextPresent("Hello, SmartPool!"));
 		selenium.open("http://castest.thoughtworks.com/cas/logout");
 	}
 
