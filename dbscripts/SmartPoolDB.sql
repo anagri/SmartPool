@@ -20,6 +20,8 @@
 -- Current Database: `smartpool`
 --
 
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'10.%.%.%' WITH GRANT OPTION;
+
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `smartpool` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `smartpool`;

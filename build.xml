@@ -6,6 +6,9 @@
         <isset property="applicationName"/>
     </condition>
     <property name="applicationName" value="${applicationName}"/>
+    <condition property="hostName" else="localhost">
+        <isset property="hostName"/>
+    </condition>
     <property name="build.dir" value="build"/>
     <property name="web.build.dir" value="${build.dir}/libs"/>
     <property name="war.file" value="${web.build.dir}/${applicationName}.war"/>
@@ -23,6 +26,7 @@
         <echo message="stop      --> Stop Tomcat application"/>
         <echo message="list      --> List Tomcat applications"/>
         <echo message=""/>
+        <echo message="${hostName}"/>
     </target>
 
     <target name="deploy" description="Deploy application to local servers">
@@ -62,7 +66,11 @@
         <classpath refid="catalina-ant-classpath"/>
     </taskdef>
 
-    <target name="install" description="Install application in Tomcat">
+    <target name="host" description="Lazy create hostname">
+        <property name="tomcat.manager.url" value="http://${hostName}:9090/manager/text"/>
+    </target>
+
+    <target name="install" description="Install application in Tomcat" depends="host">
         <install url="${tomcat.manager.url}"
                  username="${tomcat.manager.username}"
                  password="${tomcat.manager.password}"
@@ -71,7 +79,7 @@
                  war="${web.build.dir}/${applicationName}.war"/>
     </target>
 
-    <target name="reload" description="Reload application in Tomcat">
+    <target name="reload" description="Reload application in Tomcat" depends="host">
         <reload url="${tomcat.manager.url}"
                 username="${tomcat.manager.username}"
                 password="${tomcat.manager.password}"
@@ -79,21 +87,21 @@
                 />
     </target>
 
-    <target name="start" description="Start Tomcat application">
+    <target name="start" description="Start Tomcat application" depends="host">
         <start url="${tomcat.manager.url}"
                username="${tomcat.manager.username}"
                password="${tomcat.manager.password}"
                path="/${applicationName}"/>
     </target>
 
-    <target name="stop" description="Stop Tomcat application">
+    <target name="stop" description="Stop Tomcat application" depends="host">
         <stop url="${tomcat.manager.url}"
               username="${tomcat.manager.username}"
               password="${tomcat.manager.password}"
               path="/${applicationName}"/>
     </target>
 
-    <target name="list" description="List Tomcat applications">
+    <target name="list" description="List Tomcat applications" depends="host">
         <list url="${tomcat.manager.url}"
               username="${tomcat.manager.username}"
               password="${tomcat.manager.password}"/>

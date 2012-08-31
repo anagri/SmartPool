@@ -10,7 +10,6 @@ defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble', 'install', '
 
 ant.importBuild 'build.xml'
 
-
 sourceSets {
     main {
         java {
@@ -40,16 +39,18 @@ project.ext {
 }
 
 def environments = [
-        dev: [hostName: "localhost", port: 9090, applicationName: "smartpool", databaseName: "smartpool"],
-        qa: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-qa", databaseName: "smartpoolqa"],
-        uat: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-uat", databaseName: "smartpooluat"]
+        dev: [hostName: "localhost", port: 9090, applicationName: "smartpool",
+                databaseName: "smartpool", databaseHost: "localhost"],
+        qa: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-qa",
+                databaseName: "smartpoolqa", databaseHost: "10.10.15.121"],
+        uat: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-uat",
+                databaseName: "smartpooluat", databaseHost: "10.10.15.121"]
 ]
 
 war {
     def settings = environments[project['environmentName']]
     ant.properties['applicationName'] = settings.applicationName
     from 'web'
-    from 'src/resources'
     baseName settings.applicationName
     eachFile {
         if (it.name == 'web.xml') {
@@ -63,12 +64,21 @@ task prepareEnvironment {
 
     doLast {
         ant.replace(file: "${buildDir}/resources/main/SqlMapConfig.xml", token: "smartpool", value: settings.databaseName)
-
+        ant.replace(file: "${buildDir}/resources/main/SqlMapConfig.xml", token: "localhost", value: settings.databaseHost)
     }
 }
 
 test {
     dependsOn prepareEnvironment
+}
+
+task prepareTomcat {
+    def settings = environments[project['environmentName']]
+    ant.properties['hostName'] = settings.hostName
+}
+
+install {
+    dependsOn prepareTomcat
 }
 
 dependencies {
@@ -111,6 +121,7 @@ task setup_database << {
     def settings = environments[project['environmentName']]
     ant.exec(executable: "dbscripts/dbsetup.sh", failifexecutionfails: "true", failonerror: "true") {
         arg(value: settings.databaseName)
+        arg(value: settings.databaseHost)
     }
 }
 
