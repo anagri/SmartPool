@@ -32,4 +32,6 @@ public class RouteDao {
         RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
         return routeMapper.getAllLocations();
     }
+
+
 }

@@ -13,4 +13,6 @@ public interface RouteMapper {
 
     @Select(SELECT_ALL_LOCATIONS)
     public List<String> getAllLocations();
+
+
 }

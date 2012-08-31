@@ -10,6 +10,7 @@ import smartpool.domain.Carpool;
 import smartpool.domain.Status;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
+import smartpool.service.RouteService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -19,12 +20,15 @@ import java.util.List;
 public class CarpoolController {
 
     private CarpoolService carpoolService;
-    private final BuddyService buddyService;
+    private BuddyService buddyService;
+    private RouteService routeService;
 
     @Autowired
-    public CarpoolController(CarpoolService carpoolService, BuddyService buddyService) {
+    public CarpoolController(CarpoolService carpoolService, BuddyService buddyService, RouteService routeService) {
+
         this.carpoolService = carpoolService;
         this.buddyService = buddyService;
+        this.routeService = routeService;
     }
 
     @RequestMapping(value = "/carpool/{name}", method = RequestMethod.GET)
@@ -48,14 +52,21 @@ public class CarpoolController {
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Diamond District ");
         modelMap.put("searchResult", carpools);
 
+        List<String> routePoints = routeService.getAllLocation();
+        modelMap.put("routePoints", routePoints);
+
         return "carpool/search";
     }
 
 
     @RequestMapping(value = "/carpool/search", method = RequestMethod.GET)
     public String searchByLocation(@RequestParam String query, ModelMap model) {
+
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation(query);
         model.put("searchResult", carpools);
+
+        List<String> routePoints = routeService.getAllLocation();
+        model.put("routePoints", routePoints);
 
         return "carpool/search";
     }
@@ -77,4 +88,5 @@ public class CarpoolController {
         carpoolService.insert(carpool);
         return "redirect:/carpool/"+carpool.getName();
     }
+
 }

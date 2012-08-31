@@ -6,6 +6,15 @@
         Carpool Search
     </head>
 
+    <script type="text/javascript">
+        function searchByRoutePoint(){
+            var index = document.getElementById('routePointList').selectedIndex;
+            var value = document.getElementById('routePointList').options[index].text;
+
+            document.location.href = '../carpool/search?query='+value;
+        }
+    </script>
+
     <body>
         <form action="./search" method="GET">
             <input type="text" name="query" />
@@ -25,12 +34,19 @@
                     <td><a href="../carpool/${carpool.getName()}">${carpool.getName()}</a></td>
                     <td>${carpool.getStartPoint()}</td>
                     <td>${carpool.getStartTime()}</td>
-                    <td>${carpool.buddyCount()}</td>
+                    <td>${carpool.getBuddyCount()}</td>
                     <td>${carpool.getStatus()}</td>
                 </tr>
             </c:forEach>
         </table>
         </c:if>
+        <div>
+            <select id="routePointList">
+                <c:forEach var="routePoint" items="${routePoints}" varStatus="typeStatus">
+                    <option value=${routePoint} onclick="searchByRoutePoint()">${routePoint}</option>
+                </c:forEach>
+            </select>
+        </div>
     </body>
 
 </html>

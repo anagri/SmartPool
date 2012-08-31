@@ -18,9 +18,19 @@ public interface CarpoolMapper {
             ")";
     static final String SELECT_BY_NAME = "select name,date_format(start_date, '%d/%m/%Y') \"start_date\", office_eta,office_etd, cab_type,total_cab_charge,status,capacity from carpool where name = #{name}";
     static final String DELETE_BY_NAME = "delete from carpool where name=#{name}";
-    static final String SELECT_ALL = "select * from carpool";
+    static final String SELECT_ALL = "select name,date_format(start_date, '%d/%m/%Y') \"start_date\", office_eta,office_etd, cab_type,total_cab_charge,status,capacity  from carpool";
 
     @Select(SELECT_ALL)
+    @Results(value = {
+            @Result(property="name", column="name"),
+            @Result(property="startDate", column="start_date"),
+            @Result(property="cabType", column="cab_type"),
+            @Result(property="totalCabCharges", column="total_cab_charge"),
+            @Result(property="officeETA", column="office_eta"),
+            @Result(property="officeETD", column="office_etd"),
+            @Result(property="status", column="status"),
+            @Result(property="capacity", column="capacity")
+    })
     List<Carpool> selectAll();
 
     @Select(SELECT_BY_NAME)

@@ -12,9 +12,11 @@ import smartpool.domain.Status;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolBuilder;
 import smartpool.service.CarpoolService;
+import smartpool.service.RouteService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -36,15 +38,22 @@ public class CarpoolControllerTest {
     @Mock
     private BuddyService buddyService;
 
+    @Mock
+    private RouteService routeService;
+
+
     private ModelMap model;
     private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
 
     private ArrayList<Carpool> defaultCarpools;
     private final Buddy testBuddy = new Buddy("testBuddy");
 
+
+    private List<String> defaultRouteLocations;
+
     @Before
     public void setUp() throws Exception {
-        carpoolController = new CarpoolController(carpoolService,buddyService);
+        carpoolController = new CarpoolController(carpoolService,buddyService, routeService);
         when(carpoolService.getByName("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
 
@@ -55,6 +64,7 @@ public class CarpoolControllerTest {
 
         when(buddyService.getCurrentBuddy(request)).thenReturn(testBuddy);
 
+        defaultRouteLocations = Arrays.asList("Diamond District");
     }
 
     @Test
@@ -113,4 +123,12 @@ public class CarpoolControllerTest {
         carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", model,request);
         assertThat(carpool.getBuddies().contains(testBuddy),equalTo(true));
     }
+
+    @Test
+    public void shouldGetAllRoutePoints() throws Exception {
+        when(routeService.getAllLocation()).thenReturn(defaultRouteLocations);
+        carpoolController.searchByLocation(null, model);
+        assertThat((List<String>) model.get("routePoints"), is(defaultRouteLocations));
+    }
+
 }

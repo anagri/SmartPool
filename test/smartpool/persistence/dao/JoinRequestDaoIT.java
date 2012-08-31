@@ -19,7 +19,7 @@ public class JoinRequestDaoIT {
 
     @Test
     public void shouldInsertRequestToDB() {
-        joinRequestDao.sendJoinRequest(new JoinRequest("ayusht","carpool-1","9:00","Domlur"));
+        joinRequestDao.sendJoinRequest(new JoinRequest("govindm","carpool-1","9:00","Domlur"));
     }
 
     @Test
@@ -34,4 +34,5 @@ public class JoinRequestDaoIT {
 
         assertTrue(joinRequestDao.isRequestSent(ali, carpoolName));
     }
+
 }

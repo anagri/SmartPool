@@ -39,11 +39,12 @@ public class CarpoolService {
     }
 
     public List<Carpool> findAllCarpoolsByLocation(String location) {
+        location = location.trim();
         if (isBlank(location)) {
             return getAllCarpools();
         }
 
-        List<String> carpoolNames = routeService.getCarpoolNameList(location.trim());
+        List<String> carpoolNames = routeService.getCarpoolNameList(location);
         List<Carpool> carpools = new ArrayList<Carpool>();
         for (String name : carpoolNames) {
             carpools.add(findCarpoolByName(name));
@@ -61,7 +62,10 @@ public class CarpoolService {
 
     private List<Carpool> getAllCarpools() {
         List<Carpool> carpools = carpoolDao.selectAllCarpools();
+
+        for (Carpool carpool : carpools) {
+            carpool.setBuddies(buddyDao.getBuddyListByCarpoolName(carpool.getName()));
+        }
         return carpools;
     }
-
 }
