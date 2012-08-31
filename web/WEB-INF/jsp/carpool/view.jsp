@@ -40,8 +40,8 @@
 
             <a href="javascript:void(0)" id="moreDetailsButton">More Details</a>
             <p class="hiddenContent"><span>Date Started: </span> ${carpool.getStartDate().toString("d-M-Y")}</p>
-            <p class="hiddenContent"><span>Capacity: </span> ${carpool.getCapacity()}</p>
-            <p class="hiddenContent"><span>Total Cab Charges: </span> ${carpool.getTotalCabCharges()}</p>
+            <p class="hiddenContent"><span>Capacity: </span><c:if test="${carpool.getCapacity() > 0}">${carpool.getCapacity()}</c:if></p>
+            <p class="hiddenContent"><span>Total Cab Charges: </span> <c:if test="${carpool.getTotalCabCharges() > 0}">${carpool.getTotalCabCharges()}</c:if></p>
         </div>
         <div class="hiddenContent" style="width: 20%; float: right;">
             <p>Route Plan</p>

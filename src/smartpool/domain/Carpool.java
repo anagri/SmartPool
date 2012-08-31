@@ -7,11 +7,11 @@ import smartpool.common.Constants;
 import java.util.ArrayList;
 
 public class Carpool {
-    String name;
-    LocalDate startDate;
-    CabType cabType;
-    LocalTime officeETA;
-    LocalTime officeETD;
+    private String name;
+    private LocalDate startDate;
+    private CabType cabType;
+    private LocalTime officeETA;
+    private LocalTime officeETD;
 
     private int totalCabCharges;
     private Status status;
