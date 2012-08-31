@@ -6,8 +6,10 @@
 </head>
 <body>
 
-<h1>Join SmartPool: ${carpoolName}</h1>
-
+<h1>Join Smart Pool: ${carpoolName}</h1>
+<c:if test="${isRequestSent}">
+    <font color="red">You have already sent the request for this carpool</font>
+</c:if>
 <form name="joinRequest" method="post" onsubmit="alert('Join Carpool Request Sent Successfully'); return true">
 
     <div class="mainContainer">
@@ -70,7 +72,8 @@
                     </span>
         </div>
         <div class="buttonContainer">
-            <button align="right" name="submit" type="submit" >Submit</button>
+            <c:set var="isDisabled" value="${isRequestSent ? 'disabled' : ''}"/>
+            <button align="right" name="submit" type="submit" ${isDisabled}>Submit</button>
             <button align="right" disabled="disabled">EDIT</button>
         </div>
     </div>

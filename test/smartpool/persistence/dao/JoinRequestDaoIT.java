@@ -24,7 +24,7 @@ public class JoinRequestDaoIT {
 
     @Test
     public void shouldVerifyRequestSentByABuddy() {
-        String buddyName = "mdalie";
+        String buddyName = "mdaliej";
         String carpoolName = "carpool-1";
         Buddy ali = new Buddy(buddyName);
 
