@@ -20,7 +20,7 @@ public class cas3 extends SeleneseTestCase {
 
 	@Test
 	public void testCas3() throws Exception {
-		selenium.open("http://10.10.15.121:9090/smartpool-test/carpool");
+		selenium.open("http://10.10.15.121:9090/smartpool-qa");
 		verifyEquals("CAS – Central Authentication Service", selenium.getTitle());
 	}
 
