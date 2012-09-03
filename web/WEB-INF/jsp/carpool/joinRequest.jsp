@@ -2,7 +2,7 @@
 <%@ include file="../navbar.jsp" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/profileLayout.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/joinRequest.css"/>
     <title>Join SmartPool: ${carpoolName}</title>
 </head>
 <body>
