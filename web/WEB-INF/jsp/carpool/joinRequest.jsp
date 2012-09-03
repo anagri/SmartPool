@@ -11,16 +11,19 @@
 <c:if test="${isRequestSent}">
     <font color="red">You have already sent the request for this carpool</font>
 </c:if>
+
 <form name="joinRequest" method="post" onsubmit="alert('Join Carpool Request Sent Successfully'); return true">
 
     <div class="mainContainer">
+
+        <input type="hidden" name="username" value="${buddy.getUserName()}"  />
 
         <div class="subContainer">
                     <span id="nameLabel">
                         <label>Name*</label>
                     </span>
                     <span id="nameTextBox">
-                        <input name="name" type="textbox" required="required" value=${buddy.getName()} readonly /> <br />
+                        <input name="name" type="textbox" required="required" value="${buddy.getName()}" readonly /> <br />
                     </span>
         </div>
         <div class="subContainer">
@@ -28,7 +31,7 @@
                         <label>Address</label>
                     </span>
                     <span id="addressTextBox">
-                        <textarea name="address" rows="5" cols="30" value=${buddy.getAddress()} > </textarea> <br />
+                        <textarea name="address" rows="3" cols="30" value="${buddy.getAddress()}" > </textarea> <br />
                     </span>
         </div>
         <div class="subContainer">
