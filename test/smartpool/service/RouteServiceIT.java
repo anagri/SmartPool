@@ -29,6 +29,6 @@ public class RouteServiceIT {
 
     @Test
     public void shouldGetAllLocationsFromDatabase() throws Exception {
-        assertEquals(1, routeService.getAllLocation().size());
+        assertEquals(10, routeService.getAllLocation().size());
     }
 }

@@ -14,8 +14,9 @@ public class CarpoolServiceIT {
     @Test
     public void shouldGetCarpoolsFromDBWhenSearchByLocation() throws Exception {
         CarpoolService carpoolService = new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteService(new RouteDao()));
-        List<Carpool> allCarpoolsByLocation = carpoolService.findAllCarpoolsByLocation("Diamond District");
+        List<Carpool> allCarpoolsByLocation = carpoolService.findAllCarpoolsByLocation("Sony Centre");
 
         assertEquals("carpool-1", allCarpoolsByLocation.get(0).getName());
+        assertEquals(2, allCarpoolsByLocation.size());
     }
 }

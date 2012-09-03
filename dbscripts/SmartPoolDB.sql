@@ -55,11 +55,11 @@ CREATE TABLE `buddies` (
 LOCK TABLES `buddies` WRITE;
 /*!40000 ALTER TABLE `buddies` DISABLE KEYS */;
 INSERT INTO `buddies` VALUES ('arnavku','Arnav Kumar','M-58, Diamond District, Bangalore','arnavku@thoughtworks.com','1234567890','Diamond District','10:50',NULL,NULL,'carpool-1'),
-('ayusht','Ayush Tulsyan','H-81, Diamond District, Bangalore','ayusht@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
-('govindm','Govind Menon','P-81, Diamond District, Bangalore','govindm@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
-('ishak','Isha Khanna','H-71, Diamond District, Bangalore','ishak@thoughtworks.com','0987654321',NULL,NULL,NULL,NULL,NULL),
-('mdaliej','Md Ali Ejaz','C-82, Diamond District, Bangalore','mdaliej@thoughtworks.com','0987654321',NULL,NULL,NULL,NULL,NULL),
-('mzhao','Ming Zhao','J-41, Diamond District, Bangalore','mzhao@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
+('ayusht','Ayush Tulsyan','H-81, Diamond District, Bangalore','ayusht@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,'carpool-1'),
+('govindm','Govind Menon','P-81, Diamond District, Bangalore','govindm@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,'carpool-1'),
+('ishak','Isha Khanna','H-71, Diamond District, Bangalore','ishak@thoughtworks.com','0987654321',NULL,NULL,NULL,NULL,'carpool-2'),
+('mdaliej','Md Ali Ejaz','C-82, Diamond District, Bangalore','mdaliej@thoughtworks.com','0987654321',NULL,NULL,NULL,NULL,'carpool-2'),
+('mzhao','Ming Zhao','J-41, Diamond District, Bangalore','mzhao@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,'carpool-2'),
 ('prithvin','Prithvi Nambiar','H-81, Diamond District, Bangalore','prithvin@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
 ('ssquire','Samuel Michael Squir','P-81, Diamond District, Bangalore','ssquire@thoughtworks.com','0987654321',NULL,NULL,NULL,NULL,NULL),
 ('suganthk','Suganthi T','L-82, Diamond District, Bangalore','suganthit@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
@@ -96,6 +96,7 @@ CREATE TABLE `carpool` (
 LOCK TABLES `carpool` WRITE;
 /*!40000 ALTER TABLE `carpool` DISABLE KEYS */;
 INSERT INTO `carpool` VALUES ('carpool-1', '2012-06-02', 'COMPANY', '11:30', '18:30', 'RUNNING', 100, 4);
+INSERT INTO `carpool` VALUES ('carpool-2', '2012-08-02', 'PERSONAL', '09:30', '19:30', 'PENDING', 600, 8);
 /*!40000 ALTER TABLE `carpool` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,6 +151,16 @@ CREATE TABLE `route` (
 LOCK TABLES `route` WRITE;
 /*!40000 ALTER TABLE `route` DISABLE KEYS */;
 INSERT INTO `route` VALUES ('carpool-1','diamond district');
+INSERT INTO `route` VALUES ('carpool-1','Manipal Hospital');
+INSERT INTO `route` VALUES ('carpool-1','Domlur Flyover');
+INSERT INTO `route` VALUES ('carpool-1','Dell Office');
+INSERT INTO `route` VALUES ('carpool-1','Sony Centre');
+INSERT INTO `route` VALUES ('carpool-2','Command Hospital');
+INSERT INTO `route` VALUES ('carpool-2','Trinity Church');
+INSERT INTO `route` VALUES ('carpool-2','Barbeque Nation');
+INSERT INTO `route` VALUES ('carpool-2','Dell Office');
+INSERT INTO `route` VALUES ('carpool-2','Sony Centre');
+
 /*!40000 ALTER TABLE `route` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
