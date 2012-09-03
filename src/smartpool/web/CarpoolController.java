@@ -47,9 +47,9 @@ public class CarpoolController {
         return searchByLocation("", model);
     }
 
-    @RequestMapping(value = "/searchCarpool", method = RequestMethod.GET)
+    @RequestMapping(value = "/carpool/searchCarpool", method = RequestMethod.GET)
     public String searchCarpool(ModelMap modelMap) {
-        List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Diamond District ");
+        List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("");
         modelMap.put("searchResult", carpools);
 
         List<String> routePoints = routeService.getAllLocation();
