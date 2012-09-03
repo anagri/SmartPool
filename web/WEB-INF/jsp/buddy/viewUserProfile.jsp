@@ -11,10 +11,6 @@
             <table>
                 <tbody>
                 <tr>
-                    <td>User Name</td>
-                    <td>${buddyProfile.getUserName()}</td>
-                </tr>
-                <tr>
                     <td>Name</td>
                     <td>${buddyProfile.getName()}</td>
                 </tr>

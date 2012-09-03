@@ -16,20 +16,11 @@
     <div class="mainContainer">
 
         <div class="subContainer">
-                    <span id="usernameLabel">
-                        <label>Username*</label>
-                    </span>
-                    <span id="usernameTextBox">
-                        <input name="username" type="textbox" required="required" value=${buddy.getUserName()} readonly/> <br />
-                    </span>
-        </div>
-
-        <div class="subContainer">
                     <span id="nameLabel">
                         <label>Name*</label>
                     </span>
                     <span id="nameTextBox">
-                        <input name="name" type="textbox" required="required" value=${buddy.getName()} /> <br />
+                        <input name="name" type="textbox" required="required" value=${buddy.getName()} readonly /> <br />
                     </span>
         </div>
         <div class="subContainer">
@@ -53,7 +44,7 @@
                         <label>Email*</label>
                     </span>
                     <span id="emailIdTextBox">
-                        <input name="emailId" type="textbox" required="required" value=${buddy.getEmailId()}  /> <br />
+                        <input name="emailId" type="textbox" required="required" value=${buddy.getEmailId()} readonly /> <br />
                     </span>
         </div>
         <div class="subContainer">
