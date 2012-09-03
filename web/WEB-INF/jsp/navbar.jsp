@@ -3,8 +3,17 @@
 
 <html>
 <head>
-
+    <c:choose>
+        <c:when test="<%=request.getParameter(\"title\") != null %>"><title><%= request.getParameter("title") %></title></c:when>
+        <c:otherwise><title>Welcome to Smartpool</title></c:otherwise>
+    </c:choose>
     <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <c:if test="<%=request.getParameter(\"css\") != null %>">
+        <c:set var="cssFiles"><%= request.getParameter("css")%></c:set>
+        <c:forEach items="${cssFiles}" var="cssFile">
+            <link href="${pageContext.request.contextPath}/css/${cssFile}" rel="stylesheet">
+        </c:forEach>
+    </c:if>
 </head>
 <body>
 
@@ -39,16 +48,4 @@
             </div>
         </div>
     </div>
-
 </div>
-
-<div>
-    <br>
-    <br>
-    <br>
-</div>
-
-
-
-</body>
-</html>
