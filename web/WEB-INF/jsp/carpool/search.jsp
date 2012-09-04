@@ -51,9 +51,10 @@
         </c:otherwise>
         </c:choose>
         <div>
-            <select id="routePointList">
+            <select id="routePointList" onchange="searchByRoutePoint()">
+                <option value=""></option>
                 <c:forEach var="routePoint" items="${routePoints}" varStatus="typeStatus">
-                    <option value=${routePoint} onclick="searchByRoutePoint()">${routePoint}</option>
+                    <option value=${routePoint}>${routePoint}</option>
                 </c:forEach>
             </select>
         </div>
