@@ -33,7 +33,7 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li><a href="${appName}/carpool/create">Create Carpool</a></li>
-                    <li><a href="${appName}/carpool/carpool-1" >Carpools</a></li>
+                    <li><a href="${appName}/carpool/carpool-1" id="viewCarpools">Carpools</a></li>
                     <li><a href="${appName}/buddyProfile/${casUserName}">My Profile</a></li>
                     <li><a href="#notifications">Notifications</a></li>
                     <li>
