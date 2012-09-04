@@ -27,12 +27,9 @@ sourceSets {
     }
     functionalTest {
         java {
-<<<<<<< HEAD
             srcDir 'test/smartpool/functional'
-=======
             srcDir 'functional-test'
             srcDir 'src/smartpool/util'
->>>>>>> Story #0 - Suganthi/Sam - Pushed environment specific configuration to build.properties. Created an EnvironmentLoader for pulling configuration settings into Java functional tests
         }
     }
 }
