@@ -17,15 +17,17 @@
             <c:when test="${searchResult ne null}">
                 <h1>Search Carpool</h1>
                 <h3> You  have ${searchResult.size()} result{s}</h3>
-                <table class="carpools" style="border: 1px;" cellspacing="20px">
-                    <tr>
-                        <th>Name</th>
-                        <th>Start Point</th>
-                        <th>Start Time</th>
-                        <th>Buddy Count</th>
-                        <th>Vacancy</th>
-                        <th>Status</th>
-                    </tr>
+                <table id='buddy-table'>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Start Point</th>
+                            <th>Start Time</th>
+                            <th>Buddy Count</th>
+                            <th>Vacancy</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
                     <c:forEach var="carpool" items="${searchResult}" varStatus="typeStatus">
                         <tr>
                             <td><a href="../carpool/${carpool.getName()}">${carpool.getName()}</a></td>
@@ -45,7 +47,7 @@
             </c:choose>
             </div>
             <div class="rightContent">
-                <h2>Route Points</h2>
+                <div class="marginTop50"><h3>Route Points</h3></div>
                 <select id="routePointList" onchange="searchByRoutePoint()">
                     <option value=""></option>
                     <c:forEach var="routePoint" items="${routePoints}" varStatus="typeStatus">
