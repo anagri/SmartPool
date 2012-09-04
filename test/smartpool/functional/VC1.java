@@ -15,6 +15,7 @@ import smartpool.util.EnvironmentLoader;
 import java.sql.*;
 import java.util.regex.Pattern;
 
+@Ignore
 public class VC1 extends SeleneseTestCase {
     Connection connection;
 	@Before
@@ -29,7 +30,6 @@ public class VC1 extends SeleneseTestCase {
 
 
 	@Test
-    @Ignore
 	public void testVC1() throws Exception {
 		selenium.open("/carpool/carpool-1");
         //copied from CAS1 to ensure Login
