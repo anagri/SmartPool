@@ -1,10 +1,12 @@
 <jsp:include page="../navbar.jsp" flush="true">
-    <jsp:param name="css" value="profileLayout.css"/>
+    <jsp:param name="css" value="profileLayout.css,standardLayout.css"/>
     <jsp:param name="title" value="${buddyProfile.getName()}'s Profile" />
 </jsp:include>
-<div class="headerContainer">
-<h1>${buddyProfile.getName()}</h1>
+
+<div>
+    <label class="header">SmartPool Profile</label>
 </div>
+
 <div class="mainContainer">
     <div class="subContainer">
         <span><label>Name</label></span>
