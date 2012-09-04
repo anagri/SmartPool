@@ -1,4 +1,4 @@
-<%@ include file="../include.jsp" %>
+<%@ include file="../navbar.jsp" %>
 
 <html>
 
@@ -17,7 +17,7 @@
 
     <body>
         <form action="./search" method="GET">
-            <input type="text" name="query" />
+            <input type="text" name="query"/>
             <input type="submit" value="Search" />
         </form>
         <c:choose>
@@ -37,7 +37,7 @@
                     <tr>
                         <td><a href="../carpool/${carpool.getName()}">${carpool.getName()}</a></td>
                         <td>${carpool.getStartPoint()}</td>
-                        <td>${carpool.getStartTime()}</td>
+                        <td>${carpool.getStartTime().toString("h:mm a")}</td>
                         <td>${carpool.getBuddyCount()}</td>
                         <td>${carpool.getVacancy()}</td>
                         <td>${carpool.getStatus()}</td>

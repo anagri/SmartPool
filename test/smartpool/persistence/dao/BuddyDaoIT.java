@@ -1,7 +1,9 @@
 package smartpool.persistence.dao;
 
 import junit.framework.Assert;
+import org.joda.time.LocalTime;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
@@ -38,10 +40,12 @@ public class BuddyDaoIT {
     @Test
     public void shouldGetBuddyListByCarpoolName() {
         List<Buddy> buddyList = buddyDao.getBuddyListByCarpoolName("carpool-1");
-        assertThat(buddyList.size(),not(0));
+        assertThat(buddyList.size(), not(0));
+        Assert.assertEquals(new LocalTime(10, 50).toString("h:mm"), buddyList.get(0).getPickupTime().toString("h:mm"));
     }
 
     @Test
+    @Ignore
     public void shouldAddBuddyToACarpool() throws Exception {
         Buddy buddy = new Buddy("vfranca");
         Carpool carpool = new Carpool("carpool-1");
