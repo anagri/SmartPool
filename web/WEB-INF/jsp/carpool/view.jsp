@@ -55,7 +55,7 @@
             <div class="hiddenContent">
                 <h2>Route Plan</h2>
 
-                <div class="routePlan">
+                <div id="routePoints">
                     <ol>
                         <li>Diamond District</li>
                         <li>Bla</li>
@@ -64,7 +64,7 @@
                         <li>blo</li>
                         <li>blu</li>
                         <li>ThoughtWorks</li>
-                        <c:forEach var="routePoint" items="${carpool.getRoutePlan()}" varStatus="sequence">
+                        <c:forEach var="routePoint" items="${carpool.getRoutePoints()}" varStatus="sequence">
                             <li>${routePoint}</li>
                         </c:forEach>
                     </ol>

@@ -99,15 +99,22 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpoolWhenPostedOnCreate(){
-        assertThat(carpoolController.create(new Carpool("name"), "15/06/2012", "10:00", "18:00", model,request),equalTo("redirect:/carpool/name"));
+        assertThat(carpoolController.create(new Carpool("name"), "15/06/2012", "10:00", "18:00", "Kormangla", model,request),equalTo("redirect:/carpool/name"));
     }
 
     @Test
     public void shouldInsertIntoDBWhenPostedOnCreate() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", model,request);
+        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", "Kormangla", model,request);
         verify(carpoolService).insert(carpool);
         assertThat(carpool.getStatus(),equalTo(Status.PENDING));
+    }
+
+    @Test
+    public void shouldParseCommaSeperatedRouteListAndPutItInCarpoolObject() throws Exception {
+        Carpool carpool = new Carpool("name");
+        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", "Domlur, Kormangla", model,request);
+        assertThat(carpool.getRoutePoints().contains("Domlur"), equalTo(true));
     }
 
     @Test
@@ -121,7 +128,7 @@ public class CarpoolControllerTest {
     @Test
     public void shouldAddCurrentBuddyToCarpoolWhileCreating() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpoolController.create(carpool, "15/06/2012", "10:00","18:00", model,request);
+        carpoolController.create(carpool, "15/06/2012", "10:00","18:00", "Kormangla", model,request);
         assertThat(carpool.getBuddies().contains(testBuddy),equalTo(true));
     }
 

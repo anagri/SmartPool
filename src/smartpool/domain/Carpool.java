@@ -17,13 +17,13 @@ public class Carpool {
     private Status status;
     private ArrayList<Buddy> buddies = new ArrayList<Buddy>();
     private int capacity;
-    private ArrayList<String> routePlan;
+    private ArrayList<String> routePoints;
 
     public Carpool() {
         status = Status.PENDING;
     }
 
-    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officeETD, Status status, ArrayList<Buddy> buddies, int capacity, ArrayList<String> routePlan) {
+    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officeETD, Status status, ArrayList<Buddy> buddies, int capacity, ArrayList<String> routePoints) {
         this.name = name;
         this.startDate = startDate;
         this.cabType = cabType;
@@ -33,7 +33,7 @@ public class Carpool {
         this.status = status;
         this.buddies = buddies;
         this.capacity = capacity;
-        this.routePlan = routePlan;
+        this.routePoints = routePoints;
     }
 
     public Carpool(String name) {
@@ -112,8 +112,12 @@ public class Carpool {
         this.capacity = capacity;
     }
 
-    public ArrayList<String> getRoutePlan() {
-        return routePlan;
+    public ArrayList<String> getRoutePoints() {
+        return routePoints;
+    }
+
+    public void setRoutePoints(ArrayList<String> routePoints) {
+        this.routePoints = routePoints;
     }
 
     public String getStartPoint() {

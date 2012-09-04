@@ -68,15 +68,28 @@ public class CarpoolController {
     }
 
     @RequestMapping(value = "/carpool/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute Carpool carpool, @RequestParam String startDateForm, @RequestParam String officeETAForm, @RequestParam String officeETDForm, ModelMap model, HttpServletRequest request) {
+    public String create(@ModelAttribute Carpool carpool, @RequestParam String startDateForm, @RequestParam String officeETAForm, @RequestParam String officeETDForm,@RequestParam final String routePointForm, ModelMap model, HttpServletRequest request) {
+
         carpool.setStartDate(Constants.DATE_FORMATTER.parseLocalDate(startDateForm));
         carpool.setOfficeETA(Constants.TIME_FORMATTER.parseLocalTime(officeETAForm));
         carpool.setOfficeETD(Constants.TIME_FORMATTER.parseLocalTime(officeETDForm));
         carpool.setStatus(Status.PENDING);
+
+        ArrayList<String> routePointsArr = new ArrayList<String>(){
+            {
+                for (String routePoint : routePointForm.split(",")) {
+                    add(routePoint);
+                }
+            }
+        };
+        carpool.setRoutePoints(routePointsArr);
+
         ArrayList<Buddy> buddies = new ArrayList<Buddy>();
         buddies.add(buddyService.getCurrentBuddy(request));
         carpool.setBuddies(buddies);
+
         carpoolService.insert(carpool);
+
         return "redirect:/carpool/"+carpool.getName();
     }
 
