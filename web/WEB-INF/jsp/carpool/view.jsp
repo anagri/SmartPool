@@ -1,5 +1,4 @@
 <%@ include file="../navbar.jsp" %>
-<%@ include file="../include.jsp" %>
 
 <html>
 <head>

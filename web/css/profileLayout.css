@@ -2,12 +2,6 @@
     margin-top: 50px;
 }
 
-
-.mainContainer {
-    margin-left: 380px;
-    margin-top: 50px;
-}
-
 .mainContainer .subContainer {
     width: 500px;
     height: 40px;
@@ -24,4 +18,8 @@
 .buttonContainer {
     margin-left: 230px;
     margin-top: 40px;
+}
+
+.subContainer span:first-child label{
+    font-weight: bolder;
 }

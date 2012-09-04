@@ -1,4 +1,3 @@
-<%@ include file="include.jsp" %>
 <%@ include file="navbar.jsp" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
