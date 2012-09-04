@@ -11,7 +11,7 @@
 
 <body>
 <div class="container">
-    <h1>Carpool ${carpool.getName()}</h1>
+    <h1 id="carpoolName">Carpool ${carpool.getName()}</h1>
     <div>
         <a href="javascript:void(0)" id="moreDetailsButton">More Details</a>
 

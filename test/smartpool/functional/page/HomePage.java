@@ -14,6 +14,9 @@ public class HomePage extends Page {
     @FindBy(how = How.ID, using = WELCOME_MESSAGE_ID)
     private WebElement welcomeMessage;
 
+    @FindBy(how = How.ID, using = "viewCarpools")
+    private WebElement viewCarpoolsLink;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -21,6 +24,11 @@ public class HomePage extends Page {
     @Override
     public void waitForThePageToLoad() {
         waitForElementToLoad(By.id(WELCOME_MESSAGE_ID));
+    }
+
+    public ViewCarpoolPage goToViewCarpoolPage() {
+        viewCarpoolsLink.click();
+        return new ViewCarpoolPage(webDriver);
     }
 
     public void verifyWelcomeMessagePresent() {
