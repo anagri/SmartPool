@@ -17,12 +17,12 @@ public class LocalTimeTypeHandler implements TypeHandler<LocalTime>{
 
     @Override
     public LocalTime getResult(ResultSet rs, String columnName) throws SQLException {
-        return  LocalTime.parse(rs.getString(columnName));
+        return  rs.getString(columnName) == null ? null : LocalTime.parse(rs.getString(columnName));
     }
 
     @Override
     public LocalTime getResult(ResultSet rs, int columnIndex) throws SQLException {
-        return LocalTime.parse(rs.getString(columnIndex));
+        return rs.getString(columnIndex) == null ? null :  LocalTime.parse(rs.getString(columnIndex));
     }
 
     @Override
