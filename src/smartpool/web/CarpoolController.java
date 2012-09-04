@@ -33,9 +33,11 @@ public class CarpoolController {
     }
 
     @RequestMapping(value = "/carpool/{name}", method = RequestMethod.GET)
-    public String viewCarpool(@PathVariable String name, ModelMap model) {
+    public String viewCarpool(@PathVariable String name, ModelMap model, HttpServletRequest request) {
         Carpool carpool = carpoolService.getByName(name);
+        boolean buddyIsInCarpool = carpoolService.hasBuddy(buddyService.getUserNameFromCAS(request), carpool);
         model.put("carpool", carpool);
+        model.put("buddyIsInCarpool", buddyIsInCarpool);
 
         return "carpool/view";
     }

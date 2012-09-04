@@ -69,12 +69,12 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpool() throws Exception {
-        assertEquals(carpoolController.viewCarpool("carpool", model), "carpool/view");
+        assertEquals(carpoolController.viewCarpool("carpool", model, request), "carpool/view");
     }
 
     @Test
     public void shouldHaveCarpoolInstanceInModel() throws Exception {
-        carpoolController.viewCarpool("carpool", model);
+        carpoolController.viewCarpool("carpool", model, request);
         Carpool carpoolActual = (Carpool) model.get("carpool");
 
         assertEquals(expectedCarpool, carpoolActual);

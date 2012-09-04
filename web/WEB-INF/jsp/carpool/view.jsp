@@ -44,9 +44,11 @@
 
             <p><strong>Status:</strong> ${carpool.getStatus()}</p>
 
-            <form method="post" id="joinCarpoolButton">
-                <button type="submit" value="Join">Join Carpool</button>
-            </form>
+            <c:if test="${!buddyIsInCarpool}">
+                <form method="post" id="joinCarpoolButton">
+                    <button type="submit" value="Join">Join Carpool</button>
+                </form>
+            </c:if>
         </div>
 
         <div class="rightContent">

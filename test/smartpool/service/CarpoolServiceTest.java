@@ -1,5 +1,6 @@
 package smartpool.service;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -110,5 +111,23 @@ public class CarpoolServiceTest {
         when(carpoolDao.get("name")).thenReturn(carpool);
         carpoolService.getByName("name");
         verify(buddyDao).getBuddyListByCarpoolName(carpool.getName());
+    }
+
+    @Test
+    public void shouldReturnTrueIfLoggedUserIsInTheCarpool() throws Exception {
+        Carpool carpool = new Carpool("name");
+        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
+        buddies.add(new Buddy("username", "name", "123", "name@domain.com", "home"));
+        carpool.setBuddies(buddies);
+        Assert.assertTrue(carpoolService.hasBuddy("username", carpool));
+    }
+
+    @Test
+    public void shouldReturnFalseIfLoggedUserIsNotInTheCarpool() throws Exception {
+        Carpool carpool = new Carpool("name");
+        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
+        buddies.add(new Buddy("username", "name", "123", "name@domain.com", "home"));
+        carpool.setBuddies(buddies);
+        Assert.assertFalse(carpoolService.hasBuddy("otherusername", carpool));
     }
 }
