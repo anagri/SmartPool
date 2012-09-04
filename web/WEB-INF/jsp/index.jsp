@@ -14,7 +14,7 @@
 
     <br>
 
-<center><h1>Welcome to SmartPool!</h1></center>
+<center><h1 id="welcomeMessage">Welcome to SmartPool!</h1></center>
 
 
 
