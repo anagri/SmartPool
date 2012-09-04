@@ -16,3 +16,6 @@
 .mainContainer .subContainer span:last-child {
     clear: right;
 }
+.buttonContainer {
+    margin-left: 150px;
+}
