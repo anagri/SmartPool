@@ -6,7 +6,7 @@ repositories {
     mavenCentral()
 }
 
-defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble', 'install', 'functionalTest'
+defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble', 'install' // , 'functionalTest'
 
 ant.importBuild 'build.xml'
 
@@ -60,8 +60,17 @@ availableEnvironments.each {
 }
 println environments
 
+task prepareEnvironment {
+    def settings = environments[project['environmentName']]
+
+    doLast {
+        ant.replace(file: "${buildDir}/resources/main/SqlMapConfig.xml", token: "smartpool", value: settings.databaseName)
+        ant.replace(file: "${buildDir}/resources/main/SqlMapConfig.xml", token: "localhost", value: settings.databaseHost)
+    }
+}
 
 war {
+    dependsOn prepareEnvironment
     def settings = environments[project['environmentName']]
     ant.properties['applicationName'] = settings.applicationName
     from 'web'
@@ -70,15 +79,6 @@ war {
         if (it.name == 'web.xml') {
             it.expand(smartpoolServerName: String.format("%s:%s", settings.hostName, settings.port))
         }
-    }
-}
-
-task prepareEnvironment {
-    def settings = environments[project['environmentName']]
-
-    doLast {
-        ant.replace(file: "${buildDir}/resources/main/SqlMapConfig.xml", token: "smartpool", value: settings.databaseName)
-        ant.replace(file: "${buildDir}/resources/main/SqlMapConfig.xml", token: "localhost", value: settings.databaseHost)
     }
 }
 
