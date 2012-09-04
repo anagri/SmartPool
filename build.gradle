@@ -22,11 +22,12 @@ sourceSets {
     test {
         java {
             srcDir 'test'
+            exclude 'smartpool/functional/**'
         }
     }
     functionalTest {
         java {
-            srcDir 'functional-test'
+            srcDir 'test/smartpool/functional'
         }
     }
 }
