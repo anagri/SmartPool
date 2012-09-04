@@ -2,18 +2,14 @@ package smartpool.domain;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 
 public class Carpool {
     private String name;
 
-//    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate startDate;
-//    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime officeETA;
-//    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime officeETD;
 
     private int totalCabCharges;
@@ -52,7 +48,6 @@ public class Carpool {
         this.name = name;
     }
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
     public LocalDate getStartDate() {
         return startDate;
     }
@@ -69,7 +64,6 @@ public class Carpool {
         this.cabType = cabType;
     }
 
-    @DateTimeFormat(pattern = "HH:mm")
     public LocalTime getOfficeETA() {
         return officeETA;
     }
@@ -78,7 +72,6 @@ public class Carpool {
         this.officeETA = officeETA;
     }
 
-    @DateTimeFormat(pattern = "HH:mm")
     public LocalTime getOfficeETD() {
         return officeETD;
     }
