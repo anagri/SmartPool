@@ -6,8 +6,9 @@
     <title>Join SmartPool: ${carpoolName}</title>
 </head>
 <body>
-
-<h1>Join Smart Pool: ${carpoolName}</h1>
+<div class="headerContainer">
+    <h1>Join Smart Pool: ${carpoolName}</h1>
+</div>
 <c:if test="${isRequestSent}">
     <font color="red">You have already sent the request for this carpool</font>
 </c:if>

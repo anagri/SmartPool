@@ -2,7 +2,9 @@
     <jsp:param name="css" value="profileLayout.css"/>
     <jsp:param name="title" value="${buddyProfile.getName()}'s Profile" />
 </jsp:include>
-
+<div class="headerContainer">
+<h1>${buddyProfile.getName()}</h1>
+</div>
 <div class="mainContainer">
     <div class="subContainer">
         <span><label>Name</label></span>
@@ -26,8 +28,4 @@
         <button>Edit</button>
     </div>
 </div>
-    <%--<div style="margin-left:300px;top:300px">--%>
-    <%--<button>Contact ${buddyProfile.getName()}</button>--%>
-    <%--</div>--%>
-
 <%@ include file="../footer.jsp" %>
