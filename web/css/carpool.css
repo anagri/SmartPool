@@ -42,7 +42,7 @@ table .buddy-sequence{
     text-align: center;
 }
 
-#moreDetailsButton{
+.moreDetailsButton{
     float: right;
     margin-top: 25px;
 }
@@ -58,11 +58,11 @@ table .buddy-sequence{
     float: right;
 }
 
-#routePlan {
+.routePlan {
     border: 1px solid #999;
 }
 
-#joinCarpoolButton{
+.joinCarpoolButton{
     margin-top: 20px;
 }
 

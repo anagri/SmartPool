@@ -5,7 +5,7 @@ $(document).ready(function(){
 });
 
 function setClickEventOnMoreDetailsButton(){
-    $("#moreDetailsButton").click(function(){
+    $(".moreDetailsButton").click(function(){
         var hiddenContent = $('.hiddenContent');
         if(hiddenContent.is(':visible')){
             hiddenContent.hide();

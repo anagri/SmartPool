@@ -10,13 +10,13 @@
 
 <body>
 <div class="container">
-    <h1 id="carpoolName">Carpool ${carpool.getName()}</h1>
+    <h1 class="carpoolName">Carpool ${carpool.getName()}</h1>
     <div>
-        <a href="javascript:void(0)" id="moreDetailsButton">More Details</a>
+        <a href="javascript:void(0)" class="moreDetailsButton">More Details</a>
 
         <h2>Buddy List</h2>
         <div class="leftContent">
-            <table id='buddy-table'>
+            <table class='buddy-table'>
                 <thead>
                 <tr>
                     <th>Pickup Sequence</th>
@@ -31,7 +31,7 @@
                         <td class="buddy-sequence">${sequence.index + 1}</td>
                         <td><a href="../buddyProfile/${buddy.getUserName()}">${buddy.getName()}</a></td>
                         <td>${buddy.getPickupPoint()}</td>
-                        <td>${buddy.getPickupTime()}</td>
+                        <td>${buddy.getPickupTime().toString("h:mm a")}</td>
                     </tr>
                 </c:forEach>
 
@@ -45,7 +45,7 @@
             <p><strong>Status:</strong> ${carpool.getStatus()}</p>
 
             <c:if test="${!buddyIsInCarpool}">
-                <form method="post" id="joinCarpoolButton">
+                <form method="post" class="joinCarpoolButton">
                     <button type="submit" value="Join">Join Carpool</button>
                 </form>
             </c:if>
@@ -55,7 +55,7 @@
             <div class="hiddenContent">
                 <h2>Route Plan</h2>
 
-                <div id="routePlan">
+                <div class="routePlan">
                     <ol>
                         <li>Diamond District</li>
                         <li>Bla</li>
