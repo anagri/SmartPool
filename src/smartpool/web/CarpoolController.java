@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import smartpool.common.Constants;
 import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
 import smartpool.domain.Status;
@@ -63,10 +64,10 @@ public class CarpoolController {
     }
 
     @RequestMapping(value = "/carpool/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute Carpool carpool, @RequestParam String startDate,@RequestParam String officeETA,@RequestParam String officeETD, ModelMap model, HttpServletRequest request) {
-        carpool.setStartDate(startDate);
-        carpool.setOfficeETA(officeETA);
-        carpool.setOfficeETD(officeETD);
+    public String create(@ModelAttribute Carpool carpool, @RequestParam String startDateForm, @RequestParam String officeETAForm, @RequestParam String officeETDForm, ModelMap model, HttpServletRequest request) {
+        carpool.setStartDate(Constants.DATE_FORMATTER.parseLocalDate(startDateForm));
+        carpool.setOfficeETA(Constants.TIME_FORMATTER.parseLocalTime(officeETAForm));
+        carpool.setOfficeETD(Constants.TIME_FORMATTER.parseLocalTime(officeETDForm));
         carpool.setStatus(Status.PENDING);
         ArrayList<Buddy> buddies = new ArrayList<Buddy>();
         buddies.add(buddyService.getCurrentBuddy(request));
@@ -74,5 +75,6 @@ public class CarpoolController {
         carpoolService.insert(carpool);
         return "redirect:/carpool/"+carpool.getName();
     }
+
 
 }

@@ -2,18 +2,18 @@ package smartpool.domain;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import smartpool.common.Constants;
 
 import java.util.ArrayList;
 
 public class Carpool {
     private String name;
+
     private LocalDate startDate;
-    private CabType cabType;
     private LocalTime officeETA;
     private LocalTime officeETD;
 
     private int totalCabCharges;
+    private CabType cabType;
     private Status status;
     private ArrayList<Buddy> buddies = new ArrayList<Buddy>();
     private int capacity;
@@ -52,8 +52,8 @@ public class Carpool {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate == null ? null : LocalDate.parse(startDate, Constants.DATE_FORMATTER);
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     public CabType getCabType() {
@@ -68,15 +68,15 @@ public class Carpool {
         return officeETA;
     }
 
-    public void setOfficeETA(String officeETA) {
-        this.officeETA =  new  LocalTime(officeETA);
+    public void setOfficeETA(LocalTime officeETA) {
+        this.officeETA = officeETA;
     }
 
     public LocalTime getOfficeETD() {
         return officeETD;
     }
 
-    public void setOfficeETD(String officeETD) {
+    public void setOfficeETD(LocalTime officeETD) {
         this.officeETD = new  LocalTime(officeETD);
     }
 

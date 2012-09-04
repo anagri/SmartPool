@@ -99,7 +99,7 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpoolWhenPostedOnCreate(){
-        assertThat(carpoolController.create(new Carpool("name"),"15/06/2012", "10:00", "18:00", model,request),equalTo("redirect:/carpool/name"));
+        assertThat(carpoolController.create(new Carpool("name"), "15/06/2012", "10:00", "18:00", model,request),equalTo("redirect:/carpool/name"));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class CarpoolControllerTest {
     @Test
     public void shouldAddCurrentBuddyToCarpoolWhileCreating() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", model,request);
+        carpoolController.create(carpool, "15/06/2012", "10:00","18:00", model,request);
         assertThat(carpool.getBuddies().contains(testBuddy),equalTo(true));
     }
 
