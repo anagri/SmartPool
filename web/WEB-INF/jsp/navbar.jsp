@@ -4,7 +4,7 @@
 <html>
 <head>
 
-    <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.css" rel="stylesheet">
 </head>
 <body>
 

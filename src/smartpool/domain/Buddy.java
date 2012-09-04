@@ -2,7 +2,7 @@ package smartpool.domain;
 
 public class Buddy {
 
-    private String username, name, address, contactNumber, emailId, pickupTime,pickupPoint;
+    private String username, name, address, contactNumber, emailId, pickupTime, pickupPoint;
 
     private Buddy() {
     }
