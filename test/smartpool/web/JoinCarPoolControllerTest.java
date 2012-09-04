@@ -1,5 +1,6 @@
 package smartpool.web;
 
+import org.joda.time.LocalTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -64,7 +65,7 @@ public class JoinCarPoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpool() throws Exception {
-        JoinRequest joinRequest = new JoinRequest("ishak", "carpool-1", "here", "now");
+        JoinRequest joinRequest = new JoinRequest("ishak", "carpool-1", "here", new LocalTime("08:30"));
         String expectedURL = joinCarPoolController.submitUserDetails("carpool-1", joinRequest, model);
         assertEquals(expectedURL, "redirect:../../carpool/carpool-1");
 

@@ -1,14 +1,17 @@
 package smartpool.domain;
 
+import org.joda.time.LocalTime;
+
 public class JoinRequest {
 
-    String username, carpoolName, pickupPoint, pickupTime;
+    String username, carpoolName, pickupPoint;
+    LocalTime pickupTime;
 
 
     public JoinRequest() {
     }
 
-    public JoinRequest(String username, String carpoolName, String pickupPoint, String pickupTime) {
+    public JoinRequest(String username, String carpoolName, String pickupPoint, LocalTime pickupTime) {
         this.username = username;
         this.carpoolName = carpoolName;
         this.pickupPoint = pickupPoint;
@@ -41,11 +44,11 @@ public class JoinRequest {
         this.pickupPoint = pickupPoint;
     }
 
-    public String getPickupTime() {
+    public LocalTime getPickupTime() {
         return pickupTime;
     }
 
-    public void setPickupTime(String pickupTime) {
+    public void setPickupTime(LocalTime pickupTime) {
         this.pickupTime = pickupTime;
     }
 }

@@ -1,5 +1,6 @@
 package smartpool.persistence.dao;
 
+import org.joda.time.LocalTime;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class JoinRequestDaoIT {
     @Test
     @Ignore
     public void shouldInsertRequestToDB() {
-        joinRequestDao.sendJoinRequest(new JoinRequest("ayusht","carpool-1","9:00","Domlur"));
+        joinRequestDao.sendJoinRequest(new JoinRequest("ayusht","carpool-1","Domlur",new LocalTime(9,0)));
     }
 
     @Test
@@ -33,7 +34,7 @@ public class JoinRequestDaoIT {
 
         assertFalse(joinRequestDao.isRequestSent(ali, carpoolName));
 
-        joinRequestDao.sendJoinRequest(new JoinRequest(buddyName, carpoolName,"9:00","Domlur"));
+        joinRequestDao.sendJoinRequest(new JoinRequest(buddyName, carpoolName,"Domlur",new LocalTime(9,0)));
 
         assertTrue(joinRequestDao.isRequestSent(ali, carpoolName));
     }

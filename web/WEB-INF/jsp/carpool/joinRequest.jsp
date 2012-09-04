@@ -17,14 +17,12 @@
 
     <div class="mainContainer">
 
-        <input type="hidden" name="username" value="${buddy.getUserName()}"  />
-
         <div class="subContainer">
                     <span id="nameLabel">
                         <label>Name*</label>
                     </span>
                     <span id="nameTextBox">
-                        <input name="name" type="textbox" required="required" value="${buddy.getName()}" readonly /> <br />
+                        ${buddy.getName()}<br />
                     </span>
         </div>
         <div class="subContainer">
