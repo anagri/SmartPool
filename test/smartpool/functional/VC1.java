@@ -2,6 +2,7 @@ package smartpool.functional;
 
 import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.SeleneseTestCase;
+import org.junit.Ignore;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
@@ -28,6 +29,7 @@ public class VC1 extends SeleneseTestCase {
 
 
 	@Test
+    @Ignore
 	public void testVC1() throws Exception {
 		selenium.open("/carpool/carpool-1");
         //copied from CAS1 to ensure Login
