@@ -37,10 +37,8 @@ public class CarpoolControllerTest {
     private HttpServletRequest request;
     @Mock
     private BuddyService buddyService;
-
     @Mock
     private RouteService routeService;
-
 
     private ModelMap model;
     private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
@@ -64,6 +62,8 @@ public class CarpoolControllerTest {
 
         when(buddyService.getCurrentBuddy(request)).thenReturn(testBuddy);
 
+        when(request.getParameter("query")).thenReturn("Diamond District");
+
         defaultRouteLocations = Arrays.asList("Diamond District");
     }
 
@@ -82,14 +82,14 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldSearchForCarpool() {
-        carpoolController.searchByLocation("Diamond District", model);
+        carpoolController.searchByLocation(model, request);
         List<Carpool> searchResult = (List<Carpool>) model.get("searchResult");
         assertThat(searchResult, hasItems(expectedCarpool));
     }
 
     @Test
     public void shouldRedirectToViewSearchCarpool() throws Exception {
-        assertThat(carpoolController.searchByLocation("Diamond District", model), equalTo("carpool/search"));
+        assertThat(carpoolController.searchByLocation(model, request), equalTo("carpool/search"));
     }
 
     @Test
@@ -113,7 +113,8 @@ public class CarpoolControllerTest {
     @Test
     public void shouldDisplayAllCarpoolsIfQueryIsNull() {
         when(carpoolService.findAllCarpoolsByLocation(null)).thenReturn(defaultCarpools);
-        carpoolController.searchByLocation(null, model);
+        when(request.getParameter("query")).thenReturn(null);
+        carpoolController.searchByLocation(model, request);
         assertThat((ArrayList<Carpool>) model.get("searchResult"), is(defaultCarpools));
     }
 
@@ -127,7 +128,8 @@ public class CarpoolControllerTest {
     @Test
     public void shouldGetAllRoutePoints() throws Exception {
         when(routeService.getAllLocation()).thenReturn(defaultRouteLocations);
-        carpoolController.searchByLocation(null, model);
+        when(request.getParameter("query")).thenReturn(null);
+        carpoolController.searchByLocation(model, request);
         assertThat((List<String>) model.get("routePoints"), is(defaultRouteLocations));
     }
 

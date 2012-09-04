@@ -1,4 +1,4 @@
-package smartpool;
+package smartpool.functional;
 
 import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.SeleneseTestCase;
@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.util.regex.Pattern;
 
-public class cas3 extends SeleneseTestCase {
+public class cas1 extends SeleneseTestCase {
 	@Before
 	public void setUp() throws Exception {
 		WebDriver driver = new FirefoxDriver();
@@ -19,9 +19,14 @@ public class cas3 extends SeleneseTestCase {
 	}
 
 	@Test
-	public void testCas3() throws Exception {
-		selenium.open("http://localhost:9090/smartpool");
-		verifyEquals("CAS – Central Authentication Service", selenium.getTitle());
+	public void testCas1() throws Exception {
+		selenium.open("http://localhost:9090/smartpool/carpool/carpool-1");
+		selenium.type("id=username", "test.twu");
+		selenium.type("id=password", "Th0ughtW0rks@12");
+		selenium.click("name=submit");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("Hello, SmartPool!"));
+		selenium.open("http://castest.thoughtworks.com/cas/logout");
 	}
 
 	@After

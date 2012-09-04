@@ -116,16 +116,20 @@ public class Carpool {
         return routePlan;
     }
 
-    public String getStartPoint(){
+    public String getStartPoint() {
         return buddies.get(0).getPickupPoint();
     }
 
-    public String getStartTime(){
+    public LocalTime getStartTime() {
         return buddies.get(0).getPickupTime();
     }
 
     public int getBuddyCount() {
         return buddies.size();
+    }
+
+    public int getVacancy() {
+        return this.capacity - getBuddyCount();
     }
     @Override
     public boolean equals(Object o) {

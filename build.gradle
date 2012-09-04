@@ -22,11 +22,14 @@ sourceSets {
     test {
         java {
             srcDir 'test'
+            exclude 'smartpool/functional/**'
         }
     }
     functionalTest {
         java {
+            srcDir 'test/smartpool/functional'
             srcDir 'functional-test'
+            srcDir 'src/smartpool/util'
         }
     }
 }
@@ -38,14 +41,25 @@ project.ext {
     environmentName = System.getenv('SMARTPOOL_ENV') != null ? System.getenv('SMARTPOOL_ENV') : 'dev'
 }
 
-def environments = [
-        dev: [hostName: "localhost", port: 9090, applicationName: "smartpool",
-                databaseName: "smartpool", databaseHost: "localhost"],
-        qa: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-qa",
-                databaseName: "smartpoolqa", databaseHost: "10.10.15.121"],
-        uat: [hostName: "10.10.15.121", port: 9090, applicationName: "smartpool-uat",
-                databaseName: "smartpooluat", databaseHost: "10.10.15.121"]
-]
+def buildProperties = new Properties()
+new File("build.properties").withInputStream {
+    stream -> buildProperties.load(stream)
+}
+def availableEnvironments = ["dev", "uat", "qa"]
+def availableSettings = ["hostName", "port", "applicationName", "databaseName", "databaseHost"]
+def environments = [:]
+availableEnvironments.each {
+    def currentEnvironment = it
+    def configuration = [:]
+    availableSettings.each {
+        def settingName = it
+        println settingName
+        configuration[settingName] = buildProperties.getProperty("${currentEnvironment}.${settingName}")
+    }
+    environments[currentEnvironment] = configuration
+}
+println environments
+
 
 war {
     def settings = environments[project['environmentName']]

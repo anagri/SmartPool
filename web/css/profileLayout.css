@@ -1,69 +1,28 @@
+.headerContainer {
+    margin-left: 380px;
+    margin-top: 100px;
+}
+
+
 .mainContainer {
-    position: relative;
-    left: 50px;
+    margin-left: 380px;
+    margin-top: 50px;
 }
 
-.subContainer_Label {
+.mainContainer .subContainer {
+    width: 500px;
+    height: 40px;
+}
+
+.mainContainer .subContainer span {
     width: 200px;
-    clear: both;
-}
-
-.subContainer_Text {
-    position: absolute;
-    left: 200px;
-    width: 200px;
-    clear: both;
-}
-
-#userNameLabel, #nameLabel, #addressLabel, #contactLabel, #emailIdLabel, #pickupPointLabel, #pickupTimeLabel {
     float: left;
 }
 
-#userNameTextBox, #nameTextBox, #addressTextBox, #contactNumberTextBox, #emailIdTextBox, #pickupPointTextBox, #pickupTimeTextBox {
-    margin-left: 300px;
-    float: left;
-    height: 20px;
-    width: 200px;
+.mainContainer .subContainer span:last-child {
+    clear: right;
 }
-
-#userNameLabel, #userNameTextBox {
-    position: absolute;
-    top: 50px;
-
-}
-
-#nameLabel, #nameTextBox {
-    position: absolute;
-    top: 100px;
-}
-
-#addressLabel, #addressTextBox {
-    position: absolute;
-    top: 150px;
-}
-
-#contactNumberLabel, #contactNumberTextBox {
-    position: absolute;
-    top: 250px;
-}
-
-#emailIdLabel, #emailIdTextBox {
-    position: absolute;
-    top: 300px;
-}
-
-#pickupPointLabel, #pickupPointTextBox {
-    position: absolute;
-    top: 350px;
-}
-
-#pickupTimeLabel, #pickupTimeTextBox{
-    position: absolute;
-    top: 400px;
-}
-
 .buttonContainer {
-    margin-left: 400px;
-    position: absolute;
-    top: 450px;
+    margin-top: 50px;
+    margin-left: 150px;
 }

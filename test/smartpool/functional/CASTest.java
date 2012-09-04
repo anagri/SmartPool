@@ -1,4 +1,4 @@
-package smartpool;
+package smartpool.functional;
 
 import com.thoughtworks.selenium.Selenium;
 import org.junit.After;

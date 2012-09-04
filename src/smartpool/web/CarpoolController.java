@@ -38,30 +38,16 @@ public class CarpoolController {
 
         return "carpool/view";
     }
+
     @RequestMapping(value = "/carpool/{name}", method = RequestMethod.POST)
     public String joinCarpool(@PathVariable String name) {
         return "redirect:/carpool/"+name+"/join";
     }
-    @RequestMapping(value = "/carpool/", method = RequestMethod.GET)
-    public String searchByLocation(ModelMap model) {
-        return searchByLocation("", model);
-    }
-
-    @RequestMapping(value = "/searchCarpool", method = RequestMethod.GET)
-    public String searchCarpool(ModelMap modelMap) {
-        List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Diamond District ");
-        modelMap.put("searchResult", carpools);
-
-        List<String> routePoints = routeService.getAllLocation();
-        modelMap.put("routePoints", routePoints);
-
-        return "carpool/search";
-    }
-
 
     @RequestMapping(value = "/carpool/search", method = RequestMethod.GET)
-    public String searchByLocation(@RequestParam String query, ModelMap model) {
+    public String searchByLocation(ModelMap model, HttpServletRequest request) {
 
+        String query = request.getParameter("query");
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation(query);
         model.put("searchResult", carpools);
 

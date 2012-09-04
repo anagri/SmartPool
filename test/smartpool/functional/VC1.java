@@ -1,4 +1,4 @@
-package smartpool;
+package smartpool.functional;
 
 import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.SeleneseTestCase;
@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriverBackedSelenium;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import smartpool.util.EnvironmentLoader;
 //import smartpool.domain.Carpool;
 
 import java.sql.*;
@@ -18,7 +19,8 @@ public class VC1 extends SeleneseTestCase {
 	@Before
 	public void setUp() throws Exception {
 		WebDriver driver = new FirefoxDriver();
-		String baseUrl = "http://localhost:9090/";
+		String baseUrl = new EnvironmentLoader().getPropertyList(EnvironmentLoader.APPLICATION_PATH,
+                EnvironmentLoader.APPLICATION_URL);
 		selenium = new WebDriverBackedSelenium(driver, baseUrl);
         //Class.forName("com.mysql.jdbc.Driver");
         //Connection con = DriverManager.getConnection("jdbc:mysql://localhost/smartpool", "root", "");
@@ -27,7 +29,7 @@ public class VC1 extends SeleneseTestCase {
 
 	@Test
 	public void testVC1() throws Exception {
-		selenium.open("/smartpool/carpool/carpool-1");
+		selenium.open("/carpool/carpool-1");
         //copied from CAS1 to ensure Login
         selenium.type("id=username", "test.twu");
         selenium.type("id=password", "Th0ughtW0rks@12");
