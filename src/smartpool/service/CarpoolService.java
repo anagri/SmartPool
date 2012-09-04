@@ -6,6 +6,7 @@ import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
 import smartpool.persistence.dao.BuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
+import smartpool.persistence.dao.RouteDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +17,13 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class CarpoolService {
     private final CarpoolDao carpoolDao;
     private final BuddyDao buddyDao;
-    private final RouteService routeService;
+    private final RouteDao routeDao;
 
     @Autowired
-    public CarpoolService(CarpoolDao carpoolDao, BuddyDao buddyDao, RouteService routeService) {
+    public CarpoolService(CarpoolDao carpoolDao, BuddyDao buddyDao, RouteDao routeDao) {
         this.carpoolDao = carpoolDao;
         this.buddyDao = buddyDao;
-        this.routeService = routeService;
+        this.routeDao = routeDao;
     }
 
     public Carpool getByName(String name) {
@@ -43,7 +44,7 @@ public class CarpoolService {
             return getAllCarpools();
         }
 
-        List<String> carpoolNames = routeService.getCarpoolNameList(location.trim());
+        List<String> carpoolNames = routeDao.getCarpoolNameListByLocation(location.trim());
         List<Carpool> carpools = new ArrayList<Carpool>();
         for (String name : carpoolNames) {
             carpools.add(findCarpoolByName(name));

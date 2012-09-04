@@ -8,6 +8,7 @@ import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
 import smartpool.persistence.dao.BuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
+import smartpool.persistence.dao.RouteDao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,14 +31,14 @@ public class CarpoolServiceTest {
     CarpoolDao carpoolDao;
 
     @Mock
-    RouteService routeService;
+    RouteDao routeDao;
     @Mock
     BuddyDao buddyDao;
 
     @Before
     public void setUp() {
         initMocks(this);
-        carpoolService = new CarpoolService(carpoolDao, buddyDao, routeService);
+        carpoolService = new CarpoolService(carpoolDao, buddyDao, routeDao);
         expectedCarpool = CarpoolBuilder.CARPOOL_1;
         expectedCarpools = Arrays.asList(CarpoolBuilder.CARPOOL_1);
     }
@@ -61,7 +62,7 @@ public class CarpoolServiceTest {
 
     @Test
     public void shouldFindCarpoolsByLocation() {
-        when(routeService.getCarpoolNameList("Diamond District")).thenReturn(Arrays.asList("carpool-1"));
+        when(routeDao.getCarpoolNameListByLocation("Diamond District")).thenReturn(Arrays.asList("carpool-1"));
         when(carpoolDao.get("carpool-1")).thenReturn(expectedCarpool);
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Diamond District");
         assertThat(carpools, hasItems(expectedCarpool));
@@ -69,7 +70,7 @@ public class CarpoolServiceTest {
 
     @Test
     public void shouldNotFindCarpoolsByInvalidLocation() {
-        when(routeService.getCarpoolNameList("Invalid Location")).thenReturn(new ArrayList<String>());
+        when(routeDao.getCarpoolNameListByLocation("Invalid Location")).thenReturn(new ArrayList<String>());
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("Invalid Location");
         assertThat(carpools.size(), is(0));
     }
@@ -103,6 +104,18 @@ public class CarpoolServiceTest {
         carpool.setBuddies(buddies);
         carpoolService.insert(carpool);
         verify(buddyDao).addToCarpool(testBuddy, carpool);
+    }
+
+    @Test
+    public void shouldInsertIntoRoutePlanWhileCreatingCarpool() throws Exception {
+        Carpool carpool = new Carpool("name");
+        ArrayList<String> routePoints = new ArrayList<String>(){{
+            add("Domlur");
+            add("MG Road");
+        }};
+        carpool.setRoutePoints(routePoints);
+        carpoolService.insert(carpool);
+        verify(routeDao).insert("name",routePoints);
     }
 
     @Test

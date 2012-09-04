@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class CarpoolServiceIT {
     @Test
     public void shouldGetCarpoolsFromDBWhenSearchByLocation() throws Exception {
-        CarpoolService carpoolService = new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteService(new RouteDao()));
+        CarpoolService carpoolService = new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao());
         List<Carpool> allCarpoolsByLocation = carpoolService.findAllCarpoolsByLocation("Sony Centre");
 
         assertEquals("carpool-1", allCarpoolsByLocation.get(0).getName());
