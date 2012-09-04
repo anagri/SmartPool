@@ -120,7 +120,7 @@ public class Carpool {
         return buddies.get(0).getPickupPoint();
     }
 
-    public String getStartTime() {
+    public LocalTime getStartTime() {
         return buddies.get(0).getPickupTime();
     }
 
