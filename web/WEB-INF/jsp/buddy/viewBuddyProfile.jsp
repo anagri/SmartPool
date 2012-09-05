@@ -1,5 +1,5 @@
 <jsp:include page="../navbar.jsp" flush="true">
-    <jsp:param name="css" value="profileLayout.css"/>
+    <jsp:param name="css" value="profileLayout.css,standardLayout.css"/>
     <jsp:param name="title" value="${buddyProfile.getName()}'s Profile" />
 </jsp:include>
 <div class="headerContainer">
