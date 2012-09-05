@@ -20,13 +20,9 @@ public class BuddyProfileController {
         this.buddyService = buddyService;
     }
 
-    @RequestMapping(value = "/{userName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{userName:.*}", method = RequestMethod.GET)
     public String viewProfile(@PathVariable String userName, ModelMap model, HttpServletRequest request) {
         model.addAttribute("buddyProfile", buddyService.getBuddy(userName));
-        String casUserName = buddyService.getUserNameFromCAS(request);
-        if (userName.equals(casUserName)) {
-            return "buddy/viewUserProfile";
-        } else
-            return "buddy/viewBuddyProfile";
+        return "buddy/viewUserProfile";
     }
 }

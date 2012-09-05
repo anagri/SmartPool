@@ -1,3 +1,5 @@
+<%@ page import="edu.yale.its.tp.cas.client.filter.CASFilter" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../navbar.jsp" flush="true">
     <jsp:param name="css" value="profileLayout.css,standardLayout.css"/>
     <jsp:param name="title" value="${buddyProfile.getName()}'s Profile" />
@@ -26,8 +28,19 @@
         <span><label>Preferred Pickup Point:</label></span>
         <span><label>${buddyProfile.getPickupPoint()}</label></span>
     </div>
-    <div class="buttonContainer">
-        <button>Edit</button>
-    </div>
+    <c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>' />
+    <c:choose>
+        <c:when test="${casUserName eq buddyProfile.userName}">
+            <div class="buttonContainer">
+                <button>Edit</button>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div class="buttonContainer">
+                <button>Contact</button>
+            </div>
+        </c:otherwise>
+    </c:choose>
+
 </div>
 <%@ include file="../footer.jsp" %>

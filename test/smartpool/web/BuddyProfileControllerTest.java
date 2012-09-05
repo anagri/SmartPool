@@ -38,7 +38,7 @@ public class BuddyProfileControllerTest {
     public void shouldReturnBuddyProfile(){
         ModelMap model = new ModelMap();
         when(buddyProfileService.getUserNameFromCAS(request_mzhao)).thenReturn("mzhao");
-        assertThat(buddyProfileController.viewProfile("prithvin", model, request_mzhao),equalTo("buddy/viewBuddyProfile"));
+        assertThat(buddyProfileController.viewProfile("prithvin", model, request_mzhao),equalTo("buddy/viewUserProfile"));
     }
 
     @Test
