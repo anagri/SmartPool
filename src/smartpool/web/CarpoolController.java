@@ -57,6 +57,8 @@ public class CarpoolController {
         List<String> routePoints = routeService.getAllLocation();
         model.put("routePoints", routePoints);
 
+        model.put("searchQuery", query);
+
         return "carpool/search";
     }
 

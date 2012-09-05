@@ -16,7 +16,7 @@
             <c:choose>
             <c:when test="${searchResult ne null}">
                 <h1>Search Carpool</h1>
-                <h3> You  have ${searchResult.size()} result{s}</h3>
+                <h3> Your search for "${searchQuery}" returned ${searchResult.size()} result{s}</h3>
                 <table id='buddy-table'>
                     <thead>
                         <tr>
@@ -42,7 +42,7 @@
 
             </c:when>
             <c:otherwise>
-                <h1> You  have 0 results</h1>
+                <h1> Your search for "${query}" returned 0 result</h1>
             </c:otherwise>
             </c:choose>
             </div>
