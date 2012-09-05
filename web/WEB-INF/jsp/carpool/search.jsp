@@ -23,7 +23,7 @@
             <div class="leftContent">
             <c:choose>
             <c:when test="${searchResult ne null}">
-                <h3> Your search for "${searchQuery}" returned ${searchResult.size()} result{s}</h3>
+                <h3 id="resultsFoundMessage"> Your search for "${searchQuery}" returned ${searchResult.size()} result{s}</h3>
                 <table id='buddy-table'>
                     <thead>
                         <tr>

@@ -11,7 +11,7 @@
 
 <body>
 <div>
-    <label class="header">Carpool ${carpool.getName()}</label>
+    <label id="carpoolName" class="header">Carpool ${carpool.getName()}</label>
     <div>
         <h2>Buddy List</h2>
         <div class="leftContent">

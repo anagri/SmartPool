@@ -13,7 +13,7 @@ public class ViewCarpoolPage extends Page {
     public static final String CARPOOL_CLASS_NAME = "carpoolName";
     public static final String BUDDY_PROFILE_ID = "arnavku";
 
-    @FindBy(how = How.CLASS_NAME, using = CARPOOL_CLASS_NAME)
+    @FindBy(how = How.ID, using = CARPOOL_CLASS_NAME)
     private WebElement carpoolName;
 
     @FindBy(how = How.ID, using = "ayusht")
@@ -25,7 +25,7 @@ public class ViewCarpoolPage extends Page {
 
     @Override
     public void waitForThePageToLoad() {
-        waitForElementToLoad(By.className(CARPOOL_CLASS_NAME));
+        waitForElementToLoad(By.id(CARPOOL_CLASS_NAME));
     }
 
     public void verifyCarpoolDetails() {
