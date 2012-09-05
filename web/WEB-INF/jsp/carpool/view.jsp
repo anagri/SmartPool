@@ -24,13 +24,20 @@
                     <th>Pickup Time</th>
                 </tr>
                 </thead>
-
                 <c:forEach var="buddy" items="${carpool.getBuddies()}" varStatus="sequence">
                     <tr>
                         <td class="buddy-sequence">${sequence.index + 1}</td>
                         <td><a href="../buddyProfile/${buddy.getUserName()}" id="${buddy.getUserName()}">${buddy.getName()}</a></td>
                         <td>${buddy.getPickupPoint()}</td>
                         <td>${buddy.getPickupTime().toString("h:mm a")}</td>
+                    </tr>
+                </c:forEach>
+                <c:forEach var="i" begin="${carpool.getBuddies().size()+1}" end="${carpool.getCapacity()}">
+                    <tr>
+                        <td class="buddy-sequence">${i}</td>
+                        <td>(VACANT)</td>
+                        <td>----</td>
+                        <td>--:-- --</td>
                     </tr>
                 </c:forEach>
 
@@ -66,7 +73,7 @@
 
             <div class="hiddenContent moreDetailsContent">
                 <c:if test="${carpool.getStatus().toString().equals(\"PENDING\")}">
-                    <p><strong>Proposed Start Date: </strong> ${carpool.getStartDate().toString("dd/MMM/Y")}</p>
+                    <p><strong>Proposed Start Date:<br/> </strong> ${carpool.getStartDate().toString("dd MMM Y")}</p>
                 </c:if>
 
                 <p><strong>Capacity: </strong>
