@@ -1,34 +1,39 @@
 package smartpool.web.form;
 
+import org.joda.time.LocalTime;
 import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
 
 public class JoinRequestForm {
     String username;
     String carpoolName;
-    String address;
     String pickupPoint;
     String preferredPickupTime;
+    String address;
     String contactNumber;
-    String emailId;
 
     @SuppressWarnings("unused - used by spring data binding")
     public JoinRequestForm() {
     }
 
-    public JoinRequestForm(String username, String carpoolName, String pickupPoint, String preferredPickupTime) {
+    public JoinRequestForm(String username, String carpoolName, String pickupPoint, String preferredPickupTime,
+                           String address, String contactNumber) {
         this.username = username;
         this.carpoolName = carpoolName;
         this.pickupPoint = pickupPoint;
         this.preferredPickupTime = preferredPickupTime;
+        this.address = address;
+        this.contactNumber = contactNumber;
     }
 
     public JoinRequestForm(Buddy buddy, String carpoolName) {
-        this(buddy.getUserName(), carpoolName, buddy.getPickupPoint(), buddy.getPickupTime() == null ? "" : buddy.getPickupTime().toString("h:mm"));
+        this(buddy.getUserName(), carpoolName, buddy.getPickupPoint(),
+                buddy.getPickupTime() == null ? "" : buddy.getPickupTime().toString("h:mm"),
+                buddy.getAddress(), buddy.getContactNumber());
     }
 
     public JoinRequest createDomainObject() {
-        return null;
+        return new JoinRequest(username, carpoolName, pickupPoint, LocalTime.parse(preferredPickupTime), null);
     }
 
     @SuppressWarnings("unused - used by spring data binding")
@@ -61,11 +66,6 @@ public class JoinRequestForm {
         this.contactNumber = contactNumber;
     }
 
-    @SuppressWarnings("unused - used by spring data binding")
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
     @SuppressWarnings("unused - used to render pre populated form in jsp")
     public String getUsername() {
         return username;
@@ -94,10 +94,5 @@ public class JoinRequestForm {
     @SuppressWarnings("unused - used to render pre populated form in jsp")
     public String getContactNumber() {
         return contactNumber;
-    }
-
-    @SuppressWarnings("unused - used to render pre populated form in jsp")
-    public String getEmailId() {
-        return emailId;
     }
 }

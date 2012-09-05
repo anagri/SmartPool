@@ -28,7 +28,7 @@ public class JoinRequestFormValidatorTest {
 
     @Test
     public void shouldAddErrorIfPreferredTimeIsNotProvided() throws Exception {
-        JoinRequestForm form = new JoinRequestForm("twu.test", "test pool", "DD", "");
+        JoinRequestForm form = new JoinRequestForm("twu.test", "test pool", "DD", "", null, null);
 
         BindException errors = new BindException(form, "joinRequestForm");
 
@@ -41,7 +41,7 @@ public class JoinRequestFormValidatorTest {
 
     @Test
     public void shouldAddErrorIfPreferredTimeIsNotInCorrectFormat() throws Exception {
-        JoinRequestForm form = new JoinRequestForm("twu.test", "test pool", "DD", "abcd");
+        JoinRequestForm form = new JoinRequestForm("twu.test", "test pool", "DD", "abcd", null, null);
         BindException errors = new BindException(form, "joinRequestForm");
         validator.validate(form,errors);
 

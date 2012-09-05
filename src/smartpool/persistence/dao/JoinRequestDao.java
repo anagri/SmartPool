@@ -39,4 +39,14 @@ public class JoinRequestDao {
             session.close();
         }
     }
+
+    public JoinRequest selectUsersRequest(Buddy buddy, String carpoolName) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
+            return mapper.selectUserRequest(buddy.getUserName(), carpoolName);
+        } finally {
+            session.close();
+        }
+    }
 }

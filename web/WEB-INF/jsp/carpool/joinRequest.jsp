@@ -5,16 +5,32 @@
     <jsp:param name="title" value="Join SmartPool: ${carpoolName}" />
 </jsp:include>
 
-<div>
-    <label class="header">Join Smart Pool: ${carpoolName}</label>
-</div>
 
-<c:if test="${isRequestSent}">
-    <font color="red">You have already sent the request for this carpool</font>
-</c:if>
+<div class="container">
+    <div class="headerContainer">
+        <h1>Join Smart Pool: ${carpoolName}</h1>
+    </div>
+    <c:if test="${isRequestSent}">
+        <font color="red">You have already sent the request for this carpool</font>
+    </c:if>
+    <style>
+        .error {
+            color: #ff0000;
+        }
 
-<form name="joinRequest" method="post" onsubmit="alert('Join Carpool Request Sent Successfully'); return true">
+        .errorblock {
+            color: #000;
+            background-color: #ffEEEE;
+            border: 3px solid #ff0000;
+            padding: 8px;
+            margin: 16px;
+        }
+    </style>
 
+    <form:form commandName="joinRequestForm">
+    <spring:hasBindErrors name="joinRequestForm">
+    <span class="errorblock">Please correct the errors</span>
+    </spring:hasBindErrors>
     <div class="mainContainer">
 
         <div class="subContainer">
@@ -22,7 +38,7 @@
                         <label>Name*</label>
                     </span>
                     <span id="nameTextBox">
-                        ${buddy.getName()}<br />
+                        ${buddy.getName()}<br/>
                     </span>
         </div>
         <div class="subContainer">
@@ -30,7 +46,7 @@
                         <label>Address</label>
                     </span>
                     <span id="addressTextBox">
-                        <textarea name="address" rows="3" cols="30" value="${buddy.getAddress()}" > </textarea> <br />
+                        <textarea name="address" rows="3" cols="30" value="${joinRequestForm.address}"> </textarea> <br/>
                     </span>
         </div>
         <div class="subContainer">
@@ -38,23 +54,22 @@
                         <label>Contact Number*</label>
                      </span>
                      <span id="contactNumberTextBox">
-                        <input name="contactNumber" type="textbox" required="required" value=${buddy.getContactNumber()}  /> <br />
+                        <input name="contactNumber" type="textbox" required="required"
+                               value="${joinRequestForm.contactNumber}"/> <br/>
                     </span>
         </div>
         <div class="subContainer">
                     <span id="emailIdLabel">
                         <label>Email*</label>
                     </span>
-                    <span id="emailIdTextBox">
-                        <input name="emailId" type="textbox" required="required" value=${buddy.getEmailId()} readonly /> <br />
-                    </span>
+                    <span id="emailIdTextBox">${buddy.getEmailId()}</span>
         </div>
         <div class="subContainer">
                     <span id="pickupPointLabel">
                         <label>Preferred Pick Up Point*</label>
                     </span>
                     <span id="pickupPointTextBox">
-                        <input name="pickupPoint" required="required" type="textbox" /> <br />
+                        <input name="pickupPoint" required="required" type="textbox" value="${joinRequestForm.pickupPoint}"/> <br/>
                     </span>
         </div>
         <div class="subContainer">
@@ -62,7 +77,8 @@
                         <label>Pick Up Time (hh:mm)</label>
                     </span>
                     <span id="pickupTimeTextBox">
-                        <input name="pickupTime" type="textbox" /> <br />
+                        <input name="preferredPickupTime" type="text" value="${joinRequestForm.preferredPickupTime}"/> <br/>
+                        <form:errors path="preferredPickupTime" cssClass="error"/>
                     </span>
         </div>
         <div class="buttonContainer">
@@ -71,6 +87,5 @@
             <button align="right" disabled="disabled">EDIT</button>
         </div>
     </div>
-</form>
-
+</form:form>
 <%@ include file="../footer.jsp" %>

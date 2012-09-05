@@ -1,21 +1,23 @@
 package smartpool.web;
 
-import org.joda.time.LocalTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindException;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import smartpool.domain.Buddy;
-import smartpool.domain.JoinRequest;
 import smartpool.service.BuddyService;
 import smartpool.service.JoinRequestService;
+import smartpool.web.form.JoinRequestForm;
+import smartpool.web.form.JoinRequestFormValidator;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class JoinCarPoolControllerTest {
@@ -33,7 +35,7 @@ public class JoinCarPoolControllerTest {
     @Before
     public void setup() {
         initMocks(this);
-        joinCarPoolController = new JoinCarPoolController(buddyService, joinRequestService);
+        joinCarPoolController = new JoinCarPoolController(buddyService, joinRequestService, new JoinRequestFormValidator());
         model = new ModelMap();
     }
 
@@ -45,7 +47,6 @@ public class JoinCarPoolControllerTest {
 
         String userDetails = joinCarPoolController.getUserDetails("1", model, request);
         assertThat(userDetails, equalTo("carpool/joinRequest"));
-        assertThat((String) model.get("casUserName"), equalTo(buddyUserName));
         assertThat((Buddy) model.get("buddy"), equalTo(new Buddy(buddyUserName)));
     }
 
@@ -65,10 +66,10 @@ public class JoinCarPoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpool() throws Exception {
-        JoinRequest joinRequest = new JoinRequest("ishak", "carpool-1", "here", new LocalTime("08:30"));
-        String expectedURL = joinCarPoolController.submitUserDetails("carpool-1", joinRequest, model);
-        assertEquals(expectedURL, "redirect:../../carpool/carpool-1");
+        JoinRequestForm joinRequest = new JoinRequestForm("ishak", "carpool-1", "here", "09:30", null, null);
+        ModelAndView expectedURL = joinCarPoolController.submitUserDetails("carpool-1", joinRequest, new BindException(joinRequest, "joinRequest"), request);
 
-        verify(joinRequestService).sendJoinRequest(joinRequest);
+        assertThat(expectedURL.getView(), instanceOf(RedirectView.class));
+        assertThat(((RedirectView) expectedURL.getView()).getUrl(), is("../../carpool/carpool-1"));
     }
 }

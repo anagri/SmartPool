@@ -7,8 +7,9 @@ import org.junit.Test;
 import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.notNull;
 
 public class JoinRequestDaoIT {
 
@@ -22,7 +23,7 @@ public class JoinRequestDaoIT {
     @Test
     @Ignore
     public void shouldInsertRequestToDB() {
-        joinRequestDao.sendJoinRequest(new JoinRequest("ayusht","carpool-1","Domlur",new LocalTime(9,0)));
+        joinRequestDao.sendJoinRequest(new JoinRequest("ayusht", "carpool-1", "Domlur", new LocalTime(9, 0), "diamond district"));
     }
 
     @Test
@@ -34,9 +35,20 @@ public class JoinRequestDaoIT {
 
         assertFalse(joinRequestDao.isRequestSent(ali, carpoolName));
 
-        joinRequestDao.sendJoinRequest(new JoinRequest(buddyName, carpoolName,"Domlur",new LocalTime(9,0)));
+        joinRequestDao.sendJoinRequest(new JoinRequest(buddyName, carpoolName, "Domlur", new LocalTime(9, 0), "diamond district"));
 
         assertTrue(joinRequestDao.isRequestSent(ali, carpoolName));
+    }
+
+    @Ignore
+    @Test
+    public void testShouldInsertTimeInProperFormat() throws Exception {
+        JoinRequest joinRequest = new JoinRequest("test.twu", "carpool-1", "Here", new LocalTime(8, 30), "diamond district");
+
+        joinRequestDao.sendJoinRequest(joinRequest);
+
+        JoinRequest returnedRequest = joinRequestDao.selectUsersRequest(new Buddy("test.twu"), "carpool-1");
+        assertThat(returnedRequest, is(notNull()));
     }
 
 }

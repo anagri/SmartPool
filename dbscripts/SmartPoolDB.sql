@@ -111,8 +111,9 @@ DROP TABLE IF EXISTS `requests`;
 CREATE TABLE `requests` (
   `username` varchar(11) NOT NULL,
   `carpoolname` varchar(11) NOT NULL,
-  `preferredPickupTime` varchar(10) DEFAULT NULL,
+  `preferredPickupTime` time NOT NULL,
   `preferredPickupPoint` varchar(25) NOT NULL,
+  `address` varchar(100) NOT NULL,
   KEY `username` (`username`),
   KEY `carpoolname` (`carpoolname`),
   CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`username`) REFERENCES `buddies` (`username`),
@@ -127,7 +128,7 @@ ALTER TABLE requests ADD PRIMARY KEY (username,carpoolname);
 
 LOCK TABLES `requests` WRITE;
 /*!40000 ALTER TABLE `requests` DISABLE KEYS */;
-INSERT INTO `requests` VALUES ('ishak','carpool-1','now','here');
+INSERT INTO `requests` VALUES ('ishak','carpool-1','now','here', 'diamond district somewhere');
 /*!40000 ALTER TABLE `requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
