@@ -15,6 +15,7 @@ public class ViewCarpoolPage extends Page {
 
     @FindBy(how = How.CLASS_NAME, using = CARPOOL_CLASS_NAME)
     private WebElement carpoolName;
+
     @FindBy(how = How.ID, using = "ayusht")
     private WebElement ayushtLink;
 
@@ -31,8 +32,8 @@ public class ViewCarpoolPage extends Page {
         assertEquals("Carpool carpool-1", carpoolName.getText());
     }
 
-    public BuddyProfilePage goToViewBuddyProfile() {
+    public MyProfilePage goToBuddyProfilePage() {
         ayushtLink.click();
-        return new BuddyProfilePage(webDriver);
+        return new MyProfilePage(webDriver);
     }
 }

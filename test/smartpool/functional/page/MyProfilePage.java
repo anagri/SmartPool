@@ -24,8 +24,7 @@ public class MyProfilePage extends Page {
         waitForElementToLoad(By.id(MY_PROFILE_NAME_ID));
     }
 
-    public void verifyMyProfileDetails() {
-        assertEquals("Test User", myProfileName.getText());
+    public void verifyProfileDetails(String expectedUserName) {
+        assertEquals(expectedUserName, myProfileName.getText());
     }
-
-    }
+}
