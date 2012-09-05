@@ -1,41 +1,56 @@
 <jsp:include page="../navbar.jsp" flush="true">
-    <jsp:param name="css" value="profileLayout.css"/>
-    <jsp:param name="title" value="${buddyProfile.getName()}'s Profile" />
+    <jsp:param name="css" value="createCarpool.css,standardLayout.css"/>
+    <jsp:param name="title" value="Create Carpool" />
 </jsp:include>
 
-<div class="headerContainer">
-Create Carpool
-</div>
 <div class="mainContainer">
+    <div>
+        <label class="header">Create Carpool</label>
+    </div>
     <form action="create" method="post">
-        <div class="subContainer">
-            <span><label>Name: </label></span>
-            <span><input type="text" name="name" required/></span>
-        </div>
-        <div class="subContainer">
-            Proposed Start Date(DD/MM/YYYY):
-            <input type="text" name="startDateForm" required/><br/>
-        </div>
-        <div class="subContainer">
-        Pickup Point <input type="text" name="pickupPoint" required/><br/>
-        </div>
-        <div class="subContainer">
-            Pickup Time(HH:MM) <input type="text" name="pickupTime" required/><br/>
-        </div>
-        <div class="subContainer">
-            CabType <select name="cabType"><option value="PERSONAL">Personal</option><option value="COMPANY">Company</option></select><br/>
-        </div>
-        <div class="subContainer">
-            Office ETA(HH:MM) <input type="text" name="officeETAForm" required/><br/>
-        </div>
-        <div class="subContainer">
-            Office ETD(HH:MM) <input type="text" name="officeETDForm" required/><br/>
-        </div>
-        <div class="subContainer">
-            The Carpool will Pass By (Comma Seperated): <input type="text" name="routePointForm" /> (Example: Whitefield, Ramagondanhalli, Varthar Road, Marathahalli, HAL Airport, Domlur, Koramangla)<br/>
-        </div>
-        <div class="subContainer">
-            <button type="submit" value="Submit"/>
+        <span>
+            <label>Name: </label>
+            <input type="text" name="name" required/>
+        </span>
+        <span>
+            <label>Proposed Start Date:</label>
+            <input type="text" name="startDateForm" required/>
+            <label class="example">(DD/MM/YYYY)</label>
+        </span>
+        <span>
+            <label>Pickup Point:</label>
+            <input type="text" name="pickupPoint" required/>
+            <label class="example">(Example: Diamond District)</label>
+        </span>
+        <span>
+            <label>Pickup Time:</label>
+            <input type="text" name="pickupTime" required/>
+            <label class="example">(HH:MM)</label>
+        </span>
+        <span>
+            <label>CabType:</label>
+            <select name="cabType">
+                <option value="PERSONAL">Personal</option>
+                <option value="COMPANY">Company</option>
+            </select>
+        </span>
+        <span>
+            <label>Office ETA:</label>
+            <input type="text" name="officeETAForm" required/>
+            <label class="example">(HH:MM)</label>
+        </span>
+        <span>
+            <label>Office ETD:</label>
+            <input type="text" name="officeETDForm" required/>
+            <label class="example">(HH:MM)</label>
+        </span>
+        <span>
+            <label>Route Points:</label>
+            <input type="text" name="routePointForm" />
+            <label class="example">(Example: Whitefield, Ramagondanhalli, Varthar Road, Marathahalli, HAL Airport, Domlur, Koramangla)</label>
+        </span>
+        <div class="buttonContainer">
+            <button type="submit">Submit</button>
         </div>
     </form>
 </div>

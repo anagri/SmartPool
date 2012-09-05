@@ -1,0 +1,35 @@
+
+.mainContainer {
+    margin-top: 50px;
+}
+
+.mainContainer label{
+    font-weight: bold;
+    min-width: 200px;
+    text-align: right;
+    display: table-cell;
+    padding-right: 20px;
+}
+
+.mainContainer span{
+    display: table-row;
+    height: 35px;
+    vertical-align: middle;
+}
+
+.mainContainer input{
+    text-align: left;
+    width: 100%;
+}
+
+.mainContainer .example{
+    font-weight: normal;
+    font-size: small;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.buttonContainer{
+    text-align: left;
+    padding-left: 200px;
+}
