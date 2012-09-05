@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>View Carpool: ${carpool.getName()} | SmartPool</title>
+    <title>View Carpool: ${carpool.getName()}</title>
     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/carpool/view.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/carpool.css"/>
@@ -10,8 +10,8 @@
 </head>
 
 <body>
-<div class="container">
-    <h1 class="carpoolName">Carpool ${carpool.getName()}</h1>
+<div>
+    <label class="header">Carpool ${carpool.getName()}</label>
     <div>
         <h2>Buddy List</h2>
         <div class="leftContent">

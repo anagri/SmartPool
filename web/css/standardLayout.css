@@ -1,8 +1,8 @@
 body {
-    background-color: #E0E0E0;
+    background-color: #EEEEEE;
     color: #333333;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 20px;
     margin: 80px 100px 50px 100px;
 }
@@ -56,4 +56,16 @@ button.disabled {
 
 .navbar .brand{
     margin-left: 0;
+}
+
+.navbar-form input, .navbar-form select, .navbar-form .btn {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.navbar .btn, .navbar .btn-group {
+    margin-top: -3px;
+}
+
+label{
+    font-size: 16px;
 }

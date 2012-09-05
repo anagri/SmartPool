@@ -1,6 +1,14 @@
-<%@ include file="../navbar.jsp" %>
+<%@ page import="edu.yale.its.tp.cas.client.filter.CASFilter" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="../navbar.jsp" flush="true">
+    <jsp:param name="css" value="carpool.css,standardLayout.css"/>
+    <jsp:param name="title" value="Search Carpool" />
+</jsp:include>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/carpool.css"/>
+<div>
+    <label class="header">Search Carpool</label>
+</div>
+
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -15,8 +23,7 @@
             <div class="leftContent">
             <c:choose>
             <c:when test="${searchResult ne null}">
-                <div class="marginTop20"><h1>Search Carpool</h1></div>
-                <h3 id="resultsFoundMessage"> Your search for "${searchQuery}" returned ${searchResult.size()} result{s}</h3>
+                <h3> Your search for "${searchQuery}" returned ${searchResult.size()} result{s}</h3>
                 <table id='buddy-table'>
                     <thead>
                         <tr>

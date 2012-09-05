@@ -57,16 +57,17 @@
                     <li><a href="${appName}/buddyProfile/${casUserName}" id="myProfile">My Profile</a></li>
                     <li><a href="#notifications">Notifications</a></li>
                     <li>
-                        <form action="${appName}/carpool/search" method="GET" id="searchForm">
-                            <input type="text" name="query" value="${searchQuery}" id="searchBox"/>
-                            <input type="submit" value="Search" />
+
+                        <form action="${appName}/carpool/search" method="GET" style="margin-top: 10px;margin-bottom: 0px">
+                            <input type="text" name="query" value="${searchQuery}" id="searchBox" style="height: 26px;vertical-align: middle;"/>
+                            <button type="submit" class="btn logout" value="Search" style="margin-top:-10px;vertical-align: middle;"/>Search</button>
                         </form>
                     </li>
 
                 </ul>
                 <form class="navbar-form pull-right">
                     ${casUserName}
-                    <button type="button" class="btn logout" onClick="parent.location='https://castest.thoughtworks.com/cas/logout'">Logout</button>
+                    <button type="button" class="btn logout" style="margin-top: 6px" onClick="parent.location='https://castest.thoughtworks.com/cas/logout'">Logout</button>
                 </form>
             </div>
         </div>

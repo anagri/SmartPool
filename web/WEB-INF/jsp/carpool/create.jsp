@@ -3,10 +3,11 @@
     <jsp:param name="title" value="Create Carpool" />
 </jsp:include>
 
-<div class="mainContainer">
+
     <div>
         <label class="header">Create Carpool</label>
     </div>
+<div class="mainContainer">
     <form action="create" method="post">
         <span>
             <label>Name: </label>

@@ -1,13 +1,14 @@
-<%@ include file="../navbar.jsp" %>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/joinRequest.css"/>
-    <title>Join SmartPool: ${carpoolName}</title>
-</head>
-<body>
-<div class="headerContainer">
-    <h1>Join Smart Pool: ${carpoolName}</h1>
+<%@ page import="edu.yale.its.tp.cas.client.filter.CASFilter" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="../navbar.jsp" flush="true">
+    <jsp:param name="css" value="joinRequest.css,standardLayout.css"/>
+    <jsp:param name="title" value="Join SmartPool: ${carpoolName}" />
+</jsp:include>
+
+<div>
+    <label class="header">Join Smart Pool: ${carpoolName}</label>
 </div>
+
 <c:if test="${isRequestSent}">
     <font color="red">You have already sent the request for this carpool</font>
 </c:if>
@@ -73,6 +74,5 @@
         </div>
     </div>
 </form>
-</body>
-</html>
 
+<%@ include file="../footer.jsp" %>
