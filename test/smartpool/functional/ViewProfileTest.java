@@ -14,4 +14,12 @@ public class ViewProfileTest extends BaseTest {
         HomePage homePage = new LoginPage(webDriver).login();
         homePage.goToMyProfilePage().verifyMyProfileDetails();
     }
+
+    @Test
+    public void viewBuddyProfileAndItsDetails(){
+        HomePage homePage = new LoginPage(webDriver).login();
+        homePage.goToListCarpoolsPage().gotoViewCarpoolDetails().goToViewBuddyProfile().verifyBuddyProfileDetails();
+    }
+
 }
+
