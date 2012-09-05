@@ -20,6 +20,9 @@ public class HomePage extends Page {
     @FindBy(how = How.ID, using = "myProfile")
     private WebElement myProfileLink;
 
+    @FindBy(how = How.ID, using = "searchBox")
+    private WebElement searchCarpoolBox;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -41,5 +44,11 @@ public class HomePage extends Page {
 
     public void verifyWelcomeMessagePresent() {
         assertEquals("Welcome to SmartPool!", welcomeMessage.getText());
+    }
+
+    public SearchResultPage enterSearchQuery() {
+        searchCarpoolBox.sendKeys("diamond district");
+        searchCarpoolBox.submit();
+        return new SearchResultPage(webDriver);
     }
 }

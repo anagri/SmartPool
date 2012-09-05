@@ -16,7 +16,7 @@
             <c:choose>
             <c:when test="${searchResult ne null}">
                 <div class="marginTop20"><h1>Search Carpool</h1></div>
-                <h3> Your search for "${searchQuery}" returned ${searchResult.size()} result{s}</h3>
+                <h3 id="resultsFoundMessage"> Your search for "${searchQuery}" returned ${searchResult.size()} result{s}</h3>
                 <table id='buddy-table'>
                     <thead>
                         <tr>
@@ -42,12 +42,12 @@
 
             </c:when>
             <c:otherwise>
-                <h1> Your search for "${query}" returned 0 result</h1>
+                <h3 id="resultsNotFoundMessage"> Your search for "${query}" returned 0 result</h3>
             </c:otherwise>
             </c:choose>
             </div>
             <div class="rightContent">
-                <div class="marginTop50"><h3>Route Points</h3></div>
+                <div class="marginTop150"><h3>Route Points</h3></div>
                 <select id="routePointList" onchange="searchByRoutePoint()">
                     <option value=""></option>
                     <c:forEach var="routePoint" items="${routePoints}" varStatus="typeStatus">

@@ -57,7 +57,7 @@
                     <li><a href="${appName}/buddyProfile/${casUserName}" id="myProfile">My Profile</a></li>
                     <li><a href="#notifications">Notifications</a></li>
                     <li>
-                        <form action="${appName}/carpool/search" method="GET">
+                        <form action="${appName}/carpool/search" method="GET" id="searchForm">
                             <input type="text" name="query" value="${searchQuery}" id="searchBox"/>
                             <input type="submit" value="Search" />
                         </form>
