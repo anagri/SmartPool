@@ -17,15 +17,13 @@ public class EnvironmentLoader {
             EnvironmentLoader.HOST_NAME, EnvironmentLoader.PORT_NUMBER, EnvironmentLoader.APPLICATION_NAME
     };
 
-
     public EnvironmentLoader(String currentEnvironment, Properties environmentConfiguration) {
         this.environmentConfiguration = environmentConfiguration;
         this.currentEnvironment = currentEnvironment;
-
     }
 
     public EnvironmentLoader() {
-        this.currentEnvironment = System.getenv("SMARTPOOL_ENV");
+        this.currentEnvironment = System.getenv("SMARTPOOL_ENV") == null ? "dev" : System.getenv("SMARTPOOL_ENV");
         environmentConfiguration = new Properties();
         try {
             environmentConfiguration.load(new FileInputStream("build.properties"));
@@ -33,7 +31,6 @@ public class EnvironmentLoader {
             System.err.println(String.format("Property file read fail. %s", e.getMessage()));
         }
     }
-
 
     public String getProperty(String property) {
         return getProperty(currentEnvironment, property);
@@ -53,8 +50,4 @@ public class EnvironmentLoader {
         String pattern = environmentConfiguration.getProperty(propertyPattern);
         return String.format(pattern, substitutions.toArray());
     }
-
-
-
-
 }
