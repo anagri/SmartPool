@@ -19,8 +19,14 @@
             <link href="${pageContext.request.contextPath}/css/${cssFile}" rel="stylesheet" />
         </c:forEach>
     </c:if>
+
+    <script type="text/javascript">
+        function setFocus(){
+            document.getElementById('searchBox').focus();
+        }
+    </script>
 </head>
-<body>
+<body onload="setFocus()">
 
 <c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>' />
 <c:set var="appName" value="${pageContext.request.contextPath}" />
@@ -42,7 +48,7 @@
                     <li><a href="#notifications">Notifications</a></li>
                     <li>
                         <form action="${appName}/carpool/search" method="GET">
-                            <input type="text" name="query" />
+                            <input type="text" name="query" value="${searchQuery}" id="searchBox"/>
                             <input type="submit" value="Search" />
                         </form>
                     </li>
