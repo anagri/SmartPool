@@ -44,7 +44,7 @@
                 <ul class="nav">
                     <li><a href="${appName}/carpool/create">Create Carpool</a></li>
                     <li><a href="${appName}/carpool/search" id="listCarpools">Carpools</a></li>
-                    <li><a href="${appName}/buddyProfile/${casUserName}">My Profile</a></li>
+                    <li><a href="${appName}/buddyProfile/${casUserName}" id="myProfile">My Profile</a></li>
                     <li><a href="#notifications">Notifications</a></li>
                     <li>
                         <form action="${appName}/carpool/search" method="GET">

@@ -12,7 +12,7 @@
 <div class="mainContainer">
     <div class="subContainer">
         <span><label>Name:</label></span>
-        <span><label>${buddyProfile.getName()}</label></span>
+        <span><label id="myProfileName">${buddyProfile.getName()}</label></span>
     </div>
     <div class="subContainer">
         <span><label>Contact Number:</label></span>
