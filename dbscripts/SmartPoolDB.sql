@@ -65,7 +65,8 @@ INSERT INTO `buddies` VALUES ('arnavku','Arnav Kumar','M-58, Diamond District, B
 ('suganthk','Suganthi T','L-82, Diamond District, Bangalore','suganthit@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
 ('test.twu','Test User','Somewhere, Bangalore','test@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
 ('nibub','Nibu Baby','#659, Jayanthi Residency, Flat# 301, 1st Main, C Block,AECS Layout, Kundalahalli, Bangalore','nibub@thoughtworks.com','9686190831','Kundalahalli','11:10',NULL,NULL,'carpool-1'),
-('vfranca','Vitor Franca','F-75, Diamond District, Bangalore','vfranca@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL);
+('vfranca','Vitor Franca','F-75, Diamond District, Bangalore','vfranca@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),
+('ayu','Anna Yu','G-31, Diamond District, Bangalore','ayu@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `buddies` ENABLE KEYS */;
 UNLOCK TABLES;
 

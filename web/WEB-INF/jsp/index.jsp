@@ -1,19 +1,12 @@
-<%@ include file="navbar.jsp" %>
+<jsp:include page="navbar.jsp" flush="true">
+    <jsp:param name="css" value="standardLayout.css"/>
+    <jsp:param name="title" value="SmartPool" />
+</jsp:include>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html>
-<head>
-    <title>SmartPool</title>
-    <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.css" rel="stylesheet">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap/bootstrap.js"></script>
-</head>
-<body>
 
 <br>
+<center><h1>Welcome to SmartPool!</h1></center>
 
-<center><h1 id="welcomeMessage">Welcome to SmartPool!</h1></center>
 
-
-</body>
-</html>
+<%@ include file="footer.jsp" %>
