@@ -35,4 +35,10 @@ public class RouteDao {
     }
 
 
+    public void insert(String carpoolName, String routePoints) {
+        sqlSession = sqlSessionFactory.openSession();
+        RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
+        routeMapper.insert(carpoolName,routePoints);
+        sqlSession.commit();
+    }
 }

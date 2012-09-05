@@ -115,7 +115,7 @@ public class CarpoolServiceTest {
         }};
         carpool.setRoutePoints(routePoints);
         carpoolService.insert(carpool);
-        verify(routeDao).insert("name",routePoints);
+        verify(routeDao).insert("name",routePoints.get(0));
     }
 
     @Test

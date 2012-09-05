@@ -58,6 +58,9 @@ public class CarpoolService {
             if (buddy == null) continue;
             buddyDao.addToCarpool(buddy, carpool);
         }
+        for (String routePoint : carpool.getRoutePoints()) {
+            routeDao.insert(carpool.getName(),routePoint);
+        }
     }
 
     private List<Carpool> getAllCarpools() {

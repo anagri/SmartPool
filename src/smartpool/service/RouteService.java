@@ -23,5 +23,4 @@ public class RouteService {
     public List<String> getAllLocation() {
         return routeDao.getAllLocations();
     }
-
 }
