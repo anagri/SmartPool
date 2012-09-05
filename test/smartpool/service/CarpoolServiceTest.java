@@ -115,7 +115,7 @@ public class CarpoolServiceTest {
         }};
         carpool.setRoutePoints(routePoints);
         carpoolService.insert(carpool);
-        verify(routeDao).insert("name",routePoints.get(0));
+        verify(routeDao).insert("name", routePoints.get(0));
     }
 
     @Test
@@ -124,6 +124,14 @@ public class CarpoolServiceTest {
         when(carpoolDao.get("name")).thenReturn(carpool);
         carpoolService.getByName("name");
         verify(buddyDao).getBuddyListByCarpoolName(carpool.getName());
+    }
+
+    @Test
+    public void shouldReturnRouteListInCarpool(){
+        Carpool carpool = new Carpool("carpool-test");
+        when(carpoolDao.get("carpool-test")).thenReturn(carpool);
+        carpoolService.getByName("carpool-test");
+        verify(routeDao).getLocationsFor("carpool-test");
     }
 
     @Test

@@ -39,4 +39,10 @@ public class RouteDaoTest {
         routeDao.insert("name","Domlur");
         verify(mockRouteMapper).insert("name","Domlur");
     }
+
+    @Test
+    public void shouldGetLocationListForACarpool() throws Exception {
+        routeDao.getLocationsFor("carpool-test");
+        verify(mockRouteMapper).getLocationsFor("carpool-test");
+    }
 }

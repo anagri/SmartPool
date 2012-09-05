@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import smartpool.common.MyBatisConnectionFactory;
 import smartpool.data.RouteMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -45,7 +46,13 @@ public class RouteDao {
     public void delete(String carpoolName, String location) {
         sqlSession = sqlSessionFactory.openSession();
         RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
-        routeMapper.delete(carpoolName,location);
+        routeMapper.delete(carpoolName, location);
         sqlSession.commit();
+    }
+
+    public ArrayList<String> getLocationsFor(String carpoolName) {
+        sqlSession = sqlSessionFactory.openSession();
+        RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
+        return routeMapper.getLocationsFor(carpoolName);
     }
 }

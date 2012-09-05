@@ -57,13 +57,6 @@
 
                 <div id="routePoints">
                     <ol>
-                        <li>Diamond District</li>
-                        <li>Bla</li>
-                        <li>ble</li>
-                        <li>bli</li>
-                        <li>blo</li>
-                        <li>blu</li>
-                        <li>ThoughtWorks</li>
                         <c:forEach var="routePoint" items="${carpool.getRoutePoints()}" varStatus="sequence">
                             <li>${routePoint}</li>
                         </c:forEach>

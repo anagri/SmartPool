@@ -26,10 +26,13 @@ public class CarpoolService {
         this.routeDao = routeDao;
     }
 
-    public Carpool getByName(String name) {
-        Carpool carpool = carpoolDao.get(name);
-        if (carpool != null)
-            carpool.setBuddies(buddyDao.getBuddyListByCarpoolName(carpool.getName()));
+    public Carpool getByName(String carpoolName) {
+        Carpool carpool = carpoolDao.get(carpoolName);
+        if (carpool == null) return  carpool;
+
+        carpool.setBuddies(buddyDao.getBuddyListByCarpoolName(carpool.getName()));
+
+        carpool.setRoutePoints(routeDao.getLocationsFor(carpool.getName()));
         return carpool;
     }
 
@@ -59,7 +62,7 @@ public class CarpoolService {
             buddyDao.addToCarpool(buddy, carpool);
         }
         for (String routePoint : carpool.getRoutePoints()) {
-            routeDao.insert(carpool.getName(),routePoint);
+            routeDao.insert(carpool.getName(), routePoint);
         }
     }
 
