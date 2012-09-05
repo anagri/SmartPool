@@ -65,8 +65,8 @@
             </div>
 
             <div class="hiddenContent moreDetailsContent">
-                <c:if test="${carpool.getStatus() == Status.PENDING}">
-                    <p><strong>Date Started: </strong> ${carpool.getStartDate().toString("dd/MMM/Y")}</p>
+                <c:if test="${carpool.getStatus().toString().equals(\"PENDING\")}">
+                    <p><strong>Proposed Start Date: </strong> ${carpool.getStartDate().toString("dd/MMM/Y")}</p>
                 </c:if>
 
                 <p><strong>Capacity: </strong>
