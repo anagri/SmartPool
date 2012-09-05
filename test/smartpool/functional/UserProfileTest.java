@@ -9,7 +9,7 @@ public class UserProfileTest extends  BaseTest {
     @Test
     public void shouldVerifyHeaderPresentForMyProfile() throws Exception {
         HomePage homePage = new LoginPage(webDriver).login();
-        homePage.goToMyProfilePage().verifyProfileDetails();
+        homePage.goToMyProfilePage().verifyMyProfileDetails();
     }
 
     @Test

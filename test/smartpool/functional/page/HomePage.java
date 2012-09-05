@@ -42,9 +42,4 @@ public class HomePage extends Page {
     public void verifyWelcomeMessagePresent() {
         assertEquals("Welcome to SmartPool!", welcomeMessage.getText());
     }
-
-    public UserProfilePage goToMyProfilePage() {
-        myProfileLink.click();
-        return new UserProfilePage(webDriver);
-    }
 }

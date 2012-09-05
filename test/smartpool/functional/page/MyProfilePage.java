@@ -27,4 +27,5 @@ public class MyProfilePage extends Page {
     public void verifyMyProfileDetails() {
         assertEquals("Test User", myProfileName.getText());
     }
-}
+
+    }
