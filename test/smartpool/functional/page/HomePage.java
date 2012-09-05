@@ -17,6 +17,9 @@ public class HomePage extends Page {
     @FindBy(how = How.ID, using = "listCarpools")
     private WebElement listCarpoolsLink;
 
+    @FindBy(how = How.ID, using = "myProfile")
+    private WebElement myProfileLink;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -29,6 +32,11 @@ public class HomePage extends Page {
     public ListCarpoolsPage goToListCarpoolsPage() {
         listCarpoolsLink.click();
         return new ListCarpoolsPage(webDriver);
+    }
+
+    public MyProfilePage goToMyProfilePage() {
+        myProfileLink.click();
+        return new MyProfilePage(webDriver);
     }
 
     public void verifyWelcomeMessagePresent() {
