@@ -51,7 +51,7 @@
             <label class="example">(Example: Whitefield, Ramagondanhalli, Varthar Road, Marathahalli, HAL Airport, Domlur, Koramangla)</label>
         </span>
         <div class="buttonContainer">
-            <button type="submit">Submit</button>
+            <button type="submit" name="submit">Submit</button>
         </div>
     </form>
 </div>

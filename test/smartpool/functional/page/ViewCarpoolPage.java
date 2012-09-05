@@ -36,4 +36,8 @@ public class ViewCarpoolPage extends Page {
         ayushtLink.click();
         return new MyProfilePage(webDriver);
     }
+
+    public void verifyDetailsOfNewCarpool() {
+        assertEquals("Carpool Carpool-FNTEST",carpoolName.getText());
+    }
 }

@@ -23,6 +23,9 @@ public class HomePage extends Page {
     @FindBy(how = How.ID, using = "searchBox")
     private WebElement searchCarpoolBox;
 
+    @FindBy(how = How.ID, using = "createCarpool")
+    private WebElement createCarpoolLink;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -41,6 +44,12 @@ public class HomePage extends Page {
         myProfileLink.click();
         return new MyProfilePage(webDriver);
     }
+
+    public CreateCarpoolPage goToCreateCarpoolPage() {
+        createCarpoolLink.click();
+        return new CreateCarpoolPage(webDriver);
+    }
+
 
     public void verifyWelcomeMessagePresent() {
         assertEquals("Welcome to SmartPool!", welcomeMessage.getText());
