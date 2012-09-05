@@ -24,7 +24,8 @@ public class RouteDao {
     public List<String> getCarpoolNameListByLocation(String location) {
         sqlSession = sqlSessionFactory.openSession();
         RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
-        return routeMapper.getCarpoolNameList(location);
+
+        return routeMapper.getCarpoolNameList("%" + location + "%");
     }
 
     public List<String> getAllLocations() {

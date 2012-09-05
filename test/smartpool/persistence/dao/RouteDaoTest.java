@@ -31,7 +31,7 @@ public class RouteDaoTest {
 
     @Test
     public void shouldGetCarpoolNameListByLocation() throws Exception {
-        when(mockRouteMapper.getCarpoolNameList("diamond district")).thenReturn(Arrays.asList("carpool-1"));
+        when(mockRouteMapper.getCarpoolNameList("%diamond district%")).thenReturn(Arrays.asList("carpool-1"));
 
         RouteDao routeDao = new RouteDao(mockSqlSessionFactory);
         List<String> carpoolNameList = routeDao.getCarpoolNameListByLocation("diamond district");
