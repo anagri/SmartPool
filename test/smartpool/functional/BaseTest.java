@@ -12,6 +12,7 @@ public abstract class BaseTest {
     @Before
     public void setUp() {
         webDriver = new FirefoxDriver();
+        webDriver.manage().window().maximize();
         webDriver.get(new EnvironmentLoader().getPropertyList(EnvironmentLoader.APPLICATION_PATH, EnvironmentLoader.APPLICATION_URL));
     }
 
