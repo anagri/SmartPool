@@ -10,8 +10,8 @@ import static junit.framework.Assert.assertEquals;
 
 public class ViewCarpoolPage extends Page {
 
-    public static final String CARPOOL_NAME_ID = "carpoolName";
-    @FindBy(how = How.ID, using = CARPOOL_NAME_ID)
+    public static final String CARPOOL_CLASS_NAME = "carpoolName";
+    @FindBy(how = How.CLASS_NAME, using = CARPOOL_CLASS_NAME)
     private WebElement carpoolName;
 
     public ViewCarpoolPage(WebDriver webDriver) {
@@ -20,7 +20,7 @@ public class ViewCarpoolPage extends Page {
 
     @Override
     public void waitForThePageToLoad() {
-        waitForElementToLoad(By.id(CARPOOL_NAME_ID));
+        waitForElementToLoad(By.className(CARPOOL_CLASS_NAME));
     }
 
     public void verifyCarpoolDetails() {
