@@ -6,14 +6,13 @@
     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/carpool/view.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/carpool.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/standardLayout.css"/>
 </head>
 
 <body>
 <div class="container">
     <h1 class="carpoolName">Carpool ${carpool.getName()}</h1>
     <div>
-        <a href="javascript:void(0)" class="moreDetailsButton">More Details</a>
-
         <h2>Buddy List</h2>
         <div class="leftContent">
             <table class='buddy-table'>
@@ -52,6 +51,7 @@
         </div>
 
         <div class="rightContent">
+            <a href="javascript:void(0)" class="moreDetailsButton">More Details</a>
             <div class="hiddenContent">
                 <h2>Route Plan</h2>
 

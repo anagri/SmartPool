@@ -43,8 +43,7 @@ table .buddy-sequence{
 }
 
 .moreDetailsButton{
-    float: right;
-    margin-top: 25px;
+
 }
 
 .moreDetailsContent{
@@ -56,6 +55,9 @@ table .buddy-sequence{
 }
 .rightContent{
     float: right;
+    position: relative;
+    top: -90px;
+    width: 200px;
 }
 
 .routePlan {
