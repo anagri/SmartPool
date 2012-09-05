@@ -10,7 +10,7 @@ h2{
     width: 900px;
 }
 .containerWrapper{
-    margin-top: 50px;
+    margin-top: 80px;
     width: 900px;
     margin-right: auto;
     margin-left: auto;
@@ -74,4 +74,8 @@ ol{
 
 .marginTop50{
     margin-top: 50px;
+}
+
+.marginTop20{
+    margin-top: 20px;
 }
