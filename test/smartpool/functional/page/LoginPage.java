@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 public class LoginPage extends Page {
 
@@ -50,7 +51,7 @@ public class LoginPage extends Page {
     }
 
     private void enterLoginCredentials(String userNameText, String passwordText) {
-        assertEquals("CAS – Central Authentication Service", webDriver.getTitle());
+        assertTrue(webDriver.getTitle().contains("Central Authentication Service"));
         userName.sendKeys(userNameText);
         password.sendKeys(passwordText);
         userName.submit();
