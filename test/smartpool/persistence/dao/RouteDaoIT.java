@@ -14,5 +14,6 @@ public class RouteDaoIT {
         routeDao.insert("carpool-1","MG Road");
         List<String> carpoolNames = routeDao.getCarpoolNameListByLocation("MG Road");
         assertThat(carpoolNames.contains("carpool-1"), equalTo(true));
+        routeDao.delete("carpool-1","MG Road");
     }
 }

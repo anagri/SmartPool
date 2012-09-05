@@ -31,7 +31,7 @@ public class RouteDaoTest {
     @Test
     public void shouldGetCarpoolNameListByLocation() throws Exception {
         routeDao.getCarpoolNameListByLocation("diamond district");
-        verify(mockRouteMapper).getCarpoolNameList("diamond district");
+        verify(mockRouteMapper).getCarpoolNameList("%diamond district%");
     }
 
     @Test

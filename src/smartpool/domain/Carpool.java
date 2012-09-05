@@ -17,7 +17,7 @@ public class Carpool {
     private Status status;
     private ArrayList<Buddy> buddies = new ArrayList<Buddy>();
     private int capacity;
-    private ArrayList<String> routePoints;
+    private ArrayList<String> routePoints = new ArrayList<String>();
 
     public Carpool() {
         status = Status.PENDING;

@@ -41,4 +41,11 @@ public class RouteDao {
         routeMapper.insert(carpoolName,routePoints);
         sqlSession.commit();
     }
+
+    public void delete(String carpoolName, String location) {
+        sqlSession = sqlSessionFactory.openSession();
+        RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
+        routeMapper.delete(carpoolName,location);
+        sqlSession.commit();
+    }
 }

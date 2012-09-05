@@ -1,5 +1,6 @@
 package smartpool.data;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,4 +19,7 @@ public interface RouteMapper {
 
     @Insert(INSERT)
     public void insert(String carpoolName, String location);
+
+    @Delete("delete from route where carpoolName = #{param1} and location = #{param2}")
+    void delete(String carpoolName, String location);
 }
