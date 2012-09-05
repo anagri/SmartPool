@@ -24,9 +24,19 @@
         function setFocus(){
             document.getElementById('searchBox').focus();
         }
+
+        function setOptionInDropDown(query) {
+            var list = document.getElementById("routePointList");
+            for ( var i = 0; i < list.options.length; i++ ) {
+                if ( list.options[i].text == query ) {
+                    list.options[i].selected = true;
+                    return;
+                }
+            }
+        }
     </script>
 </head>
-<body onload="setFocus()">
+<body onload="setFocus();setOptionInDropDown('${searchQuery}')">
 
 <c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>' />
 <c:set var="appName" value="${pageContext.request.contextPath}" />

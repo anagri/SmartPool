@@ -1,21 +1,21 @@
 <%@ include file="../navbar.jsp" %>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/carpool.css"/>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 
 <script type="text/javascript">
-        function searchByRoutePoint(){
-            var index = document.getElementById('routePointList').selectedIndex;
-            var value = document.getElementById('routePointList').options[index].text;
+    function searchByRoutePoint(){
+        var index = document.getElementById('routePointList').selectedIndex;
+        var value = document.getElementById('routePointList').options[index].text;
 
-            document.location.href = '../carpool/search?query='+value;
-        }
-    </script>
-
+        document.location.href = '../carpool/search?query=' + value;
+    }
+</script>
         <div class="containerWrapper">
             <div class="leftContent">
             <c:choose>
             <c:when test="${searchResult ne null}">
-                <h1>Search Carpool</h1>
+                <div class="marginTop20"><h1>Search Carpool</h1></div>
                 <h3> Your search for "${searchQuery}" returned ${searchResult.size()} result{s}</h3>
                 <table id='buddy-table'>
                     <thead>
@@ -56,5 +56,4 @@
                 </select>
             </div>
         </div>
-
 <%@ include file="../footer.jsp" %>
