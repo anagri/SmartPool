@@ -65,7 +65,7 @@ public class CarpoolService {
         int sequenceNumber=0;
         for (String routePoint : routePoints) {
             sequenceNumber++;
-            routeDao.insert(carpool.getName(), routePoint,sequenceNumber);
+            routeDao.insert(carpool.getName(), routePoint.trim(),sequenceNumber);
         }
     }
 
