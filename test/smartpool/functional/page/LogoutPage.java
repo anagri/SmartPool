@@ -8,7 +8,6 @@ import org.openqa.selenium.support.How;
 import smartpool.util.EnvironmentLoader;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import static org.junit.Assert.assertTrue;
 
@@ -34,8 +33,7 @@ public class LogoutPage extends Page {
     }
 
     public boolean askLoginWhenGoToHomePage() throws MalformedURLException {
-        URL url = new URL((new EnvironmentLoader().getPropertyList(EnvironmentLoader.APPLICATION_PATH, EnvironmentLoader.APPLICATION_URL)));
-        webDriver.navigate().to(url);
+        webDriver.get(new EnvironmentLoader().getPropertyList(EnvironmentLoader.APPLICATION_PATH, EnvironmentLoader.APPLICATION_URL));
         if (webDriver.findElement(By.id("login")) != null) {
             return true;
         }

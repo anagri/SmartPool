@@ -46,7 +46,7 @@ new File("build.properties").withInputStream {
     stream -> buildProperties.load(stream)
 }
 def availableEnvironments = ["dev", "uat", "qa"]
-def availableSettings = ["hostName", "port", "applicationName", "databaseName", "databaseHost"]
+def availableSettings = ["hostName", "port", "applicationName", "databaseName", "databaseHost", "casServerUrl"]
 def environments = [:]
 availableEnvironments.each {
     def currentEnvironment = it
@@ -77,7 +77,7 @@ war {
     baseName settings.applicationName
     eachFile {
         if (it.name == 'web.xml') {
-            it.expand(smartpoolServerName: String.format("%s:%s", settings.hostName, settings.port), casServerName: "https://castest.thoughtworks.com/cas")
+            it.expand(smartpoolServerName: String.format("%s:%s", settings.hostName, settings.port), casServerUrl: settings.casServerUrl)
         }
     }
 }

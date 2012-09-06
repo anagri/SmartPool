@@ -5,9 +5,9 @@ import org.junit.Test;
 
 import java.util.Properties;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
 
-public class EnvironmentSettingTests {
+public class EnvironmentLoaderTest {
 
 
     private Properties expected_properties;
@@ -16,7 +16,8 @@ public class EnvironmentSettingTests {
 
     private String expected_environment1_hostName = "localhost";
     private String expected_environment1_port = "9090";
-    private final String expected_environment1_applicationName = "anothername";
+    private String expected_environment1_applicationName = "anothername";
+    private String expected_environment1_casServerUrl = "testCAS";
 
     private String expected_environment2_hostName = "10.10.10.10";
     private String expected_environment2_port = "7070";
@@ -28,6 +29,7 @@ public class EnvironmentSettingTests {
         expected_properties.setProperty("environment1.hostName", expected_environment1_hostName);
         expected_properties.setProperty("environment1.port", expected_environment1_port);
         expected_properties.setProperty("environment1.applicationName", expected_environment1_applicationName);
+        expected_properties.setProperty("environment1.casServerUrl", expected_environment1_casServerUrl);
 
         expected_properties.setProperty("environment2.hostName", expected_environment2_hostName);
         expected_properties.setProperty("environment2.applicationName", expected_environment2_applicationName);
@@ -56,6 +58,11 @@ public class EnvironmentSettingTests {
     }
 
     @Test
+    public void environment1HasOwnCasServerUrl() throws Exception {
+        assertEquals(expected_environment1_casServerUrl, loader1.getProperty(EnvironmentLoader.CAS_SERVER_URL));
+    }
+
+    @Test
     public void shouldDeriveApplicationPathFromEnvironment2() {
         assertEquals("http://10.10.10.10:7070/somename", loader2.getPropertyList("applicationPath",
                 EnvironmentLoader.HOST_NAME, EnvironmentLoader.PORT_NUMBER, EnvironmentLoader.APPLICATION_NAME));
@@ -72,5 +79,4 @@ public class EnvironmentSettingTests {
         assertEquals("http://10.10.10.10:7070/somename", loader2.getPropertyList("applicationPath",
                 EnvironmentLoader.APPLICATION_URL));
     }
-
 }

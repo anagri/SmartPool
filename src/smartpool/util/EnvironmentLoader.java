@@ -12,6 +12,7 @@ public class EnvironmentLoader {
     public static final String PORT_NUMBER = "port";
     public static final String APPLICATION_NAME = "applicationName";
     public static final String APPLICATION_PATH = "applicationPath";
+    public static final String CAS_SERVER_URL = "casServerUrl";
     private Properties environmentConfiguration;
     public static final String[] APPLICATION_URL = new String[]{
             EnvironmentLoader.HOST_NAME, EnvironmentLoader.PORT_NUMBER, EnvironmentLoader.APPLICATION_NAME
