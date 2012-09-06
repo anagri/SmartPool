@@ -10,8 +10,12 @@ public class CreateCarpoolPage extends Page {
 
     public static final String MAIN_CONTAINER_CLASS_NAME = "mainContainer";
 
-    @FindBy(how = How.NAME, using = "name")
-    private WebElement nameTextBox;
+    @FindBy(how = How.NAME, using = "to")
+    private WebElement toTextBox;
+
+    @FindBy(how = How.NAME, using = "from")
+    private WebElement fromTextBox;
+
 
     @FindBy(how = How.NAME, using = "startDateForm")
     private WebElement startDateTextBox;
@@ -44,7 +48,8 @@ public class CreateCarpoolPage extends Page {
     }
 
     public ViewCarpoolPage enterCarpoolDetails() {
-        nameTextBox.sendKeys("Carpool-FNTEST");
+        fromTextBox.sendKeys("from");
+        toTextBox.sendKeys("to");
         startDateTextBox.sendKeys("15/10/2012");
         pickupPointTextBox.sendKeys("Domlur");
         pickupTimeTextBox.sendKeys("10:15");

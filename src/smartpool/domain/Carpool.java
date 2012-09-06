@@ -16,7 +16,7 @@ public class Carpool {
     private int totalCabCharges;
     private CabType cabType;
     private Status status;
-    private ArrayList<Buddy> buddies = new ArrayList<Buddy>();
+    private ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
     private int capacity;
     private ArrayList<String> routePoints = new ArrayList<String>();
 
@@ -24,7 +24,7 @@ public class Carpool {
         status = Status.PENDING;
     }
 
-    public Carpool(String name, LocalDate startDate, String pickupPoint, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officeETD, Status status, ArrayList<Buddy> buddies, int capacity, ArrayList<String> routePoints) {
+    public Carpool(String name, LocalDate startDate, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officeETD, Status status, ArrayList<CarpoolBuddy> carpoolBuddies, int capacity, ArrayList<String> routePoints) {
         this.name = name;
         this.startDate = startDate;
         this.cabType = cabType;
@@ -32,7 +32,7 @@ public class Carpool {
         this.officeETA = officeETA;
         this.officeETD = officeETD;
         this.status = status;
-        this.buddies = buddies;
+        this.carpoolBuddies = carpoolBuddies;
         this.capacity = capacity;
         this.routePoints = routePoints;
     }
@@ -97,12 +97,12 @@ public class Carpool {
         this.status = status;
     }
 
-    public ArrayList<Buddy> getBuddies() {
-        return buddies;
+    public ArrayList<CarpoolBuddy> getCarpoolBuddies() {
+        return carpoolBuddies;
     }
 
-    public void setBuddies(ArrayList<Buddy> buddies) {
-        this.buddies = buddies;
+    public void setCarpoolBuddies(ArrayList<CarpoolBuddy> carpoolBuddies) {
+        this.carpoolBuddies = carpoolBuddies;
     }
 
     public int getCapacity() {
@@ -122,15 +122,15 @@ public class Carpool {
     }
 
     public String getStartPoint() {
-        return buddies.get(0).getPickupPoint();
+        return carpoolBuddies.get(0).getPickupPoint();
     }
 
     public LocalTime getStartTime() {
-        return buddies.get(0).getPickupTime();
+        return carpoolBuddies.get(0).getPickupTime();
     }
 
     public int getBuddyCount() {
-        return buddies.size();
+        return carpoolBuddies.size();
     }
 
     public int getVacancy() {
@@ -147,14 +147,33 @@ public class Carpool {
 
         Carpool carpool = (Carpool) o;
 
+        if (capacity != carpool.capacity) return false;
+        if (totalCabCharges != carpool.totalCabCharges) return false;
+        if (cabType != carpool.cabType) return false;
+        if (carpoolBuddies != null ? !carpoolBuddies.equals(carpool.carpoolBuddies) : carpool.carpoolBuddies != null)
+            return false;
         if (name != null ? !name.equals(carpool.name) : carpool.name != null) return false;
+        if (officeETA != null ? !officeETA.equals(carpool.officeETA) : carpool.officeETA != null) return false;
+        if (officeETD != null ? !officeETD.equals(carpool.officeETD) : carpool.officeETD != null) return false;
+        if (routePoints != null ? !routePoints.equals(carpool.routePoints) : carpool.routePoints != null) return false;
+        if (startDate != null ? !startDate.equals(carpool.startDate) : carpool.startDate != null) return false;
+        if (status != carpool.status) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        result = 31 * result + (officeETA != null ? officeETA.hashCode() : 0);
+        result = 31 * result + (officeETD != null ? officeETD.hashCode() : 0);
+        result = 31 * result + totalCabCharges;
+        result = 31 * result + (cabType != null ? cabType.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (carpoolBuddies != null ? carpoolBuddies.hashCode() : 0);
+        result = 31 * result + capacity;
+        result = 31 * result + (routePoints != null ? routePoints.hashCode() : 0);
+        return result;
     }
-
 }

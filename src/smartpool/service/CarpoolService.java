@@ -2,8 +2,10 @@ package smartpool.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import smartpool.common.Constants;
 import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
+import smartpool.domain.CarpoolBuddy;
 import smartpool.persistence.dao.BuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
 import smartpool.persistence.dao.RouteDao;
@@ -30,15 +32,26 @@ public class CarpoolService {
         Carpool carpool = carpoolDao.get(carpoolName);
         if (carpool == null) return  carpool;
 
-        carpool.setBuddies(buddyDao.getBuddyListByCarpoolName(carpool.getName()));
+        ArrayList<CarpoolBuddy> carpoolBuddies = getCarpoolBuddyListByName(carpool.getName());
+        carpool.setCarpoolBuddies(carpoolBuddies);
 
         carpool.setRoutePoints(routeDao.getLocationsFor(carpool.getName()));
         return carpool;
     }
 
+    private ArrayList<CarpoolBuddy> getCarpoolBuddyListByName(String name) {
+        ArrayList<Buddy> buddies = buddyDao.getBuddyListByCarpoolName(name);
+        ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
+
+        for (Buddy buddy : buddies) {
+            carpoolBuddies.add(new CarpoolBuddy(buddy, "location", Constants.TIME_FORMATTER.parseLocalTime("10:00")));
+        }
+        return carpoolBuddies;
+    }
+
     public Carpool findCarpoolByName(String name) {
         Carpool carpool = carpoolDao.get(name);
-        carpool.setBuddies(buddyDao.getBuddyListByCarpoolName(name));
+        carpool.setCarpoolBuddies(getCarpoolBuddyListByName(name));
         return carpool;
     }
 
@@ -57,9 +70,9 @@ public class CarpoolService {
 
     public void insert(Carpool carpool) {
         carpoolDao.insert(carpool);
-        for (Buddy buddy : carpool.getBuddies()) {
-            if (buddy == null) continue;
-            buddyDao.addToCarpool(buddy, carpool);
+        for (CarpoolBuddy carpoolBuddy : carpool.getCarpoolBuddies()) {
+            if (carpoolBuddy == null) continue;
+            buddyDao.addToCarpool(carpoolBuddy.getBuddy(), carpool);
         }
         ArrayList<String> routePoints = carpool.getRoutePoints();
         int sequenceNumber=0;
@@ -73,15 +86,14 @@ public class CarpoolService {
         List<Carpool> carpools = carpoolDao.selectAllCarpools();
 
         for (Carpool carpool : carpools) {
-            carpool.setBuddies(buddyDao.getBuddyListByCarpoolName(carpool.getName()));
+            carpool.setCarpoolBuddies(getCarpoolBuddyListByName(carpool.getName()));
         }
         return carpools;
     }
 
     public boolean hasBuddy(String username, Carpool carpool) {
-        ArrayList<Buddy> buddies = carpool.getBuddies();
-        for (Buddy buddy : buddies) {
-            if (buddy.getUserName().equals(username)) {
+        for (CarpoolBuddy carpoolBuddy : carpool.getCarpoolBuddies()) {
+            if (carpoolBuddy.getBuddy().getUserName().equals(username)) {
                 return true;
             }
         }

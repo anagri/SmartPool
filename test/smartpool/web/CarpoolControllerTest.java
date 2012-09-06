@@ -1,5 +1,6 @@
 package smartpool.web;
 
+import org.joda.time.LocalTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
+import smartpool.domain.CarpoolBuddy;
 import smartpool.domain.Status;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolBuilder;
@@ -44,7 +46,7 @@ public class CarpoolControllerTest {
     private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
 
     private ArrayList<Carpool> defaultCarpools;
-    private final Buddy testBuddy = new Buddy("testBuddy");
+    private final CarpoolBuddy testBuddy = new CarpoolBuddy(new Buddy("testBuddy"),"location",new LocalTime(10,30));
 
 
     private List<String> defaultRouteLocations;
@@ -60,7 +62,7 @@ public class CarpoolControllerTest {
         }};
         when(carpoolService.findAllCarpoolsByLocation("Diamond District")).thenReturn(defaultCarpools);
 
-        when(buddyService.getCurrentBuddy(request)).thenReturn(testBuddy);
+        when(buddyService.getCurrentBuddy(request)).thenReturn(testBuddy.getBuddy());
 
         when(request.getParameter("query")).thenReturn("Diamond District");
 
@@ -99,13 +101,13 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpoolWhenPostedOnCreate(){
-        assertThat(carpoolController.create(new Carpool("name"), "15/06/2012", "10:00", "18:00", "Kormangla", request),equalTo("redirect:/carpool/name"));
+        assertThat(carpoolController.create(new Carpool("name"), "15/06/2012", "10:00", "18:00", "Kormangla", "location", "10:30", model,request),equalTo("redirect:/carpool/name"));
     }
 
     @Test
     public void shouldInsertIntoDBWhenPostedOnCreate() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", "Kormangla", request);
+        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", "Kormangla", "location", "10:30", model,request);
         verify(carpoolService).insert(carpool);
         assertThat(carpool.getStatus(),equalTo(Status.PENDING));
     }
@@ -113,7 +115,7 @@ public class CarpoolControllerTest {
     @Test
     public void shouldParseCommaSeperatedRouteListAndPutItInCarpoolObject() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", "Domlur, Kormangla", request);
+        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", "Domlur, Kormangla", "location", "10:30", model,request);
         assertThat(carpool.getRoutePoints().contains("Domlur"), equalTo(true));
     }
 
@@ -128,8 +130,8 @@ public class CarpoolControllerTest {
     @Test
     public void shouldAddCurrentBuddyToCarpoolWhileCreating() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpoolController.create(carpool, "15/06/2012", "10:00","18:00", "Kormangla", request);
-        assertThat(carpool.getBuddies().contains(testBuddy),equalTo(true));
+        carpoolController.create(carpool, "15/06/2012", "10:00","18:00", "Kormangla", "location", "10:30", model,request);
+        assertThat(carpool.getCarpoolBuddies().contains(testBuddy),equalTo(true));
     }
 
     @Test

@@ -4,18 +4,17 @@ package smartpool.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import smartpool.common.Constants;
-import smartpool.domain.Buddy;
-import smartpool.domain.CabType;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import smartpool.domain.Carpool;
-import smartpool.domain.Status;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
 import smartpool.service.RouteService;
+import smartpool.web.form.CreateCarpoolForm;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -66,28 +65,9 @@ public class CarpoolController {
     }
 
     @RequestMapping(value = "/carpool/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute Carpool carpool, @RequestParam String startDateForm, @RequestParam String officeETAForm, @RequestParam String officeETDForm,@RequestParam final String routePointForm, HttpServletRequest request) {
-
-        carpool.setStartDate(Constants.DATE_FORMATTER.parseLocalDate(startDateForm));
-        carpool.setOfficeETA(Constants.TIME_FORMATTER.parseLocalTime(officeETAForm));
-        carpool.setOfficeETD(Constants.TIME_FORMATTER.parseLocalTime(officeETDForm));
-        carpool.setStatus(Status.PENDING);
-
-        ArrayList<String> routePointsArr = new ArrayList<String>() {
-            {
-                for (String routePoint : routePointForm.split(",")) {
-                    add(routePoint);
-                }
-            }
-        };
-        carpool.setRoutePoints(routePointsArr);
-
-        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
-        buddies.add(buddyService.getCurrentBuddy(request));
-        carpool.setBuddies(buddies);
-
+    public String create(@ModelAttribute CreateCarpoolForm createCarpoolForm, ModelMap model, HttpServletRequest request) {
+        Carpool carpool = createCarpoolForm.getDomainObject(buddyService.getCurrentBuddy(request));
         carpoolService.insert(carpool);
-
         return "redirect:/carpool/" + carpool.getName();
     }
 

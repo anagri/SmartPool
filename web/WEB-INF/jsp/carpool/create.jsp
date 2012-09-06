@@ -10,12 +10,16 @@
 <div class="mainContainer">
     <form action="create" method="post">
         <span>
-            <label>Name: </label>
-            <input type="text" name="name" required/>
+            <label>From</label>
+            <input type="text" name="from" required/>
+        </span>
+        <span>
+            <label>To</label>
+            <input type="text" name="to" required/>
         </span>
         <span>
             <label>Proposed Start Date:</label>
-            <input type="text" name="startDateForm" required/>
+            <input type="text" name="proposedStartDate" required/>
             <label class="example">(DD/MM/YYYY)</label>
         </span>
         <span>
@@ -37,17 +41,17 @@
         </span>
         <span>
             <label>Office Arrival Time:</label>
-            <input type="text" name="officeETAForm" required/>
+            <input type="text" name="officeArrivalTime" required/>
             <label class="example">(10:00)</label>
         </span>
         <span>
             <label>Office Departure Time:</label>
-            <input type="text" name="officeETDForm" required/>
+            <input type="text" name="officeDepartureTime" required/>
             <label class="example">(18:00)</label>
         </span>
         <span>
             <label>Route Points:</label>
-            <input type="text" name="routePointForm" />
+            <input type="text" name="routePoints" />
             <label class="example">(Example: Whitefield, Ramagondanhalli, Varthar Road, Marathahalli, HAL Airport, Domlur, Koramangla)</label>
         </span>
         <div class="buttonContainer">

@@ -15,6 +15,10 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+--
+-- Current Database: `smartpool`
+--
+
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `smartpool` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `smartpool`;
@@ -77,9 +81,37 @@ CREATE TABLE `carpool` (
 
 LOCK TABLES `carpool` WRITE;
 /*!40000 ALTER TABLE `carpool` DISABLE KEYS */;
-INSERT INTO `carpool` VALUES ('carpool-1','2012-06-02','COMPANY','11:30:00','18:30:00','RUNNING',100,4),
-('carpool-2','2012-08-02','PERSONAL','09:30:00','19:30:00','PENDING',600,8);
+INSERT INTO `carpool` VALUES ('carpool-1','2012-06-02','COMPANY','11:30:00','18:30:00','ACTIVE',100,4),('carpool-2','2012-08-02','PERSONAL','09:30:00','19:30:00','PENDING',600,8);
 /*!40000 ALTER TABLE `carpool` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `carpoolbuddy`
+--
+
+DROP TABLE IF EXISTS `carpoolbuddy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `carpoolbuddy` (
+  `buddy_username` varchar(11) NOT NULL DEFAULT '',
+  `carpool_name` varchar(15) NOT NULL DEFAULT '',
+  `pickup_point` varchar(50) DEFAULT NULL,
+  `pickup_time` time DEFAULT NULL,
+  PRIMARY KEY (`buddy_username`,`carpool_name`),
+  KEY `carpool_name` (`carpool_name`),
+  CONSTRAINT `carpoolbuddy_ibfk_1` FOREIGN KEY (`buddy_username`) REFERENCES `buddies` (`username`),
+  CONSTRAINT `carpoolbuddy_ibfk_2` FOREIGN KEY (`carpool_name`) REFERENCES `carpool` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carpoolbuddy`
+--
+
+LOCK TABLES `carpoolbuddy` WRITE;
+/*!40000 ALTER TABLE `carpoolbuddy` DISABLE KEYS */;
+INSERT INTO `carpoolbuddy` VALUES ('arnavku','carpool-1','Diamond District','10:50:00'),('ayusht','carpool-1','Manipal Hospital','10:55:00'),('govindm','carpool-1','domlur flyover','11:00:00'),('ishak','carpool-2','Command Hospital','08:30:00'),('mdaliej','carpool-2','Trinity Church','08:45:00'),('mzhao','carpool-2','barbeque nation','09:00:00'),('nibub','carpool-1','Kundalahalli','11:10:00');
+/*!40000 ALTER TABLE `carpoolbuddy` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -109,7 +141,7 @@ CREATE TABLE `requests` (
 
 LOCK TABLES `requests` WRITE;
 /*!40000 ALTER TABLE `requests` DISABLE KEYS */;
-INSERT INTO `requests` VALUES ('ishak','carpool-1','now','here', 'diamond district somewhere');
+INSERT INTO `requests` VALUES ('ishak','carpool-1','00:00:00','here','diamond district somewhere');
 /*!40000 ALTER TABLE `requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,4 +179,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-09-05 17:15:16
+-- Dump completed on 2012-09-06 14:32:37

@@ -4,8 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import smartpool.common.Constants;
 import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
+import smartpool.domain.CarpoolBuddy;
 import smartpool.persistence.dao.BuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
 import smartpool.persistence.dao.RouteDao;
@@ -98,12 +100,12 @@ public class CarpoolServiceTest {
     @Test
     public void shouldUpdateBuddyWhileCreatingCarpool() throws Exception {
         Carpool carpool = new Carpool("name");
-        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
-        Buddy testBuddy = new Buddy("testBuddy");
+        ArrayList<CarpoolBuddy> buddies = new ArrayList<CarpoolBuddy>();
+        CarpoolBuddy testBuddy = new CarpoolBuddy(new Buddy("testBuddy"),"testPoint", Constants.TIME_FORMATTER.parseLocalTime("10:00"));
         buddies.add(testBuddy);
-        carpool.setBuddies(buddies);
+        carpool.setCarpoolBuddies(buddies);
         carpoolService.insert(carpool);
-        verify(buddyDao).addToCarpool(testBuddy, carpool);
+        verify(buddyDao).addToCarpool(testBuddy.getBuddy(), carpool);
     }
 
     @Test
@@ -137,18 +139,18 @@ public class CarpoolServiceTest {
     @Test
     public void shouldReturnTrueIfLoggedUserIsInTheCarpool() throws Exception {
         Carpool carpool = new Carpool("name");
-        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
-        buddies.add(new Buddy("username", "name", "123", "name@domain.com", "home"));
-        carpool.setBuddies(buddies);
+        ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
+        carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home"), "testPoint", Constants.TIME_FORMATTER.parseLocalTime("10:00")));
+        carpool.setCarpoolBuddies(carpoolBuddies);
         Assert.assertTrue(carpoolService.hasBuddy("username", carpool));
     }
 
     @Test
     public void shouldReturnFalseIfLoggedUserIsNotInTheCarpool() throws Exception {
         Carpool carpool = new Carpool("name");
-        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
-        buddies.add(new Buddy("username", "name", "123", "name@domain.com", "home"));
-        carpool.setBuddies(buddies);
+        ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
+        carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home"), "testPoint", Constants.TIME_FORMATTER.parseLocalTime("10:00")));
+        carpool.setCarpoolBuddies(carpoolBuddies);
         Assert.assertFalse(carpoolService.hasBuddy("otherusername", carpool));
     }
 
