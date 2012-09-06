@@ -17,7 +17,7 @@ public class RouteDaoIT {
     @Before
     public void setUp() throws Exception {
         routeDao = new RouteDao();
-        routeDao.insert("carpool-1", "MG Road");
+        routeDao.insert("carpool-1", "MG Road", 0);
     }
 
     @Test

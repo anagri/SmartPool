@@ -36,8 +36,8 @@ public class RouteDaoTest {
 
     @Test
     public void shouldInsertRoutePoint() throws Exception {
-        routeDao.insert("name","Domlur");
-        verify(mockRouteMapper).insert("name","Domlur");
+        routeDao.insert("name","Domlur", 0);
+        verify(mockRouteMapper).insert("name","Domlur", 0);
     }
 
     @Test
