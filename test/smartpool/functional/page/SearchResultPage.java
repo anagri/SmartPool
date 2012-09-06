@@ -29,10 +29,9 @@ public class SearchResultPage extends Page {
     }
 
     public SearchResultPage selectLocationFromRoutePointList(String routePoint) {
-        WebElement option = webDriver.findElement(By.tagName("option"));
-        option.sendKeys(routePoint);
+        webDriver.findElement(By.tagName("option")).sendKeys(routePoint);
         routePointList.click();
-        option.sendKeys(Keys.ENTER);
+        webDriver.findElement(By.tagName("option")).sendKeys(Keys.ENTER);
         return new SearchResultPage(webDriver, routePoint);
     }
 
