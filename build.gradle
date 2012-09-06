@@ -77,7 +77,7 @@ war {
     baseName settings.applicationName
     eachFile {
         if (it.name == 'web.xml') {
-            it.expand(smartpoolServerName: String.format("%s:%s", settings.hostName, settings.port))
+            it.expand(smartpoolServerName: String.format("%s:%s", settings.hostName, settings.port), casServerName: "https://castest.thoughtworks.com/cas")
         }
     }
 }
