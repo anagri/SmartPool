@@ -58,7 +58,7 @@
                 </c:if>
             </div>
             <div class="rightContent">
-                <div class="marginTop150"><h3>Route Points</h3></div>
+                <div class="marginTop60"><h3>Route Points</h3></div>
                 <select id="routePointList" onchange="searchByRoutePoint()">
                     <option value=""></option>
                     <c:forEach var="routePoint" items="${routePoints}" varStatus="typeStatus">

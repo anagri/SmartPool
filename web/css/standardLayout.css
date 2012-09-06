@@ -20,7 +20,6 @@ body {
 
 button {
     font-size: 16px;
-    height: 35px;
     color: #333333;
     background-color: #0099ff;
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#22DDFF), to(#0099FF));
@@ -29,8 +28,10 @@ button {
     background-image: linear-gradient(to bottom, #22DDFF, #0099FF);
     background-image: -moz-linear-gradient(top, #22DDFF, #0099FF);
     border-color: #22DDFF #11AAFF #0099FF;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 24px;
+    padding-right: 24px;
     border-radius: 5px;
 }
 
@@ -43,9 +44,10 @@ button.disabled {
     background-color: #e6e6e6;
 }
 
-.logout {
-    height: 32px;
-    margin-top: 0px;
+.btn-small {
+    font-size: 14px;
+    padding: 4px 11px;
+    line-height: 17px;
 }
 
 .navbar .container{
@@ -63,13 +65,20 @@ button.disabled {
     margin-bottom: 5px;
 }
 .navbar .btn, .navbar .btn-group {
-    margin-top: -3px;
+    margin-top: 7px;
 }
 
 label{
     font-size: 16px;
 }
 
-.warning{
-    color: red;
+input[type="text"] {
+    border-radius: 3px 3px 3px 3px;
+    color: #555555;
+    display: inline-block;
+    font-size: 16px;
+    height: 27px;
+    line-height: 20px;
+    margin-bottom: 9px;
+    padding: 4px 6px;
 }

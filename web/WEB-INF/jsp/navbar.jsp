@@ -47,14 +47,14 @@
                     <li>
                         <form action="${appName}/carpool/search" method="GET" class="searchForm">
                             <input type="text" name="query" value="${searchQuery}" id="searchBox" class="searchText"/>
-                            <button type="submit" class="btn searchButton" value="Search"/>Search</button>
+                            <button type="submit" class="btn searchButton" value="Search" style="padding: 3px 14px"/>Search</button>
                         </form>
                     </li>
 
                 </ul>
                 <form class="navbar-form pull-right" id="logoutForm" action="${appName}/logout" method="GET">
                     ${casUserName}
-                    <button type="submit" class="btn logout" >Logout</button>
+                    <button type="submit" class="btn btn-small" style="margin-top: 7px">Logout</button>
                 </form>
             </div>
         </div>

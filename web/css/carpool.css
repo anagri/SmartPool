@@ -7,11 +7,9 @@ h2{
 }
 
 .container{
-    width: 1000px;
 }
+
 .containerWrapper{
-    margin-top: 50px;
-    width: 900px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -52,12 +50,11 @@ table .buddy-sequence{
 
 .leftContent{
     float: left;
+    padding-top: 10px;
 }
 .rightContent{
-    float: right;
-    position: relative;
-    top: -90px;
-    width: 310px;
+    padding-left: 40px;
+    float:left;
 }
 
 .info{
@@ -77,8 +74,8 @@ ol{
     margin: 5px 5px 5px 25px;
 }
 
-.marginTop150{
-    margin-top: 150px;
+.marginTop60{
+    margin-top: 60px;
 }
 
 .marginTop20{
