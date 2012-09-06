@@ -26,6 +26,9 @@ public class HomePage extends Page {
     @FindBy(how = How.ID, using = "createCarpool")
     private WebElement createCarpoolLink;
 
+    @FindBy(how = How.ID, using = "logoutForm")
+    private WebElement logoutForm;
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -59,5 +62,10 @@ public class HomePage extends Page {
         searchCarpoolBox.sendKeys(searchQuery);
         searchCarpoolBox.submit();
         return new SearchResultPage(webDriver, searchQuery);
+    }
+
+    public LogoutPage logout() {
+        logoutForm.submit();
+        return new LogoutPage(webDriver);
     }
 }
