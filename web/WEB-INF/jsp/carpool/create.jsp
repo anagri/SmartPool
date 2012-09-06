@@ -26,7 +26,7 @@
         <span>
             <label>Pickup Time:</label>
             <input type="text" name="pickupTime" required/>
-            <label class="example">(HH:MM)</label>
+            <label class="example">(09:00)</label>
         </span>
         <span>
             <label>CabType:</label>
@@ -38,12 +38,12 @@
         <span>
             <label>Office ETA:</label>
             <input type="text" name="officeETAForm" required/>
-            <label class="example">(HH:MM)</label>
+            <label class="example">(10:00)</label>
         </span>
         <span>
             <label>Office ETD:</label>
             <input type="text" name="officeETDForm" required/>
-            <label class="example">(HH:MM)</label>
+            <label class="example">(18:00)</label>
         </span>
         <span>
             <label>Route Points:</label>
