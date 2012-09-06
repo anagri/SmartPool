@@ -60,6 +60,11 @@ table .buddy-sequence{
     width: 310px;
 }
 
+.info{
+    height: 15px;
+    vertical-align: top;
+}
+
 .routePlan {
     border: 1px solid #999;
 }
@@ -79,3 +84,19 @@ ol{
 .marginTop20{
     margin-top: 20px;
 }
+
+.more-info{
+    color:#999;
+    font-size: 10px;
+}
+
+#tooltip {
+    position: absolute;
+    z-index: 3000;
+    border: 1px solid #111;
+    background-color: #eee;
+    padding: 5px;
+    opacity: 0.85;
+}
+
+#tooltip h3, #tooltip div { margin: 0; }

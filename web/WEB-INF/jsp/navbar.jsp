@@ -8,6 +8,8 @@
 
 <html>
 <head>
+    <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.tooltip.js"></script>
 
     <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/searchCarpool.css" rel="stylesheet">
@@ -26,15 +28,6 @@
             document.getElementById('searchBox').focus();
         }
 
-        function setOptionInDropDown(query) {
-            var list = document.getElementById("routePointList");
-            for ( var i = 0; i < list.options.length; i++ ) {
-                if ( list.options[i].text == query ) {
-                    list.options[i].selected = true;
-                    return;
-                }
-            }
-        }
     </script>
 </head>
 <body onload="setFocus();setOptionInDropDown('${searchQuery}')">

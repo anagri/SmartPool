@@ -18,6 +18,16 @@
 
         document.location.href = '../carpool/search?query=' + value;
     }
+
+    function setOptionInDropDown(query) {
+        var list = document.getElementById("routePointList");
+        for ( var i = 0; i < list.options.length; i++ ) {
+            if ( list.options[i].text == query ) {
+                list.options[i].selected = true;
+                return;
+            }
+        }
+    }
 </script>
         <div class="containerWrapper">
             <div class="leftContent">

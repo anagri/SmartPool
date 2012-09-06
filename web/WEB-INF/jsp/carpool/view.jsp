@@ -1,15 +1,20 @@
-<%@ include file="../navbar.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="../navbar.jsp">
+    <jsp:param name="title" value="View Carpool: ${carpool.getName()}"/>
+    <jsp:param name="css" value="carpool.css,standardLayout.css" />
+</jsp:include>
 
-<html>
-<head>
-    <title>View Carpool: ${carpool.getName()}</title>
-    <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/carpool/view.js"></script>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/carpool.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/standardLayout.css"/>
-</head>
-
-<body>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/carpool/view.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.more-info .info').tooltip({
+            bodyHandler:function () {
+                return $($(this).parent().find('.more-info-message')).html();
+            },
+            showURL: false
+        });
+    });
+</script>
 <div>
     <label id="carpoolName" class="header">Carpool ${carpool.getName()}</label>
 
@@ -45,7 +50,29 @@
                 </c:forEach>
 
             </table>
-            <p><strong>Cab Type:</strong> ${carpool.getCabType()}</p>
+
+            <p><strong>Cab Type:</strong>
+            <c:choose>
+                <c:when test="${carpool.getCabType() == PERSONAL}">
+                ${carpool.getCabType()}
+                <span class="more-info">
+                    <img src="${pageContext.request.contextPath}/css/img/moreinfo.png" class="info"/>
+                        <span style="display: none;" class="more-info-message tooltip">
+                            Vehicle belongs and is operated by ${carpool.getBuddies().get(0).getName()}. 50% of fuel cost is paid by ThoughtWorks.
+                        </span>
+                    </span>
+                </c:when>
+                <c:when test="${carpool.getCabType() == COMPANY}">
+                    ${carpool.getCabType()}
+                    <span class="more-info">
+                    <img src="${pageContext.request.contextPath}/css/img/moreinfo.png" class="info"/>
+                        <span style="display: none;" class="more-info-message tooltip">
+                            Vehicle is a cab owned and operated by a cab agency. 50% of cab charges are paid by ThoughtWorks.
+                        </span>
+                    </span>
+                </c:when>
+            </c:choose>
+            </p>
 
             <p><strong>Office Arrival Time:</strong> ${carpool.getOfficeETA().toString("h:mm a")}</p>
 
@@ -106,6 +133,4 @@
 
 </div>
 
-</body>
-
-</html>
+<%@ include file="../footer.jsp" %>
