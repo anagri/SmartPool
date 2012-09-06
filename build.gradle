@@ -28,8 +28,6 @@ sourceSets {
     functionalTest {
         java {
             srcDir 'test/smartpool/functional'
-            srcDir 'functional-test'
-            srcDir 'src/smartpool/util'
         }
     }
 }
@@ -42,7 +40,7 @@ project.ext {
 }
 
 def buildProperties = new Properties()
-new File("build.properties").withInputStream {
+new File("src/main/resources/app.properties").withInputStream {
     stream -> buildProperties.load(stream)
 }
 def availableEnvironments = ["dev", "uat", "qa"]

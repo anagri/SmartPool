@@ -1,11 +1,13 @@
 package smartpool.util;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+@Component
 public class EnvironmentLoader {
     public String currentEnvironment;
     public static final String HOST_NAME = "hostName";
@@ -13,24 +15,20 @@ public class EnvironmentLoader {
     public static final String APPLICATION_NAME = "applicationName";
     public static final String APPLICATION_PATH = "applicationPath";
     public static final String CAS_SERVER_URL = "casServerUrl";
-    private Properties environmentConfiguration;
+    private Properties environmentConfiguration = new Properties();
+
     public static final String[] APPLICATION_URL = new String[]{
-            EnvironmentLoader.HOST_NAME, EnvironmentLoader.PORT_NUMBER, EnvironmentLoader.APPLICATION_NAME
+        EnvironmentLoader.HOST_NAME, EnvironmentLoader.PORT_NUMBER, EnvironmentLoader.APPLICATION_NAME
     };
+
+    @Autowired
+    public EnvironmentLoader(Properties appProperties) {
+        this(System.getenv("SMARTPOOL_ENV") == null ? "dev" : System.getenv("SMARTPOOL_ENV"), appProperties);
+    }
 
     public EnvironmentLoader(String currentEnvironment, Properties environmentConfiguration) {
         this.environmentConfiguration = environmentConfiguration;
         this.currentEnvironment = currentEnvironment;
-    }
-
-    public EnvironmentLoader() {
-        this.currentEnvironment = System.getenv("SMARTPOOL_ENV") == null ? "dev" : System.getenv("SMARTPOOL_ENV");
-        environmentConfiguration = new Properties();
-        try {
-            environmentConfiguration.load(new FileInputStream("build.properties"));
-        } catch (IOException e) {
-            System.err.println(String.format("Property file read fail. %s", e.getMessage()));
-        }
     }
 
     public String getProperty(String property) {

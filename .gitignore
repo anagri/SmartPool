@@ -3,7 +3,6 @@
 dbscripts/**.orig
 **.lock
 **.bin
-**.properties
 .gradle/**
 out/
 output/

@@ -3,7 +3,7 @@ package smartpool.functional;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import smartpool.util.EnvironmentLoader;
+import smartpool.functional.page.Page;
 
 public abstract class BaseTest {
 
@@ -13,7 +13,7 @@ public abstract class BaseTest {
     public void setUp() {
         webDriver = new FirefoxDriver();
         webDriver.manage().window().maximize();
-        webDriver.get(new EnvironmentLoader().getPropertyList(EnvironmentLoader.APPLICATION_PATH, EnvironmentLoader.APPLICATION_URL));
+        webDriver.get(Page.BASE_URL);
     }
 
     @After

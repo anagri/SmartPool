@@ -13,6 +13,7 @@ public abstract class Page {
     protected WebDriver webDriver;
     private WebDriverWait wait;
     protected String searchQuery;
+    public static final String BASE_URL = "http://localhost:9090/smartpool";
 
     public Page(WebDriver webDriver) {
         this(webDriver, null);

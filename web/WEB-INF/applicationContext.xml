@@ -2,7 +2,8 @@
 <b:beans xmlns:b="http://www.springframework.org/schema/beans"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns:context="http://www.springframework.org/schema/context"
-         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+         xmlns:util="http://www.springframework.org/schema/util"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
     <context:component-scan base-package="smartpool"/>
 
     <b:bean id="profileCheckFilter" class="smartpool.web.filter.ProfileCheckFilter"/>
@@ -13,4 +14,6 @@
             class="org.springframework.context.support.ResourceBundleMessageSource">
         <b:property name="basename" value="/messages"/>
     </b:bean>
+
+    <util:properties id="appProperties" location="classpath:app.properties"/>
 </b:beans>
