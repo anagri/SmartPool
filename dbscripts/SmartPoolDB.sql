@@ -64,7 +64,7 @@ CREATE TABLE `carpool` (
   `cab_type` enum('PERSONAL','COMPANY') DEFAULT NULL,
   `office_eta` time DEFAULT NULL,
   `office_etd` time DEFAULT NULL,
-  `status` enum('RUNNING','PENDING') DEFAULT NULL,
+  `status` enum('ACTIVE','INACTIVE','NOT_STARTED','PENDING') DEFAULT NULL,
   `total_cab_charge` int(11) DEFAULT NULL,
   `capacity` int(11) DEFAULT NULL,
   PRIMARY KEY (`name`)

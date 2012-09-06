@@ -39,7 +39,7 @@ public class CarpoolDaoIT {
         assertNotNull(carpoolActual);
         assertEquals(100, carpoolActual.getTotalCabCharges());
         assertEquals(CabType.COMPANY, carpoolActual.getCabType());
-        assertEquals(Status.RUNNING, carpoolActual.getStatus());
+        assertEquals(Status.ACTIVE, carpoolActual.getStatus());
         assertEquals(4, carpoolActual.getCapacity());
     }
 

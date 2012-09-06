@@ -1,7 +1,8 @@
 package smartpool.domain;
 
 public enum Status {
-    RUNNING,
-    PENDING,
-    DROPPED
+    ACTIVE,
+    INACTIVE,
+    NOT_STARTED,
+    PENDING
 }
