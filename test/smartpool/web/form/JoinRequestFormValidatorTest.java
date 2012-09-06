@@ -16,19 +16,35 @@ import static org.mockito.Mockito.when;
 public class JoinRequestFormValidatorTest {
 
     private JoinRequestFormValidator validator;
+    private String valid_username = "twu.test";
+    private String valid_pickuptime = "09:30";
+    private String valid_contactnumber = "9100000000";
+    private String valid_pickuppoint = "DD";
+    private String valid_address = "Diamond District";
 
     @Before
     public void setUp() throws Exception {
         validator = new JoinRequestFormValidator();
         HttpSession stubSession = mock(HttpSession.class);
-        when(stubSession.getAttribute(CASFilter.CAS_FILTER_USER)).thenReturn("twu.test");
+        when(stubSession.getAttribute(CASFilter.CAS_FILTER_USER)).thenReturn(valid_username);
         HttpServletRequest stubRequest = mock(HttpServletRequest.class);
         when(stubRequest.getSession()).thenReturn(stubSession);
     }
 
     @Test
+    public void testShouldAddErrorOnInvalidNumbers() throws Exception {
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_pickuppoint, valid_pickuptime, valid_address, "abc");
+        BindException errors = new BindException(form, "joinRequestForm");
+        validator.validate(form, errors);
+
+        assertThat(errors.hasErrors(), is(true));
+        assertThat(errors.getAllErrors().size(), is(1));
+        assertThat(errors.getFieldError("contactNumber").getCode(), is("field.invalid"));
+    }
+
+    @Test
     public void shouldAddErrorIfPreferredTimeIsNotProvided() throws Exception {
-        JoinRequestForm form = new JoinRequestForm("twu.test", "test pool", "DD", "", "Diamond District", "333");
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_pickuppoint, "", valid_address, valid_contactnumber);
 
         BindException errors = new BindException(form, "joinRequestForm");
 
@@ -36,17 +52,43 @@ public class JoinRequestFormValidatorTest {
 
         assertThat(errors.hasErrors(), is(true));
         assertThat(errors.getAllErrors().size(), is(1));
-        assertThat(errors.getFieldError("preferredPickupTime").getCode(),is("field.required"));
+        assertThat(errors.getFieldError("preferredPickupTime").getCode(), is("field.required"));
+    }
+
+    @Test
+    public void testShouldAddErrorIfPickupTimeNotProvided() throws Exception {
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", "", valid_pickuptime, valid_address, valid_contactnumber);
+
+        BindException errors = new BindException(form, "joinRequestForm");
+
+        validator.validate(form, errors);
+
+        assertThat(errors.hasErrors(), is(true));
+        assertThat(errors.getAllErrors().size(), is(1));
+        assertThat(errors.getFieldError("pickupPoint").getCode(), is("field.required"));
+
     }
 
     @Test
     public void shouldAddErrorIfPreferredTimeIsNotInCorrectFormat() throws Exception {
-        JoinRequestForm form = new JoinRequestForm("twu.test", "test pool", "DD", "abcd", "Diamond District", "333");
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_pickuppoint, "abcd", valid_address, valid_contactnumber);
         BindException errors = new BindException(form, "joinRequestForm");
-        validator.validate(form,errors);
+        validator.validate(form, errors);
 
         assertThat(errors.hasErrors(), is(true));
         assertThat(errors.getAllErrors().size(), is(1));
         assertThat(errors.getFieldError("preferredPickupTime").getCode(), is("field.invalid"));
     }
+
+    @Test
+    public void shouldAddErrorIfPreferredTimeNotInRange() throws Exception {
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_pickuppoint, "25:00", valid_address, valid_contactnumber);
+        BindException errors = new BindException(form, "joinRequestForm");
+        validator.validate(form, errors);
+
+        assertThat(errors.hasErrors(), is(true));
+        assertThat(errors.getAllErrors().size(), is(1));
+        assertThat(errors.getFieldError("preferredPickupTime").getCode(), is("field.invalid"));
+    }
+
 }

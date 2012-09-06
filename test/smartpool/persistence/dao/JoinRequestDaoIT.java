@@ -8,7 +8,10 @@ import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.isNotNull;
 import static org.mockito.Matchers.notNull;
 
 public class JoinRequestDaoIT {
@@ -34,21 +37,18 @@ public class JoinRequestDaoIT {
         Buddy ali = new Buddy(buddyName);
 
         assertFalse(joinRequestDao.isRequestSent(ali, carpoolName));
-
         joinRequestDao.sendJoinRequest(new JoinRequest(buddyName, carpoolName, "Domlur", new LocalTime(9, 0), "diamond district"));
-
         assertTrue(joinRequestDao.isRequestSent(ali, carpoolName));
     }
 
-    @Ignore
     @Test
+    @Ignore
     public void testShouldInsertTimeInProperFormat() throws Exception {
         JoinRequest joinRequest = new JoinRequest("test.twu", "carpool-1", "Here", new LocalTime(8, 30), "diamond district");
 
         joinRequestDao.sendJoinRequest(joinRequest);
 
         JoinRequest returnedRequest = joinRequestDao.selectUsersRequest(new Buddy("test.twu"), "carpool-1");
-        assertThat(returnedRequest, is(notNull()));
+        assertThat(returnedRequest, is(not(nullValue())));
     }
-
 }

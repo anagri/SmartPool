@@ -96,6 +96,7 @@ CREATE TABLE `requests` (
   `address` varchar(100) NOT NULL,
   KEY `username` (`username`),
   KEY `carpoolname` (`carpoolname`),
+  UNIQUE KEY `user_request` (`username`, `carpoolname`),
   CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`username`) REFERENCES `buddies` (`username`),
   CONSTRAINT `requests_ibfk_2` FOREIGN KEY (`carpoolname`) REFERENCES `carpool` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
