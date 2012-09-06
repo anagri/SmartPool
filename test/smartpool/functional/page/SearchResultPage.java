@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.junit.Assert;
+import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.Assert.assertTrue;
 
@@ -31,9 +32,7 @@ public class SearchResultPage extends Page {
     }
 
     public SearchResultPage selectLocationFromRoutePointList(String routePoint) {
-        webDriver.findElement(By.tagName("option")).sendKeys(routePoint);
-        routePointList.click();
-        webDriver.findElement(By.tagName("option")).sendKeys(Keys.ENTER);
+        new Select(routePointList).selectByValue(routePoint);
         return new SearchResultPage(webDriver, routePoint);
     }
 

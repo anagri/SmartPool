@@ -1,7 +1,5 @@
 package smartpool.functional;
 
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import smartpool.functional.page.HomePage;
 import smartpool.functional.page.LoginPage;
@@ -29,7 +27,6 @@ public class SearchCarpoolTest extends BaseTest{
     }
 
     @Test
-    @Ignore
     public void searchFromRoutePointsOptionBox() {
         homePage.enterSearchQuery("")
                 .selectLocationFromRoutePointList("Sony Centre")
