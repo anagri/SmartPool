@@ -8,6 +8,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import smartpool.domain.Buddy;
+import smartpool.domain.Carpool;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
 import smartpool.service.JoinRequestService;
@@ -49,7 +50,8 @@ public class JoinCarPoolControllerTest {
         when(buddyService.getUserNameFromCAS(request)).thenReturn(buddyUserName);
         when(buddyService.getBuddy(buddyUserName)).thenReturn(new Buddy(buddyUserName));
 
-        String userDetails = joinCarPoolController.getUserDetails("1", model, request);
+        when(carpoolService.getByName("carpool-1")).thenReturn(new Carpool("carpool-1"));
+        String userDetails = joinCarPoolController.getUserDetails("carpool-1", model, request);
         assertThat(userDetails, equalTo("carpool/joinRequest"));
         assertThat((Buddy) model.get("buddy"), equalTo(new Buddy(buddyUserName)));
     }
@@ -57,12 +59,13 @@ public class JoinCarPoolControllerTest {
     @Test
     public void shouldReturnViewForABuddy_WhoHasAlreadyRequestedToJoinACarpool() {
         String buddyUserName = "ishak";
-        String carpoolName = "1";
+        String carpoolName = "carpool-1";
         Buddy isha = new Buddy(buddyUserName);
 
         when(buddyService.getUserNameFromCAS(request)).thenReturn(buddyUserName);
         when(buddyService.getBuddy(buddyUserName)).thenReturn(isha);
         when(joinRequestService.isRequestSent(isha, carpoolName)).thenReturn(true);
+        when(carpoolService.getByName("carpool-1")).thenReturn(new Carpool("carpool-1"));
 
         joinCarPoolController.getUserDetails(carpoolName, model, request);
         assertThat((Boolean) model.get("isRequestSent"), equalTo(true));
@@ -70,7 +73,7 @@ public class JoinCarPoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpool() throws Exception {
-        JoinRequestForm joinRequest = new JoinRequestForm("ishak", "carpool-1", "here", "09:30", null, null);
+        JoinRequestForm joinRequest = new JoinRequestForm("ishak", "carpool-1", "here", "09:30", "address", "999999999");
         ModelAndView expectedURL = joinCarPoolController.submitUserDetails("carpool-1", joinRequest, new BindException(joinRequest, "joinRequest"), request);
 
         assertThat(expectedURL.getView(), instanceOf(RedirectView.class));
