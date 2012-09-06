@@ -36,12 +36,12 @@
             </select>
         </span>
         <span>
-            <label>Office ETA:</label>
+            <label>Office Arrival Time:</label>
             <input type="text" name="officeETAForm" required/>
             <label class="example">(10:00)</label>
         </span>
         <span>
-            <label>Office ETD:</label>
+            <label>Office Departure Time:</label>
             <input type="text" name="officeETDForm" required/>
             <label class="example">(18:00)</label>
         </span>
