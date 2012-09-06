@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import smartpool.service.BuddyService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/buddyProfile")
 public class BuddyProfileController {
@@ -21,6 +23,12 @@ public class BuddyProfileController {
     @RequestMapping(value = "/{userName:.*}", method = RequestMethod.GET)
     public String viewProfile(@PathVariable String userName, ModelMap model) {
         model.addAttribute("buddyProfile", buddyService.getBuddy(userName));
+        return "buddy/viewUserProfile";
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String viewMyProfile(ModelMap model, HttpServletRequest request) {
+        model.addAttribute("buddyProfile", buddyService.getCurrentBuddy(request));
         return "buddy/viewUserProfile";
     }
 }

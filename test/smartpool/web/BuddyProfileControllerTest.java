@@ -9,6 +9,7 @@ import smartpool.service.BuddyService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
@@ -18,40 +19,39 @@ public class BuddyProfileControllerTest {
 
     @Mock
     BuddyService buddyProfileService;
-    private Buddy buddy;
     private BuddyProfileController buddyProfileController;
-    private HttpServletRequest request_prithvin;
-    private HttpServletRequest request_mzhao;
 
+    @Mock
+    private HttpServletRequest request;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         initMocks(this);
-
-        buddy = new Buddy("Prithvi");
         buddyProfileController = new BuddyProfileController(buddyProfileService);
+    }
 
+    @Test
+    public void shouldReturnBuddyProfile() {
+        Buddy buddy = new Buddy("Prithvi");
+        when(buddyProfileService.getUserNameFromCAS(request)).thenReturn("mzhao");
         when(buddyProfileService.getBuddy("prithvin")).thenReturn(buddy);
+
+        ModelMap model = new ModelMap();
+        String response = buddyProfileController.viewProfile("prithvin", model);
+
+        assertThat(response, equalTo("buddy/viewUserProfile"));
+        assertThat((Buddy) model.get("buddyProfile"), equalTo(buddy));
     }
 
     @Test
-    public void shouldReturnBuddyProfile(){
-        ModelMap model = new ModelMap();
-        when(buddyProfileService.getUserNameFromCAS(request_mzhao)).thenReturn("mzhao");
-        assertThat(buddyProfileController.viewProfile("prithvin", model),equalTo("buddy/viewUserProfile"));
-    }
+    public void shouldReturnCurrentlyLoggedInUserProfile() {
+        Buddy currentlyLoggedInUser = new Buddy("prithvin");
+        when(buddyProfileService.getCurrentBuddy(request)).thenReturn(currentlyLoggedInUser);
 
-    @Test
-    public void shouldReturnUserProfile(){
         ModelMap model = new ModelMap();
-        when(buddyProfileService.getUserNameFromCAS(request_prithvin)).thenReturn("prithvin");
-        assertThat(buddyProfileController.viewProfile("prithvin", model),equalTo("buddy/viewUserProfile"));
-    }
+        String response = buddyProfileController.viewMyProfile(model, request);
 
-    @Test
-    public void shouldPutDomainObjectInModel(){
-        ModelMap model = new ModelMap();
-        buddyProfileController.viewProfile("prithvin", model);
-        assertThat((Buddy) model.get("buddyProfile"),equalTo(buddy));
+        assertThat(response, equalTo("buddy/viewUserProfile"));
+        assertThat((Buddy) model.get("buddyProfile"), is(currentlyLoggedInUser));
     }
 }
