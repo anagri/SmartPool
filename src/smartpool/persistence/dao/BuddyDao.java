@@ -61,5 +61,15 @@ public class BuddyDao {
             session.close();
         }
     }
+
+    public boolean exists(String username) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            BuddyMapper mapper = session.getMapper(BuddyMapper.class);
+            return mapper.exists(username);
+        } finally {
+            session.close();
+        }
+    }
 }
 

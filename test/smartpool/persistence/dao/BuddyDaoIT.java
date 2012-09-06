@@ -1,6 +1,5 @@
 package smartpool.persistence.dao;
 
-import junit.framework.Assert;
 import org.joda.time.LocalTime;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -10,7 +9,9 @@ import smartpool.domain.Carpool;
 
 import java.util.List;
 
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -27,8 +28,8 @@ public class BuddyDaoIT {
     @Test
     public void shouldGetBuddyByUserName(){
         Buddy expectedBuddy = new Buddy("arnavku");
-        Assert.assertEquals(expectedBuddy, buddyDao.selectBuddy("arnavku"));
-        Assert.assertEquals("Diamond District", buddyDao.selectBuddy("arnavku").getPickupPoint());
+        assertEquals(expectedBuddy, buddyDao.selectBuddy("arnavku"));
+        assertEquals("Diamond District", buddyDao.selectBuddy("arnavku").getPickupPoint());
     }
 
     @Test
@@ -41,7 +42,19 @@ public class BuddyDaoIT {
     public void shouldGetBuddyListByCarpoolName() {
         List<Buddy> buddyList = buddyDao.getBuddyListByCarpoolName("carpool-1");
         assertThat(buddyList.size(), not(0));
-        Assert.assertEquals(new LocalTime(10, 50).toString("h:mm"), buddyList.get(0).getPickupTime().toString("h:mm"));
+        assertEquals(new LocalTime(10, 50).toString("h:mm"), buddyList.get(0).getPickupTime().toString("h:mm"));
+    }
+
+    @Test
+    public void shouldReturnFalseIfBuddyProfileDoesNotExist() throws Exception {
+        boolean result = buddyDao.exists("ghostuser");
+        assertThat(result, is(false));
+    }
+
+    @Test
+    public void shouldReturnTrueIfBuddyProfileExists() throws Exception {
+        boolean result = buddyDao.exists("arnavku");
+        assertThat(result, is(true));
     }
 
     @Test
