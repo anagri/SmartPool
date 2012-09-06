@@ -21,37 +21,31 @@
 </script>
         <div class="containerWrapper">
             <div class="leftContent">
-            <c:choose>
-            <c:when test="${searchResult ne null}">
-                <h3 id="resultsFoundMessage"> Your search for "${searchQuery}" returned ${searchResult.size()} result{s}</h3>
-                <table id='buddy-table'>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Start Point</th>
-                            <th>Start Time</th>
-                            <th>Buddy Count</th>
-                            <th>Vacancy</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <c:forEach var="carpool" items="${searchResult}" varStatus="typeStatus">
-                        <tr>
-                            <td><a href="../carpool/${carpool.getName()}" id="${carpool.getName()}">${carpool.getName()}</a></td>
-                            <td>${carpool.getStartPoint()}</td>
-                            <td>${carpool.getStartTime().toString("h:mm a")}</td>
-                            <td>${carpool.getBuddyCount()}</td>
-                            <td>${carpool.getVacancy()}</td>
-                            <td>${carpool.getStatus()}</td>
-                        </tr>
-                   </c:forEach>
-                </table>
-
-            </c:when>
-            <c:otherwise>
-                <h3 id="resultsNotFoundMessage"> Your search for "${query}" returned 0 result</h3>
-            </c:otherwise>
-            </c:choose>
+                <h3 id="resultsMessage">Your search for "${searchQuery}" returned ${searchResult == null ? 0 : searchResult.size()} result{s}</h3>
+                <c:if test="${searchResult ne null}">
+                    <table id='buddy-table'>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Start Point</th>
+                                <th>Start Time</th>
+                                <th>Buddy Count</th>
+                                <th>Vacancy</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <c:forEach var="carpool" items="${searchResult}" varStatus="typeStatus">
+                            <tr>
+                                <td><a href="../carpool/${carpool.getName()}" id="${carpool.getName()}">${carpool.getName()}</a></td>
+                                <td>${carpool.getStartPoint()}</td>
+                                <td>${carpool.getStartTime().toString("h:mm a")}</td>
+                                <td>${carpool.getBuddyCount()}</td>
+                                <td>${carpool.getVacancy()}</td>
+                                <td>${carpool.getStatus()}</td>
+                            </tr>
+                       </c:forEach>
+                    </table>
+                </c:if>
             </div>
             <div class="rightContent">
                 <div class="marginTop150"><h3>Route Points</h3></div>

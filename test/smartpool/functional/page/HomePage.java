@@ -55,9 +55,9 @@ public class HomePage extends Page {
         assertEquals("Welcome to SmartPool!", welcomeMessage.getText());
     }
 
-    public SearchResultPage enterSearchQuery() {
-        searchCarpoolBox.sendKeys("diamond district");
+    public SearchResultPage enterSearchQuery(String searchQuery) {
+        searchCarpoolBox.sendKeys(searchQuery);
         searchCarpoolBox.submit();
-        return new SearchResultPage(webDriver);
+        return new SearchResultPage(webDriver, searchQuery);
     }
 }
