@@ -11,8 +11,7 @@ public class LogoutTest extends BaseTest{
     @Test
     public void logoutAndPrintSuccessMessage() throws Exception {
         HomePage homePage = new LoginPage(webDriver).login();
-        homePage.logout()
-                .verifySuccessMessage();
+        homePage.logout().verifySuccessMessage();
     }
 
     @Test

@@ -69,7 +69,7 @@ public class CarpoolController {
     }
 
     @RequestMapping(value = "/carpool/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute Carpool carpool, @RequestParam String startDateForm, @RequestParam String officeETAForm, @RequestParam String officeETDForm,@RequestParam final String routePointForm, ModelMap model, HttpServletRequest request) {
+    public String create(@ModelAttribute Carpool carpool, @RequestParam String startDateForm, @RequestParam String officeETAForm, @RequestParam String officeETDForm,@RequestParam final String routePointForm, HttpServletRequest request) {
 
         carpool.setStartDate(Constants.DATE_FORMATTER.parseLocalDate(startDateForm));
         carpool.setOfficeETA(Constants.TIME_FORMATTER.parseLocalTime(officeETAForm));

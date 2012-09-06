@@ -77,7 +77,7 @@ public class Carpool {
     }
 
     public void setOfficeETD(LocalTime officeETD) {
-        this.officeETD = new  LocalTime(officeETD);
+        this.officeETD = new LocalTime(officeETD);
     }
 
     public int getTotalCabCharges() {
@@ -135,6 +135,7 @@ public class Carpool {
     public int getVacancy() {
         return this.capacity - getBuddyCount();
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -151,5 +152,4 @@ public class Carpool {
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
     }
-
 }

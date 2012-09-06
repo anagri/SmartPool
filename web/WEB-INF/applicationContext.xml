@@ -8,6 +8,4 @@
             class="org.springframework.context.support.ResourceBundleMessageSource">
         <b:property name="basename" value="/messages"/>
     </b:bean>
-
-
 </b:beans>

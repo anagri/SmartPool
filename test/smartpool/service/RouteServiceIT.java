@@ -24,7 +24,6 @@ public class RouteServiceIT {
         List<String> carpoolNamesExpected = Arrays.asList("carpool-1");
 
         assertEquals(carpoolNamesExpected, carpoolNamesActual);
-
     }
 
     @Test

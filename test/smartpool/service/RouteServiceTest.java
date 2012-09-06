@@ -33,7 +33,6 @@ public class RouteServiceTest {
         verify(routeDao).getCarpoolNameListByLocation("Diamond District");
     }
 
-
     @Test
     public void shouldReturnAllLocationsFromDatabase() throws Exception {
         when(routeDao.getAllLocations()).thenReturn(Arrays.asList("Diamond District", "Mars"));

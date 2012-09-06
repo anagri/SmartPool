@@ -31,6 +31,6 @@ public class LDAPServiceIT {
 
     @Test(expected = LDAPUserNotFoundException.class)
     public void shouldThrowExceptionIfUserNotFoundOnLDAP(){
-        LDAPResultSet result =ldapService.searchByUserName("ghostuser");
+        ldapService.searchByUserName("ghostuser");
     }
 }

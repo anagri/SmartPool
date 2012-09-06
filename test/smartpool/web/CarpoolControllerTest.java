@@ -99,13 +99,13 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpoolWhenPostedOnCreate(){
-        assertThat(carpoolController.create(new Carpool("name"), "15/06/2012", "10:00", "18:00", "Kormangla", model,request),equalTo("redirect:/carpool/name"));
+        assertThat(carpoolController.create(new Carpool("name"), "15/06/2012", "10:00", "18:00", "Kormangla", request),equalTo("redirect:/carpool/name"));
     }
 
     @Test
     public void shouldInsertIntoDBWhenPostedOnCreate() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", "Kormangla", model,request);
+        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", "Kormangla", request);
         verify(carpoolService).insert(carpool);
         assertThat(carpool.getStatus(),equalTo(Status.PENDING));
     }
@@ -113,7 +113,7 @@ public class CarpoolControllerTest {
     @Test
     public void shouldParseCommaSeperatedRouteListAndPutItInCarpoolObject() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", "Domlur, Kormangla", model,request);
+        carpoolController.create(carpool,"15/06/2012", "10:00", "18:00", "Domlur, Kormangla", request);
         assertThat(carpool.getRoutePoints().contains("Domlur"), equalTo(true));
     }
 
@@ -128,7 +128,7 @@ public class CarpoolControllerTest {
     @Test
     public void shouldAddCurrentBuddyToCarpoolWhileCreating() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpoolController.create(carpool, "15/06/2012", "10:00","18:00", "Kormangla", model,request);
+        carpoolController.create(carpool, "15/06/2012", "10:00","18:00", "Kormangla", request);
         assertThat(carpool.getBuddies().contains(testBuddy),equalTo(true));
     }
 
@@ -139,5 +139,4 @@ public class CarpoolControllerTest {
         carpoolController.searchByLocation(model, request);
         assertThat((List<String>) model.get("routePoints"), is(defaultRouteLocations));
     }
-
 }

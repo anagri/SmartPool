@@ -11,7 +11,7 @@ import java.net.URL;
 
 import static org.junit.Assert.assertTrue;
 
-public class LogoutPage extends Page{
+public class LogoutPage extends Page {
 
     @FindBy(how = How.ID, using = "msg")
     private WebElement logoutMessage;
@@ -32,13 +32,10 @@ public class LogoutPage extends Page{
         assertTrue(logoutMessage.getText().contains("Logout successful"));
     }
 
-    public void verifyNeedsLoginAgain() {
-    }
-
     public boolean askLoginWhenGoToHomePage() throws MalformedURLException {
         URL url = new URL("http://localhost:9090/smartpool");
         webDriver.navigate().to(url);
-        if(webDriver.findElement(By.id("login")) != null){
+        if (webDriver.findElement(By.id("login")) != null) {
             return true;
         }
         return false;

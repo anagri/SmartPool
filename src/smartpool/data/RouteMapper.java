@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface RouteMapper {
+
     final static String SELECT_ALL_CARPOOL_NAMES = "select distinct carpoolName from route where location like #{location}";
     final static String SELECT_ALL_LOCATIONS = "select distinct location from route";
     final static String INSERT = "insert into route (carpoolName,location, sequenceNumber) values(#{param1}, #{param2}, #{param3})";

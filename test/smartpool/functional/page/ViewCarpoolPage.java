@@ -44,11 +44,4 @@ public class ViewCarpoolPage extends Page {
     public void verifyDetailsOfNewCarpool() {
         assertEquals("Carpool Carpool-FNTEST",carpoolName.getText());
     }
-
-    public void clickOnMoreDetails(){
-        moreDetailsButton.click();
-    }
-
-    public void verifyMoreDetailsVisible(){
-    }
 }

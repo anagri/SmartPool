@@ -8,13 +8,10 @@ import smartpool.data.JoinRequestMapper;
 import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Component
 public class JoinRequestDao {
 
     private SqlSessionFactory sqlSessionFactory;
-    private HttpServletRequest request;
 
     public JoinRequestDao(){
         sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();

@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Select;
 import smartpool.domain.JoinRequest;
 
 public interface JoinRequestMapper {
+
     static final String INSERT_REQUEST = "insert into requests values( #{username}, #{carpoolName}, " +
             "#{preferredPickupTime,javaType=org.joda.time.LocalTime, jdbcType=TIME, typeHandler=smartpool.data.typeHandler.LocalTimeTypeHandler}," +
             " #{pickupPoint}, #{address});";

@@ -34,5 +34,4 @@ public interface BuddyMapper {
 
     @Update(ADD_BUDDY_TO_CARPOOL)
     void addToCarpool(@Param("userName") String userName, @Param("carpoolName") String carpoolName);
-
 }

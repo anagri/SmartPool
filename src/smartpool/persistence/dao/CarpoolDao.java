@@ -7,14 +7,12 @@ import smartpool.common.MyBatisConnectionFactory;
 import smartpool.data.CarpoolMapper;
 import smartpool.domain.Carpool;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Component
 public class CarpoolDao {
 
     private SqlSessionFactory sqlSessionFactory;
-    private HttpServletRequest request;
 
     public CarpoolDao() {
         this(MyBatisConnectionFactory.getSqlSessionFactory());
@@ -55,8 +53,7 @@ public class CarpoolDao {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             CarpoolMapper mapper = session.getMapper(CarpoolMapper.class);
-            List<Carpool> carpools = mapper.selectAll();
-            return carpools;
+            return mapper.selectAll();
         } finally {
             session.close();
         }

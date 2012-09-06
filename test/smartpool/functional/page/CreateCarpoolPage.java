@@ -54,8 +54,4 @@ public class CreateCarpoolPage extends Page {
         submitButton.click();
         return new ViewCarpoolPage(webDriver);
     }
-
-    public void verifyDetailsOnViewCarpool() {
-
-    }
 }

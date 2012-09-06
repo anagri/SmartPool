@@ -38,20 +38,20 @@ public class BuddyProfileControllerTest {
     public void shouldReturnBuddyProfile(){
         ModelMap model = new ModelMap();
         when(buddyProfileService.getUserNameFromCAS(request_mzhao)).thenReturn("mzhao");
-        assertThat(buddyProfileController.viewProfile("prithvin", model, request_mzhao),equalTo("buddy/viewUserProfile"));
+        assertThat(buddyProfileController.viewProfile("prithvin", model),equalTo("buddy/viewUserProfile"));
     }
 
     @Test
     public void shouldReturnUserProfile(){
         ModelMap model = new ModelMap();
         when(buddyProfileService.getUserNameFromCAS(request_prithvin)).thenReturn("prithvin");
-        assertThat(buddyProfileController.viewProfile("prithvin", model, request_prithvin),equalTo("buddy/viewUserProfile"));
+        assertThat(buddyProfileController.viewProfile("prithvin", model),equalTo("buddy/viewUserProfile"));
     }
 
     @Test
     public void shouldPutDomainObjectInModel(){
         ModelMap model = new ModelMap();
-        buddyProfileController.viewProfile("prithvin", model, request_prithvin);
+        buddyProfileController.viewProfile("prithvin", model);
         assertThat((Buddy) model.get("buddyProfile"),equalTo(buddy));
     }
 }

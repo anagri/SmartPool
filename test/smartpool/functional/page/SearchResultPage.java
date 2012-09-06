@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.junit.Assert;
 
+import static org.junit.Assert.assertTrue;
+
 
 public class SearchResultPage extends Page {
 
@@ -36,6 +38,6 @@ public class SearchResultPage extends Page {
     }
 
     public void verifyResultCount(String resultCount) {
-        Assert.assertTrue(resultMessage.getText().contains(resultCount));
+        assertTrue(resultMessage.getText().contains(resultCount));
     }
 }
