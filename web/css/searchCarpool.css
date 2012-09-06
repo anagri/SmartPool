@@ -1,0 +1,17 @@
+.searchForm {
+    margin-top: 10px;
+    margin-bottom: 0px
+}
+
+.searchText {
+    height: 26px !important;
+    width: 170px;
+    margin-top:-3px !important;
+    vertical-align: middle;
+}
+
+.searchButton {
+    height:26px;
+    margin-top:-13px !important;
+    vertical-align: middle;
+}

@@ -9,11 +9,11 @@
 <head>
 
     <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/searchCarpool.css" rel="stylesheet">
     <c:choose>
         <c:when test="<%=request.getParameter(\"title\") != null %>"><title><%= request.getParameter("title") %></title></c:when>
         <c:otherwise><title>Welcome to Smartpool</title></c:otherwise>
     </c:choose>
-    <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.css" rel="stylesheet">
     <c:if test="<%=request.getParameter(\"css\") != null %>">
         <c:forEach var="cssFile" items="<%= request.getParameter(\"css\").split(\",\",2)%>" varStatus="counter">
             <link href="${pageContext.request.contextPath}/css/${cssFile}" rel="stylesheet" />
@@ -57,10 +57,9 @@
                     <li><a href="${appName}/buddyProfile" id="myProfile">My Profile</a></li>
                     <li><a href="#notifications">Notifications</a></li>
                     <li>
-
-                        <form action="${appName}/carpool/search" method="GET" style="margin-top: 10px;margin-bottom: 0px">
-                            <input type="text" name="query" value="${searchQuery}" id="searchBox" style="height: 26px;vertical-align: middle;"/>
-                            <button type="submit" class="btn logout" value="Search" style="margin-top:-10px;vertical-align: middle;"/>Search</button>
+                        <form action="${appName}/carpool/search" method="GET" class="searchForm">
+                            <input type="text" name="query" value="${searchQuery}" id="searchBox" class="searchText"/>
+                            <button type="submit" class="btn searchButton" value="Search"/>Search</button>
                         </form>
                     </li>
 
