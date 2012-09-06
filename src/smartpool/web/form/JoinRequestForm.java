@@ -33,7 +33,7 @@ public class JoinRequestForm {
     }
 
     public JoinRequest createDomainObject() {
-        return new JoinRequest(username, carpoolName, pickupPoint, LocalTime.parse(preferredPickupTime), null);
+        return new JoinRequest(username, carpoolName, pickupPoint, LocalTime.parse(preferredPickupTime), address);
     }
 
     @SuppressWarnings("unused - used by spring data binding")
