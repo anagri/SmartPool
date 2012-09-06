@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import smartpool.util.EnvironmentLoader;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,7 +34,7 @@ public class LogoutPage extends Page {
     }
 
     public boolean askLoginWhenGoToHomePage() throws MalformedURLException {
-        URL url = new URL("http://localhost:9090/smartpool");
+        URL url = new URL((new EnvironmentLoader().getPropertyList(EnvironmentLoader.APPLICATION_PATH, EnvironmentLoader.APPLICATION_URL)));
         webDriver.navigate().to(url);
         if (webDriver.findElement(By.id("login")) != null) {
             return true;
