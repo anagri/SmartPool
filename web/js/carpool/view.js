@@ -1,7 +1,8 @@
 $(document).ready(function(){
     $('.hiddenContent').hide();
     setClickEventOnMoreDetailsButton();
-    shadeTable();
+    shadeOccupiedSeats();
+    shadeAvailableSeats();
 });
 
 function setClickEventOnMoreDetailsButton(){
@@ -17,10 +18,20 @@ function setClickEventOnMoreDetailsButton(){
     });
 }
 
-function shadeTable(){
-    $("table").find("tbody tr").each(function(index) {
+function shadeOccupiedSeats(){
+    $("table").find("tbody tr.seat-occupied").each(function(index) {
         if(index % 2 == 1){
             $(this).css("background", "#ccc");
+        }
+    });
+}
+
+function shadeAvailableSeats(){
+    $("table").find("tbody tr.seat-available").each(function(index) {
+        if(index % 2 == 1){
+            $(this).css("background", "#a0e5a0");
+        }else{
+            $(this).css("background", "#c0ffc0");
         }
     });
 }

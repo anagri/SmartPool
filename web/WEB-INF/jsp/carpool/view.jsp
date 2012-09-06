@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <c:forEach var="buddy" items="${carpool.getBuddies()}" varStatus="sequence">
-                    <tr>
+                    <tr class="seat-occupied">
                         <td class="buddy-sequence">${sequence.index + 1}</td>
                         <td><a href="../buddyProfile/${buddy.getUserName()}" id="${buddy.getUserName()}">${buddy.getName()}</a></td>
                         <td>${buddy.getPickupPoint()}</td>
@@ -33,34 +33,49 @@
                     </tr>
                 </c:forEach>
                 <c:forEach var="i" begin="${carpool.getBuddies().size()+1}" end="${carpool.getCapacity()}">
-                    <tr>
+                    <tr class="seat-available">
                         <td class="buddy-sequence">${i}</td>
-                        <td>(VACANT)</td>
+                        <td>(SEAT AVAILABLE)</td>
                         <td>----</td>
                         <td>--:-- --</td>
                     </tr>
                 </c:forEach>
 
             </table>
-            <p><strong>Cab Type:</strong> ${carpool.getCabType()}</p>
+            <p><strong>Cab Type:</strong> 
+            <c:choose>
+                <c:when test="${carpool.getCabType() == PERSONAL}"><span title="Someone's car">${carpool.getCabType()}</span></p></c:when>
+                <c:when test="${carpool.getCabType() == COMPANY}"><span title="Company's cab">${carpool.getCabType()}</span></p></c:when>
+            </c:choose>
 
             <p><strong>Office Arrival Time:</strong> ${carpool.getOfficeETA().toString("h:mm a")}</p>
 
             <p><strong>Office Pickup Time:</strong> ${carpool.getOfficeETD().toString("h:mm a")}</p>
 
-            <p><strong>Status:</strong> ${carpool.getStatus()}</p>
+            <p><strong>Status:</strong>
+            <c:choose>
+                <c:when test="${carpool.getStatus() == PENDING}"> Not Started</p></c:when>
+                <c:when test="${carpool.getStatus() == RUNNING}"> Active</p></c:when>
+                <c:when test="${carpool.getStatus() == DROPPED}"> Dropped</p></c:when>
+            </c:choose>
 
-            <c:if test="${!buddyIsInCarpool}">
-                <form method="post" class="joinCarpoolButton">
-                    <button type="submit" value="Join">Join Carpool</button>
-                </form>
-            </c:if>
+            <c:choose>
+                <c:when test="${(carpool.getBuddies().size() < carpool.getCapacity()) && !buddyIsInCarpool}">
+                    <form method="post" class="joinCarpoolButton">
+                        <button type="submit" value="Join" >Join Carpool</button>
+                    </form>
+                </c:when>
+                <c:when test="${(carpool.getBuddies().size() == carpool.getCapacity()) && !buddyIsInCarpool}">
+                    <span class="warning">NO SEATS AVAILABLE</span>
+                </c:when>
+            </c:choose>
+
         </div>
 
         <div class="rightContent">
             <a href="javascript:void(0)" class="moreDetailsButton">More Details</a>
             <div class="hiddenContent">
-                <h2>Route Plan</h2>
+                <h2>Areas Covered By Carpool</h2>
 
                 <div id="routePoints">
                     <ol>
@@ -77,11 +92,17 @@
                 </c:if>
 
                 <p><strong>Capacity: </strong>
-                    <c:if test="${carpool.getCapacity() > 0}">${carpool.getCapacity()}</c:if>
+                    <c:choose>
+                        <c:when test="${carpool.getCapacity() > 0}">${carpool.getCapacity()}</c:when>
+                        <c:otherwise>To be set</c:otherwise>
+                    </c:choose>
                 </p>
 
                 <p><strong>Total Cab Charges: </strong>
-                    <c:if test="${carpool.getTotalCabCharges() > 0}">${carpool.getTotalCabCharges()}</c:if>
+                    <c:choose>
+                        <c:when test="${carpool.getTotalCabCharges() > 0}">${carpool.getTotalCabCharges()}</c:when>
+                        <c:otherwise>To be set</c:otherwise>
+                    </c:choose>
                 </p>
             </div>
         </div>

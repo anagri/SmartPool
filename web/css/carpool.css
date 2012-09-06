@@ -7,7 +7,7 @@ h2{
 }
 
 .container{
-    width: 900px;
+    width: 1000px;
 }
 .containerWrapper{
     margin-top: 50px;
@@ -57,7 +57,7 @@ table .buddy-sequence{
     float: right;
     position: relative;
     top: -90px;
-    width: 200px;
+    width: 310px;
 }
 
 .routePlan {

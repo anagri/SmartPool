@@ -12,12 +12,16 @@ public class ViewCarpoolPage extends Page {
 
     public static final String CARPOOL_NAME_ID = "carpoolName";
     public static final String BUDDY_PROFILE_ID = "arnavku";
+    public static final String MORE_DETAILS_BUTTON = "moreDetailsButton";
 
     @FindBy(how = How.ID, using = CARPOOL_NAME_ID)
     private WebElement carpoolName;
 
     @FindBy(how = How.ID, using = "ayusht")
     private WebElement ayushtLink;
+
+    @FindBy(how = How.CLASS_NAME, using = MORE_DETAILS_BUTTON)
+    private WebElement moreDetailsButton;
 
     public ViewCarpoolPage(WebDriver webDriver) {
         super(webDriver);
@@ -39,5 +43,12 @@ public class ViewCarpoolPage extends Page {
 
     public void verifyDetailsOfNewCarpool() {
         assertEquals("Carpool Carpool-FNTEST",carpoolName.getText());
+    }
+
+    public void clickOnMoreDetails(){
+        moreDetailsButton.click();
+    }
+
+    public void verifyMoreDetailsVisible(){
     }
 }

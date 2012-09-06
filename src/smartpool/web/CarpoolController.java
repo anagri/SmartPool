@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import smartpool.common.Constants;
 import smartpool.domain.Buddy;
+import smartpool.domain.CabType;
 import smartpool.domain.Carpool;
 import smartpool.domain.Status;
 import smartpool.service.BuddyService;
@@ -38,6 +39,11 @@ public class CarpoolController {
         boolean buddyIsInCarpool = carpoolService.hasBuddy(buddyService.getUserNameFromCAS(request), carpool);
         model.put("carpool", carpool);
         model.put("buddyIsInCarpool", buddyIsInCarpool);
+        model.put("DROPPED", Status.DROPPED);
+        model.put("RUNNING", Status.RUNNING);
+        model.put("PENDING", Status.PENDING);
+        model.put("COMPANY", CabType.COMPANY);
+        model.put("PERSONAL", CabType.PERSONAL);
 
         return "carpool/view";
     }

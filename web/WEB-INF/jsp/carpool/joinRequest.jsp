@@ -11,7 +11,7 @@
         <h1>Join Smart Pool: ${carpoolName}</h1>
     </div>
     <c:if test="${isRequestSent}">
-        <font color="red">You have already sent the request for this carpool</font>
+        <span class="warning">You have already sent the request for this carpool</span>
     </c:if>
     <style>
         .error {
