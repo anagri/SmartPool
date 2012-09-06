@@ -42,11 +42,6 @@ public class CarpoolController {
         return "carpool/view";
     }
 
-    @RequestMapping(value = "/carpool/{name}", method = RequestMethod.POST)
-    public String joinCarpool(@PathVariable String name) {
-        return "redirect:/carpool/"+name+"/join";
-    }
-
     @RequestMapping(value = "/carpool/search", method = RequestMethod.GET)
     public String searchByLocation(ModelMap model, HttpServletRequest request) {
 
