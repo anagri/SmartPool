@@ -25,7 +25,11 @@ public class BuddyService {
         return buddyDao.selectBuddy(username);
     }
 
-    public static String getUserNameFromCAS(HttpServletRequest request) {
+    public String getUserNameFromCAS(HttpServletRequest request) {
+        return extractUsernameFromRequest(request);
+    }
+
+    public static String extractUsernameFromRequest(HttpServletRequest request) {
         HttpSession session = request.getSession();
         return (String) session.getAttribute(CASFilter.CAS_FILTER_USER);
     }

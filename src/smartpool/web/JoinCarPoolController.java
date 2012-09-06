@@ -39,7 +39,7 @@ public class JoinCarPoolController {
     }
 
 
-    @RequestMapping(value = "carpool/{carpoolName}/join", method = RequestMethod.GET)
+    @RequestMapping(value = "carpool/join/{carpoolName}", method = RequestMethod.GET)
     public String getUserDetails(@PathVariable String carpoolName, ModelMap model, HttpServletRequest request) {
         String userName = getCurrentUserNameFromRequest(request);
 
@@ -58,7 +58,7 @@ public class JoinCarPoolController {
         return "carpool/joinRequest";
     }
 
-    @RequestMapping(value = "carpool/{carpoolName}/join", method = RequestMethod.POST)
+    @RequestMapping(value = "carpool/join/{carpoolName}", method = RequestMethod.POST)
     public ModelAndView submitUserDetails(@PathVariable String carpoolName,
                                           @ModelAttribute("joinRequestForm") JoinRequestForm joinRequestForm,
                                           BindingResult bindingResult,

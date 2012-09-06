@@ -84,7 +84,6 @@
                 <c:when test="${!hasEnoughSpace}">
                     <label>This carpool is already full.</label>
                     <button disabled="disabled">Carpool Full</button>
-
                 </c:when>
                 <c:when test="${alreadyInCarpool}">
                     <label>You are already in this carpool.</label>
@@ -92,7 +91,7 @@
 
                 </c:when>
                 <c:otherwise>
-                    <form method="get" action="${carpool.getName()}/join" class="joinCarpoolButton">
+                    <form method="get" action="${carpool.getName()}/join" class="joinCarpoolButton" action="<c:url value="/carpool/join/${carpool.name}"/>">
                         <button type="submit" value="Join">Join Carpool</button>
                     </form>
                 </c:otherwise>
