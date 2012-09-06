@@ -9,9 +9,7 @@
 
 
 <div class="container">
-    <div class="headerContainer">
-        <h1>Join Smart Pool: ${carpoolName}</h1>
-    </div>
+    <div class="header">Join Smart Pool: ${carpoolName}</div>
     <c:if test="${isRequestSent}">
         <span class="warning">You have already sent the request for this carpool</span>
     </c:if>
@@ -91,6 +89,7 @@
         </div>
         <div class="buttonContainer">
             <c:set var="isDisabled" value="${isRequestSent ? 'disabled' : ''}"/>
+            <a href="<c:url value="/carpool/${carpoolName}" />">Cancel</a>
             <button align="right" name="submit" type="submit" ${isDisabled}>Submit</button>
         </div>
     </div>

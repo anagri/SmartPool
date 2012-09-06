@@ -52,6 +52,7 @@ public class JoinCarPoolController {
         Buddy buddy = buddyService.getBuddy(userName);
         JoinRequestForm joinRequestForm = new JoinRequestForm(buddy, carpoolName);
         model.put("buddy", buddy);
+        model.put("carpoolName", carpoolName);
         model.put("joinRequestForm", joinRequestForm);
         model.put("isRequestSent", joinRequestService.isRequestSent(buddy, carpoolName));
 
