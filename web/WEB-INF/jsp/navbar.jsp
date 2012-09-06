@@ -65,9 +65,9 @@
                     </li>
 
                 </ul>
-                <form class="navbar-form pull-right">
+                <form class="navbar-form pull-right" action="${appName}/logout" method="GET">
                     ${casUserName}
-                    <button type="button" class="btn logout" style="margin-top: 6px" onClick="parent.location='https://castest.thoughtworks.com/cas/logout'">Logout</button>
+                    <button type="submit" class="btn logout" >Logout</button>
                 </form>
             </div>
         </div>
