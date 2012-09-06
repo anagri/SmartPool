@@ -33,6 +33,6 @@ public class JoinRequestFormValidator implements Validator {
             } catch (IllegalFieldValueException e) {
                 errors.rejectValue("preferredPickupTime", "field.invalid");
             }
-    }
+        }
     }
 }
