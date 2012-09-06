@@ -87,4 +87,8 @@ public class CarpoolService {
         }
         return false;
     }
+
+    public boolean canUserSendRequest(String username, Carpool carpool) {
+        return !hasBuddy(username, carpool) && carpool.hasVacancy();
+    }
 }

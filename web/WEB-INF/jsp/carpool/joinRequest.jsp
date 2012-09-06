@@ -28,8 +28,8 @@
             margin: 16px;
         }
     </style>
-
-    <form:form commandName="joinRequestForm">
+    <c:if test="${!isRequestSent}">
+    <form:form commandName="joinRequestForm" htmlEscape="true">
     <spring:hasBindErrors name="joinRequestForm">
         <spring:message code="errors.exist"/>
     </spring:hasBindErrors>
@@ -73,6 +73,7 @@
                         <label>Preferred Pick Up Point*</label>
                     </span>
                     <span id="pickupPointTextBox">
+
                         <input name="pickupPoint" required="required" type="textbox"
                                value="${joinRequestForm.pickupPoint}"/> <br/>
                         <form:errors path="pickupPoint" cssClass="error"/>
@@ -91,8 +92,8 @@
         <div class="buttonContainer">
             <c:set var="isDisabled" value="${isRequestSent ? 'disabled' : ''}"/>
             <button align="right" name="submit" type="submit" ${isDisabled}>Submit</button>
-            <button align="right" disabled="disabled">EDIT</button>
         </div>
     </div>
     </form:form>
+    </c:if>
     <%@ include file="../footer.jsp" %>

@@ -36,14 +36,11 @@ public class CarpoolController {
     @RequestMapping(value = "/carpool/{name}", method = RequestMethod.GET)
     public String viewCarpool(@PathVariable String name, ModelMap model, HttpServletRequest request) {
         Carpool carpool = carpoolService.getByName(name);
-        boolean buddyIsInCarpool = carpoolService.hasBuddy(buddyService.getUserNameFromCAS(request), carpool);
+        String username = buddyService.getUserNameFromCAS(request);
+
         model.put("carpool", carpool);
-        model.put("buddyIsInCarpool", buddyIsInCarpool);
-        model.put("DROPPED", Status.DROPPED);
-        model.put("RUNNING", Status.RUNNING);
-        model.put("PENDING", Status.PENDING);
-        model.put("COMPANY", CabType.COMPANY);
-        model.put("PERSONAL", CabType.PERSONAL);
+        model.put("hasEnoughSpace", carpool.hasVacancy());
+        model.put("alreadyInCarpool", carpoolService.hasBuddy(username, carpool));
 
         return "carpool/view";
     }
@@ -76,7 +73,7 @@ public class CarpoolController {
         carpool.setOfficeETD(Constants.TIME_FORMATTER.parseLocalTime(officeETDForm));
         carpool.setStatus(Status.PENDING);
 
-        ArrayList<String> routePointsArr = new ArrayList<String>(){
+        ArrayList<String> routePointsArr = new ArrayList<String>() {
             {
                 for (String routePoint : routePointForm.split(",")) {
                     add(routePoint);
@@ -91,7 +88,7 @@ public class CarpoolController {
 
         carpoolService.insert(carpool);
 
-        return "redirect:/carpool/"+carpool.getName();
+        return "redirect:/carpool/" + carpool.getName();
     }
 
 

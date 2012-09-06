@@ -6,26 +6,43 @@
          version="2.5">
 
     <context-param>
+        <param-name>defaultHtmlEscape</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>WEB-INF/applicationContext.xml</param-value>
     </context-param>
 
+    <!--<filter>-->
+    <!--<filter-name>CAS Single Sign Out Filter</filter-name>-->
+    <!--<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>CAS Single Sign Out Filter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!--<listener>-->
+    <!--<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>-->
+    <!--</listener>-->
+
     <filter>
         <filter-name>CAS Authentication Filter</filter-name>
-         <filter-class>edu.yale.its.tp.cas.client.filter.CASFilter</filter-class>
-         <init-param>
+        <filter-class>edu.yale.its.tp.cas.client.filter.CASFilter</filter-class>
+        <init-param>
             <param-name>edu.yale.its.tp.cas.client.filter.loginUrl</param-name>
-            <param-value>${casServerUrl}/login</param-value>
-         </init-param>
-         <init-param>
+            <param-value>${casServerName}/login</param-value>
+        </init-param>
+        <init-param>
             <param-name>edu.yale.its.tp.cas.client.filter.validateUrl</param-name>
-            <param-value>${casServerUrl}/serviceValidate</param-value>
-         </init-param>
-         <init-param>
+            <param-value>${casServerName}/serviceValidate</param-value>
+        </init-param>
+        <init-param>
             <param-name>edu.yale.its.tp.cas.client.filter.serverName</param-name>
             <param-value>${smartpoolServerName}</param-value>
-         </init-param>
-     </filter>
+        </init-param>
+    </filter>
 
     <filter-mapping>
         <filter-name>CAS Authentication Filter</filter-name>
@@ -46,6 +63,7 @@
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
+
     </servlet-mapping>
 
     <servlet-mapping>

@@ -1,5 +1,6 @@
 package smartpool.domain;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
@@ -135,6 +136,9 @@ public class Carpool {
     public int getVacancy() {
         return this.capacity - getBuddyCount();
     }
+    public boolean hasVacancy() {
+        return getVacancy() > 0;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -152,4 +156,5 @@ public class Carpool {
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
     }
+
 }

@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import smartpool.domain.Buddy;
 import smartpool.service.BuddyService;
+import smartpool.service.CarpoolService;
 import smartpool.service.JoinRequestService;
 import smartpool.web.form.JoinRequestForm;
 import smartpool.web.form.JoinRequestFormValidator;
@@ -31,11 +32,14 @@ public class JoinCarPoolControllerTest {
     private BuddyService buddyService;
     @Mock
     private HttpServletRequest request;
+    @Mock
+    private CarpoolService carpoolService;
+
 
     @Before
     public void setup() {
         initMocks(this);
-        joinCarPoolController = new JoinCarPoolController(buddyService, joinRequestService, new JoinRequestFormValidator());
+        joinCarPoolController = new JoinCarPoolController(buddyService, joinRequestService, carpoolService, new JoinRequestFormValidator());
         model = new ModelMap();
     }
 

@@ -151,4 +151,23 @@ public class CarpoolServiceTest {
         carpool.setBuddies(buddies);
         Assert.assertFalse(carpoolService.hasBuddy("otherusername", carpool));
     }
+
+    @Test
+    public void testFullCarpoolJoinCheckShouldReturnFalse() throws Exception {
+        Carpool carpool = new Carpool("name");
+        carpool.setCapacity(1);
+        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
+        buddies.add(new Buddy("username", "name", "123", "name@domain.com", "home"));
+        carpool.setBuddies(buddies);
+        Assert.assertFalse(carpoolService.canUserSendRequest("someoneelse", carpool));
+    }
+    @Test
+    public void testJoinCheckWhenBuddyAlreadyInCarpoolShouldReturnFalse() throws Exception {
+        Carpool carpool = new Carpool("name");
+        carpool.setCapacity(3);
+        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
+        buddies.add(new Buddy("username", "name", "123", "name@domain.com", "home"));
+        carpool.setBuddies(buddies);
+        Assert.assertFalse(carpoolService.canUserSendRequest("username", carpool));
+    }
 }
