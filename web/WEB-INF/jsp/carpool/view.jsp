@@ -132,11 +132,17 @@
                 </c:if>
 
                 <p><strong>Capacity: </strong>
-                    <c:if test="${carpool.getCapacity() > 0}">${carpool.getCapacity()}</c:if>
+                    <c:choose>
+                        <c:when test="${carpool.getCapacity() > 0}">${carpool.getCapacity()}</c:when>
+                        <c:otherwise>To be set</c:otherwise>
+                    </c:choose>
                 </p>
 
                 <p><strong>Total Cab Charges: </strong>
-                    <c:if test="${carpool.getTotalCabCharges() > 0}">${carpool.getTotalCabCharges()}</c:if>
+                    <c:choose>
+                        <c:when test="${carpool.getTotalCabCharges() > 0}">${carpool.getTotalCabCharges()}</c:when>
+                        <c:otherwise>To be set</c:otherwise>
+                    </c:choose>
                 </p>
             </div>
         </div>
