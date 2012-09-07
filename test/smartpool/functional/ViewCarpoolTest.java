@@ -13,4 +13,13 @@ public class ViewCarpoolTest extends BaseTest {
                 .gotoViewCarpoolDetails()
                 .verifyCarpoolDetails();
     }
+
+    @Test
+    public void  viewCarpoolAndMoreDetails() {
+       HomePage homePage = new LoginPage(webDriver).login();
+        homePage.goToListCarpoolsPage()
+                .gotoViewCarpoolDetails()
+                .goToAndVerifyViewMoreDetails();
+    }
+
 }

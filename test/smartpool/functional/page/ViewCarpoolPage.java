@@ -1,19 +1,25 @@
 package smartpool.functional.page;
 
+import org.hamcrest.BaseMatcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import smartpool.util.matchers.ContainsMatcher;
 
 import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static smartpool.util.matchers.ContainsMatcher.contains;
 
 public class ViewCarpoolPage extends Page {
 
     public static final String CARPOOL_NAME_ID = "carpoolName";
+
     public static final String BUDDY_PROFILE_ID = "arnavku";
     public static final String MORE_DETAILS_BUTTON = "moreDetailsButton";
     private static final String JOIN_REQUEST_BUTTON = "joinRequestButton";
+    //public static final String MORE_DETAILS_BUTTON = "moreDetailsButton";
 
     @FindBy(how = How.ID, using = CARPOOL_NAME_ID)
     private WebElement carpoolName;
@@ -21,8 +27,11 @@ public class ViewCarpoolPage extends Page {
     @FindBy(how = How.LINK_TEXT, using = "Ayush Tulsyan")
     private WebElement ayushtLink;
 
-    @FindBy(how = How.CLASS_NAME, using = MORE_DETAILS_BUTTON)
-    private WebElement moreDetailsButton;
+    @FindBy(how = How.ID, using = "routePoints")
+    private WebElement routepoints;
+
+    @FindBy(how = How.LINK_TEXT, using = "More Details")
+    private WebElement moreDetailsButtonLink;
 
     @FindBy(how = How.ID, using = JOIN_REQUEST_BUTTON)
     private WebElement joinRequestButton;
@@ -56,4 +65,9 @@ public class ViewCarpoolPage extends Page {
         return new JoinCarpoolPage(webDriver);
     }
 
+    public void goToAndVerifyViewMoreDetails() {
+        moreDetailsButtonLink.click();
+        waitForElementToVisible(By.id("routePoints"));
+        assertThat(routepoints.getText(), contains("Dell Office"));
+    }
 }

@@ -44,6 +44,15 @@ public abstract class Page {
         });
     }
 
+    protected void waitForElementToVisible(final By by) {
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver webDriver) {
+                return webDriver.findElement(by) != null && webDriver.findElement(by).isDisplayed();
+            }
+        });
+    }
+
     protected void waitForElementToLoad(final By by, final String text) {
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
