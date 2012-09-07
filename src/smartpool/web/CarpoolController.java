@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import smartpool.domain.CabType;
 import smartpool.domain.Carpool;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
@@ -38,6 +39,8 @@ public class CarpoolController {
         String username = buddyService.getUserNameFromCAS(request);
 
         model.put("carpool", carpool);
+        model.put("COMPANY", CabType.COMPANY);
+        model.put("PERSONAL", CabType.PERSONAL);
         model.put("hasEnoughSpace", carpool.hasVacancy());
         model.put("alreadyInCarpool", carpoolService.hasBuddy(username, carpool));
 

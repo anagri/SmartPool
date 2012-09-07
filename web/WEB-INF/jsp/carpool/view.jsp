@@ -58,7 +58,7 @@
                 <span class="more-info">
                     <img src="${pageContext.request.contextPath}/css/img/moreinfo.png" class="info"/>
                         <span style="display: none;" class="more-info-message tooltip">
-                            Vehicle belongs and is operated by ${carpool.getBuddies().get(0).getName()}. 50% of fuel cost is paid by ThoughtWorks.
+                            Vehicle belongs and is operated by ${carpool.getCarpoolBuddies().get(0).getBuddy().getName()}. 50% of fuel cost is paid by ThoughtWorks.
                         </span>
                     </span>
                 </c:when>
