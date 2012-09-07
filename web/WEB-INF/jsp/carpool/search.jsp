@@ -51,7 +51,7 @@
                                 <td>${carpool.getStartTime().toString("h:mm a")}</td>
                                 <td>${carpool.getBuddyCount()}</td>
                                 <td>${carpool.getVacancy()}</td>
-                                <td>${carpool.getStatus()}</td>
+                                <td id="status${typeStatus.count}">${carpool.getStatus()}</td>
                             </tr>
                        </c:forEach>
                     </table>

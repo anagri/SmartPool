@@ -32,4 +32,18 @@ public class SearchCarpoolTest extends BaseTest{
                 .selectLocationFromRoutePointList("Sony Centre")
                 .verifyResultCount("2 result");
     }
+
+    @Test
+    public void searchCarpoolByPickUpPoint() {
+        homePage.enterSearchQuery("")
+                .selectLocationFromRoutePointList("Kundalahalli")
+                .verifyResultCount("1 result");
+
+    }
+
+    @Test
+    public void shouldReturnSearchResultInOrder() throws Exception {
+        homePage.enterSearchQuery("")
+                .verifyOrder();
+    }
 }

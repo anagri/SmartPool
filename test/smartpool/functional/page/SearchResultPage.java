@@ -1,12 +1,10 @@
 package smartpool.functional.page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.junit.Assert;
 import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.Assert.assertTrue;
@@ -21,6 +19,9 @@ public class SearchResultPage extends Page {
 
     @FindBy(how = How.ID, using = "routePointList")
     private WebElement routePointList;
+
+    @FindBy(how = How.ID, using = "status1")
+    private WebElement firstStatus;
 
     public SearchResultPage(WebDriver webDriver, String searchQuery) {
         super(webDriver, searchQuery);
@@ -38,5 +39,9 @@ public class SearchResultPage extends Page {
 
     public void verifyResultCount(String resultCount) {
         assertTrue(resultMessage.getText().contains(resultCount));
+    }
+
+    public void verifyOrder() {
+        assertTrue(firstStatus.getText().equals("ACTIVE"));
     }
 }
