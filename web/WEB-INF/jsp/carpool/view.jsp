@@ -80,24 +80,6 @@
 
             <p><strong>Status:</strong> ${carpool.getStatus()}</p>
 
-            <%--<c:choose>--%>
-                <%--<c:when test="${!hasEnoughSpace}">--%>
-                    <%--<label>This carpool is already full.</label>--%>
-                    <%--<button disabled="disabled">Carpool Full</button>--%>
-                <%--</c:when>--%>
-                <%--<c:when test="${alreadyInCarpool}">--%>
-                    <%--<label>You are already in this carpool.</label>--%>
-                    <%--<button disabled="disabled">Already Joined</button>--%>
-
-                <%--</c:when>--%>
-                <%--<c:otherwise>--%>
-                    <%--<form method="get" action="${carpool.getName()}/join" class="joinCarpoolButton" action="<c:url value="/carpool/join/${carpool.name}"/>">--%>
-                        <%--<button type="submit" value="Join">Join Carpool</button>--%>
-                    <%--</form>--%>
-                <%--</c:otherwise>--%>
-            <%--</c:choose>--%>
-
-
             <c:choose>
                 <c:when test="${(carpool.getCarpoolBuddies().size() < carpool.getCapacity()) && !buddyIsInCarpool}">
                     <form method="get" action="join/${carpool.getName()}" class="joinCarpoolButton" action="<c:url value="/carpool/join/${carpool.name}"/>">
