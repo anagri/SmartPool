@@ -23,14 +23,8 @@
         </c:forEach>
     </c:if>
 
-    <script type="text/javascript">
-        function setFocus(){
-            document.getElementById('searchBox').focus();
-        }
-
-    </script>
 </head>
-<body onload="setFocus();setOptionInDropDown('${searchQuery}')">
+<body onload="setOptionInDropDown('${searchQuery}')">
 
 <c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>' />
 <c:set var="appName" value="${pageContext.request.contextPath}" />
