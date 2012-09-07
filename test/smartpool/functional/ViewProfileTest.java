@@ -4,24 +4,48 @@ package smartpool.functional;
 import org.junit.Test;
 import smartpool.functional.page.HomePage;
 import smartpool.functional.page.LoginPage;
+import smartpool.functional.page.MyProfilePage;
+
+import static junit.framework.Assert.assertEquals;
+
 
 
 public class ViewProfileTest extends BaseTest {
 
+    public final String OWN_USER_NAME="Test User";
+    public final String OWN_USER_EMAIL="test@thoughtworks.com";
+    public final String OWN_USER_PHONE_NO="1234567890";
+
+    public final String OTHER_USER_NAME="Ayush Tulsyan";
+    public final String OTHER_USER_EMAIL="ayusht@thoughtworks.com";
+    public final String OTHER_USER_PHONE_NO="1234567890";
+
+    public MyProfilePage profilePage;
     @Test
     public void viewMyProfileAndItsDetails() {
-        HomePage homePage = new LoginPage(webDriver).login();
-        homePage.goToMyProfilePage().
-                verifyProfileDetails("Test User", "test@thoughtworks.com", "1234567890");
+        profilePage = new LoginPage(webDriver).login().goToMyProfilePage();
+        assertEquals(OWN_USER_NAME, profilePage.getMyProfileNameId());
+        assertEquals(OWN_USER_PHONE_NO, profilePage.getMyProfilePhoneNumberId());
+        assertEquals(OWN_USER_EMAIL, profilePage.getMyProfileEmailId());
     }
 
     @Test
     public void viewBuddyProfileAndItsDetails() {
-        HomePage homePage = new LoginPage(webDriver).login();
-        homePage.goToListCarpoolsPage().
-                gotoViewCarpoolDetails().
-                goToBuddyProfilePage().
-                verifyProfileDetails("Ayush Tulsyan", "ayusht@thoughtworks.com", "1234567890");
+        profilePage = new LoginPage(webDriver).login().goToListCarpoolsPage().gotoViewCarpoolDetails().goToBuddyProfilePage();
+        assertEquals(OTHER_USER_NAME, profilePage.getMyProfileNameId());
+        assertEquals(OTHER_USER_PHONE_NO, profilePage.getMyProfilePhoneNumberId());
+        assertEquals(OTHER_USER_EMAIL, profilePage.getMyProfileEmailId());
     }
+
+    @Test
+    public void shouldDisplyEditButNotContactButtonWhenViewingMyProfile() {
+        HomePage homePage = new LoginPage(webDriver).login();
+        homePage.goToMyProfilePage().
+                verifyProfileButton("Edit");
+    }
+
+
+
+
 }
 

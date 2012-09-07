@@ -54,6 +54,6 @@ public class ViewCarpoolPage extends Page {
     public JoinCarpoolPage goToJoinCarpoolPage() {
         joinRequestButton.click();
         return new JoinCarpoolPage(webDriver);
-        //To change body of created methods use File | Settings | File Templates.
     }
+
 }

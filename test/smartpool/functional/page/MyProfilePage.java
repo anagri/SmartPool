@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import static junit.framework.Assert.assertEquals;
-
 public class MyProfilePage extends Page {
 
     public static final String MY_PROFILE_NAME_ID = "myProfileName";
@@ -32,10 +30,25 @@ public class MyProfilePage extends Page {
     public void waitForThePageToLoad() {
         waitForElementToLoad(By.id(MY_PROFILE_NAME_ID));
     }
+    public String getMyProfileNameId()
+    {
+        return myProfileName.getText();
+    }
 
-    public void verifyProfileDetails(String expectedUserName, String expectedUserEmail, String expectedUserPhoneNumber) {
-        assertEquals(expectedUserName, myProfileName.getText());
-        assertEquals(expectedUserPhoneNumber, myProfilePhoneNumber.getText());
-        assertEquals(expectedUserEmail, myProfileEmail.getText());
+    public String getMyProfilePhoneNumberId()
+    {
+        return myProfilePhoneNumber.getText();
+    }
+
+    public String getMyProfileEmailId()
+    {
+        return myProfileEmail.getText();
+    }
+
+    //public MyProfilePage ProfileDetails() {
+     //   return this;
+   // }
+
+    public void verifyProfileButton(String expected) {
     }
 }

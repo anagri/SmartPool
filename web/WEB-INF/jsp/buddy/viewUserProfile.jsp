@@ -28,6 +28,8 @@
         <span><label>Preferred Pickup Point:</label></span>
         <span><label>${buddyProfile.getPreferredPickupPoint()}</label></span>
     </div>
+
+    <div id="profileButton">
     <c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>' />
     <c:choose>
         <c:when test="${casUserName eq buddyProfile.userName}">
@@ -41,6 +43,7 @@
             </div>
         </c:otherwise>
     </c:choose>
+    </div>
 
 </div>
 <%@ include file="../footer.jsp" %>
