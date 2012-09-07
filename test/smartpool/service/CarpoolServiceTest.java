@@ -115,9 +115,9 @@ public class CarpoolServiceTest {
     @Test
     public void shouldInsertIntoCarpoolBuddy() throws Exception {
         Carpool carpool = new Carpool("name");
-        carpool.setCarpoolBuddies(new ArrayList<CarpoolBuddy>(){
+        carpool.setCarpoolBuddies(new ArrayList<CarpoolBuddy>() {
             {
-                add(new CarpoolBuddy(new Buddy("name"),"pickupLocation",new LocalTime(10,0)));
+                add(new CarpoolBuddy(new Buddy("name"), "pickupLocation", new LocalTime(10, 0)));
             }
         });
         carpoolService.insert(carpool);
@@ -144,7 +144,7 @@ public class CarpoolServiceTest {
     public void shouldReturnTrueIfLoggedUserIsInTheCarpool() throws Exception {
         Carpool carpool = new Carpool("name");
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
-        carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home"), "testPoint", Constants.TIME_FORMATTER.parseLocalTime("10:00")));
+        carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home", "preferredPoint", new LocalTime(10, 30)), "testPoint", Constants.TIME_FORMATTER.parseLocalTime("10:00")));
         carpool.setCarpoolBuddies(carpoolBuddies);
         Assert.assertTrue(carpoolService.hasBuddy("username", carpool));
     }
@@ -153,7 +153,7 @@ public class CarpoolServiceTest {
     public void shouldReturnFalseIfLoggedUserIsNotInTheCarpool() throws Exception {
         Carpool carpool = new Carpool("name");
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
-        carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home"), "testPoint", Constants.TIME_FORMATTER.parseLocalTime("10:00")));
+        carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home", "preferredPoint", new LocalTime(10, 30)), "testPoint", Constants.TIME_FORMATTER.parseLocalTime("10:00")));
         carpool.setCarpoolBuddies(carpoolBuddies);
         Assert.assertFalse(carpoolService.hasBuddy("otherusername", carpool));
     }
@@ -162,18 +162,18 @@ public class CarpoolServiceTest {
     public void testFullCarpoolJoinCheckShouldReturnFalse() throws Exception {
         Carpool carpool = new Carpool("name");
         carpool.setCapacity(1);
-        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
-        buddies.add(new Buddy("username", "name", "123", "name@domain.com", "home"));
-        carpool.setBuddies(buddies);
+        ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
+        carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home", "preferredPoint", new LocalTime(10, 30)), "diamond district", new LocalTime(9, 20)));
+        carpool.setCarpoolBuddies(carpoolBuddies);
         Assert.assertFalse(carpoolService.canUserSendRequest("someoneelse", carpool));
     }
     @Test
     public void testJoinCheckWhenBuddyAlreadyInCarpoolShouldReturnFalse() throws Exception {
         Carpool carpool = new Carpool("name");
         carpool.setCapacity(3);
-        ArrayList<Buddy> buddies = new ArrayList<Buddy>();
-        buddies.add(new Buddy("username", "name", "123", "name@domain.com", "home"));
-        carpool.setBuddies(buddies);
+        ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
+        carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home", "preferredPoint", new LocalTime(10, 30)), "diamond district", new LocalTime(9, 20)));
+        carpool.setCarpoolBuddies(carpoolBuddies);
         Assert.assertFalse(carpoolService.canUserSendRequest("username", carpool));
     }
 }

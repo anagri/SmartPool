@@ -26,7 +26,7 @@
 
     <div class="subContainer">
         <span><label>Preferred Pickup Point:</label></span>
-        <span><label>${buddyProfile.getPickupPoint()}</label></span>
+        <span><label>${buddyProfile.getPreferredPickupPoint()}</label></span>
     </div>
     <c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>' />
     <c:choose>
