@@ -29,9 +29,10 @@
 <c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>' />
 <c:set var="appName" value="${pageContext.request.contextPath}" />
 
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
+            <img src="${pageContext.request.contextPath}/css/img/navbarLogo.jpg" border="0px;" heigh="100px" class="navbar-logo"/>
             <a class="brand" href="${appName}/">SmartPool</a>
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
