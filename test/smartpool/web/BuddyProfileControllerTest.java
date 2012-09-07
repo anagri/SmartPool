@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.ui.ModelMap;
 import smartpool.domain.Buddy;
+import smartpool.domain.LDAPResultSet;
 import smartpool.service.BuddyService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,9 @@ public class BuddyProfileControllerTest {
 
     @Mock
     private HttpServletRequest request;
+
+    @Mock
+    private LDAPResultSet resultSet;
 
     @Before
     public void setUp() {
@@ -53,5 +57,26 @@ public class BuddyProfileControllerTest {
 
         assertThat(response, equalTo("buddy/viewUserProfile"));
         assertThat((Buddy) model.get("buddyProfile"), is(currentlyLoggedInUser));
+    }
+
+    @Test
+    public void shouldRenderPrePopulatedCreateProfileForm() throws Exception {
+        Buddy currentlyLoggedInUser = new Buddy("prithvin");
+        when(buddyProfileService.getCurrentBuddy(request)).thenReturn(currentlyLoggedInUser);
+
+        ModelMap model = new ModelMap();
+        String response = buddyProfileController.viewMyProfile(model, request);
+
+        assertThat(response, equalTo("buddy/viewUserProfile"));
+        assertThat((Buddy) model.get("buddyProfile"), is(currentlyLoggedInUser));
+    }
+
+    @Test
+    public void shouldShowWrongPageIfMissingMandatoryInformation() throws Exception {
+
+    }
+
+    @Test
+    public void shouldCreateProfileIfInformationIsProvided() throws Exception {
     }
 }

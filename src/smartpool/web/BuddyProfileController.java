@@ -31,4 +31,6 @@ public class BuddyProfileController {
         model.addAttribute("buddyProfile", buddyService.getCurrentBuddy(request));
         return "buddy/viewUserProfile";
     }
+
+
 }
