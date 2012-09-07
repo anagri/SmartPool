@@ -100,9 +100,6 @@
 
             <c:choose>
                 <c:when test="${(carpool.getCarpoolBuddies().size() < carpool.getCapacity()) && !buddyIsInCarpool}">
-                    <%--<form method="post" class="joinCarpoolButton">--%>
-                        <%--<button type="submit" value="Join" >Join Carpool</button>--%>
-                    <%--</form>--%>
                     <form method="get" action="join/${carpool.getName()}" class="joinCarpoolButton" action="<c:url value="/carpool/join/${carpool.name}"/>">
                         <button id="joinRequestButton" type="submit" value="Join">Join Carpool</button>
                     </form>
