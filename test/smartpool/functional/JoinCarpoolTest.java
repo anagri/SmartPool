@@ -11,9 +11,7 @@ public class JoinCarpoolTest extends BaseTest {
         homePage.goToListCarpoolsPage()
                 .goToVacantCarpoolDetails()
                 .goToJoinCarpoolPage()
-                .enterJoinRequestDetails()  ;
-
-
-
+                .enterJoinRequestDetails()
+                .submitForm();
     }
 }

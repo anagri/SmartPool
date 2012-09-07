@@ -46,8 +46,8 @@
                     <span id="addressLabel">
                         <label>Address</label>
                     </span>
-                    <span id="addressTextBox">
-                        <textarea name="address" rows="3" cols="30"
+                    <span>
+                        <textarea id="addressTextBox" name="address" rows="3" cols="30"
                                   value="${joinRequestForm.address}"> </textarea> <br/>
                     </span>
         </div>
@@ -70,9 +70,9 @@
                     <span id="pickupPointLabel">
                         <label>Preferred Pick Up Point*</label>
                     </span>
-                    <span id="pickupPointTextBox">
+                    <span>
 
-                        <input name="pickupPoint" required="required" type="textbox"
+                        <input id="pickupPointTextBox" name="pickupPoint" required="required" type="textbox"
                                value="${joinRequestForm.pickupPoint}"/> <br/>
                         <form:errors path="pickupPoint" cssClass="error"/>
                     </span>
@@ -81,8 +81,8 @@
                     <span id="pickupTimeLabel">
                         <label>Pick Up Time (hh:mm)</label>
                     </span>
-                    <span id="pickupTimeTextBox">
-                        <input name="preferredPickupTime" type="text"
+                    <span>
+                        <input id="pickupTimeTextBox" name="preferredPickupTime" type="text"
                                value="${joinRequestForm.preferredPickupTime}"/> <br/>
                         <form:errors path="preferredPickupTime" cssClass="error"/>
                     </span>
@@ -90,7 +90,7 @@
         <div class="buttonContainer">
             <c:set var="isDisabled" value="${isRequestSent ? 'disabled' : ''}"/>
             <a href="<c:url value="/carpool/${carpoolName}" />">Cancel</a>
-            <button align="right" name="submit" type="submit" ${isDisabled}>Submit</button>
+            <button id="submitFormButton" align="right" name="submit" type="submit" ${isDisabled}>Submit</button>
         </div>
     </div>
     </form:form>
