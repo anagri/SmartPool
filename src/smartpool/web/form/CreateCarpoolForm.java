@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class CreateCarpoolForm {
     private String from;
     private String to;
+    private int capacity;
     private LocalDate proposedStartDate;
     private String proposedStartDateStr;
     private String pickupPoint;
@@ -22,10 +23,11 @@ public class CreateCarpoolForm {
     public CreateCarpoolForm() {
     }
 
-    public CreateCarpoolForm(String from, String to, String proposedStartDate, String pickupPoint, String pickupTime, String cabType, String officeArrivalTime, String officeDepartureTime, String routePoints) {
+    public CreateCarpoolForm(String from, String to, String proposedStartDate, String pickupPoint, String pickupTime, String cabType, int capacity, String officeArrivalTime, String officeDepartureTime, String routePoints) {
 
         this.from = from;
         this.to = to;
+        this.capacity = capacity;
         this.proposedStartDate = Constants.DATE_FORMATTER.parseLocalDate(proposedStartDate);
         this.pickupPoint = pickupPoint;
         this.pickupTime = Constants.TIME_FORMATTER.parseLocalTime(pickupTime);
@@ -37,7 +39,7 @@ public class CreateCarpoolForm {
 
     public Carpool getDomainObject(Buddy currentBuddy) {
 
-        Carpool carpool = new Carpool(from + " - " + to, proposedStartDate, cabType, 0, officeArrivalTime, officeDepartureTime, Status.NOT_STARTED, null, 0, routePoints);
+        Carpool carpool = new Carpool(from + " - " + to, proposedStartDate, cabType, 0, officeArrivalTime, officeDepartureTime, Status.NOT_STARTED, null, capacity, routePoints);
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
         carpoolBuddies.add(new CarpoolBuddy(currentBuddy,pickupPoint,pickupTime));
         carpool.setCarpoolBuddies(carpoolBuddies);
@@ -85,5 +87,9 @@ public class CreateCarpoolForm {
     public void setProposedStartDateStr(String proposedStartDateStr) {
         this.proposedStartDateStr = proposedStartDateStr;
         this.proposedStartDate = Constants.DATE_FORMATTER.parseLocalDate(proposedStartDateStr);
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }

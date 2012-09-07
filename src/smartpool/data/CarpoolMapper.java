@@ -13,13 +13,14 @@ import java.util.List;
 public interface CarpoolMapper {
 
     static final String INSERT = "insert into carpool " +
-            "(name,start_date, cab_type, office_eta, office_etd, status) values(" +
+            "(name,start_date, cab_type, office_eta, office_etd, status, capacity) values(" +
             "#{name}," +
             "#{startDate, javaType=org.joda.time.LocalDate, jdbcType=DATE, typeHandler=smartpool.data.typeHandler.LocalDateTypeHandler}," +
             "#{cabType}," +
             "#{officeETA, javaType=org.joda.time.LocalTime, jdbcType=TIME, typeHandler=smartpool.data.typeHandler.LocalTimeTypeHandler}," +
             "#{officeETD, javaType=org.joda.time.LocalTime, jdbcType=TIME, typeHandler=smartpool.data.typeHandler.LocalTimeTypeHandler}," +
-            "#{status}" +
+            "#{status}," +
+            "#{capacity}" +
             ")";
     static final String SELECT_BY_NAME = "select name,start_date, office_eta,office_etd, cab_type,total_cab_charge,status,capacity from carpool where name = #{name}";
     static final String DELETE_BY_NAME = "delete from carpool where name=#{name}";

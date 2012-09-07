@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 public class CreateCarpoolFormTest {
     @Test
     public void shouldCreateAValidDomainObjectForCarpool() throws Exception {
-        CreateCarpoolForm createCarpoolForm = new CreateCarpoolForm("from","to","16/9/2012","PickupPoint","10:00","PERSONAL","11:00","18:00","route,points");
+        CreateCarpoolForm createCarpoolForm = new CreateCarpoolForm("from","to","16/9/2012","PickupPoint","10:00","PERSONAL", 6, "11:00","18:00","route,points");
 
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
         Buddy buddy = new Buddy("buddyName");
@@ -23,7 +23,7 @@ public class CreateCarpoolFormTest {
         routePoints.add("route");
         routePoints.add("points");
 
-        assertThat(createCarpoolForm.getDomainObject(buddy), equalTo(new Carpool("from - to", Constants.DATE_FORMATTER.parseLocalDate("16/9/2012"), CabType.PERSONAL, 0, Constants.TIME_FORMATTER.parseLocalTime("11:00"), Constants.TIME_FORMATTER.parseLocalTime("18:00"), Status.NOT_STARTED, carpoolBuddies, 0, routePoints)));
+        assertThat(createCarpoolForm.getDomainObject(buddy), equalTo(new Carpool("from - to", Constants.DATE_FORMATTER.parseLocalDate("16/9/2012"), CabType.PERSONAL, 0, Constants.TIME_FORMATTER.parseLocalTime("11:00"), Constants.TIME_FORMATTER.parseLocalTime("18:00"), Status.NOT_STARTED, carpoolBuddies, 6, routePoints)));
     }
 
 }

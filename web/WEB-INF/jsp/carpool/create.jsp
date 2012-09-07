@@ -41,7 +41,7 @@
         </span>
         <span id="capacity">
             <label>Capacity</label>
-            <input type="text" name="capacity" />
+            <input type="text" name="capacity" value="0" />
         </span>
         <span>
             <label>Office Arrival Time:</label>
