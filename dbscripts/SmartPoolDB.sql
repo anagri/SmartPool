@@ -15,6 +15,10 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+--
+-- Current Database: `smartpool`
+--
+
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `smartpool` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `smartpool`;
@@ -32,11 +36,8 @@ CREATE TABLE `buddies` (
   `address` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
-  `pickup_location` varchar(20) DEFAULT NULL,
-  `pickup_time` time DEFAULT NULL,
   `preferred_pickup_location` varchar(20) DEFAULT NULL,
   `preferred_pickup_time` time DEFAULT NULL,
-  `carpoolname` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -47,7 +48,7 @@ CREATE TABLE `buddies` (
 
 LOCK TABLES `buddies` WRITE;
 /*!40000 ALTER TABLE `buddies` DISABLE KEYS */;
-INSERT INTO `buddies` VALUES ('arnavku','Arnav Kumar','M-58, Diamond District, Bangalore','arnavku@thoughtworks.com','1234567890','Diamond District','10:50:00',NULL,NULL,'carpool-1'),('ayu','Anna Yu','G-31, Diamond District, Bangalore','ayu@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,'carpool-2'),('ayusht','Ayush Tulsyan','H-81, Diamond District, Bangalore','ayusht@thoughtworks.com','1234567890','Manipal Hospital','10:55:00',NULL,NULL,'carpool-1'),('govindm','Govind Menon','P-81, Diamond District, Bangalore','govindm@thoughtworks.com','1234567890','domlur flyover','11:00:00',NULL,NULL,'carpool-1'),('ishak','Isha Khanna','H-71, Diamond District, Bangalore','ishak@thoughtworks.com','0987654321','Command Hospital','08:30:00',NULL,NULL,'carpool-2'),('mdaliej','Md Ali Ejaz','C-82, Diamond District, Bangalore','mdaliej@thoughtworks.com','0987654321','Trinity Church','08:45:00',NULL,NULL,'carpool-2'),('mzhao','Ming Zhao','J-41, Diamond District, Bangalore','mzhao@thoughtworks.com','1234567890','barbeque nation','09:00:00',NULL,NULL,'carpool-2'),('nibub','Nibu Baby','#659, Jayanthi Residency, Flat# 301, 1st Main, C Block,AECS Layout, Kundalahalli, Bangalore','nibub@thoughtworks.com','9686190831','Kundalahalli','11:10:00',NULL,NULL,'carpool-1'),('prithvin','Prithvi Nambiar','H-81, Diamond District, Bangalore','prithvin@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),('ssquire','Samuel Michael Squir','P-81, Diamond District, Bangalore','ssquire@thoughtworks.com','0987654321',NULL,NULL,NULL,NULL,NULL),('suganthk','Suganthi T','L-82, Diamond District, Bangalore','suganthit@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),('test.twu','Test User','Somewhere, Bangalore','test@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL),('vfranca','Vitor Franca','F-75, Diamond District, Bangalore','vfranca@thoughtworks.com','1234567890',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `buddies` VALUES ('arnavku','Arnav Kumar','M-58, Diamond District, Bangalore','arnavku@thoughtworks.com','1234567890',NULL,NULL),('ayu','Anna Yu','G-31, Diamond District, Bangalore','ayu@thoughtworks.com','1234567890',NULL,NULL),('ayusht','Ayush Tulsyan','H-81, Diamond District, Bangalore','ayusht@thoughtworks.com','1234567890',NULL,NULL),('govindm','Govind Menon','P-81, Diamond District, Bangalore','govindm@thoughtworks.com','1234567890',NULL,NULL),('ishak','Isha Khanna','H-71, Diamond District, Bangalore','ishak@thoughtworks.com','0987654321',NULL,NULL),('mdaliej','Md Ali Ejaz','C-82, Diamond District, Bangalore','mdaliej@thoughtworks.com','0987654321',NULL,NULL),('mzhao','Ming Zhao','J-41, Diamond District, Bangalore','mzhao@thoughtworks.com','1234567890',NULL,NULL),('nibub','Nibu Baby','#659, Jayanthi Residency, Flat# 301, 1st Main, C Block,AECS Layout, Kundalahalli, Bangalore','nibub@thoughtworks.com','9686190831',NULL,NULL),('prithvin','Prithvi Nambiar','H-81, Diamond District, Bangalore','prithvin@thoughtworks.com','1234567890',NULL,NULL),('ssquire','Samuel Michael Squir','P-81, Diamond District, Bangalore','ssquire@thoughtworks.com','0987654321',NULL,NULL),('suganthk','Suganthi T','L-82, Diamond District, Bangalore','suganthit@thoughtworks.com','1234567890',NULL,NULL),('test.twu','Test User','Somewhere, Bangalore','test@thoughtworks.com','1234567890',NULL,NULL),('vfranca','Vitor Franca','F-75, Diamond District, Bangalore','vfranca@thoughtworks.com','1234567890',NULL,NULL);
 /*!40000 ALTER TABLE `buddies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +65,7 @@ CREATE TABLE `carpool` (
   `cab_type` enum('PERSONAL','COMPANY') DEFAULT NULL,
   `office_eta` time DEFAULT NULL,
   `office_etd` time DEFAULT NULL,
-  `status` enum('RUNNING','PENDING') DEFAULT NULL,
+  `status` enum('ACTIVE','NOT_STARTED') DEFAULT NULL,
   `total_cab_charge` int(11) DEFAULT NULL,
   `capacity` int(11) DEFAULT NULL,
   PRIMARY KEY (`name`)
@@ -77,9 +78,37 @@ CREATE TABLE `carpool` (
 
 LOCK TABLES `carpool` WRITE;
 /*!40000 ALTER TABLE `carpool` DISABLE KEYS */;
-INSERT INTO `carpool` VALUES ('carpool-1','2012-06-02','COMPANY','11:30:00','18:30:00','RUNNING',100,4),
-('carpool-2','2012-08-02','PERSONAL','09:30:00','19:30:00','PENDING',600,8);
+INSERT INTO `carpool` VALUES ('carpool-1','2012-06-02','COMPANY','11:30:00','18:30:00','ACTIVE',100,4),('carpool-2','2012-08-02','PERSONAL','09:30:00','19:30:00','NOT_STARTED',600,8);
 /*!40000 ALTER TABLE `carpool` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `carpoolbuddy`
+--
+
+DROP TABLE IF EXISTS `carpoolbuddy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `carpoolbuddy` (
+  `buddy_username` varchar(11) NOT NULL DEFAULT '',
+  `carpool_name` varchar(15) NOT NULL DEFAULT '',
+  `pickup_point` varchar(50) DEFAULT NULL,
+  `pickup_time` time DEFAULT NULL,
+  PRIMARY KEY (`buddy_username`,`carpool_name`),
+  KEY `carpool_name` (`carpool_name`),
+  CONSTRAINT `carpoolbuddy_ibfk_1` FOREIGN KEY (`buddy_username`) REFERENCES `buddies` (`username`),
+  CONSTRAINT `carpoolbuddy_ibfk_2` FOREIGN KEY (`carpool_name`) REFERENCES `carpool` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carpoolbuddy`
+--
+
+LOCK TABLES `carpoolbuddy` WRITE;
+/*!40000 ALTER TABLE `carpoolbuddy` DISABLE KEYS */;
+INSERT INTO `carpoolbuddy` VALUES ('arnavku','carpool-1','Diamond District','10:50:00'),('ayusht','carpool-1','Manipal Hospital','10:55:00'),('govindm','carpool-1','domlur flyover','11:00:00'),('ishak','carpool-2','Command Hospital','08:30:00'),('mdaliej','carpool-2','Trinity Church','08:45:00'),('mzhao','carpool-2','barbeque nation','09:00:00'),('nibub','carpool-1','Kundalahalli','11:10:00');
+/*!40000 ALTER TABLE `carpoolbuddy` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -109,7 +138,7 @@ CREATE TABLE `requests` (
 
 LOCK TABLES `requests` WRITE;
 /*!40000 ALTER TABLE `requests` DISABLE KEYS */;
-INSERT INTO `requests` VALUES ('ishak','carpool-1','now','here', 'diamond district somewhere');
+INSERT INTO `requests` VALUES ('ishak','carpool-1','00:00:00','here','diamond district somewhere');
 /*!40000 ALTER TABLE `requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-09-05 17:15:16
+-- Dump completed on 2012-09-06 15:17:16
