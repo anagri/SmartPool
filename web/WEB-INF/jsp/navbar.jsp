@@ -47,8 +47,17 @@
                     <li><a href="#notifications">Notifications</a></li>
                     <li>
                         <form action="${appName}/carpool/search" method="GET" class="searchForm">
-                            <input type="text" name="query" value="${searchQuery}" id="searchBox" class="searchText"/>
-                            <button type="submit" class="btn searchButton" value="Search" style="padding: 3px 14px"/>Search</button>
+
+                            <c:choose>
+                                <c:when test="${empty searchQuery}">
+                                    <input type="text" name="query" value="Enter Location" id="searchBox" class="searchText" onclick="this.value=''"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="text" name="query" value="${searchQuery}" id="searchBox" class="searchText" />
+                                </c:otherwise>
+                            </c:choose>
+
+                                <button type="submit" class="btn searchButton" value="Search"/>Search</button>
                         </form>
                     </li>
 
