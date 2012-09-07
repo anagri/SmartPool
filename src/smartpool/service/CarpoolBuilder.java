@@ -24,5 +24,5 @@ public class CarpoolBuilder {
         ROUTE_PLAN_1.add("Kormangala");
     }
     public static Carpool CARPOOL_1 = new Carpool("carpool-1", LocalDate.now(), CabType.COMPANY, 100, new LocalTime(9, 0), LocalTime.now(), Status.ACTIVE, BUDDIES_CARPOOL_1, 4, ROUTE_PLAN_1);
-    public static final Carpool CARPOOL_2 = new Carpool("Domlur-1", LocalDate.now(), CabType.COMPANY, 100, new LocalTime(10, 0), LocalTime.now(), Status.PENDING, BUDDIES_CARPOOL_2, 4, new ArrayList<String>());
+    public static final Carpool CARPOOL_2 = new Carpool("Domlur-1", LocalDate.now(), CabType.COMPANY, 100, new LocalTime(10, 0), LocalTime.now(), Status.NOT_STARTED, BUDDIES_CARPOOL_2, 4, new ArrayList<String>());
 }

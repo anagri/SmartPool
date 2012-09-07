@@ -37,7 +37,7 @@ public class CreateCarpoolForm {
 
     public Carpool getDomainObject(Buddy currentBuddy) {
 
-        Carpool carpool = new Carpool(from + " - " + to, proposedStartDate, cabType, 0, officeArrivalTime, officeDepartureTime, Status.PENDING, null, 0, routePoints);
+        Carpool carpool = new Carpool(from + " - " + to, proposedStartDate, cabType, 0, officeArrivalTime, officeDepartureTime, Status.NOT_STARTED, null, 0, routePoints);
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
         carpoolBuddies.add(new CarpoolBuddy(currentBuddy,pickupPoint,pickupTime));
         carpool.setCarpoolBuddies(carpoolBuddies);

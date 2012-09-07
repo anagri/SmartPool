@@ -1,6 +1,5 @@
 package smartpool.domain;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
@@ -21,7 +20,7 @@ public class Carpool {
     private ArrayList<String> routePoints = new ArrayList<String>();
 
     public Carpool() {
-        status = Status.PENDING;
+        status = Status.NOT_STARTED;
     }
 
     public Carpool(String name, LocalDate startDate, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officeETD, Status status, ArrayList<CarpoolBuddy> carpoolBuddies, int capacity, ArrayList<String> routePoints) {

@@ -23,7 +23,7 @@ public class CreateCarpoolFormTest {
         routePoints.add("route");
         routePoints.add("points");
 
-        assertThat(createCarpoolForm.getDomainObject(buddy), equalTo(new Carpool("from - to", Constants.DATE_FORMATTER.parseLocalDate("16/9/2012"), CabType.PERSONAL, 0, Constants.TIME_FORMATTER.parseLocalTime("11:00"), Constants.TIME_FORMATTER.parseLocalTime("18:00"), Status.PENDING, carpoolBuddies, 0, routePoints)));
+        assertThat(createCarpoolForm.getDomainObject(buddy), equalTo(new Carpool("from - to", Constants.DATE_FORMATTER.parseLocalDate("16/9/2012"), CabType.PERSONAL, 0, Constants.TIME_FORMATTER.parseLocalTime("11:00"), Constants.TIME_FORMATTER.parseLocalTime("18:00"), Status.NOT_STARTED, carpoolBuddies, 0, routePoints)));
     }
 
 }

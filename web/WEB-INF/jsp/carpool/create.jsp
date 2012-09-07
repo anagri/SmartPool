@@ -40,6 +40,10 @@
             </select>
         </span>
         <span>
+            <label>Capacity</label>
+            <input type="text" name="capacity" />
+        </span>
+        <span>
             <label>Office Arrival Time:</label>
             <input type="text" name="officeArrivalTime" required/>
             <label class="example">(10:00)</label>

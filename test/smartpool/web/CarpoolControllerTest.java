@@ -113,7 +113,7 @@ public class CarpoolControllerTest {
         routePoints.add("Kormangla");
         routePoints.add("Domlur");
 
-        Carpool carpool = new Carpool("from - to",new LocalDate(2012,6,15), CabType.PERSONAL,0,new LocalTime(10,0),new LocalTime(18,0),Status.PENDING, carpoolBuddies,0, routePoints);
+        Carpool carpool = new Carpool("from - to",new LocalDate(2012,6,15), CabType.PERSONAL,0,new LocalTime(10,0),new LocalTime(18,0),Status.NOT_STARTED, carpoolBuddies,0, routePoints);
         carpoolController.create(new CreateCarpoolForm("from", "to", "15/06/2012", "pickupPoint", "9:00", "PERSONAL", "10:00", "18:00", "Kormangla, Domlur"), model, request);
 
         verify(carpoolService).insert(carpool);
