@@ -8,6 +8,12 @@ repositories {
 
 defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble', 'install', 'functionalTest'
 
+if (System.getenv('SMARTPOOL_ENV') == 'qa' || System.getenv('SMARTPOOL_ENV') == 'uat') {
+    println("START: Copying of " + System.getenv('SMARTPOOL_ENV') + ".properties")
+    ant.copy(file: "src/main/resources/" + System.getenv('SMARTPOOL_ENV') + ".properties", tofile: "src/main/resources/app.properties")
+    println("END: Copying of " + System.getenv('SMARTPOOL_ENV') + ".properties")
+}
+
 ant.importBuild 'build.xml'
 
 sourceSets {
@@ -37,7 +43,6 @@ project.ext {
     springSecurityVersion = "3.0.2.RELEASE"
     springSecurityCasVersion = "3.1.0.RELEASE"
     casClientVersion = "3.1.3"
-    environmentName = System.getenv('SMARTPOOL_ENV') != null ? System.getenv('SMARTPOOL_ENV') : 'dev'
     appProperties = new Properties()
     new File("src/main/resources/app.properties").withInputStream {
         stream -> appProperties.load(stream)
@@ -47,9 +52,6 @@ project.ext {
 war {
     from 'web'
     baseName appProperties['applicationName']
-    if (environmentName == 'qa' || environmentName == 'uat') {
-        ant.copy(file: "src/main/resources/" + System.getenv('SMARTPOOL_ENV') + ".properties", tofile: "src/main/resources/app.properties")
-    }
 }
 
 task prepareTomcat {
