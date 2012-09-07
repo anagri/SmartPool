@@ -8,12 +8,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import smartpool.domain.*;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolBuilder;
 import smartpool.service.CarpoolService;
 import smartpool.service.RouteService;
 import smartpool.web.form.CreateCarpoolForm;
+import smartpool.web.form.CreateCarpoolFormValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -25,9 +27,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.hasItems;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CarpoolControllerTest {
@@ -41,19 +41,26 @@ public class CarpoolControllerTest {
     private BuddyService buddyService;
     @Mock
     private RouteService routeService;
+    @Mock
+    private CreateCarpoolFormValidator createCarpoolFormValidator;
+    @Mock
+    private CreateCarpoolForm createCarpoolForm;
+    @Mock
+    private BindingResult errors;
 
     private ModelMap model;
+
     private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
-
     private ArrayList<Carpool> defaultCarpools;
+
+
     private final CarpoolBuddy testBuddy = new CarpoolBuddy(new Buddy("testBuddy"),"location",new LocalTime(10,30));
-
-
     private List<String> defaultRouteLocations;
 
     @Before
     public void setUp() throws Exception {
-        carpoolController = new CarpoolController(carpoolService,buddyService, routeService);
+
+        carpoolController = new CarpoolController(carpoolService,buddyService, routeService, createCarpoolFormValidator);
         when(carpoolService.getByName("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
 
@@ -65,6 +72,8 @@ public class CarpoolControllerTest {
         when(buddyService.getCurrentBuddy(request)).thenReturn(testBuddy.getBuddy());
 
         when(request.getParameter("query")).thenReturn("Diamond District");
+
+        when(createCarpoolForm.getDomainObject(testBuddy.getBuddy())).thenReturn(expectedCarpool);
 
         defaultRouteLocations = Arrays.asList("Diamond District");
     }
@@ -101,7 +110,7 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpoolWhenPostedOnCreate(){
-        assertThat(carpoolController.create(new CreateCarpoolForm("from", "to", "15/06/2012", "pickupPoint", "9:00", "PERSONAL", "0", "10:00", "18:00", "Kormangla"), model, request), equalTo("redirect:/carpool/from - to"));
+        assertThat(carpoolController.create(new CreateCarpoolForm("from", "to", "15/06/2012", "pickupPoint", "9:00", "PERSONAL", "0", "10:00", "18:00", "Kormangla"), errors, model, request), equalTo("redirect:/carpool/from - to"));
     }
 
     @Test
@@ -114,7 +123,7 @@ public class CarpoolControllerTest {
         routePoints.add("Domlur");
 
         Carpool carpool = new Carpool("from - to",new LocalDate(2012,6,15), CabType.PERSONAL,0,new LocalTime(10,0),new LocalTime(18,0),Status.NOT_STARTED, carpoolBuddies,0, routePoints);
-        carpoolController.create(new CreateCarpoolForm("from", "to", "15/06/2012", "pickupPoint", "9:00", "PERSONAL", "0", "10:00", "18:00", "Kormangla, Domlur"), model, request);
+        carpoolController.create(new CreateCarpoolForm("from", "to", "15/06/2012", "pickupPoint", "9:00", "PERSONAL", "0", "10:00", "18:00", "Kormangla, Domlur"), errors, model, request);
 
         verify(carpoolService).insert(carpool);
     }
@@ -129,10 +138,29 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldAddCurrentBuddyToCarpoolWhileCreating() throws Exception {
-        CreateCarpoolForm createCarpoolForm = mock(CreateCarpoolForm.class);
         when(createCarpoolForm.getDomainObject(testBuddy.getBuddy())).thenReturn(new Carpool("testName"));
-        carpoolController.create(createCarpoolForm, model, request);
+        carpoolController.create(createCarpoolForm, errors, model, request);
         verify(createCarpoolForm).getDomainObject(testBuddy.getBuddy());
+    }
+
+    @Test
+    public void shouldValidateFormBeforeCreatingCarpool() throws Exception {
+        carpoolController.create(createCarpoolForm,errors ,model,request);
+        verify(createCarpoolFormValidator).validate(createCarpoolForm,errors);
+    }
+
+    @Test
+    public void shouldRedirectToCreatePageIfValidationhasErrors() throws Exception {
+        when(errors.hasErrors()).thenReturn(true);
+        String redirectPage = carpoolController.create(createCarpoolForm,errors ,model,request);
+        assertThat(redirectPage,is("carpool/create"));
+    }
+
+    @Test
+    public void shouldGiveBackTheFormInModelWhenValidationHasErrors() throws Exception {
+        when(errors.hasErrors()).thenReturn(true);
+        carpoolController.create(createCarpoolForm, errors,model,request);
+        assertThat((CreateCarpoolForm) model.get("createCarpoolForm"),is(createCarpoolForm));
     }
 
     @Test
@@ -142,4 +170,6 @@ public class CarpoolControllerTest {
         carpoolController.searchByLocation(model, request);
         assertThat((List<String>) model.get("routePoints"), is(defaultRouteLocations));
     }
+
+
 }

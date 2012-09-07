@@ -28,7 +28,7 @@ public class CreateCarpoolFormValidator implements Validator {
         if(form.officeDepartureTime  == null || form.officeDepartureTime.equals("")) errors.rejectValue("officeDepartureTime", Constants.FIELD_REQUIRED);
 
         try{
-            Constants.DATE_FORMATTER.parseLocalDate(form.proposedStartDate);
+            if(form.proposedStartDate != null) Constants.DATE_FORMATTER.parseLocalDate(form.proposedStartDate);
         }catch (IllegalArgumentException e){
             errors.rejectValue("proposedStartDate",Constants.FIELD_INVALID);
         }
@@ -38,7 +38,7 @@ public class CreateCarpoolFormValidator implements Validator {
         checkForInvalidTime(errors,form.officeDepartureTime,"officeDepartureTime");
 
         try{
-            Integer.parseInt(form.capacity);
+            if(form.capacity != null) Integer.parseInt(form.capacity);
         }catch (NumberFormatException e){
             errors.rejectValue("capacity",Constants.FIELD_INVALID);
         }
@@ -47,7 +47,7 @@ public class CreateCarpoolFormValidator implements Validator {
 
     private void checkForInvalidTime(Errors errors, String fieldValue, String fieldName) {
         try{
-            Constants.TIME_FORMATTER.parseLocalTime(fieldValue);
+            if(fieldValue != null) Constants.TIME_FORMATTER.parseLocalTime(fieldValue);
         }catch (IllegalArgumentException e){
             errors.rejectValue(fieldName,Constants.FIELD_INVALID);
         }

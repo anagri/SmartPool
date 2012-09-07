@@ -4,6 +4,7 @@ package smartpool.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
 import smartpool.service.RouteService;
 import smartpool.web.form.CreateCarpoolForm;
+import smartpool.web.form.CreateCarpoolFormValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -24,13 +26,15 @@ public class CarpoolController {
     private CarpoolService carpoolService;
     private BuddyService buddyService;
     private RouteService routeService;
+    private CreateCarpoolFormValidator validator;
 
     @Autowired
-    public CarpoolController(CarpoolService carpoolService, BuddyService buddyService, RouteService routeService) {
+    public CarpoolController(CarpoolService carpoolService, BuddyService buddyService, RouteService routeService, CreateCarpoolFormValidator validator) {
 
         this.carpoolService = carpoolService;
         this.buddyService = buddyService;
         this.routeService = routeService;
+        this.validator = validator;
     }
 
     @RequestMapping(value = "/carpool/{name}", method = RequestMethod.GET)
@@ -70,7 +74,12 @@ public class CarpoolController {
     }
 
     @RequestMapping(value = "/carpool/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute CreateCarpoolForm createCarpoolForm, ModelMap model, HttpServletRequest request) {
+    public String create(@ModelAttribute CreateCarpoolForm createCarpoolForm, BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
+        validator.validate(createCarpoolForm,bindingResult);
+        if(bindingResult.hasErrors()){
+            model.put("createCarpoolForm",createCarpoolForm);
+            return "carpool/create";
+        }
         Carpool carpool = createCarpoolForm.getDomainObject(buddyService.getCurrentBuddy(request));
         carpoolService.insert(carpool);
         return "redirect:/carpool/" + carpool.getName();

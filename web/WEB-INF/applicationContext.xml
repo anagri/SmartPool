@@ -10,6 +10,7 @@
     <b:bean id="casFilter" class="smartpool.web.filter.CasFilter"/>
 
     <b:bean name="joinRequestValidator" class="smartpool.web.form.JoinRequestFormValidator" />
+    <b:bean name="createCarpoolValidator" class="smartpool.web.form.CreateCarpoolFormValidator" />
 
     <b:bean id="messageSource"
             class="org.springframework.context.support.ResourceBundleMessageSource">

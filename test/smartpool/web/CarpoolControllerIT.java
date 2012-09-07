@@ -11,6 +11,7 @@ import smartpool.persistence.dao.RouteDao;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
 import smartpool.service.RouteService;
+import smartpool.web.form.CreateCarpoolFormValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -26,7 +27,7 @@ public class CarpoolControllerIT {
     @Test
     public void shouldSearchForCarpool() {
         initMocks(this);
-        CarpoolController carpoolController = new CarpoolController(new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao()), new BuddyService(), new RouteService(new RouteDao()));
+        CarpoolController carpoolController = new CarpoolController(new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao()), new BuddyService(), new RouteService(new RouteDao()), new CreateCarpoolFormValidator());
         ModelMap model = new ModelMap();
         request.setAttribute("query", "Sony Centre");
         carpoolController.searchByLocation(model, request);
