@@ -46,37 +46,63 @@ public class JoinCarPoolControllerTest {
 
     @Test
     public void shouldReturnView() {
-        String buddyUserName = "ishak";
-        when(buddyService.getUserNameFromCAS(request)).thenReturn(buddyUserName);
-        when(buddyService.getBuddy(buddyUserName)).thenReturn(new Buddy(buddyUserName));
+        String buddyUserName = "test.twu";
+        String carpoolName = "carpool-2";
+        Buddy testUser = new Buddy(buddyUserName);
 
-        when(carpoolService.getByName("carpool-1")).thenReturn(new Carpool("carpool-1"));
-        String userDetails = joinCarPoolController.getUserDetails("carpool-1", model, request);
+        when(buddyService.getUserNameFromCAS(request)).thenReturn(buddyUserName);
+        when(buddyService.getBuddy(buddyUserName)).thenReturn(testUser);
+        when(joinRequestService.isRequestSent(testUser, carpoolName)).thenReturn(false);
+        when(carpoolService.isValidCarpool(carpoolName)).thenReturn(true);
+        when(carpoolService.canUserSendRequest(buddyUserName, carpoolName)).thenReturn(true);
+        when(carpoolService.getByName("carpool-2")).thenReturn(new Carpool("carpool-2"));
+
+        String userDetails = joinCarPoolController.getUserDetails("carpool-2", model, request);
         assertThat(userDetails, equalTo("carpool/joinRequest"));
         assertThat((Buddy) model.get("buddy"), equalTo(new Buddy(buddyUserName)));
     }
 
     @Test
     public void shouldReturnViewForABuddy_WhoHasAlreadyRequestedToJoinACarpool() {
-        String buddyUserName = "ishak";
-        String carpoolName = "carpool-1";
-        Buddy isha = new Buddy(buddyUserName);
+        String buddyUserName = "test.twu";
+        String carpoolName = "carpool-2";
+        Buddy testUser = new Buddy(buddyUserName);
 
         when(buddyService.getUserNameFromCAS(request)).thenReturn(buddyUserName);
-        when(buddyService.getBuddy(buddyUserName)).thenReturn(isha);
-        when(joinRequestService.isRequestSent(isha, carpoolName)).thenReturn(true);
-        when(carpoolService.getByName("carpool-1")).thenReturn(new Carpool("carpool-1"));
+        when(buddyService.getBuddy(buddyUserName)).thenReturn(testUser);
+        when(joinRequestService.isRequestSent(testUser, carpoolName)).thenReturn(true);
+        when(carpoolService.isValidCarpool(carpoolName)).thenReturn(true);
+        when(carpoolService.canUserSendRequest(buddyUserName, carpoolName)).thenReturn(false);
+        when(carpoolService.getByName("carpool-2")).thenReturn(new Carpool("carpool-2"));
 
-        joinCarPoolController.getUserDetails(carpoolName, model, request);
-        assertThat((Boolean) model.get("isRequestSent"), equalTo(true));
+        String view = joinCarPoolController.getUserDetails(carpoolName, model, request);
+        assertThat(view, is("redirect:/carpool/search"));
     }
 
     @Test
     public void shouldRedirectToViewCarpool() throws Exception {
-        JoinRequestForm joinRequest = new JoinRequestForm("ishak", "carpool-1", "here", "09:30", "address", "999999999");
-        ModelAndView expectedURL = joinCarPoolController.submitUserDetails("carpool-1", joinRequest, new BindException(joinRequest, "joinRequest"), request);
+        String buddyUserName = "test.twu";
+        String carpoolName = "carpool-2";
+        Buddy testUser = new Buddy(buddyUserName);
+
+        when(buddyService.getUserNameFromCAS(request)).thenReturn(buddyUserName);
+        when(buddyService.getBuddy(buddyUserName)).thenReturn(testUser);
+        when(joinRequestService.isRequestSent(testUser, carpoolName)).thenReturn(false);
+        when(carpoolService.isValidCarpool(carpoolName)).thenReturn(true);
+        when(carpoolService.canUserSendRequest(buddyUserName, carpoolName)).thenReturn(true);
+        when(carpoolService.getByName("carpool-2")).thenReturn(new Carpool("carpool-2"));
+
+        JoinRequestForm joinRequest = new JoinRequestForm(buddyUserName, "carpool-2", "here", "09:30", "address", "999999999");
+        ModelAndView expectedURL = joinCarPoolController.submitUserDetails("carpool-2", joinRequest, new BindException(joinRequest, "joinRequest"), request);
 
         assertThat(expectedURL.getView(), instanceOf(RedirectView.class));
-        assertThat(((RedirectView) expectedURL.getView()).getUrl(), is("../../carpool/carpool-1"));
+        assertThat(((RedirectView) expectedURL.getView()).getUrl(), is("../../carpool/carpool-2"));
+    }
+
+    @Test
+    public void testShouldRedirectToSearchWhenAccessingInvalidCarPool() throws Exception {
+        
+
+
     }
 }

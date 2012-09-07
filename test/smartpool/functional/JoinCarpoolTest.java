@@ -9,9 +9,9 @@ public class JoinCarpoolTest extends BaseTest {
     public void sendJoinRequestWithoutErrors() throws Exception {
         HomePage homePage = new LoginPage(webDriver).login();
         homePage.goToListCarpoolsPage()
-                .gotoViewCarpoolDetails()
+                .goToVacantCarpoolDetails()
                 .goToJoinCarpoolPage()
-                .enterJoinRequestDetails();
+                .enterJoinRequestDetails()  ;
 
 
 

@@ -43,14 +43,13 @@ public class JoinCarPoolController {
 
     @RequestMapping(value = "carpool/join/{carpoolName}", method = RequestMethod.GET)
     public String getUserDetails(@PathVariable String carpoolName, ModelMap model, HttpServletRequest request) {
-        String userName = getCurrentUserNameFromRequest(request);
-        Carpool carpool = carpoolService.getByName(carpoolName);
-        if (carpool == null) {
+        String username = getCurrentUserNameFromRequest(request);
+        if (!isJoinRequestPossible(username, carpoolName)) {
             return "redirect:/carpool/search";
         }
-        carpoolService.canUserSendRequest(userName, carpool);
+        carpoolService.canUserSendRequest(username, carpoolName);
 
-        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddyService.getBuddy(userName),"pickupPoint",new LocalTime(10,00));
+        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddyService.getBuddy(username),"pickupPoint",new LocalTime(10,00));
         JoinRequestForm joinRequestForm = new JoinRequestForm(carpoolBuddy, carpoolName);
         model.put("buddy", carpoolBuddy.getBuddy());
         model.put("joinRequestForm", joinRequestForm);
@@ -64,7 +63,9 @@ public class JoinCarPoolController {
                                           BindingResult bindingResult,
                                           HttpServletRequest request) {
         String username = getCurrentUserNameFromRequest(request);
-
+        if (!isJoinRequestPossible(username, carpoolName)) {
+            return new ModelAndView(new RedirectView("../../carpool/search"));
+        }
         joinRequestForm.setUsername(username);
         joinRequestForm.setCarpoolName(carpoolName);
         Buddy buddy = buddyService.getBuddy(username);
@@ -82,6 +83,10 @@ public class JoinCarPoolController {
             joinRequestService.sendJoinRequest(joinRequestForm.createDomainObject());
             return new ModelAndView(new RedirectView("../../carpool/" + carpoolName));
         }
+    }
+
+    public boolean isJoinRequestPossible(String username, String carpool) {
+        return carpoolService.isValidCarpool(carpool) && carpoolService.canUserSendRequest(username, carpool);
     }
 
 

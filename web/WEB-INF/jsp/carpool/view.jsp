@@ -92,7 +92,7 @@
                 </c:when>
                 <c:otherwise>
                     <form method="get" action="join/${carpool.getName()}" class="joinCarpoolButton" action="<c:url value="/carpool/join/${carpool.name}"/>">
-                        <button type="submit" value="Join">Join Carpool</button>
+                        <button id="joinRequestButton" type="submit" value="Join">Join Carpool</button>
                     </form>
                 </c:otherwise>
             </c:choose>

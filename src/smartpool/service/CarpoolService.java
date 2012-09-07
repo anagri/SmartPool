@@ -33,7 +33,7 @@ public class CarpoolService {
 
     public Carpool getByName(String carpoolName) {
         Carpool carpool = carpoolDao.get(carpoolName);
-        if (carpool == null) return  carpool;
+        if (carpool == null) return carpool;
 
         ArrayList<CarpoolBuddy> carpoolBuddies = getCarpoolBuddyListByName(carpool.getName());
         carpool.setCarpoolBuddies(carpoolBuddies);
@@ -75,10 +75,10 @@ public class CarpoolService {
             carpoolBuddyDao.insert(carpoolBuddy,carpool);
         }
         ArrayList<String> routePoints = carpool.getRoutePoints();
-        int sequenceNumber=0;
+        int sequenceNumber = 0;
         for (String routePoint : routePoints) {
             sequenceNumber++;
-            routeDao.insert(carpool.getName(), routePoint.trim(),sequenceNumber);
+            routeDao.insert(carpool.getName(), routePoint.trim(), sequenceNumber);
         }
     }
 
@@ -104,5 +104,13 @@ public class CarpoolService {
 
     public boolean canUserSendRequest(String username, Carpool carpool) {
         return !hasBuddy(username, carpool) && carpool.hasVacancy();
+    }
+
+    public boolean canUserSendRequest(String username, String carpool) {
+        return canUserSendRequest(username, getByName(carpool));
+    }
+
+    public boolean isValidCarpool(String carpoolName) {
+        return getByName(carpoolName) != null;
     }
 }

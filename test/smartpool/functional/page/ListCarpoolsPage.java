@@ -9,8 +9,12 @@ import org.openqa.selenium.support.How;
 public class ListCarpoolsPage extends Page {
 
     public static final String CARPOOL_1_ID = "carpool-1";
+    public static final String CARPOOL_2_ID = "carpool-2";
     @FindBy(how = How.ID, using = CARPOOL_1_ID)
     private WebElement carpool1;
+    @FindBy(how = How.ID, using = CARPOOL_2_ID)
+
+    private WebElement carpool2;
 
     public ListCarpoolsPage(WebDriver webDriver) {
         super(webDriver);
@@ -24,5 +28,11 @@ public class ListCarpoolsPage extends Page {
     public ViewCarpoolPage gotoViewCarpoolDetails() {
         carpool1.click();
         return new ViewCarpoolPage(webDriver);
+    }
+
+    public ViewCarpoolPage goToVacantCarpoolDetails() {
+        carpool2.click();
+        return new ViewCarpoolPage(webDriver);
+
     }
 }
