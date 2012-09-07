@@ -6,7 +6,7 @@ repositories {
     mavenCentral()
 }
 
-defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble', 'install'//, 'functionalTest'
+defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble', 'install', 'functionalTest'
 
 ant.importBuild 'build.xml'
 
@@ -113,7 +113,6 @@ dependencies {
             "commons-codec:commons-codec:1.4",
             "commons-logging:commons-logging:1.1",
             "org.apache.santuario:xmlsec:1.4.0",
-            "log4j:log4j:1.2.17",
             "org.opensaml:opensaml:1.1",
             "cas:casclient:2.0.11",
             "ant-contrib:ant-contrib:20020829"
