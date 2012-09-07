@@ -25,9 +25,4 @@ public class RouteServiceIT {
 
         assertEquals(carpoolNamesExpected, carpoolNamesActual);
     }
-
-    @Test
-    public void shouldGetAllLocationsFromDatabase() throws Exception {
-        assertEquals(8, routeService.getAllLocation().size());
-    }
 }

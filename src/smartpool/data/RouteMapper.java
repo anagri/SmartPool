@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface RouteMapper {
 
-    final static String SELECT_ALL_CARPOOL_NAMES = "select distinct carpoolName from route where location like #{location}";
-    final static String SELECT_ALL_LOCATIONS = "select distinct location from route";
+    final static String SELECT_ALL_CARPOOL_NAMES = "select distinct carpoolName from route,carpoolbuddy where location like #{location} or pickup_point like #{location} and carpoolName=carpool_name";
+    final static String SELECT_ALL_LOCATIONS = "select distinct location from route union select distinct pickup_point from carpoolbuddy";
     final static String INSERT = "insert into route (carpoolName,location, sequenceNumber) values(#{param1}, #{param2}, #{param3})";
     String DELETE = "delete from route where carpoolName = #{param1} and location = #{param2}";
 

@@ -20,4 +20,11 @@ public class CarpoolServiceIT {
         assertEquals("carpool-1", allCarpoolsByLocation.get(0).getName());
         assertEquals(2, allCarpoolsByLocation.size());
     }
+
+    @Test
+    public void shouldFilterCarpoolsFromPickupPoints() {
+        CarpoolService carpoolService = new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao());
+        List<Carpool> allCarpoolsByLocation = carpoolService.findAllCarpoolsByLocation("Kundalahalli");
+        assertEquals("carpool-1", allCarpoolsByLocation.get(0).getName());
+    }
 }
