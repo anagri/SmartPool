@@ -12,16 +12,16 @@
 <div class="mainContainer">
     <div class="subContainer">
         <span><label>Name:</label></span>
-        <span><label id="myProfileName">${buddyProfile.getName()}</label></span>
+        <span><label id="profileName">${buddyProfile.getName()}</label></span>
     </div>
     <div class="subContainer">
         <span><label>Contact Number:</label></span>
-        <span><label id="myProfilePhoneNumber">${buddyProfile.getContactNumber()}</label></span>
+        <span><label id="profilePhoneNumber">${buddyProfile.getContactNumber()}</label></span>
     </div>
 
     <div class="subContainer">
         <span><label>Email:</label></span>
-        <span><label id="myProfileEmail">${buddyProfile.getEmailId()}</label></span>
+        <span><label id="profileEmail">${buddyProfile.getEmailId()}</label></span>
     </div>
 
     <div class="subContainer">

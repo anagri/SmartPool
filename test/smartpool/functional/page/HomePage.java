@@ -43,9 +43,9 @@ public class HomePage extends Page {
         return new ListCarpoolsPage(webDriver);
     }
 
-    public MyProfilePage goToMyProfilePage() {
+    public ProfilePage goToMyProfilePage() {
         myProfileLink.click();
-        return new MyProfilePage(webDriver);
+        return new ProfilePage(webDriver);
     }
 
     public CreateCarpoolPage goToCreateCarpoolPage() {

@@ -64,7 +64,7 @@
                 </ul>
                 <form class="navbar-form pull-right" id="logoutForm" action="${appName}/logout" method="GET">
                     ${casUserName}
-                    <button type="submit" class="btn btn-small" style="margin-top: 7px">Logout</button>
+                    <button type="submit" class="btn btn-small" style="margin-top: 4px">Logout</button>
                 </form>
             </div>
         </div>

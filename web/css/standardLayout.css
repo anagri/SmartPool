@@ -51,6 +51,7 @@ button.disabled {
     font-size: 14px;
     padding: 2px 11px;
     line-height: 17px;
+    height: 26px;
 }
 
 .navbar .container{
@@ -89,6 +90,10 @@ button.disabled {
 
 .navbar-form input, .navbar-form select, .navbar-form .btn {
     display: inline-block;
+}
+
+.navbar-form{
+    margin-top: 4px;
 }
 
 .navbar .nav > li > a {
