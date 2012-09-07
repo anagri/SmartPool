@@ -16,7 +16,7 @@
     </div>
     <div class="subContainer">
         <span><label>Contact Number:</label></span>
-        <span><label>${buddyProfile.getContactNumber()}</label></span>
+        <span><label id="myProfilePhoneNumber">${buddyProfile.getContactNumber()}</label></span>
     </div>
 
     <div class="subContainer">
