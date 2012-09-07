@@ -17,12 +17,9 @@ import static smartpool.service.BuddyService.extractUsernameFromRequest;
 
 
 public class ProfileCheckFilter extends GenericFilterBean {
-    @Autowired
     private BuddyService buddyService;
 
-    public ProfileCheckFilter() {
-    }
-
+    @Autowired
     public ProfileCheckFilter(BuddyService buddyService) {
         this.buddyService = buddyService;
     }

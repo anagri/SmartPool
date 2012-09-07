@@ -2,10 +2,11 @@ package smartpool.web;
 
 import org.junit.Test;
 import org.mockito.Mock;
-import smartpool.util.EnvironmentLoader;
+import smartpool.common.Constants;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -20,16 +21,16 @@ public class LogoutControllerTest {
     private HttpSession session;
 
     @Mock
-    private EnvironmentLoader environmentLoader;
+    private Properties appProperties;
 
     @Test
     public void shouldCheckSessionIsInvalid() throws Exception {
         initMocks(this);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("username")).thenReturn("suganthi");
-        when(environmentLoader.getProperty(EnvironmentLoader.CAS_SERVER_URL)).thenReturn("testCAS");
+        when(appProperties.getProperty(Constants.CAS_SERVER_URL)).thenReturn("testCAS");
 
-        LogoutController logoutController = new LogoutController(environmentLoader);
+        LogoutController logoutController = new LogoutController(appProperties);
         String logoutURL = logoutController.logout(request);
 
         assertEquals("redirect:testCAS/logout", logoutURL);

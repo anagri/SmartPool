@@ -16,31 +16,19 @@
     </context-param>
 
     <filter>
-        <filter-name>CAS Authentication Filter</filter-name>
-        <filter-class>edu.yale.its.tp.cas.client.filter.CASFilter</filter-class>
-        <init-param>
-            <param-name>edu.yale.its.tp.cas.client.filter.loginUrl</param-name>
-            <param-value>${casServerUrl}/login</param-value>
-        </init-param>
-        <init-param>
-            <param-name>edu.yale.its.tp.cas.client.filter.validateUrl</param-name>
-            <param-value>${casServerUrl}/serviceValidate</param-value>
-        </init-param>
-        <init-param>
-            <param-name>edu.yale.its.tp.cas.client.filter.serverName</param-name>
-            <param-value>${smartpoolServerName}</param-value>
-        </init-param>
+        <filter-name>casFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
+
+    <filter-mapping>
+        <filter-name>casFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <filter>
         <filter-name>profileCheckFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
-
-    <filter-mapping>
-        <filter-name>CAS Authentication Filter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 
     <filter-mapping>
         <filter-name>profileCheckFilter</filter-name>
