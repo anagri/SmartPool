@@ -33,7 +33,7 @@
                 </thead>
                 <c:forEach var="carpoolBuddy" items="${carpool.getCarpoolBuddies()}" varStatus="sequence">
                     <c:set var="buddy" value="${carpoolBuddy.getBuddy()}" />
-                    <tr>
+                    <tr class="seat-occupied">
                         <td class="buddy-sequence">${sequence.index + 1}</td>
                         <td><a href="../buddyProfile/${buddy.getUserName()}" id="${buddy.getUserName()}">${buddy.getName()}</a></td>
                         <td>${carpoolBuddy.getPickupPoint()}</td>
@@ -41,9 +41,9 @@
                     </tr>
                 </c:forEach>
                 <c:forEach var="i" begin="${carpool.getCarpoolBuddies().size()+1}" end="${carpool.getCapacity()}">
-                    <tr>
+                    <tr class="seat-available">
                         <td class="buddy-sequence">${i}</td>
-                        <td>(VACANT)</td>
+                        <td>(SEAT AVAILABLE)</td>
                         <td>----</td>
                         <td>--:-- --</td>
                     </tr>
@@ -80,21 +80,36 @@
 
             <p><strong>Status:</strong> ${carpool.getStatus()}</p>
 
-            <c:choose>
-                <c:when test="${!hasEnoughSpace}">
-                    <label>This carpool is already full.</label>
-                    <button disabled="disabled">Carpool Full</button>
-                </c:when>
-                <c:when test="${alreadyInCarpool}">
-                    <label>You are already in this carpool.</label>
-                    <button disabled="disabled">Already Joined</button>
+            <%--<c:choose>--%>
+                <%--<c:when test="${!hasEnoughSpace}">--%>
+                    <%--<label>This carpool is already full.</label>--%>
+                    <%--<button disabled="disabled">Carpool Full</button>--%>
+                <%--</c:when>--%>
+                <%--<c:when test="${alreadyInCarpool}">--%>
+                    <%--<label>You are already in this carpool.</label>--%>
+                    <%--<button disabled="disabled">Already Joined</button>--%>
 
-                </c:when>
-                <c:otherwise>
+                <%--</c:when>--%>
+                <%--<c:otherwise>--%>
+                    <%--<form method="get" action="${carpool.getName()}/join" class="joinCarpoolButton" action="<c:url value="/carpool/join/${carpool.name}"/>">--%>
+                        <%--<button type="submit" value="Join">Join Carpool</button>--%>
+                    <%--</form>--%>
+                <%--</c:otherwise>--%>
+            <%--</c:choose>--%>
+
+
+            <c:choose>
+                <c:when test="${(carpool.getCarpoolBuddies().size() < carpool.getCapacity()) && !buddyIsInCarpool}">
+                    <%--<form method="post" class="joinCarpoolButton">--%>
+                        <%--<button type="submit" value="Join" >Join Carpool</button>--%>
+                    <%--</form>--%>
                     <form method="get" action="join/${carpool.getName()}" class="joinCarpoolButton" action="<c:url value="/carpool/join/${carpool.name}"/>">
                         <button id="joinRequestButton" type="submit" value="Join">Join Carpool</button>
                     </form>
-                </c:otherwise>
+                </c:when>
+                <c:when test="${(carpool.getCarpoolBuddies().size() == carpool.getCapacity()) && !buddyIsInCarpool}">
+                    <span class="warning">NO SEATS AVAILABLE</span>
+                </c:when>
             </c:choose>
 
         </div>

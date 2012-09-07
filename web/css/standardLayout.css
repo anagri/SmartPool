@@ -121,6 +121,10 @@ label{
     font-size: 16px;
 }
 
+.warning{
+    color: red;
+}
+
 input[type="text"] {
     border-radius: 3px 3px 3px 3px;
     color: #555555;
