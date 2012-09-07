@@ -50,13 +50,4 @@ public class BuddyDaoIT {
         boolean result = buddyDao.exists("arnavku");
         assertThat(result, is(true));
     }
-
-//    @Test
-//    @Ignore
-//    public void shouldAddBuddyToACarpool() throws Exception {
-//        Buddy buddy = new Buddy("vfranca");
-//        Carpool carpool = new Carpool("carpool-1");
-//        buddyDao.addToCarpool(buddy, carpool);
-//        assertThat(buddyDao.getBuddyListByCarpoolName("carpool-1").contains(buddy),equalTo(true));
-//    }
 }
