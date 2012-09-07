@@ -59,6 +59,7 @@ public class HomePage extends Page {
     }
 
     public SearchResultPage enterSearchQuery(String searchQuery) {
+        searchCarpoolBox.click();
         searchCarpoolBox.sendKeys(searchQuery);
         searchCarpoolBox.submit();
         return new SearchResultPage(webDriver, searchQuery);
