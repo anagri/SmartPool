@@ -2,7 +2,7 @@
     <jsp:param name="css" value="createCarpool.css,standardLayout.css"/>
     <jsp:param name="title" value="Create Carpool" />
 </jsp:include>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/carpool/create.js"></script>
 
     <div>
         <label class="header">Create Carpool</label>
@@ -39,7 +39,7 @@
                 <option value="COMPANY">Company</option>
             </select>
         </span>
-        <span>
+        <span id="capacity">
             <label>Capacity</label>
             <input type="text" name="capacity" />
         </span>
