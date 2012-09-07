@@ -1,5 +1,6 @@
 package smartpool.web;
 
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
+import smartpool.domain.CarpoolBuddy;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
 import smartpool.service.JoinRequestService;
@@ -42,20 +44,17 @@ public class JoinCarPoolController {
     @RequestMapping(value = "carpool/join/{carpoolName}", method = RequestMethod.GET)
     public String getUserDetails(@PathVariable String carpoolName, ModelMap model, HttpServletRequest request) {
         String userName = getCurrentUserNameFromRequest(request);
-
         Carpool carpool = carpoolService.getByName(carpoolName);
         if (carpool == null) {
             return "redirect:/carpool/search";
         }
         carpoolService.canUserSendRequest(userName, carpool);
 
-        Buddy buddy = buddyService.getBuddy(userName);
-        JoinRequestForm joinRequestForm = new JoinRequestForm(buddy, carpoolName);
-        model.put("buddy", buddy);
-        model.put("carpoolName", carpoolName);
+        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddyService.getBuddy(userName),"pickupPoint",new LocalTime(10,00));
+        JoinRequestForm joinRequestForm = new JoinRequestForm(carpoolBuddy, carpoolName);
+        model.put("buddy", carpoolBuddy.getBuddy());
         model.put("joinRequestForm", joinRequestForm);
-        model.put("isRequestSent", joinRequestService.isRequestSent(buddy, carpoolName));
-
+        model.put("isRequestSent", joinRequestService.isRequestSent(carpoolBuddy.getBuddy(), carpoolName));
         return "carpool/joinRequest";
     }
 

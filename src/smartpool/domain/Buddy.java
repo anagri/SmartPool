@@ -1,11 +1,12 @@
 package smartpool.domain;
 
-import org.joda.time.LocalTime;
-
 public class Buddy {
 
-    private String username, name, address, contactNumber, emailId, pickupPoint;
-    private LocalTime pickupTime;
+    private String username;
+    private String name;
+    private String address;
+    private String contactNumber;
+    private String emailId;
 
     private Buddy() {
     }
@@ -57,20 +58,5 @@ public class Buddy {
     @Override
     public int hashCode() {
         return username != null ? username.hashCode() : 0;
-    }
-
-    public String getPickupPoint() {
-        return pickupPoint;
-    }
-    public LocalTime getPickupTime() {
-        return pickupTime;
-    }
-
-    public void setPickupTime(LocalTime pickupTime) {
-        this.pickupTime = pickupTime;
-    }
-
-    public void setPickupPoint(String pickupPoint) {
-        this.pickupPoint = pickupPoint;
     }
 }

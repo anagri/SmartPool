@@ -1,5 +1,6 @@
 package smartpool.persistence.dao;
 
+import junit.framework.Assert;
 import org.joda.time.LocalTime;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -9,10 +10,7 @@ import smartpool.domain.Carpool;
 
 import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -28,8 +26,7 @@ public class BuddyDaoIT {
     @Test
     public void shouldGetBuddyByUserName(){
         Buddy expectedBuddy = new Buddy("arnavku");
-        assertEquals(expectedBuddy, buddyDao.selectBuddy("arnavku"));
-        assertEquals("Diamond District", buddyDao.selectBuddy("arnavku").getPickupPoint());
+        Assert.assertEquals(expectedBuddy, buddyDao.selectBuddy("arnavku"));
     }
 
     @Test
@@ -57,12 +54,12 @@ public class BuddyDaoIT {
         assertThat(result, is(true));
     }
 
-    @Test
-    @Ignore
-    public void shouldAddBuddyToACarpool() throws Exception {
-        Buddy buddy = new Buddy("vfranca");
-        Carpool carpool = new Carpool("carpool-1");
-        buddyDao.addToCarpool(buddy, carpool);
-        assertThat(buddyDao.getBuddyListByCarpoolName("carpool-1").contains(buddy),equalTo(true));
-    }
+//    @Test
+//    @Ignore
+//    public void shouldAddBuddyToACarpool() throws Exception {
+//        Buddy buddy = new Buddy("vfranca");
+//        Carpool carpool = new Carpool("carpool-1");
+//        buddyDao.addToCarpool(buddy, carpool);
+//        assertThat(buddyDao.getBuddyListByCarpoolName("carpool-1").contains(buddy),equalTo(true));
+//    }
 }

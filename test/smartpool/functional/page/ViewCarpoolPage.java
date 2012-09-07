@@ -42,6 +42,6 @@ public class ViewCarpoolPage extends Page {
     }
 
     public void verifyDetailsOfNewCarpool() {
-        assertEquals("Carpool Carpool-FNTEST",carpoolName.getText());
+        assertEquals("Carpool from - to",carpoolName.getText());
     }
 }

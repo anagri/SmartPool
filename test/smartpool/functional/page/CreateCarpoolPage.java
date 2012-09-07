@@ -17,7 +17,7 @@ public class CreateCarpoolPage extends Page {
     private WebElement fromTextBox;
 
 
-    @FindBy(how = How.NAME, using = "startDateForm")
+    @FindBy(how = How.NAME, using = "proposedStartDate")
     private WebElement startDateTextBox;
 
     @FindBy(how = How.NAME, using = "pickupPoint")
@@ -26,13 +26,13 @@ public class CreateCarpoolPage extends Page {
     @FindBy(how = How.NAME, using = "pickupTime")
     private WebElement pickupTimeTextBox;
 
-    @FindBy(how = How.NAME, using = "officeETAForm")
+    @FindBy(how = How.NAME, using = "officeArrivalTime")
     private WebElement officeETATextBox;
 
-    @FindBy(how = How.NAME, using = "officeETDForm")
+    @FindBy(how = How.NAME, using = "officeDepartureTime")
     private WebElement officeETDTextBox;
 
-    @FindBy(how = How.NAME, using = "routePointForm")
+    @FindBy(how = How.NAME, using = "routePoints")
     private WebElement routePointTextBox;
 
     @FindBy(how = How.NAME, using = "submit")

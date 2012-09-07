@@ -1,7 +1,7 @@
 package smartpool.web.form;
 
 import org.joda.time.LocalTime;
-import smartpool.domain.Buddy;
+import smartpool.domain.CarpoolBuddy;
 import smartpool.domain.JoinRequest;
 
 public class JoinRequestForm {
@@ -26,10 +26,10 @@ public class JoinRequestForm {
         this.contactNumber = contactNumber;
     }
 
-    public JoinRequestForm(Buddy buddy, String carpoolName) {
-        this(buddy.getUserName(), carpoolName, buddy.getPickupPoint(),
-                buddy.getPickupTime() == null ? "" : buddy.getPickupTime().toString("h:mm"),
-                buddy.getAddress(), buddy.getContactNumber());
+    public JoinRequestForm(CarpoolBuddy carpoolBuddy, String carpoolName) {
+        this(carpoolBuddy.getBuddy().getUserName(), carpoolName, carpoolBuddy.getPickupPoint(),
+                carpoolBuddy.getPickupTime() == null ? "" : carpoolBuddy.getPickupTime().toString("h:mm"),
+                carpoolBuddy.getBuddy().getAddress(), carpoolBuddy.getBuddy().getContactNumber());
     }
 
     public JoinRequest createDomainObject() {

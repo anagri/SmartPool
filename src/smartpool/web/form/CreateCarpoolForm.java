@@ -78,7 +78,7 @@ public class CreateCarpoolForm {
 
     public void setRoutePoints(String routePoints) {
         for (String routePoint : routePoints.split(",")) {
-            this.routePoints.add(routePoint);
+            this.routePoints.add(routePoint.trim());
         }
     }
 

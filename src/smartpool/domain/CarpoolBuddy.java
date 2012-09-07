@@ -4,8 +4,11 @@ import org.joda.time.LocalTime;
 
 public class CarpoolBuddy {
     Buddy buddy;
+
     String pickupPoint;
     LocalTime pickupTime;
+
+    public CarpoolBuddy(){}
 
     public CarpoolBuddy(Buddy buddy, String pickupPoint, LocalTime pickupTime) {
         this.buddy = buddy;

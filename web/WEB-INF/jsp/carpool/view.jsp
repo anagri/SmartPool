@@ -35,10 +35,9 @@
                     <c:set var="buddy" value="${carpoolBuddy.getBuddy()}" />
                     <tr>
                         <td class="buddy-sequence">${sequence.index + 1}</td>
-                        <td><a href="../buddyProfile/${buddy.getUserName()}"
-                               id="${buddy.getUserName()}">${buddy.getName()}</a></td>
-                        <td>${buddy.getPickupPoint()}</td>
-                        <td>${buddy.getPickupTime().toString("h:mm a")}</td>
+                        <td><a href="../buddyProfile/${buddy.getUserName()}" id="${buddy.getUserName()}">${buddy.getName()}</a></td>
+                        <td>${carpoolBuddy.getPickupPoint()}</td>
+                        <td>${carpoolBuddy.getPickupTime().toString("h:mm a")}</td>
                     </tr>
                 </c:forEach>
                 <c:forEach var="i" begin="${carpool.getCarpoolBuddies().size()+1}" end="${carpool.getCapacity()}">

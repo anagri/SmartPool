@@ -26,13 +26,17 @@ public class RouteDao {
         sqlSession = sqlSessionFactory.openSession();
         RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
 
-        return routeMapper.getCarpoolNameList("%" + location + "%");
+        List<String> carpoolNameList = routeMapper.getCarpoolNameList("%" + location + "%");
+        sqlSession.close();
+        return carpoolNameList;
     }
 
     public List<String> getAllLocations() {
         sqlSession = sqlSessionFactory.openSession();
         RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
-        return routeMapper.getAllLocations();
+        List<String> allLocations = routeMapper.getAllLocations();
+        sqlSession.close();
+        return allLocations;
     }
 
 
@@ -41,6 +45,7 @@ public class RouteDao {
         RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
         routeMapper.insert(carpoolName, routePoints, sequenceNumber);
         sqlSession.commit();
+        sqlSession.close();
     }
 
     public void delete(String carpoolName, String location) {
@@ -48,11 +53,14 @@ public class RouteDao {
         RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
         routeMapper.delete(carpoolName, location);
         sqlSession.commit();
+        sqlSession.close();
     }
 
     public ArrayList<String> getLocationsFor(String carpoolName) {
         sqlSession = sqlSessionFactory.openSession();
         RouteMapper routeMapper = sqlSession.getMapper(RouteMapper.class);
-        return routeMapper.getLocationsFor(carpoolName);
+        ArrayList<String> locations = routeMapper.getLocationsFor(carpoolName);
+        sqlSession.close();
+        return locations;
     }
 }

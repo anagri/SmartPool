@@ -5,6 +5,7 @@ import org.mockito.Mock;
 import org.springframework.ui.ModelMap;
 import smartpool.domain.Carpool;
 import smartpool.persistence.dao.BuddyDao;
+import smartpool.persistence.dao.CarpoolBuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
 import smartpool.persistence.dao.RouteDao;
 import smartpool.service.BuddyService;
@@ -25,7 +26,7 @@ public class CarpoolControllerIT {
     @Test
     public void shouldSearchForCarpool() {
         initMocks(this);
-        CarpoolController carpoolController = new CarpoolController(new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao()), new BuddyService(new BuddyDao()), new RouteService(new RouteDao()));
+        CarpoolController carpoolController = new CarpoolController(new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao()), new BuddyService(), new RouteService(new RouteDao()));
         ModelMap model = new ModelMap();
         request.setAttribute("query", "Sony Centre");
         carpoolController.searchByLocation(model, request);

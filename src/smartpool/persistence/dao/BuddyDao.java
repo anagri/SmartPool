@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import smartpool.common.MyBatisConnectionFactory;
 import smartpool.data.BuddyMapper;
 import smartpool.domain.Buddy;
-import smartpool.domain.Carpool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,17 +45,6 @@ public class BuddyDao {
         try {
             BuddyMapper mapper = session.getMapper(BuddyMapper.class);
             return mapper.selectBuddyListByCarpoolName(carpoolName);
-        } finally {
-            session.close();
-        }
-    }
-
-    public void addToCarpool(Buddy buddy, Carpool carpool) {
-        SqlSession session = sqlSessionFactory.openSession();
-        try {
-            BuddyMapper mapper = session.getMapper(BuddyMapper.class);
-            mapper.addToCarpool(buddy.getUserName(), carpool.getName());
-            session.commit();
         } finally {
             session.close();
         }
