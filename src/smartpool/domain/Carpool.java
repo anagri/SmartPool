@@ -5,7 +5,7 @@ import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
 
-public class Carpool {
+public class Carpool implements Comparable{
     private String name;
 
     private LocalDate startDate;
@@ -174,5 +174,12 @@ public class Carpool {
         result = 31 * result + capacity;
         result = 31 * result + (routePoints != null ? routePoints.hashCode() : 0);
         return result;
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        Carpool carpool = (Carpool)o;
+        return this.status.compareTo(carpool.status);
     }
 }

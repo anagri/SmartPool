@@ -9,6 +9,7 @@ import smartpool.common.Constants;
 import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
 import smartpool.domain.CarpoolBuddy;
+import smartpool.domain.Status;
 import smartpool.persistence.dao.BuddyDao;
 import smartpool.persistence.dao.CarpoolBuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
@@ -175,5 +176,20 @@ public class CarpoolServiceTest {
         carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home", "preferredPoint", new LocalTime(10, 30)), "diamond district", new LocalTime(9, 20)));
         carpool.setCarpoolBuddies(carpoolBuddies);
         Assert.assertFalse(carpoolService.canUserSendRequest("username", carpool));
+    }
+
+    @Test
+    public void shouldReturnCarpoolsInOrder() throws Exception {
+        Carpool carpool1 = new Carpool("runningCarpool");
+        carpool1.setStatus(Status.ACTIVE);
+        Carpool carpool2 = new Carpool("pendingCarpool");
+        carpool2.setStatus(Status.NOT_STARTED);
+        ArrayList<Carpool> carpoolList = new ArrayList<Carpool>();
+        carpoolList.add(carpool2);
+        carpoolList.add(carpool1);
+
+        when(carpoolDao.selectAllCarpools()).thenReturn(carpoolList);
+        List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("");
+        assertThat(carpoolList.get(0),is(carpool1));
     }
 }

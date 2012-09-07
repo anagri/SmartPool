@@ -11,6 +11,7 @@ import smartpool.persistence.dao.CarpoolDao;
 import smartpool.persistence.dao.RouteDao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -53,15 +54,17 @@ public class CarpoolService {
     }
 
     public List<Carpool> findAllCarpoolsByLocation(String location) {
-        if (isBlank(location)) {
-            return getAllCarpools();
-        }
-
-        List<String> carpoolNames = routeDao.getCarpoolNameListByLocation(location.trim());
         List<Carpool> carpools = new ArrayList<Carpool>();
-        for (String name : carpoolNames) {
-            carpools.add(findCarpoolByName(name));
+        if (isBlank(location)) {
+            carpools = getAllCarpools();
         }
+        else {
+            List<String> carpoolNames = routeDao.getCarpoolNameListByLocation(location.trim());
+            for (String name : carpoolNames) {
+                carpools.add(findCarpoolByName(name));
+            }
+        }
+        Collections.sort(carpools);
         return carpools;
     }
 
