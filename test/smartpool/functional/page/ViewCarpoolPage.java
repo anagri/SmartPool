@@ -13,15 +13,20 @@ public class ViewCarpoolPage extends Page {
     public static final String CARPOOL_NAME_ID = "carpoolName";
     public static final String BUDDY_PROFILE_ID = "arnavku";
     public static final String MORE_DETAILS_BUTTON = "moreDetailsButton";
+    private static final String JOIN_REQUEST_BUTTON = "joinRequestButton";
 
     @FindBy(how = How.ID, using = CARPOOL_NAME_ID)
     private WebElement carpoolName;
 
-    @FindBy(how = How.ID, using = "ayusht")
+    @FindBy(how = How.LINK_TEXT, using = "Ayush Tulsyan")
     private WebElement ayushtLink;
 
     @FindBy(how = How.CLASS_NAME, using = MORE_DETAILS_BUTTON)
     private WebElement moreDetailsButton;
+
+    @FindBy(how = How.ID, using = JOIN_REQUEST_BUTTON)
+    private WebElement joinRequestButton;
+
 
     public ViewCarpoolPage(WebDriver webDriver) {
         super(webDriver);
@@ -41,7 +46,14 @@ public class ViewCarpoolPage extends Page {
         return new MyProfilePage(webDriver);
     }
 
+
     public void verifyDetailsOfNewCarpool() {
         assertEquals("Carpool from - to",carpoolName.getText());
+    }
+
+    public JoinCarpoolPage goToJoinCarpoolPage() {
+        joinRequestButton.click();
+        return new JoinCarpoolPage(webDriver);
+        //To change body of created methods use File | Settings | File Templates.
     }
 }
