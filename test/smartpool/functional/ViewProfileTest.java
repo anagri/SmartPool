@@ -12,7 +12,7 @@ public class ViewProfileTest extends BaseTest {
     public void viewMyProfileAndItsDetails() {
         HomePage homePage = new LoginPage(webDriver).login();
         homePage.goToMyProfilePage().
-                verifyProfileDetails("Test User");
+                verifyProfileDetails("Test User", "test@thoughtworks.com");
     }
 
     @Test
@@ -21,7 +21,7 @@ public class ViewProfileTest extends BaseTest {
         homePage.goToListCarpoolsPage().
                 gotoViewCarpoolDetails().
                 goToBuddyProfilePage().
-                verifyProfileDetails("Ayush Tulsyan");
+                verifyProfileDetails("Ayush Tulsyan", "ayusht@thoughtworks.com");
     }
 }
 

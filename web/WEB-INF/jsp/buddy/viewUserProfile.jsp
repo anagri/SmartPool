@@ -21,7 +21,7 @@
 
     <div class="subContainer">
         <span><label>Email:</label></span>
-        <span><label>${buddyProfile.getEmailId()}</label></span>
+        <span><label id="myProfileEmail">${buddyProfile.getEmailId()}</label></span>
     </div>
 
     <div class="subContainer">

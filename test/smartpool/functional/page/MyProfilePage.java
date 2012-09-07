@@ -12,8 +12,14 @@ import static junit.framework.Assert.assertEquals;
 public class MyProfilePage extends Page {
 
     public static final String MY_PROFILE_NAME_ID = "myProfileName";
+    public static final String MY_PROFILE_PHONE_ID = "myProfilePhone";
+    public static final String MY_PROFILE_EMAIL_ID = "myProfileEmail";
+
     @FindBy(how = How.ID, using = MY_PROFILE_NAME_ID)
     private WebElement myProfileName;
+
+    @FindBy(how = How.ID, using = MY_PROFILE_EMAIL_ID)
+    private WebElement myProfileEmail;
 
     public MyProfilePage(WebDriver webDriver) {
         super(webDriver);
@@ -24,7 +30,8 @@ public class MyProfilePage extends Page {
         waitForElementToLoad(By.id(MY_PROFILE_NAME_ID));
     }
 
-    public void verifyProfileDetails(String expectedUserName) {
+    public void verifyProfileDetails(String expectedUserName, String expectedUserEmail) {
         assertEquals(expectedUserName, myProfileName.getText());
+        assertEquals(expectedUserEmail, myProfileEmail.getText());
     }
 }
