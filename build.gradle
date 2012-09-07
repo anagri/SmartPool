@@ -10,7 +10,7 @@ defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble', 'install', '
 
 if (System.getenv('SMARTPOOL_ENV') == 'qa' || System.getenv('SMARTPOOL_ENV') == 'uat') {
     println("START: Copying of " + System.getenv('SMARTPOOL_ENV') + ".properties")
-    ant.copy(file: "src/main/resources/" + System.getenv('SMARTPOOL_ENV') + ".properties", tofile: "src/main/resources/app.properties")
+    ant.copy(file: "src/main/resources/" + System.getenv('SMARTPOOL_ENV') + ".properties", tofile: "src/main/resources/app.properties", overwrite: true)
     println("END: Copying of " + System.getenv('SMARTPOOL_ENV') + ".properties")
 }
 
