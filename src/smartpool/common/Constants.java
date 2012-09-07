@@ -11,4 +11,6 @@ public class Constants {
     public static final String HOST_NAME = "hostName";
     public static final String PORT_NUMBER = "port";
     public static final String CAS_SERVER_URL = "casServerUrl";
+    public static final String FIELD_REQUIRED = "field.required";
+    public static final String FIELD_INVALID = "field.invalid";
 }

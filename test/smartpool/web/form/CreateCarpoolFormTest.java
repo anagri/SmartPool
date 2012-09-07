@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 public class CreateCarpoolFormTest {
     @Test
     public void shouldCreateAValidDomainObjectForCarpool() throws Exception {
-        CreateCarpoolForm createCarpoolForm = new CreateCarpoolForm("from","to","16/9/2012","PickupPoint","10:00","PERSONAL", 6, "11:00","18:00","route,points");
+        CreateCarpoolForm createCarpoolForm = new CreateCarpoolForm("from","to","16/9/2012","PickupPoint","10:00","PERSONAL", "6", "11:00","18:00","route,points");
 
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
         Buddy buddy = new Buddy("buddyName");
