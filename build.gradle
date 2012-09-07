@@ -34,6 +34,7 @@ sourceSets {
     functionalTest {
         java {
             srcDir 'test/smartpool/functional'
+            srcDir 'test/smartpool/util/matchers'
         }
     }
 }
@@ -93,7 +94,8 @@ dependencies {
 
     functionalTestCompile "junit:junit:4.10",
             "org.mockito:mockito-core:1.8.4",
-            "org.seleniumhq.selenium:selenium-java:2.24.1"
+            "org.seleniumhq.selenium:selenium-java:2.24.1",
+            "org.apache.commons:commons-lang3:3.1"
 }
 
 // create a task in gradle to read user, password from property, execute mysql command with SmartPoolDB.sql so that it populates the DB

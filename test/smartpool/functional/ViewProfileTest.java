@@ -7,8 +7,6 @@ import smartpool.functional.page.ProfilePage;
 
 import static junit.framework.Assert.assertEquals;
 
-
-
 public class ViewProfileTest extends BaseTest {
 
     public final String OWN_USER_NAME="Test User";
@@ -23,6 +21,7 @@ public class ViewProfileTest extends BaseTest {
     public final String CONTACT_BUTTON_TEXT="Contact";
 
     public ProfilePage profilePage;
+
     @Test
     public void viewMyProfileAndItsDetails() {
         profilePage = new LoginPage(webDriver).login().goToMyProfilePage();

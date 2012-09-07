@@ -16,26 +16,27 @@ public class ViewCarpoolPage extends Page {
 
     public static final String CARPOOL_NAME_ID = "carpoolName";
 
-    public static final String BUDDY_PROFILE_ID = "arnavku";
+    public static final String BUDDY_PROFILE_ID = "ayusht";
     public static final String MORE_DETAILS_BUTTON = "moreDetailsButton";
     private static final String JOIN_REQUEST_BUTTON = "joinRequestButton";
-    //public static final String MORE_DETAILS_BUTTON = "moreDetailsButton";
 
     @FindBy(how = How.ID, using = CARPOOL_NAME_ID)
     private WebElement carpoolName;
 
     @FindBy(how = How.LINK_TEXT, using = "Ayush Tulsyan")
     private WebElement ayushtLink;
-
+    
     @FindBy(how = How.ID, using = "routePoints")
     private WebElement routepoints;
+    
+    @FindBy(how = How.CLASS_NAME, using = MORE_DETAILS_BUTTON)
+    private WebElement moreDetailsButton;
 
     @FindBy(how = How.LINK_TEXT, using = "More Details")
     private WebElement moreDetailsButtonLink;
 
     @FindBy(how = How.ID, using = JOIN_REQUEST_BUTTON)
     private WebElement joinRequestButton;
-
 
     public ViewCarpoolPage(WebDriver webDriver) {
         super(webDriver);
