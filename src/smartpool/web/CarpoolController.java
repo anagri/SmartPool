@@ -37,13 +37,15 @@ public class CarpoolController {
     public String viewCarpool(@PathVariable String name, ModelMap model, HttpServletRequest request) {
         Carpool carpool = carpoolService.getByName(name);
         String username = buddyService.getUserNameFromCAS(request);
+//        boolean buddyIsInCarpool = carpoolService.hasBuddy(buddyService.getUserNameFromCAS(request), carpool);
+
 
         model.put("carpool", carpool);
         model.put("COMPANY", CabType.COMPANY);
         model.put("PERSONAL", CabType.PERSONAL);
         model.put("hasEnoughSpace", carpool.hasVacancy());
-        model.put("alreadyInCarpool", carpoolService.hasBuddy(username, carpool));
-
+        model.put("buddyIsInCarpool", carpoolService.hasBuddy(username, carpool));
+//        model.put("buddyIsInCarpool", buddyIsInCarpool);
         return "carpool/view";
     }
 
