@@ -5,7 +5,7 @@ import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
 
-public class Carpool implements Comparable{
+public class Carpool implements Comparable {
     private String name;
 
     private LocalDate startDate;
@@ -21,6 +21,7 @@ public class Carpool implements Comparable{
 
     public Carpool() {
         status = Status.NOT_STARTED;
+        capacity = 1;
     }
 
     public Carpool(String name, LocalDate startDate, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officeETD, Status status, ArrayList<CarpoolBuddy> carpoolBuddies, int capacity, ArrayList<String> routePoints) {
@@ -135,6 +136,7 @@ public class Carpool implements Comparable{
     public int getVacancy() {
         return this.capacity - getBuddyCount();
     }
+
     public boolean hasVacancy() {
         return getVacancy() > 0;
     }
@@ -179,7 +181,7 @@ public class Carpool implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        Carpool carpool = (Carpool)o;
+        Carpool carpool = (Carpool) o;
         return this.status.compareTo(carpool.status);
     }
 }

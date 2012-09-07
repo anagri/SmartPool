@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public interface CarpoolBuddyMapper {
     String SELECT_PICKUP_POINT_AND_TIME = "select buddy_username, pickup_point, pickup_time from carpoolbuddy where carpool_name = #{carpoolName}";
+    String DELETE_BUDDY_FROM_CARPOOL = "delete from carpoolbuddy where buddy_username = #{userName} and carpool_name = #{carpoolName};";
 
     @Select(SELECT_PICKUP_POINT_AND_TIME)
             @Results(value = {
@@ -23,4 +24,7 @@ public interface CarpoolBuddyMapper {
 
     @Insert("insert into carpoolbuddy values(#{buddyUserName},#{carpoolName},#{pickupPoint},#{pickupTime})")
     void insert(@Param("buddyUserName")String userName,@Param("carpoolName") String carpoolName,@Param("pickupPoint") String pickupPoint,@Param("pickupTime") String pickupTime);
+
+    @Delete(DELETE_BUDDY_FROM_CARPOOL)
+    void remove(@Param("userName") String userName, @Param("carpoolName") String carpoolName);
 }

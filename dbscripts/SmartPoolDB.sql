@@ -107,7 +107,12 @@ CREATE TABLE `carpoolbuddy` (
 
 LOCK TABLES `carpoolbuddy` WRITE;
 /*!40000 ALTER TABLE `carpoolbuddy` DISABLE KEYS */;
-INSERT INTO `carpoolbuddy` VALUES ('arnavku','carpool-1','Diamond District','10:50:00'),('ayusht','carpool-1','Manipal Hospital','10:55:00'),('govindm','carpool-1','domlur flyover','11:00:00'),('ishak','carpool-2','Command Hospital','08:30:00'),('mdaliej','carpool-2','Trinity Church','08:45:00'),('mzhao','carpool-2','barbeque nation','09:00:00'),('nibub','carpool-1','Kundalahalli','11:10:00');
+INSERT INTO `carpoolbuddy` VALUES ('arnavku','carpool-1','Diamond District','10:50:00'),
+                                  ('ayusht','carpool-1','Manipal Hospital','10:55:00'),
+                                  ('nibub','carpool-1','Kundalahalli','11:10:00'),
+                                  ('ishak','carpool-2','Command Hospital','08:30:00'),
+                                  ('mdaliej','carpool-2','Trinity Church','08:45:00'),
+                                  ('mzhao','carpool-2','barbeque nation','09:00:00');
 /*!40000 ALTER TABLE `carpoolbuddy` ENABLE KEYS */;
 UNLOCK TABLES;
 

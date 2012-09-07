@@ -37,8 +37,9 @@ public class CarpoolBuddyDaoIT {
 
     @Test
     public void shouldInsertIntoDB() throws Exception {
-        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(new Buddy("prithvin"),"Ooty Chocolates",new LocalTime(10,0));
-        carpoolBuddyDao.insert(carpoolBuddy, new Carpool("carpool-2"));
-        assertThat(carpoolBuddyDao.getCarpoolBuddiesByCarpoolName("carpool-2").contains(carpoolBuddy),equalTo(true));
-    }
+        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(new Buddy("prithvin"),"location",new LocalTime(10,0));
+        carpoolBuddyDao.insert(carpoolBuddy, new Carpool("carpool-1"));
+        assertThat(carpoolBuddyDao.getCarpoolBuddiesByCarpoolName("carpool-1").contains(carpoolBuddy),equalTo(true));
+        carpoolBuddyDao.remove(carpoolBuddy, "carpool-1");
+    }   
 }

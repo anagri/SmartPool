@@ -6,6 +6,7 @@ import org.joda.time.LocalTime;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import smartpool.common.Constants;
 
 public class JoinRequestFormValidator implements Validator {
     public JoinRequestFormValidator() {
