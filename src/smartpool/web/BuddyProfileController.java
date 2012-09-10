@@ -24,6 +24,8 @@ public class BuddyProfileController {
     private BuddyService buddyService;
     private LDAPService ldapService;
 
+
+
     @Autowired
     public BuddyProfileController(BuddyService buddyService, LDAPService ldapService) {
         this.buddyService = buddyService;
@@ -53,22 +55,21 @@ public class BuddyProfileController {
         return "buddy/form";
     }
 
-    @RequestMapping(value = "/submit", method = RequestMethod.GET)
-    public ModelAndView submit(@ModelAttribute("createProfileForm") CreateProfileForm form, HttpServletRequest request, BindingResult bindingResult) {
-        new CreateProfileFormValidator().validate(form,bindingResult);
+    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    public ModelAndView submit(@ModelAttribute("createProfileForm") CreateProfileForm form, BindingResult bindingResult, HttpServletRequest request) {
+        new CreateProfileFormValidator().validate(form, bindingResult);
 
-        if(bindingResult.hasErrors()) {
-            String username = buddyService.getUserNameFromCAS(request);
-            LDAPResultSet ldapResultSet = ldapService.searchByUserName(username);
-            form.setUsername(username);
-            form.setName(ldapResultSet.name);
-            form.setEmail(ldapResultSet.email);
-
+        String username = buddyService.getUserNameFromCAS(request);
+        LDAPResultSet ldapResultSet = ldapService.searchByUserName(username);
+        form.setUsername(username);
+        form.setName(ldapResultSet.name);
+        form.setEmail(ldapResultSet.email);
+        if (bindingResult.hasErrors()) {
             ModelMap model = new ModelMap();
             model.addAttribute("createProfileForm", form);
             return new ModelAndView("buddy/form", model);
         }
-
+        buddyService.insert(form.createBuddy());
         return new ModelAndView(new RedirectView("/buddyProfile", true));
     }
 }
