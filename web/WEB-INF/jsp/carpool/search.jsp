@@ -50,7 +50,11 @@
                                 <td>${carpool.getStartPoint()}</td>
                                 <td>${carpool.getStartTime().toString("h:mm a")}</td>
                                 <td>${carpool.getBuddyCount()}</td>
-                                <td>${carpool.getVacancy()}</td>
+                                <td><c:choose>
+                                    <c:when test="${carpool.getVacancy()<0}">-</c:when>
+                                    <c:otherwise> ${carpool.getVacancy()}</c:otherwise>
+                                </c:choose>
+                               </td>
                                 <td id="status${typeStatus.count}">${carpool.getStatus()}</td>
                             </tr>
                        </c:forEach>
