@@ -11,7 +11,7 @@
 <div class="container">
     <div class="header">Join Smart Pool: ${carpoolName}</div>
     <c:if test="${isRequestSent}">
-        <span class="warning">You have already sent the request for this carpool</span>
+    <span class="warning">You have already sent the request for this carpool</span>
     </c:if>
     <style>
         .error {
@@ -24,6 +24,7 @@
             border: 3px solid #ff0000;
             padding: 8px;
             margin: 16px;
+
         }
     </style>
     <c:if test="${!isRequestSent}">
@@ -33,66 +34,49 @@
     </spring:hasBindErrors>
 
     <div class="mainContainer">
+            <span>
+                <label>Name*</label>
+                ${buddy.getName()}
+            </span>
 
-        <div class="subContainer">
-                    <span id="nameLabel">
-                        <label>Name*</label>
-                    </span>
-                    <span id="nameTextBox">
-                        ${buddy.getName()}<br/>
-                    </span>
-        </div>
-        <div class="subContainer">
-                    <span id="addressLabel">
-                        <label>Address</label>
-                    </span>
-                    <span>
-                        <textarea id="addressTextBox" name="address" rows="3" cols="30"
-                                  value="${joinRequestForm.address}"> </textarea> <br/>
-                    </span>
-        </div>
-        <div class="subContainer">
-                    <span id="contactNumberLabel">
-                        <label>Contact Number*</label>
-                     </span>
-                     <span id="contactNumberTextBox">
-                        <input name="contactNumber" type="textbox" required="required"
-                               value="${joinRequestForm.contactNumber}"/> <br/>
-                    </span>
-        </div>
-        <div class="subContainer">
-                    <span id="emailIdLabel">
-                        <label>Email*</label>
-                    </span>
-            <span id="emailIdTextBox">${buddy.getEmailId()}</span>
-        </div>
-        <div class="subContainer">
-                    <span id="pickupPointLabel">
-                        <label>Preferred Pick Up Point*</label>
-                    </span>
-                    <span>
+            <span>
+                <label>Address</label>
+                <textarea id="addressTextBox" name="address" rows="3" cols="30"
+                          value="${joinRequestForm.address}"> </textarea>
+            </span>
 
-                        <input id="pickupPointTextBox" name="pickupPoint" required="required" type="textbox"
-                               value="${joinRequestForm.pickupPoint}"/> <br/>
-                        <form:errors path="pickupPoint" cssClass="error"/>
-                    </span>
-        </div>
-        <div class="subContainer">
-                    <span id="pickupTimeLabel">
-                        <label>Pick Up Time (hh:mm)</label>
-                    </span>
-                    <span>
-                        <input id="pickupTimeTextBox" name="preferredPickupTime" type="text"
-                               value="${joinRequestForm.preferredPickupTime}"/> <br/>
-                        <form:errors path="preferredPickupTime" cssClass="error"/>
-                    </span>
-        </div>
+            <span>
+                <label>Contact Number*</label>
+                <input id="contactNumberTextBox" name="contactNumber" type="textbox" required="required"
+                       value="${joinRequestForm.contactNumber}"/>
+                 <form:errors path="contactNumber" cssClass="error"/>
+            </span>
+
+            <span>
+                <label>Email*</label>
+                ${buddy.getEmailId()}
+            </span>
+
+            <span>
+                <label>Preferred Pick Up Point*</label>
+                <input id="pickupPointTextBox" name="pickupPoint" required="required" type="textbox"
+                       value="${joinRequestForm.pickupPoint}"/>
+                <form:errors path="pickupPoint" cssClass="error"/>
+            </span>
+            <span>
+                <label>Pick Up Time (hh:mm)</label>
+                <input id="pickupTimeTextBox" name="preferredPickupTime" type="textbox"
+                       value="${joinRequestForm.preferredPickupTime}"/>
+                <form:errors path="preferredPickupTime" cssClass="error"/>
+                <label class="example"><spring:message code="pickupTimeExample"/></label>
+            </span>
+
         <div class="buttonContainer">
             <c:set var="isDisabled" value="${isRequestSent ? 'disabled' : ''}"/>
             <a href="<c:url value="/carpool/${carpoolName}" />">Cancel</a>
-            <button id="submitFormButton" align="right" name="submit" type="submit" ${isDisabled}>Submit</button>
+            <button id="submitFormButton" name="submit" type="submit" ${isDisabled}>Submit</button>
         </div>
     </div>
     </form:form>
     </c:if>
-    <%@ include file="../footer.jsp" %>
+<%@ include file="../footer.jsp" %>
