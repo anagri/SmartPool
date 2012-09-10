@@ -134,16 +134,13 @@ public class Carpool implements Comparable {
     }
 
     public int getVacancy() {
-        if (this.capacity > 0) {
-            return this.capacity - getBuddyCount();
-        }
-        else {
-            return 0;
-        }
+        return this.capacity - getBuddyCount();
     }
 
     public boolean hasVacancy() {
-        return getVacancy() > 0;
+        if(getVacancy()!=0)
+            return true;
+        return false;
     }
 
     @Override
