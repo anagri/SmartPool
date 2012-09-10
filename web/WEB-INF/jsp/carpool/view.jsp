@@ -54,7 +54,7 @@
             </table>
 
             <c:if test="${carpool.getCabType() == PERSONAL}">
-            <span style="font-size: smaller;"><i class="icon-leaf"></i>:car owner</span>
+            <span style="font-size: smaller;"><i class="icon-leaf"></i>:carpool lead</span>
             </c:if>
 
             <p style="margin-top:23px;margin-bottom: 6px;">Cab Type:
