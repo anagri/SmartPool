@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static junit.framework.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class MailServiceIT {
@@ -20,8 +21,21 @@ public class MailServiceIT {
     }
 
     @Test
-    public void shouldSendEmailsToCarpoolBuddies() throws Exception {
-        ArrayList<String> buddyEmailList = joinRequestService.getCarpoolBuddies("carpool-2");
-        assertTrue(mailService.sendMailToList(buddyEmailList, "", ""));
+    public void shouldSendEmailsToList() throws Exception {
+        ArrayList<String> emailList = new ArrayList<String>();
+        emailList.add("prithvin@thoughtworks.com");
+        emailList.add("ishak@thoughtworks.com");
+
+        assertTrue(mailService.sendMailToList(emailList, "", ""));
+    }
+
+    @Test
+    public void shouldFailWhileSendingEmailToWrongAddress() throws Exception {
+        ArrayList<String> emailList = new ArrayList<String>();
+        emailList.add("prithvin@thoughtworks.com");
+        emailList.add("jjajajaj");
+        emailList.add("ishak@thoughtworks.com");
+
+        assertFalse(mailService.sendMailToList(emailList, "", ""));
     }
 }

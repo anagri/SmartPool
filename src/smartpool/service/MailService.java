@@ -22,10 +22,12 @@ public class MailService {
     }
 
     public boolean sendMailToList(ArrayList<String> buddyEmailList, String subject, String message) {
+        Boolean status = true;
         Mail mail = new Mail();
         for(String email : buddyEmailList){
-            mail.sendMail(email, subject, message);
+            if(mail.sendMail(email, subject, message)==false)
+                status = false;
         }
-        return true;
+        return status;
     }
 }

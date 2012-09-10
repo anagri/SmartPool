@@ -15,6 +15,8 @@ public class Mail {
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("Prithvi"));
+            InternetAddress recipientAddress = new InternetAddress(to);
+            recipientAddress.validate();
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
             message.setSubject(subject);
