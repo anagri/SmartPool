@@ -31,7 +31,7 @@
 </script>
         <div class="containerWrapper">
             <div class="leftContent">
-                <h3 id="resultsMessage">Your search for "${searchQuery}" returned ${searchResult == null ? 0 : searchResult.size()} result{s}</h3>
+                <h3 style="font-weight: normal;" id="resultsMessage">Your search for "${searchQuery}" returned ${searchResult == null ? 0 : searchResult.size()} result{s}</h3>
                 <c:if test="${searchResult ne null}">
                     <table id='buddy-table'>
                         <thead>
@@ -62,7 +62,7 @@
                 </c:if>
             </div>
             <div class="rightContent">
-                <div class="marginTop60"><h3>Route Points</h3></div>
+                <div class="marginTop60"><h4 style="font-weight: normal;">Route Points</h4></div>
                 <select id="routePointList" onchange="searchByRoutePoint()">
                     <option value=""></option>
                     <c:forEach var="routePoint" items="${routePoints}" varStatus="typeStatus">

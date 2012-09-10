@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../navbar.jsp" flush="true">
     <jsp:param name="css" value="profileLayout.css,standardLayout.css"/>
-    <jsp:param name="title" value="${buddyProfile.getName()}'s Profile" />
+    <jsp:param name="title" value="SmartPool Profile" />
 </jsp:include>
 
 <div>

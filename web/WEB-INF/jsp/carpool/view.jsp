@@ -19,7 +19,7 @@
     <label id="carpoolName" class="header">Carpool ${carpool.getName()}</label>
 
     <div>
-        <h2>Buddy List</h2>
+        <h2 style="font-weight: normal;">Buddy List</h2>
 
         <div class="leftContent">
             <table class='buddy-table' style="margin-bottom: 4px;">
@@ -57,7 +57,7 @@
             <span style="font-size: smaller;"><i class="icon-leaf"></i>:car owner</span>
             </c:if>
 
-            <p style="margin-top:23px;margin-bottom: 6px;"><strong>Cab Type:</strong>
+            <p style="margin-top:23px;margin-bottom: 6px;">Cab Type:
             <c:choose>
                 <c:when test="${carpool.getCabType() == PERSONAL}">
                 ${carpool.getCabType()}
@@ -80,11 +80,11 @@
             </c:choose>
             </p>
 
-            <p><strong>Office Arrival Time:</strong> ${carpool.getOfficeETA().toString("h:mm a")}</p>
+            <p>Office Arrival Time: ${carpool.getOfficeETA().toString("h:mm a")}</p>
 
-            <p><strong>Office Pickup Time:</strong> ${carpool.getOfficeETD().toString("h:mm a")}</p>
+            <p>Office Pickup Time: ${carpool.getOfficeETD().toString("h:mm a")}</p>
 
-            <p><strong>Status:</strong> ${carpool.getStatus()}</p>
+            <p>Status: ${carpool.getStatus()}</p>
 
             <c:choose>
                 <c:when test="${!hasEnoughSpace && !buddyIsInCarpool}">
@@ -109,7 +109,7 @@
             <a href="javascript:void(0)" class="moreDetailsButton">More Details</a>
 
             <div class="hiddenContent">
-                <h2>Route Plan</h2>
+                <h4 style="font-weight: normal;">Route Plan</h4>
 
                 <div id="routePoints">
                     <ol>
@@ -122,17 +122,17 @@
 
             <div class="hiddenContent moreDetailsContent">
                 <c:if test="${carpool.getStatus().toString().equals(\"NOT_STARTED\")}">
-                    <p><strong>Proposed Start Date:<br/> </strong> ${carpool.getStartDate().toString("dd MMM Y")}</p>
+                    <p>Proposed Start Date:<br/> ${carpool.getStartDate().toString("dd MMM Y")}</p>
                 </c:if>
 
-                <p><strong>Capacity: </strong>
+                <p>Capacity:
                     <c:choose>
                         <c:when test="${carpool.getCapacity() > 0}"><span id="carpoolCapacity">${carpool.getCapacity()}</span></c:when>
                         <c:otherwise>To be set</c:otherwise>
                     </c:choose>
                 </p>
 
-                <p><strong>Total Cab Charges: </strong>
+                <p>Total Cab Charges:
                     <c:choose>
                         <c:when test="${carpool.getTotalCabCharges() > 0}">${carpool.getTotalCabCharges()}</c:when>
                         <c:otherwise>To be set</c:otherwise>
