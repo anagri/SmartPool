@@ -9,7 +9,7 @@ public class Buddy {
     private String address;
     private String contactNumber;
     private String preferredPickupPoint;
-    private LocalTime preferredTime;
+    private LocalTime preferredPickupTime;
     private String emailId;
 
     private Buddy() {
@@ -19,14 +19,14 @@ public class Buddy {
         this.username = username;
     }
 
-    public Buddy(String username, String name, String contactNumber, String emailId, String address, String preferredPickupPoint, LocalTime preferredTime) {
+    public Buddy(String username, String name, String contactNumber, String emailId, String address, String preferredPickupPoint, LocalTime preferredPickupTime) {
         this(username);
         this.name = name;
         this.address = address;
         this.emailId = emailId;
         this.contactNumber = contactNumber;
         this.preferredPickupPoint = preferredPickupPoint;
-        this.preferredTime = preferredTime;
+        this.preferredPickupTime = preferredPickupTime;
     }
 
     public String getName() {
@@ -53,8 +53,8 @@ public class Buddy {
         return preferredPickupPoint;
     }
 
-    public LocalTime getPreferredTime() {
-        return preferredTime;
+    public LocalTime getPreferredPickupTime() {
+        return preferredPickupTime;
     }
 
     @Override
