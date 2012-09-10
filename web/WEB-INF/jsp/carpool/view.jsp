@@ -127,7 +127,7 @@
 
                 <p><strong>Capacity: </strong>
                     <c:choose>
-                        <c:when test="${carpool.getCapacity() > 0}">${carpool.getCapacity()}</c:when>
+                        <c:when test="${carpool.getCapacity() > 0}"><span id="carpoolCapacity">${carpool.getCapacity()}</span></c:when>
                         <c:otherwise>To be set</c:otherwise>
                     </c:choose>
                 </p>

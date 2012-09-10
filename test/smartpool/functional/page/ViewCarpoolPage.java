@@ -15,10 +15,11 @@ import static smartpool.util.matchers.ContainsMatcher.contains;
 
 public class ViewCarpoolPage extends Page {
 
-    public static final String CARPOOL_NAME_ID = "carpoolName";
-    public static final String MORE_DETAILS_BUTTON = "moreDetailsButton";
+    private static final String CARPOOL_NAME_ID = "carpoolName";
+    private static final String MORE_DETAILS_BUTTON = "moreDetailsButton";
     private static final String JOIN_REQUEST_BUTTON = "joinRequestButton";
     private static final String STATUS_MESSAGE = "status-message";
+    private static final String CARPOOL_CAPACITY_ID = "carpoolCapacity";
 
     @FindBy(how = How.ID, using = CARPOOL_NAME_ID)
     private WebElement carpoolName;
@@ -41,6 +42,9 @@ public class ViewCarpoolPage extends Page {
     @FindBy(how = How.CLASS_NAME, using = STATUS_MESSAGE)
     private WebElement statusMessage;
 
+    @FindBy(how = How.ID, using = CARPOOL_CAPACITY_ID)
+    private WebElement carpoolCapacity;
+
     public ViewCarpoolPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -60,8 +64,11 @@ public class ViewCarpoolPage extends Page {
     }
 
 
-    public void verifyDetailsOfNewCarpool() {
-        assertEquals("Carpool from - to",carpoolName.getText());
+    public void verifyDetailsOfNewCarpool(String from) {
+        assertEquals(String.format("Carpool %s - TW", from),carpoolName.getText());
+        moreDetailsButtonLink.click();
+        waitForElementToVisible(By.id(CARPOOL_CAPACITY_ID));
+        assertEquals("4", carpoolCapacity.getText());
     }
 
     public JoinCarpoolPage goToJoinCarpoolPage() {

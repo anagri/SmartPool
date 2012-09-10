@@ -21,5 +21,4 @@ public class ViewCarpoolTest extends BaseTest {
                 .gotoViewCarpoolDetails()
                 .goToAndVerifyViewMoreDetails();
     }
-
 }

@@ -7,9 +7,13 @@ import smartpool.functional.page.LoginPage;
 public class CreateCarpoolTest extends BaseTest {
     @Test
     public void shouldCreateANewCarpool() throws Exception {
+        String carpoolName = "AA60";
         HomePage homePage = new LoginPage(webDriver).login();
         homePage.goToCreateCarpoolPage()
-                .enterCarpoolDetails()
-                .verifyDetailsOfNewCarpool();
+                .enterCarpoolDetails(carpoolName)
+                .verifyDetailsOfNewCarpool(carpoolName);
     }
+
+
+
 }

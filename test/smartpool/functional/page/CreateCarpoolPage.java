@@ -37,6 +37,9 @@ public class CreateCarpoolPage extends Page {
     @FindBy(how = How.NAME, using = "submit")
     private WebElement submitButton;
 
+    @FindBy(how = How.NAME, using = "capacity")
+    private WebElement capacityTextBox;
+
     public CreateCarpoolPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -46,12 +49,13 @@ public class CreateCarpoolPage extends Page {
         waitForElementToLoad(By.className(MAIN_CONTAINER_CLASS_NAME));
     }
 
-    public ViewCarpoolPage enterCarpoolDetails() {
-        fromTextBox.sendKeys("from");
-        toTextBox.sendKeys("to");
+    public ViewCarpoolPage enterCarpoolDetails(String from) {
+        fromTextBox.sendKeys(from);
+        toTextBox.sendKeys("TW");
         startDateTextBox.sendKeys("15/10/2012");
         pickupPointTextBox.sendKeys("Domlur");
         pickupTimeTextBox.sendKeys("10:15");
+        capacityTextBox.sendKeys("4");
         officeETATextBox.sendKeys("11:00");
         officeETDTextBox.sendKeys("18:00");
         routePointTextBox.sendKeys("Domlur, Oasis Mall");
@@ -59,3 +63,5 @@ public class CreateCarpoolPage extends Page {
         return new ViewCarpoolPage(webDriver);
     }
 }
+
+
