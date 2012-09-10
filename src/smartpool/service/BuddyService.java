@@ -41,4 +41,8 @@ public class BuddyService {
     public boolean exists(String username) {
         return buddyDao.exists(username);
     }
+
+    public void insert(Buddy buddy) {
+        buddyDao.insertIntoBuddies(buddy);
+    }
 }
