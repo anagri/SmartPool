@@ -28,8 +28,6 @@ public class JoinCarpoolPage extends Page {
 
     @FindBy(how = How.ID, using = SUBMIT_FORM_BUTTON_ID)
     private WebElement submitFormButton;
-    @FindBy(how = How.CLASS_NAME, using = JOIN_REQUEST_WARNING)
-    private WebElement warningMessage;
 
     public JoinCarpoolPage(WebDriver webDriver) {
         super(webDriver);
@@ -56,9 +54,5 @@ public class JoinCarpoolPage extends Page {
     public ViewCarpoolPage submitForm() {
         submitFormButton.click();
         return new ViewCarpoolPage(webDriver);
-    }
-
-    public void verifyFormSubmitted() {
-        assertEquals("You have already sent the request for this carpool", warningMessage.getText());
     }
 }

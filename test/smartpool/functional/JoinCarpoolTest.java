@@ -14,8 +14,7 @@ public class JoinCarpoolTest extends BaseTest {
                 .goToJoinCarpoolPage()
                 .enterJoinRequestDetails()
                 .submitForm()
-                .goToJoinCarpoolPage()
-                .verifyFormSubmitted();
+                .verifyJoinRequestPending();
     }
 
     @Override
