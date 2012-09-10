@@ -16,7 +16,6 @@ public class CreateCarpoolPage extends Page {
     @FindBy(how = How.NAME, using = "from")
     private WebElement fromTextBox;
 
-
     @FindBy(how = How.NAME, using = "proposedStartDate")
     private WebElement startDateTextBox;
 

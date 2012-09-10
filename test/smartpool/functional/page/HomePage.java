@@ -53,7 +53,6 @@ public class HomePage extends Page {
         return new CreateCarpoolPage(webDriver);
     }
 
-
     public void verifyWelcomeMessagePresent() {
         assertEquals("Welcome to SmartPool!", welcomeMessage.getText());
     }

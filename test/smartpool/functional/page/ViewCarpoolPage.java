@@ -15,8 +15,6 @@ import static smartpool.util.matchers.ContainsMatcher.contains;
 public class ViewCarpoolPage extends Page {
 
     public static final String CARPOOL_NAME_ID = "carpoolName";
-
-    public static final String BUDDY_PROFILE_ID = "ayusht";
     public static final String MORE_DETAILS_BUTTON = "moreDetailsButton";
     private static final String JOIN_REQUEST_BUTTON = "joinRequestButton";
 
