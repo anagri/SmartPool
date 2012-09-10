@@ -59,5 +59,15 @@ public class BuddyDao {
             session.close();
         }
     }
+
+    public void insertIntoBuddies(Buddy buddy) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            BuddyMapper mapper = session.getMapper(BuddyMapper.class);
+            mapper.insertIntoBuddies(buddy);
+        } finally {
+            session.close();
+        }
+    }
 }
 
