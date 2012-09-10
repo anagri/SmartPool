@@ -12,8 +12,8 @@ public class ListCarpoolsPage extends Page {
     public static final String CARPOOL_2_ID = "carpool-2";
     @FindBy(how = How.ID, using = CARPOOL_1_ID)
     private WebElement carpool1;
-    @FindBy(how = How.ID, using = CARPOOL_2_ID)
 
+    @FindBy(how = How.ID, using = CARPOOL_2_ID)
     private WebElement carpool2;
 
     public ListCarpoolsPage(WebDriver webDriver) {
