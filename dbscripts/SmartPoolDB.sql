@@ -60,7 +60,7 @@ DROP TABLE IF EXISTS `carpool`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `carpool` (
-  `name` varchar(15) NOT NULL DEFAULT '',
+  `name` varchar(50) NOT NULL DEFAULT '',
   `start_date` date DEFAULT NULL,
   `cab_type` enum('PERSONAL','COMPANY') DEFAULT NULL,
   `office_eta` time DEFAULT NULL,
