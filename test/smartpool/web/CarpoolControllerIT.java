@@ -4,12 +4,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.ui.ModelMap;
 import smartpool.domain.Carpool;
-import smartpool.persistence.dao.BuddyDao;
-import smartpool.persistence.dao.CarpoolBuddyDao;
-import smartpool.persistence.dao.CarpoolDao;
-import smartpool.persistence.dao.RouteDao;
+import smartpool.persistence.dao.*;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
+import smartpool.service.JoinRequestService;
 import smartpool.service.RouteService;
 import smartpool.web.form.CreateCarpoolFormValidator;
 
@@ -27,7 +25,7 @@ public class CarpoolControllerIT {
     @Test
     public void shouldSearchForCarpool() {
         initMocks(this);
-        CarpoolController carpoolController = new CarpoolController(new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao()), new BuddyService(), new RouteService(new RouteDao()), new CreateCarpoolFormValidator());
+        CarpoolController carpoolController = new CarpoolController(new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao()), new JoinRequestService(new JoinRequestDao()),new BuddyService(), new RouteService(new RouteDao()), new CreateCarpoolFormValidator());
         ModelMap model = new ModelMap();
         request.setAttribute("query", "Sony Centre");
         carpoolController.searchByLocation(model, request);

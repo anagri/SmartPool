@@ -10,10 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import smartpool.domain.*;
-import smartpool.service.BuddyService;
-import smartpool.service.CarpoolBuilder;
-import smartpool.service.CarpoolService;
-import smartpool.service.RouteService;
+import smartpool.service.*;
 import smartpool.web.form.CreateCarpoolForm;
 import smartpool.web.form.CreateCarpoolFormValidator;
 
@@ -47,8 +44,12 @@ public class CarpoolControllerTest {
     private CreateCarpoolForm createCarpoolForm;
     @Mock
     private BindingResult errors;
+    @Mock
+    private JoinRequestService joinRequestService;
 
     private ModelMap model;
+
+
 
     private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
     private ArrayList<Carpool> defaultCarpools;
@@ -60,7 +61,7 @@ public class CarpoolControllerTest {
     @Before
     public void setUp() throws Exception {
 
-        carpoolController = new CarpoolController(carpoolService,buddyService, routeService, createCarpoolFormValidator);
+        carpoolController = new CarpoolController(carpoolService,joinRequestService,buddyService, routeService, createCarpoolFormValidator);
         when(carpoolService.getByName("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
 

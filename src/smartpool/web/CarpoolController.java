@@ -13,6 +13,7 @@ import smartpool.domain.CabType;
 import smartpool.domain.Carpool;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
+import smartpool.service.JoinRequestService;
 import smartpool.service.RouteService;
 import smartpool.web.form.CreateCarpoolForm;
 import smartpool.web.form.CreateCarpoolFormValidator;
@@ -27,11 +28,13 @@ public class CarpoolController {
     private BuddyService buddyService;
     private RouteService routeService;
     private CreateCarpoolFormValidator validator;
+    private JoinRequestService joinRequestService;
 
     @Autowired
-    public CarpoolController(CarpoolService carpoolService, BuddyService buddyService, RouteService routeService, CreateCarpoolFormValidator validator) {
+    public CarpoolController(CarpoolService carpoolService, JoinRequestService joinRequestService,BuddyService buddyService, RouteService routeService, CreateCarpoolFormValidator validator) {
 
         this.carpoolService = carpoolService;
+        this.joinRequestService = joinRequestService;
         this.buddyService = buddyService;
         this.routeService = routeService;
         this.validator = validator;
@@ -41,15 +44,14 @@ public class CarpoolController {
     public String viewCarpool(@PathVariable String name, ModelMap model, HttpServletRequest request) {
         Carpool carpool = carpoolService.getByName(name);
         String username = buddyService.getUserNameFromCAS(request);
-//        boolean buddyIsInCarpool = carpoolService.hasBuddy(buddyService.getUserNameFromCAS(request), carpool);
 
 
         model.put("carpool", carpool);
         model.put("COMPANY", CabType.COMPANY);
         model.put("PERSONAL", CabType.PERSONAL);
         model.put("hasEnoughSpace", carpool.hasVacancy());
+        model.put("isRequestSent", joinRequestService.isRequestSent(buddyService.getBuddy(username), carpool.getName()));
         model.put("buddyIsInCarpool", carpoolService.hasBuddy(username, carpool));
-//        model.put("buddyIsInCarpool", buddyIsInCarpool);
         return "carpool/view";
     }
 

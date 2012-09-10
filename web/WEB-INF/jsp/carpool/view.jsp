@@ -81,14 +81,20 @@
             <p><strong>Status:</strong> ${carpool.getStatus()}</p>
 
             <c:choose>
-                <c:when test="${(carpool.getCarpoolBuddies().size() < carpool.getCapacity()) && !buddyIsInCarpool}">
-                    <form method="get" action="join/${carpool.getName()}" class="joinCarpoolButton" action="<c:url value="/carpool/join/${carpool.name}"/>">
-                        <button id="joinRequestButton" type="submit" value="Join">Join Carpool</button>
-                    </form>
-                </c:when>
-                <c:when test="${(carpool.getCarpoolBuddies().size() == carpool.getCapacity()) && !buddyIsInCarpool}">
+                <c:when test="${!hasEnoughSpace && !buddyIsInCarpool}">
                     <span class="warning">NO SEATS AVAILABLE</span>
                 </c:when>
+                <c:when test="${buddyIsInCarpool}">
+                    <span class="status-message">YOU ARE CURRENTLY A MEMBER OF THIS CARPOOL.</span>
+                </c:when>
+                <c:when test="${isRequestSent}">
+                    <span class="status-message">JOIN REQUEST PENDING</span>
+                </c:when>
+                <c:otherwise>
+                    <form method="get" action="join/${carpool.getName()}" class="joinCarpoolButton" action="<c:url value="/carpool/join/${carpool.name}"/>">
+                        <button type="submit" id="joinRequestButton" value="Join">Join Carpool</button>
+                    </form>
+                </c:otherwise>
             </c:choose>
 
         </div>

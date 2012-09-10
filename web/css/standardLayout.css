@@ -130,6 +130,10 @@ label{
     color: red;
 }
 
+.status-message{
+    color: green;
+}
+
 input[type="text"] {
     border-radius: 3px 3px 3px 3px;
     color: #555555;
