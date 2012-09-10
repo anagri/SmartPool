@@ -35,7 +35,9 @@
                     <c:set var="buddy" value="${carpoolBuddy.getBuddy()}" />
                     <tr class="seat-occupied">
                         <td class="buddy-sequence">${sequence.index + 1}</td>
-                        <td><a href="../buddyProfile/${buddy.getUserName()}" id="${buddy.getUserName()}">${buddy.getName()}</a></td>
+                        <td><a href="../buddyProfile/${buddy.getUserName()}" id="${buddy.getUserName()}">
+                        <c:if test="${sequence.index==0 && carpool.getCabType() == PERSONAL}"><i class="icon-leaf" style="margin-left: -19px;"></i></c:if>
+                        ${buddy.getName()}</a></td>
                         <td>${carpoolBuddy.getPickupPoint()}</td>
                         <td>${carpoolBuddy.getPickupTime().toString("h:mm a")}</td>
                     </tr>
