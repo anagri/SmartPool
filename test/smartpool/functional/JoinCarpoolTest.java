@@ -1,6 +1,8 @@
 package smartpool.functional;
 
+import org.junit.After;
 import org.junit.Test;
+import smartpool.domain.CarpoolBuddy;
 import smartpool.functional.page.HomePage;
 import smartpool.functional.page.LoginPage;
 
@@ -12,6 +14,15 @@ public class JoinCarpoolTest extends BaseTest {
                 .goToVacantCarpoolDetails()
                 .goToJoinCarpoolPage()
                 .enterJoinRequestDetails()
-                .submitForm();
+                .submitForm()
+                .goToJoinCarpoolPage()
+                .verifyFormSubmitted();
+    }
+
+    @Override
+    @After
+    public void tearDown() {
+        super.tearDown();
+
     }
 }
