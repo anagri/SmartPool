@@ -86,7 +86,7 @@ public class BuddyProfileControllerTest {
         CreateProfileForm invalidForm = new CreateProfileForm(null, null, null, "", "abcd", "", "");
         BindException errors = new BindException(invalidForm, "createProfileForm");
 
-        ModelAndView modelAndView = buddyProfileController.submit(invalidForm, request, errors);
+        ModelAndView modelAndView = buddyProfileController.submit(invalidForm, errors, request);
 
         assertThat(modelAndView.getViewName(), is("buddy/form"));
         assertThat((CreateProfileForm) modelAndView.getModel().get("createProfileForm"),
@@ -99,9 +99,10 @@ public class BuddyProfileControllerTest {
         CreateProfileForm profileForm = new CreateProfileForm("mzhao", "Ming Zhao", "mzhao@thoughtworks.com", "", "234567809876", "", "");
         BindException errors = new BindException(profileForm, "createProfileForm");
 
-        ModelAndView modelAndView = buddyProfileController.submit(profileForm, request, errors);
+        ModelAndView modelAndView = buddyProfileController.submit(profileForm, errors, request);
 
         assertThat(modelAndView.getView(), instanceOf(RedirectView.class));
         assertThat(((RedirectView) modelAndView.getView()).getUrl(), endsWith("/buddyProfile"));
     }
+
 }
