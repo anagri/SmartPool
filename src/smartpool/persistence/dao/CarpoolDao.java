@@ -34,10 +34,10 @@ public class CarpoolDao {
 
     public Carpool get(String name) {
         SqlSession sqlSession = sqlSessionFactory.openSession();
-
         CarpoolMapper carpoolMapper = sqlSession.getMapper(CarpoolMapper.class);
-        return carpoolMapper.get(name);
-
+        Carpool carpool = carpoolMapper.get(name);
+        sqlSession.close();
+        return carpool;
     }
 
     public void delete(String name) {

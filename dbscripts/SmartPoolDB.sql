@@ -19,6 +19,8 @@
 -- Current Database: `smartpool`
 --
 
+DROP database IF EXISTS `smartpool`;
+
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `smartpool` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `smartpool`;

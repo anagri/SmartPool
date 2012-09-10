@@ -46,6 +46,5 @@ public class CarpoolBuddyDao {
                 carpool);
         sqlSession.commit();
         sqlSession.close();
-
     }
 }
