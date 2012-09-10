@@ -12,6 +12,7 @@ import smartpool.domain.Carpool;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
 import smartpool.service.JoinRequestService;
+import smartpool.service.MailService;
 import smartpool.web.form.JoinRequestForm;
 import smartpool.web.form.JoinRequestFormValidator;
 
@@ -35,6 +36,9 @@ public class JoinCarPoolControllerTest {
     private HttpServletRequest request;
     @Mock
     private CarpoolService carpoolService;
+    @Mock
+    private MailService mailService;
+
     private String buddyUserName;
     private Buddy testUser;
     private String carpoolName;
@@ -43,7 +47,7 @@ public class JoinCarPoolControllerTest {
     @Before
     public void setup() {
         initMocks(this);
-        joinCarPoolController = new JoinCarPoolController(buddyService, joinRequestService, carpoolService, new JoinRequestFormValidator());
+        joinCarPoolController = new JoinCarPoolController(buddyService, joinRequestService, carpoolService, new JoinRequestFormValidator(),mailService);
         model = new ModelMap();
         buddyUserName = "test.twu";
         carpoolName = "carpool-2";
@@ -90,11 +94,5 @@ public class JoinCarPoolControllerTest {
 
         assertThat(expectedURL.getView(), instanceOf(RedirectView.class));
         assertThat(((RedirectView) expectedURL.getView()).getUrl(), is("../../carpool/carpool-2"));
-    }
-
-    @Test
-    public void testShouldRedirectToSearchWhenAccessingInvalidCarPool() throws Exception {
-
-
     }
 }

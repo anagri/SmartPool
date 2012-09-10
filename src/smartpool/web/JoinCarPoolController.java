@@ -16,6 +16,7 @@ import smartpool.domain.CarpoolBuddy;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
 import smartpool.service.JoinRequestService;
+import smartpool.service.MailService;
 import smartpool.web.form.JoinRequestForm;
 import smartpool.web.form.JoinRequestFormValidator;
 
@@ -27,16 +28,20 @@ public class JoinCarPoolController {
     private JoinRequestService joinRequestService;
     private CarpoolService carpoolService;
     private final JoinRequestFormValidator validator;
+    private MailService mailService;
+
 
     @Autowired
     public JoinCarPoolController(BuddyService buddyService,
                                  JoinRequestService joinRequestService,
                                  CarpoolService carpoolService,
-                                 JoinRequestFormValidator validator) {
+                                 JoinRequestFormValidator validator,
+                                 MailService mailService) {
         this.buddyService = buddyService;
         this.joinRequestService = joinRequestService;
         this.carpoolService = carpoolService;
         this.validator = validator;
+        this.mailService = mailService;
     }
 
 

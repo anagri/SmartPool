@@ -18,4 +18,8 @@ public class JoinRequest {
         this.preferredPickupTime = preferredPickupTime;
         this.address = address;
     }
+
+    public String getCarpoolName() {
+        return carpoolName;
+    }
 }

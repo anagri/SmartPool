@@ -5,9 +5,14 @@ import org.junit.Test;
 import org.mockito.Mock;
 import smartpool.builder.BuddyBuilder;
 import smartpool.domain.Buddy;
+import smartpool.domain.CarpoolBuddy;
+import smartpool.persistence.dao.CarpoolBuddyDao;
 import smartpool.persistence.dao.JoinRequestDao;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -16,6 +21,11 @@ public class JoinRequestServiceTest {
     private JoinRequestService joinRequestService;
     @Mock
     private JoinRequestDao joinRequestDao;
+    @Mock
+    private CarpoolBuddyDao carpoolBuddyDao;
+    @Mock
+    private MailService mailService;
+
     private Buddy buddy;
     private String carpoolName;
 
@@ -24,7 +34,7 @@ public class JoinRequestServiceTest {
         initMocks(this);
         buddy = BuddyBuilder.buddy_1;
         carpoolName = "carpool-1";
-        joinRequestService = new JoinRequestService(joinRequestDao);
+        joinRequestService = new JoinRequestService(joinRequestDao, carpoolBuddyDao, mailService);
     }
 
     @Test
@@ -33,5 +43,22 @@ public class JoinRequestServiceTest {
 
         boolean actualResult = joinRequestService.isRequestSent(buddy, carpoolName);
         assertTrue(actualResult);
+    }
+
+
+    @Test
+    public void shouldGetEmailsOfBuddies() throws Exception {
+        when(carpoolBuddyDao.getCarpoolBuddiesByCarpoolName("carpool-2")).thenReturn(new ArrayList<CarpoolBuddy>());
+        ArrayList<String> buddyEmailList = joinRequestService.getCarpoolBuddies("carpool-2");
+        verify(carpoolBuddyDao).getCarpoolBuddiesByCarpoolName("carpool-2");
+    }
+
+    @Test
+    public void shouldSendEmailToList() throws Exception {
+        when(carpoolBuddyDao.getCarpoolBuddiesByCarpoolName("carpool-2")).thenReturn(new ArrayList<CarpoolBuddy>());
+        ArrayList<String> buddyEmailList = joinRequestService.getCarpoolBuddies("carpool-2");
+        when(mailService.sendMailToList(buddyEmailList,"","")).thenReturn(true);
+        assertTrue(joinRequestService.sendEmailToList("carpool-2"));
+        verify(mailService).sendMailToList(buddyEmailList,"","");
     }
 }
