@@ -8,16 +8,16 @@ import smartpool.domain.*;
 import java.util.ArrayList;
 
 public class CreateCarpoolForm {
-    String from;
-    String to;
-    String capacity;
-    String proposedStartDate;
-    String pickupPoint;
-    String pickupTime;
-    String cabType;
-    String officeArrivalTime;
-    String officeDepartureTime;
-    String routePoints;
+     String from;
+     String to;
+     String capacity;
+     String proposedStartDate;
+     String pickupPoint;
+     String pickupTime;
+     String cabType;
+     String officeArrivalTime;
+     String officeDepartureTime;
+     ArrayList<String> routePoints = new ArrayList<String>();
 
     public CreateCarpoolForm() {
     }
@@ -33,7 +33,7 @@ public class CreateCarpoolForm {
         this.cabType = cabType;
         this.officeArrivalTime = officeArrivalTime;
         this.officeDepartureTime = officeDepartureTime;
-        this.routePoints = routePoints;
+        setRoutePoints(routePoints);
     }
 
     public Carpool getDomainObject(Buddy currentBuddy) {
@@ -44,15 +44,10 @@ public class CreateCarpoolForm {
         LocalTime pickupTime = Constants.TIME_FORMATTER.parseLocalTime(this.pickupTime);
         CabType cabType = CabType.valueOf(this.cabType);
 
-        ArrayList<String> routePoints = new ArrayList<String>();
-        for (String routePoint : this.routePoints.split(",")) {
-            routePoints.add(routePoint.trim());
-        }
-
         Carpool carpool = new Carpool(from + " - " + to, proposedStartDate, cabType, 0, officeArrivalTime, officeDepartureTime, Status.NOT_STARTED, null, capacity, routePoints);
 
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
-        carpoolBuddies.add(new CarpoolBuddy(currentBuddy, pickupPoint, pickupTime));
+        carpoolBuddies.add(new CarpoolBuddy(currentBuddy,pickupPoint, pickupTime));
         carpool.setCarpoolBuddies(carpoolBuddies);
 
         return carpool;
@@ -87,7 +82,9 @@ public class CreateCarpoolForm {
     }
 
     public void setRoutePoints(String routePoints) {
-        this.routePoints = routePoints;
+        for (String routePoint : routePoints.split(",")) {
+            this.routePoints.add(routePoint.trim());
+        }
     }
 
     public void setProposedStartDate(String proposedStartDate) {
@@ -134,7 +131,7 @@ public class CreateCarpoolForm {
         return officeDepartureTime;
     }
 
-    public String getRoutePoints() {
+    public ArrayList<String> getRoutePoints() {
         return routePoints;
     }
 }
