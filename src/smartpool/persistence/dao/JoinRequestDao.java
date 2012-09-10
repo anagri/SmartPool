@@ -37,11 +37,22 @@ public class JoinRequestDao {
         }
     }
 
-    public JoinRequest selectUsersRequest(Buddy buddy, String carpoolName) {
+    public JoinRequest selectUsersRequest(String buddyUsername, String carpoolName) {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
-            return mapper.selectUserRequest(buddy.getUserName(), carpoolName);
+            return mapper.selectUserRequest(buddyUsername, carpoolName);
+        } finally {
+            session.close();
+        }
+    }
+
+    public void deleteUsersRequest(String buddyUsername, String carpoolName) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
+            mapper.deleteUserRequest(buddyUsername, carpoolName);
+            session.commit();
         } finally {
             session.close();
         }

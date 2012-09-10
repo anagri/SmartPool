@@ -1,5 +1,6 @@
 package smartpool.data;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import smartpool.domain.JoinRequest;
 
@@ -10,6 +11,7 @@ public interface JoinRequestMapper {
             " #{pickupPoint}, #{address});";
     static final String SELECT_REQUEST_COUNT = "select count(*) from requests where username = #{param1} and carpoolname = #{param2};";
     static final String GET_MY_REQUEST = "select * from requests where username = #{param1} and carpoolname = #{param2};";
+    static final String DELETE_USERS_REQUEST = "delete from requests where username = #{param1} and carpoolname = #{param2}";
 
     @Select(INSERT_REQUEST)
     void insertRequest(JoinRequest joinRequest);
@@ -19,4 +21,7 @@ public interface JoinRequestMapper {
 
     @Select(GET_MY_REQUEST)
     JoinRequest selectUserRequest(String userName, String carpoolName);
+
+    @Delete(DELETE_USERS_REQUEST)
+    void deleteUserRequest(String buddyUsername, String carpoolName);
 }

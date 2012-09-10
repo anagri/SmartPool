@@ -1,8 +1,8 @@
 package smartpool.persistence.dao;
 
 import org.joda.time.LocalTime;
+import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
@@ -11,44 +11,57 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.isNotNull;
-import static org.mockito.Matchers.notNull;
 
 public class JoinRequestDaoIT {
 
     private JoinRequestDao joinRequestDao;
+    private String buddyUsername;
+    private String carpoolName;
 
     @Before
     public void setUp() throws Exception {
         joinRequestDao = new JoinRequestDao();
+        buddyUsername = "test.twu";
+        carpoolName = "carpool-1";
     }
 
     @Test
-    @Ignore
     public void shouldInsertRequestToDB() {
-        joinRequestDao.sendJoinRequest(new JoinRequest("ayusht", "carpool-1", "Domlur", new LocalTime(9, 0), "diamond district"));
+        joinRequestDao.sendJoinRequest(new JoinRequest(buddyUsername, carpoolName, "Domlur", new LocalTime(9, 0), "diamond district"));
+
+        JoinRequest returnedRequest = joinRequestDao.selectUsersRequest(buddyUsername, carpoolName);
+        assertThat(returnedRequest, not(nullValue()));
     }
 
     @Test
-    @Ignore
     public void shouldVerifyRequestSentByABuddy() {
-        String buddyName = "mdaliej";
-        String carpoolName = "carpool-1";
-        Buddy ali = new Buddy(buddyName);
 
-        assertFalse(joinRequestDao.isRequestSent(ali, carpoolName));
-        joinRequestDao.sendJoinRequest(new JoinRequest(buddyName, carpoolName, "Domlur", new LocalTime(9, 0), "diamond district"));
-        assertTrue(joinRequestDao.isRequestSent(ali, carpoolName));
+        Buddy buddy = new Buddy(buddyUsername);
+
+        assertFalse(joinRequestDao.isRequestSent(buddy, carpoolName));
+        joinRequestDao.sendJoinRequest(new JoinRequest(buddyUsername, carpoolName, "Domlur", new LocalTime(9, 0), "diamond district"));
+        assertTrue(joinRequestDao.isRequestSent(buddy, carpoolName));
     }
 
     @Test
-    @Ignore
     public void testShouldInsertTimeInProperFormat() throws Exception {
-        JoinRequest joinRequest = new JoinRequest("test.twu", "carpool-1", "Here", new LocalTime(8, 30), "diamond district");
+        JoinRequest joinRequest = new JoinRequest(buddyUsername, carpoolName, "Here", new LocalTime(8, 30), "diamond district");
 
         joinRequestDao.sendJoinRequest(joinRequest);
 
-        JoinRequest returnedRequest = joinRequestDao.selectUsersRequest(new Buddy("test.twu"), "carpool-1");
+        JoinRequest returnedRequest = joinRequestDao.selectUsersRequest(buddyUsername, carpoolName);
         assertThat(returnedRequest, is(not(nullValue())));
+    }
+
+    @Test
+    public void testShouldDeleteUsersJoinRequest() throws Exception {
+        joinRequestDao.sendJoinRequest(new JoinRequest(buddyUsername, carpoolName, "Domlur", new LocalTime(9, 0), "diamond district"));
+        joinRequestDao.deleteUsersRequest(buddyUsername, carpoolName);
+        assertThat(joinRequestDao.selectUsersRequest(buddyUsername, carpoolName), is(nullValue()));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        joinRequestDao.deleteUsersRequest(buddyUsername, carpoolName);
     }
 }
