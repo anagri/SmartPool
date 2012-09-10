@@ -52,6 +52,7 @@ public class JoinCarPoolController {
         CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddyService.getBuddy(username),"pickupPoint",new LocalTime(10,00));
         JoinRequestForm joinRequestForm = new JoinRequestForm(carpoolBuddy, carpoolName);
         model.put("buddy", carpoolBuddy.getBuddy());
+        model.put("carpoolName", carpoolName);
         model.put("joinRequestForm", joinRequestForm);
         model.put("isRequestSent", joinRequestService.isRequestSent(carpoolBuddy.getBuddy(), carpoolName));
         return "carpool/joinRequest";
@@ -84,6 +85,8 @@ public class JoinCarPoolController {
             return new ModelAndView(new RedirectView("../../carpool/" + carpoolName));
         }
     }
+
+
 
     public boolean isJoinRequestPossible(String username, String carpool) {
         return carpoolService.isValidCarpool(carpool) && carpoolService.canUserSendRequest(username, carpool);
