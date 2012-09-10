@@ -2,7 +2,6 @@ package smartpool.functional;
 
 import org.junit.After;
 import org.junit.Test;
-import smartpool.domain.CarpoolBuddy;
 import smartpool.functional.page.HomePage;
 import smartpool.functional.page.LoginPage;
 

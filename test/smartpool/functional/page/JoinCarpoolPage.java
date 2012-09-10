@@ -6,10 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import sun.jvm.hotspot.types.basic.VtblAccess;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 public class JoinCarpoolPage extends Page {
     private static final String PICKUP_TIME_ID = "pickupTimeTextBox";
