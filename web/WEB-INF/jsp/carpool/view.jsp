@@ -22,7 +22,7 @@
         <h2>Buddy List</h2>
 
         <div class="leftContent">
-            <table class='buddy-table'>
+            <table class='buddy-table' style="margin-bottom: 4px;">
                 <thead>
                 <tr>
                     <th>Pickup Sequence</th>
@@ -53,7 +53,11 @@
 
             </table>
 
-            <p><strong>Cab Type:</strong>
+            <c:if test="${carpool.getCabType() == PERSONAL}">
+            <span style="font-size: smaller;"><i class="icon-leaf"></i>:car owner</span>
+            </c:if>
+
+            <p style="margin-top:23px;margin-bottom: 6px;"><strong>Cab Type:</strong>
             <c:choose>
                 <c:when test="${carpool.getCabType() == PERSONAL}">
                 ${carpool.getCabType()}
