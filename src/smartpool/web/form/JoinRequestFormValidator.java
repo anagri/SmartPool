@@ -22,10 +22,6 @@ public class JoinRequestFormValidator implements Validator {
         JoinRequestForm form = (JoinRequestForm) target;
         if (StringUtils.isBlank(form.preferredPickupTime)) {
             ValidationUtils.rejectIfEmpty(errors, "preferredPickupTime", "field.required");
-        } else if (StringUtils.isBlank(form.pickupPoint)) {
-            ValidationUtils.rejectIfEmpty(errors, "pickupPoint", "field.required");
-        } else if (!form.contactNumber.matches("\\d*")) {
-            errors.rejectValue("contactNumber", "field.invalid");
         } else if (!form.preferredPickupTime.matches("\\d{1,2}:\\d{2}")) {
             errors.rejectValue("preferredPickupTime", "field.invalid");
         } else {
@@ -34,6 +30,12 @@ public class JoinRequestFormValidator implements Validator {
             } catch (IllegalFieldValueException e) {
                 errors.rejectValue("preferredPickupTime", "field.invalid");
             }
+        }
+
+        if (StringUtils.isBlank(form.pickupPoint)) {
+            ValidationUtils.rejectIfEmpty(errors, "pickupPoint", "field.required");
+        } if (!form.contactNumber.matches("\\d*")) {
+            errors.rejectValue("contactNumber", "field.invalid");
         }
     }
 }
