@@ -16,8 +16,7 @@ public class CreateProfileForm {
     public CreateProfileForm() {
     }
 
-    public CreateProfileForm(String username, String name, String preferredPickupPoint, String preferredPickupTime,
-                           String address, String contactNumber, String email) {
+    public CreateProfileForm(String username, String name, String email, String address, String contactNumber, String preferredPickupPoint, String preferredPickupTime) {
         this.username = username;
         this.name = name;
         this.preferredPickupPoint = preferredPickupPoint;
@@ -31,13 +30,15 @@ public class CreateProfileForm {
         return new Buddy(username, name, contactNumber, email, address, preferredPickupPoint, LocalTime.parse(preferredPickupTime));
     }
 
-    @SuppressWarnings("unused - used by spring data binding")
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
 
-    @SuppressWarnings("unused - used by spring data binding")
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     @SuppressWarnings("unused - used to render pre populated form in jsp")
@@ -64,7 +65,7 @@ public class CreateProfileForm {
     }
 
     @SuppressWarnings("unused - used to render pre populated form in jsp")
-    public String getname() {
+    public String getName() {
         return name;
     }
     @SuppressWarnings("unused - used to render pre populated form in jsp")
@@ -84,5 +85,10 @@ public class CreateProfileForm {
     @SuppressWarnings("unused - used to render pre populated form in jsp")
     public String getContactNumber() {
         return contactNumber;
+    }
+
+    @SuppressWarnings("unused - used to render pre populated form in jsp")
+    public String getEmail() {
+        return email;
     }
 }

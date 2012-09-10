@@ -1,5 +1,6 @@
 package smartpool.service;
 
+import org.springframework.stereotype.Component;
 import smartpool.domain.LDAPResultSet;
 
 import javax.naming.Context;
@@ -8,6 +9,7 @@ import javax.naming.NamingException;
 import javax.naming.directory.*;
 import java.util.Hashtable;
 
+@Component
 public class LDAPService {
 
     public LDAPResultSet searchByUserName(String userName) {

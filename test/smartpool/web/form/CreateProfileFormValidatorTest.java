@@ -18,7 +18,7 @@ public class CreateProfileFormValidatorTest {
 
     @Test
     public void shouldValidateForPresenceOfContactNumber() throws Exception {
-        CreateProfileForm form = new CreateProfileForm("test.twu", "Test TWU", "Diamond District", "08:00", "G8", "", "test.twu@thoughtworks.com");
+        CreateProfileForm form = new CreateProfileForm("test.twu", "Test TWU", "test.twu@thoughtworks.com", "G8", "", "Diamond District", "08:00");
         BindException errors = new BindException(form, "profileForm");
 
         validator.validate(form, errors);
@@ -28,7 +28,7 @@ public class CreateProfileFormValidatorTest {
 
     @Test
     public void shouldValidateForTheFormatOfContactNumber() throws Exception {
-        CreateProfileForm form = new CreateProfileForm("test.twu", "Test TWU", "Diamond District", "08:00", "G8", "91abc9999999", "test.twu@thoughtworks.com");
+        CreateProfileForm form = new CreateProfileForm("test.twu", "Test TWU", "test.twu@thoughtworks.com", "G8", "91abc9999999", "Diamond District", "08:00");
         BindException errors = new BindException(form, "profileForm");
 
         validator.validate(form, errors);

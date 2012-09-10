@@ -44,6 +44,6 @@ public class ProfileCheckFilterTest {
 
         profileCheckFilter.doFilter(servletRequest, servletResponse, filterChain);
 
-        verify(servletResponse).sendRedirect("carpool/buddy/create");
+        verify(servletResponse).sendRedirect("carpool/buddyProfile/create");
     }
 }
