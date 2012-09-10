@@ -93,7 +93,7 @@ DROP TABLE IF EXISTS `carpoolbuddy`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `carpoolbuddy` (
   `buddy_username` varchar(11) NOT NULL DEFAULT '',
-  `carpool_name` varchar(15) NOT NULL DEFAULT '',
+  `carpool_name` varchar(50) NOT NULL DEFAULT '',
   `pickup_point` varchar(50) DEFAULT NULL,
   `pickup_time` time DEFAULT NULL,
   PRIMARY KEY (`buddy_username`,`carpool_name`),
@@ -128,7 +128,7 @@ DROP TABLE IF EXISTS `requests`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `requests` (
   `username` varchar(11) NOT NULL,
-  `carpoolname` varchar(11) NOT NULL,
+  `carpoolname` varchar(50) NOT NULL,
   `preferredPickupTime` time NOT NULL,
   `preferredPickupPoint` varchar(25) NOT NULL,
   `address` varchar(100) NOT NULL,
@@ -158,7 +158,7 @@ DROP TABLE IF EXISTS `route`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `route` (
-  `carpoolName` varchar(20) NOT NULL DEFAULT '',
+  `carpoolName` varchar(50) NOT NULL DEFAULT '',
   `location` varchar(25) NOT NULL DEFAULT '',
   `sequenceNumber` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`carpoolName`,`location`)
