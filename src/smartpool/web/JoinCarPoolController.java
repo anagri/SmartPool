@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import smartpool.domain.Buddy;
-import smartpool.domain.Carpool;
 import smartpool.domain.CarpoolBuddy;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
@@ -78,6 +77,7 @@ public class JoinCarPoolController {
             ModelMap model = new ModelMap();
             model.put("buddy", buddy);
             model.put("joinRequestForm", joinRequestForm);
+            model.put("carpoolName", carpoolName);
             model.put("isRequestSent", requestSent);
             return new ModelAndView("carpool/joinRequest", model);
         } else {

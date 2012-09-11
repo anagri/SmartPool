@@ -16,8 +16,8 @@ public class JoinRequestForm {
     public JoinRequestForm() {
     }
 
-    public JoinRequestForm(String username, String carpoolName, String pickupPoint, String preferredPickupTime,
-                           String address, String contactNumber) {
+    public JoinRequestForm(String username, String carpoolName,
+                           String address, String contactNumber, String pickupPoint, String preferredPickupTime) {
         this.username = username;
         this.carpoolName = carpoolName;
         this.pickupPoint = pickupPoint;
@@ -27,9 +27,8 @@ public class JoinRequestForm {
     }
 
     public JoinRequestForm(CarpoolBuddy carpoolBuddy, String carpoolName) {
-        this(carpoolBuddy.getBuddy().getUserName(), carpoolName, carpoolBuddy.getPickupPoint(),
-                carpoolBuddy.getPickupTime() == null ? "" : carpoolBuddy.getPickupTime().toString("h:mm"),
-                carpoolBuddy.getBuddy().getAddress(), carpoolBuddy.getBuddy().getContactNumber());
+        this(carpoolBuddy.getBuddy().getUserName(), carpoolName,
+                carpoolBuddy.getBuddy().getAddress(), carpoolBuddy.getBuddy().getContactNumber(), null, null);
     }
 
     public JoinRequest createDomainObject() {

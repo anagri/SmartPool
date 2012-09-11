@@ -33,7 +33,7 @@ public class JoinRequestFormValidatorTest {
 
     @Test
     public void testShouldAddErrorOnInvalidNumbers() throws Exception {
-        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_pickuppoint, valid_pickuptime, valid_address, "abc");
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, "abc", null, null);
         BindException errors = new BindException(form, "joinRequestForm");
         validator.validate(form, errors);
 
@@ -43,21 +43,8 @@ public class JoinRequestFormValidatorTest {
     }
 
     @Test
-    public void shouldAddErrorIfPreferredTimeIsNotProvided() throws Exception {
-        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_pickuppoint, "", valid_address, valid_contactnumber);
-
-        BindException errors = new BindException(form, "joinRequestForm");
-
-        validator.validate(form, errors);
-
-        assertThat(errors.hasErrors(), is(true));
-        assertThat(errors.getAllErrors().size(), is(1));
-        assertThat(errors.getFieldError("preferredPickupTime").getCode(), is("field.required"));
-    }
-
-    @Test
-    public void testShouldAddErrorIfPickupTimeNotProvided() throws Exception {
-        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", "", valid_pickuptime, valid_address, valid_contactnumber);
+    public void testShouldAddErrorIfPickupPointNotProvided() throws Exception {
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, valid_contactnumber, null, null);
 
         BindException errors = new BindException(form, "joinRequestForm");
 
@@ -71,7 +58,7 @@ public class JoinRequestFormValidatorTest {
 
     @Test
     public void shouldAddErrorIfPreferredTimeIsNotInCorrectFormat() throws Exception {
-        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_pickuppoint, "abcd", valid_address, valid_contactnumber);
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, valid_contactnumber, null, null);
         BindException errors = new BindException(form, "joinRequestForm");
         validator.validate(form, errors);
 
@@ -82,7 +69,7 @@ public class JoinRequestFormValidatorTest {
 
     @Test
     public void shouldAddErrorIfPreferredTimeNotInRange() throws Exception {
-        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_pickuppoint, "25:00", valid_address, valid_contactnumber);
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, valid_contactnumber, null, null);
         BindException errors = new BindException(form, "joinRequestForm");
         validator.validate(form, errors);
 
