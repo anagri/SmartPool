@@ -2,6 +2,7 @@ package smartpool.persistence.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -18,27 +19,35 @@ public class CarpoolDaoTest {
     SqlSession mockSqlSession;
     @Mock
     CarpoolMapper mockCarpoolMapper;
+    private String carpoolName;
+    private CarpoolDao carpoolDao;
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
         when(mockSqlSessionFactory.openSession()).thenReturn(mockSqlSession);
         when(mockSqlSession.getMapper(CarpoolMapper.class)).thenReturn(mockCarpoolMapper);
+        carpoolName = "name";
+        carpoolDao = new CarpoolDao(mockSqlSessionFactory);
     }
 
     @Test
     public void shouldInsertIntoDatabase() throws Exception {
         CarpoolDao carpoolDao = new CarpoolDao(mockSqlSessionFactory);
-        Carpool carpool = new Carpool("name");
+        Carpool carpool = new Carpool(carpoolName);
         carpoolDao.insert(carpool);
         verify(mockCarpoolMapper).insert(carpool);
     }
 
     @Test
     public void shouldGetFromDB() throws Exception {
-        CarpoolDao carpoolDao = new CarpoolDao(mockSqlSessionFactory);
-        carpoolDao.get("name");
+        carpoolDao.get(carpoolName);
 
-        verify(mockCarpoolMapper).get("name");
+        verify(mockCarpoolMapper).get(carpoolName);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        carpoolDao.delete(carpoolName);
     }
 }

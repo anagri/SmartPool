@@ -16,20 +16,22 @@ import static org.junit.Assert.assertThat;
 public class CarpoolDaoIT {
 
     private CarpoolDao carpoolDao;
+    private String name;
 
     @Before
     public void setUp() throws Exception {
         carpoolDao = new CarpoolDao();
+        name = "name";
     }
 
     @Test
     public void shouldInsertNewRowInDB() throws Exception {
-        Carpool carpool = new Carpool("name");
+        Carpool carpool = new Carpool(name);
         carpool.setStartDate(Constants.DATE_FORMATTER.parseLocalDate("10/12/2012"));
 
         carpoolDao.insert(carpool);
 
-         assertThat(carpoolDao.get("name").getStartDate(),equalTo(carpool.getStartDate()));
+        assertThat(carpoolDao.get(name).getStartDate(),equalTo(carpool.getStartDate()));
     }
 
     @Test
@@ -45,6 +47,6 @@ public class CarpoolDaoIT {
 
     @After
     public void tearDown() throws Exception {
-        carpoolDao.delete("name");
+        carpoolDao.delete(name);
     }
 }
