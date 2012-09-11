@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static junit.framework.Assert.assertEquals;
+
 public class ProfilePage extends Page {
 
     public static final String PROFILE_NAME_ID = "profileName";
@@ -54,4 +56,7 @@ public class ProfilePage extends Page {
         return profileButton.getText();
     }
 
+    public void verifyDetailsOfNewBuddy(String buddyUserName) {
+        assertEquals(buddyUserName, profileName.getText());
+    }
 }

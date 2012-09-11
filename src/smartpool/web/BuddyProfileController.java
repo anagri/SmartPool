@@ -24,8 +24,6 @@ public class BuddyProfileController {
     private BuddyService buddyService;
     private LDAPService ldapService;
 
-
-
     @Autowired
     public BuddyProfileController(BuddyService buddyService, LDAPService ldapService) {
         this.buddyService = buddyService;
@@ -69,6 +67,7 @@ public class BuddyProfileController {
             model.addAttribute("createProfileForm", form);
             return new ModelAndView("buddy/form", model);
         }
+
         buddyService.insert(form.createBuddy());
         return new ModelAndView(new RedirectView("/buddyProfile", true));
     }

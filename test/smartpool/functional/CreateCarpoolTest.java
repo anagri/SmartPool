@@ -5,6 +5,7 @@ import smartpool.functional.page.HomePage;
 import smartpool.functional.page.LoginPage;
 
 public class CreateCarpoolTest extends BaseTest {
+
     @Test
     public void shouldCreateANewCarpool() throws Exception {
         String carpoolName = "AA60";
@@ -13,7 +14,4 @@ public class CreateCarpoolTest extends BaseTest {
                 .enterCarpoolDetails(carpoolName)
                 .verifyDetailsOfNewCarpool(carpoolName);
     }
-
-
-
 }

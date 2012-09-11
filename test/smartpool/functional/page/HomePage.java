@@ -68,4 +68,9 @@ public class HomePage extends Page {
         logoutForm.submit();
         return new LogoutPage(webDriver);
     }
+
+    public CreateProfilePage myProfileRedirectToCreateProfilePage() {
+        myProfileLink.click();
+        return new CreateProfilePage(webDriver);
+    }
 }

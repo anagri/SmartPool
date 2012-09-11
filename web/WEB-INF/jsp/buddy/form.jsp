@@ -15,8 +15,9 @@
         </span>
         <span>
             <label>Address:</label>
-            <form:textarea path="address"/>
+            <textarea rows="3" cols="30" name="address" value="${createProfileForm.address}"></textarea>
         </span>
+
         <span>
             <label>Contact Number:</label>
             <input type="text" name="contactNumber" value="${createProfileForm.contactNumber}"/>

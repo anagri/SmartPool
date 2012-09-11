@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import smartpool.domain.Buddy;
 import smartpool.domain.CabType;
 import smartpool.domain.Carpool;
 import smartpool.service.BuddyService;
@@ -45,13 +46,15 @@ public class CarpoolController {
         Carpool carpool = carpoolService.getByName(name);
         String username = buddyService.getUserNameFromCAS(request);
 
-
         model.put("carpool", carpool);
         model.put("COMPANY", CabType.COMPANY);
         model.put("PERSONAL", CabType.PERSONAL);
         model.put("hasEnoughSpace", carpool.hasVacancy());
-        model.put("isRequestSent", joinRequestService.isRequestSent(buddyService.getBuddy(username), carpool.getName()));
-        model.put("buddyIsInCarpool", carpoolService.hasBuddy(username, carpool));
+        Buddy buddy = buddyService.getBuddy(username);
+        if(buddy!=null){
+            model.put("isRequestSent", joinRequestService.isRequestSent(buddy, carpool.getName()));
+            model.put("buddyIsInCarpool", carpoolService.hasBuddy(username, carpool));
+        }
         return "carpool/view";
     }
 
