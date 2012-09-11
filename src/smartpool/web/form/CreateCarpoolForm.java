@@ -1,5 +1,6 @@
 package smartpool.web.form;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import smartpool.common.Constants;
@@ -46,7 +47,10 @@ public class CreateCarpoolForm {
 
         ArrayList<String> routePoints = new ArrayList<String>();
         for (String routePoint : this.routePoints.split(",")) {
-            routePoints.add(routePoint.trim());
+            String trimmedRoutePoint = routePoint.trim();
+            if (StringUtils.isNotBlank(trimmedRoutePoint)) {
+                routePoints.add(trimmedRoutePoint);
+            }
         }
 
         Carpool carpool = new Carpool(from + " - " + to, proposedStartDate, cabType, 0, officeArrivalTime, officeDepartureTime, Status.NOT_STARTED, null, capacity, routePoints);

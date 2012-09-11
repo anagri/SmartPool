@@ -18,30 +18,46 @@ public class CreateCarpoolFormTest {
     private String carpoolFrom;
     private String carpoolTo;
     private String proposedStartDate;
+    private String pickupPoint;
+    private String pickupTime;
+    private String cabType;
+    private String capacity;
+    private String officeArrivalTime;
+    private String officeDepartureTime;
+    private String badRoute;
+    private String goodRoute;
 
     @Before
     public void setUp() throws Exception {
         buddy = new Buddy("buddyName");
-        carpoolBuddies.add(new CarpoolBuddy(buddy, "PickupPoint", new LocalTime(10, 0)));
         carpoolFrom = "from";
         carpoolTo = "to";
         proposedStartDate = "16/9/2012";
+        pickupPoint = "PickupPoint";
+        pickupTime = "10:00";
+        cabType = "PERSONAL";
+        capacity = "6";
+        officeArrivalTime = "11:00";
+        officeDepartureTime = "18:00";
+        badRoute = "route,,points";
+        goodRoute = "route,points";
+        carpoolBuddies.add(new CarpoolBuddy(buddy, pickupPoint, new LocalTime(10, 0)));
     }
 
     @Test
     public void shouldCreateAValidDomainObjectForCarpool() throws Exception {
-        CreateCarpoolForm createCarpoolForm = new CreateCarpoolForm(carpoolFrom, carpoolTo, proposedStartDate,"PickupPoint","10:00","PERSONAL", "6", "11:00","18:00","route,points");
+        CreateCarpoolForm createCarpoolForm = new CreateCarpoolForm(carpoolFrom, carpoolTo, proposedStartDate, pickupPoint, pickupTime, cabType, capacity, officeArrivalTime, officeDepartureTime, goodRoute);
 
         ArrayList<String> routePoints = new ArrayList<String>();
         routePoints.add("route");
         routePoints.add("points");
 
-        assertThat(createCarpoolForm.getDomainObject(buddy), equalTo(new Carpool("from - to", Constants.DATE_FORMATTER.parseLocalDate(proposedStartDate), CabType.PERSONAL, 0, Constants.TIME_FORMATTER.parseLocalTime("11:00"), Constants.TIME_FORMATTER.parseLocalTime("18:00"), Status.NOT_STARTED, carpoolBuddies, 6, routePoints)));
+        assertThat(createCarpoolForm.getDomainObject(buddy), equalTo(new Carpool("from - to", Constants.DATE_FORMATTER.parseLocalDate(proposedStartDate), CabType.PERSONAL, 0, Constants.TIME_FORMATTER.parseLocalTime(officeArrivalTime), Constants.TIME_FORMATTER.parseLocalTime(officeDepartureTime), Status.NOT_STARTED, carpoolBuddies, 6, routePoints)));
     }
 
     @Test
     public void shouldNotHaveBlankRoutePointInDomainObject() throws Exception {
-        CreateCarpoolForm createCarpoolForm = new CreateCarpoolForm(carpoolFrom, carpoolTo, proposedStartDate,"PickupPoint","10:00","PERSONAL", "6", "11:00","18:00","route,,points");
-        assertThat(createCarpoolForm.getDomainObject(buddy).getRoutePoints().contains(""),equalTo(false));
+        CreateCarpoolForm createCarpoolForm = new CreateCarpoolForm(carpoolFrom, carpoolTo, proposedStartDate, pickupPoint, pickupTime, cabType, capacity, officeArrivalTime, officeDepartureTime, badRoute);
+        assertThat(createCarpoolForm.getDomainObject(buddy).getRoutePoints().contains(""), equalTo(false));
     }
 }
