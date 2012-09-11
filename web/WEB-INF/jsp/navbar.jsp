@@ -27,6 +27,7 @@
 <body onload="setOptionInDropDown('${searchQuery}')">
 
 <c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>' />
+<c:set var="ldapUserName" value='<%=request.getSession().getAttribute("ldapUserName")%>' />
 <c:set var="appName" value="${pageContext.request.contextPath}" />
 
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -63,7 +64,7 @@
 
                 </ul>
                 <form class="navbar-form pull-right" id="logoutForm" action="${appName}/logout" method="GET">
-                    ${casUserName}
+                    ${ldapUserName}
                     <button type="submit" class="btn btn-small" style="margin-top: 4px">Logout</button>
                 </form>
             </div>

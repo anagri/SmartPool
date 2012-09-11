@@ -6,13 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import static junit.framework.Assert.assertEquals;
-
 public class HomePage extends Page {
 
     public static final String WELCOME_MESSAGE_ID = "welcomeMessage";
     @FindBy(how = How.ID, using = WELCOME_MESSAGE_ID)
-    private WebElement welcomeMessage;
+    public WebElement welcomeMessage;
 
     @FindBy(how = How.ID, using = "listCarpools")
     private WebElement listCarpoolsLink;
@@ -27,7 +25,7 @@ public class HomePage extends Page {
     private WebElement createCarpoolLink;
 
     @FindBy(how = How.ID, using = "logoutForm")
-    private WebElement logoutForm;
+    public WebElement logoutForm;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -51,10 +49,6 @@ public class HomePage extends Page {
     public CreateCarpoolPage goToCreateCarpoolPage() {
         createCarpoolLink.click();
         return new CreateCarpoolPage(webDriver);
-    }
-
-    public void verifyWelcomeMessagePresent() {
-        assertEquals("Welcome to SmartPool!", welcomeMessage.getText());
     }
 
     public SearchResultPage enterSearchQuery(String searchQuery) {
