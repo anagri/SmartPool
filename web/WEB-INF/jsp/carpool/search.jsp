@@ -5,6 +5,8 @@
     <jsp:param name="title" value="Search Carpool" />
 </jsp:include>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/carpool/search.js"></script>
+
 <div>
     <label class="header">Search Carpool</label>
 </div>
@@ -48,14 +50,14 @@
                             <tr>
                                 <td><a href="../carpool/${carpool.getName()}" id="${carpool.getName()}">${carpool.getName()}</a></td>
                                 <td>${carpool.getStartPoint()}</td>
-                                <td>${carpool.getStartTime().toString("h:mm a")}</td>
-                                <td>${carpool.getBuddyCount()}</td>
-                                <td><c:choose>
+                                <td class="center">${carpool.getStartTime().toString("h:mm a")}</td>
+                                <td class="center">${carpool.getBuddyCount()}</td>
+                                <td class="center"><c:choose>
                                     <c:when test="${carpool.getVacancy()<0}">-</c:when>
                                     <c:otherwise> ${carpool.getVacancy()}</c:otherwise>
                                 </c:choose>
                                </td>
-                                <td id="status${typeStatus.count}">${carpool.getStatus()}</td>
+                                <td id="status${typeStatus.count}">${carpool.getStatusAsString()}</td>
                             </tr>
                        </c:forEach>
                     </table>
