@@ -2,6 +2,8 @@ package smartpool.domain;
 
 import org.joda.time.LocalTime;
 
+import java.util.ArrayList;
+
 public class Buddy {
 
     private String username;
@@ -11,6 +13,7 @@ public class Buddy {
     private String preferredPickupPoint;
     private LocalTime preferredPickupTime;
     private String emailId;
+    private ArrayList<Carpool> carpools = new ArrayList<Carpool>();
 
     private Buddy() {
     }
@@ -57,6 +60,10 @@ public class Buddy {
         return preferredPickupTime;
     }
 
+    public ArrayList<Carpool> getCarpools() {
+        return carpools;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,5 +79,10 @@ public class Buddy {
     @Override
     public int hashCode() {
         return username != null ? username.hashCode() : 0;
+    }
+
+
+    public void addCarpool(Carpool carpool) {
+        carpools.add(carpool);
     }
 }

@@ -32,6 +32,7 @@ public class CarpoolBuddyDao {
     }
 
     public void insert(CarpoolBuddy carpoolBuddy, Carpool carpool) {
+        carpoolBuddy.getBuddy().addCarpool(carpool);
         SqlSession sqlSession = sqlSessionFactory.openSession();
         CarpoolBuddyMapper carpoolBuddyMapper = sqlSession.getMapper(CarpoolBuddyMapper.class);
         carpoolBuddyMapper.insert(carpoolBuddy.getBuddy().getUserName(),carpool.getName(),carpoolBuddy.getPickupPoint(),carpoolBuddy.getPickupTime().toString("HH:mm"));

@@ -127,6 +127,20 @@ public class CarpoolServiceTest {
     }
 
     @Test
+    public void shouldRemoveFromCarpoolBuddy() throws Exception {
+        final CarpoolBuddy carpoolBuddy = new CarpoolBuddy(new Buddy("name"), "pickupLocation", new LocalTime(10, 0));
+        Carpool carpool = new Carpool("name");
+        carpool.setCarpoolBuddies(new ArrayList<CarpoolBuddy>() {
+            {
+                add(carpoolBuddy);
+            }
+        });
+        carpoolService.insert(carpool);
+        carpoolService.drop(carpool, carpoolBuddy);
+        verify(carpoolBuddyDao).remove(carpool.getCarpoolBuddies().get(0), carpool.getName());
+    }
+
+    @Test
     public void shouldReturnBuddyListInCarpool() throws Exception {
         Carpool carpool = new Carpool("name");
         when(carpoolDao.get("name")).thenReturn(carpool);

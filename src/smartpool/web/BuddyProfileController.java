@@ -35,13 +35,19 @@ public class BuddyProfileController {
         model.addAttribute("buddyProfile", buddyService.getBuddy(userName));
         return "buddy/viewUserProfile";
     }
+//
+//    @RequestMapping(value = "/{userName:.*}", method = RequestMethod.POST)
+//    public String dropFromCarpool(@PathVariable String userName, ModelMap model, HttpServletRequest request) {
+//        buddyService.getBuddy(userName).getCarpools().remove();
+//        return "buddy/viewUserProfile";
+//    }
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewMyProfile(ModelMap model, HttpServletRequest request) {
         model.addAttribute("buddyProfile", buddyService.getCurrentBuddy(request));
+        model.addAttribute("carpools", buddyService.getCurrentBuddy(request).getCarpools());
         return "buddy/viewUserProfile";
     }
-
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String renderForm(ModelMap model, HttpServletRequest request) {

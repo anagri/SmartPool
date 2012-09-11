@@ -76,10 +76,5 @@
     </form:form>
     </c:if>
 
-    <%--<div class="buttonContainer">--%>
-        <%--<form action="/smartpool/carpool/${carpoolName}" method="link">--%>
-            <%--<button id="cancelButton" name="cancel" type="submit">Cancel</button>--%>
-        <%--</form>--%>
-    <%--</div>--%>
 
     <%@ include file="../footer.jsp" %>

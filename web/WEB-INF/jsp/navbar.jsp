@@ -45,7 +45,6 @@
                     <li><a href="${appName}/carpool/create" id="createCarpool">Create Carpool</a></li>
                     <li><a href="${appName}/carpool/search" id="listCarpools">Carpools</a></li>
                     <li><a href="${appName}/buddyProfile" id="myProfile">My Profile</a></li>
-                    <li><a href="#notifications">Notifications</a></li>
                     <li>
                         <form action="${appName}/carpool/search" method="GET" class="searchForm">
 

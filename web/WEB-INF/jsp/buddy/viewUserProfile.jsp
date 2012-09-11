@@ -29,6 +29,20 @@
         <span><label>${buddyProfile.getPreferredPickupPoint()}</label></span>
     </div>
 
+    <div class="subContainer" style="height: 100px">
+    <span><label>My Carpools:</label></span>
+    <c:forEach var="carpool" items="${carpools}" varStatus="typeStatus">
+        <ul id="carpoolList">
+            <li>
+                <a href="../carpool/${carpool.getName()}" id="${carpool.getName()}">${carpool.getName()}</a>
+                <span id="status${typeStatus.count}">${carpool.getStatus()}</span>
+                <c:set var="carpool" value='<%=carpool%>' />
+                <span><button type="submit" value="Drop">Drop from carpool</button></span>
+        </li>
+        </ul>
+    </c:forEach>
+    </div>
+
     <div id="profileButton">
     <c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>' />
     <c:choose>
