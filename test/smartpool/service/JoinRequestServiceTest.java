@@ -51,14 +51,14 @@ public class JoinRequestServiceTest {
     @Test
     public void shouldGetEmailsOfBuddies() throws Exception {
         when(carpoolBuddyDao.getCarpoolBuddiesByCarpoolName("carpool-2")).thenReturn(new ArrayList<CarpoolBuddy>());
-        ArrayList<String> buddyEmailList = joinRequestService.getCarpoolBuddies("carpool-2");
+        joinRequestService.getCarpoolBuddies("carpool-2");
         verify(carpoolBuddyDao).getCarpoolBuddiesByCarpoolName("carpool-2");
     }
 
     @Test
     public void shouldSendEmailToList() throws Exception {
         carpoolName = "carpool-2";
-        JoinRequest joinRequest = new JoinRequest("suganthk", carpoolName, "pickupPoint", new LocalTime(10, 0), "address");
+        JoinRequest joinRequest = new JoinRequest("suganthk", carpoolName, "address", "pickupPoint", new LocalTime(10, 0));
         when(carpoolBuddyDao.getCarpoolBuddiesByCarpoolName(carpoolName)).thenReturn(new ArrayList<CarpoolBuddy>());
         ArrayList<String> buddyEmailList = joinRequestService.getCarpoolBuddies(carpoolName);
         String subject = "New Buddy Request To Join Your Carpool";
