@@ -145,3 +145,7 @@ input[type="text"] {
     margin-bottom: 9px;
     padding: 4px 6px;
 }
+
+.center{
+    text-align: center;
+}
