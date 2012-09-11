@@ -6,7 +6,7 @@ repositories {
     mavenCentral()
 }
 
-defaultTasks 'clean', 'idea', 'setup_database', 'test', 'assemble', 'install', 'functionalTest'
+defaultTasks 'clean', 'idea', 'setup_database', 'create_test_data', 'test', 'assemble', 'install', 'functionalTest'
 
 if (System.getenv('SMARTPOOL_ENV') == 'qa' || System.getenv('SMARTPOOL_ENV') == 'uat') {
     println("START: Copying of " + System.getenv('SMARTPOOL_ENV') + ".properties")
@@ -99,11 +99,19 @@ dependencies {
             "org.apache.commons:commons-lang3:3.1"
 }
 
-// create a task in gradle to read user, password from property, execute mysql command with SmartPoolDB.sql so that it populates the DB
 task setup_database << {
     ant.exec(executable: "dbscripts/dbsetup.sh", failifexecutionfails: "true", failonerror: "true") {
         arg(value: appProperties['databaseName'])
         arg(value: appProperties['databaseHost'])
+    }
+}
+
+task create_test_data << {
+    if (System.getenv('SMARTPOOL_ENV') == 'dev' || System.getenv('SMARTPOOL_ENV') == null) {
+        ant.exec(executable: "dbscripts/createTestData.sh", failifexecutionfails: "true", failonerror: "true") {
+            arg(value: appProperties['databaseName'])
+            arg(value: appProperties['databaseHost'])
+        }
     }
 }
 
