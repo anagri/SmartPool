@@ -3,18 +3,28 @@ package smartpool.service;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import smartpool.common.Constants;
 import smartpool.domain.LDAPResultSet;
 
+import java.util.Properties;
+
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 import static smartpool.util.matchers.ReflectionMatcher.reflectionEquals;
 
 public class LDAPServiceIT {
 
     private LDAPService ldapService;
+    @Mock
+    private Properties appProperties;
 
     @Before
     public void setUp() throws Exception {
-        ldapService = new LDAPService();
+        initMocks(this);
+        ldapService = new LDAPService(appProperties);
+        when(appProperties.getProperty(Constants.LDAP_URL)).thenReturn("ldap://ldap.thoughtworks.com:389/dc=Corporate,dc=ThoughtWorks,dc=COM");
     }
 
     @Test

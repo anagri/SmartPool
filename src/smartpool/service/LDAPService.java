@@ -1,6 +1,8 @@
 package smartpool.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import smartpool.common.Constants;
 import smartpool.domain.LDAPResultSet;
 
 import javax.naming.Context;
@@ -8,9 +10,17 @@ import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.*;
 import java.util.Hashtable;
+import java.util.Properties;
 
-@Component
+@Service
 public class LDAPService {
+
+    private Properties appProperties;
+
+    @Autowired
+    public LDAPService(Properties appProperties) {
+        this.appProperties = appProperties;
+    }
 
     public LDAPResultSet searchByUserName(String userName) {
         if ("test.twu".equals(userName)) {
@@ -24,8 +34,7 @@ public class LDAPService {
         String sp = "com.sun.jndi.ldap.LdapCtxFactory";
         env.put(Context.INITIAL_CONTEXT_FACTORY, sp);
 
-        String ldapUrl = "ldap://ldap.thoughtworks.com:389/dc=Corporate,dc=ThoughtWorks,dc=COM";
-        env.put(Context.PROVIDER_URL, ldapUrl);
+        env.put(Context.PROVIDER_URL, appProperties.getProperty(Constants.LDAP_URL));
 
         DirContext dirContext = null;
         try {
