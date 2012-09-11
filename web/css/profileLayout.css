@@ -1,14 +1,9 @@
-.mainContainer {
-}
-
 .mainContainer .subContainer {
     width: 500px;
-    height: 40px;
 }
 
 .mainContainer .subContainer span {
     width: 200px;
-    float: left;
 }
 
 .mainContainer .subContainer span:last-child {
@@ -17,4 +12,8 @@
 .buttonContainer {
     margin-left: 230px;
     margin-top: 40px;
+}
+.fieldName{
+    float: left;
+    min-width: 200px;
 }

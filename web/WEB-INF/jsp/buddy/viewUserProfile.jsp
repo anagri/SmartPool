@@ -11,21 +11,21 @@
 
 <div class="mainContainer">
     <div class="subContainer">
-        <span><label>Name:</label></span>
+        <span><label class="fieldName">Name:</label></span>
         <span><label id="profileName">${buddyProfile.getName()}</label></span>
     </div>
     <div class="subContainer">
-        <span><label>Contact Number:</label></span>
+        <span><label class="fieldName">Contact Number:</label></span>
         <span><label id="profilePhoneNumber">${buddyProfile.getContactNumber()}</label></span>
     </div>
 
     <div class="subContainer">
-        <span><label>Email:</label></span>
+        <span><label class="fieldName">Email:</label></span>
         <span><label id="profileEmail">${buddyProfile.getEmailId()}</label></span>
     </div>
 
     <div class="subContainer">
-        <span><label>Preferred Pickup Point:</label></span>
+        <span><label class="fieldName">Preferred Pickup Point:</label></span>
         <span><label>${buddyProfile.getPreferredPickupPoint()}</label></span>
     </div>
 
