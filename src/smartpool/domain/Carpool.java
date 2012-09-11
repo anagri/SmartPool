@@ -93,6 +93,10 @@ public class Carpool implements Comparable {
         return status;
     }
 
+    public String getStatusAsString(){
+        return status.toString().replaceAll("_", " ");
+    }
+
     public void setStatus(Status status) {
         this.status = status;
     }

@@ -84,7 +84,7 @@
 
             <p>Office Pickup Time: ${carpool.getOfficeETD().toString("h:mm a")}</p>
 
-            <p>Status: ${carpool.getStatus()}</p>
+            <p>Status: ${carpool.getStatusAsString()}</p>
 
             <c:choose>
                 <c:when test="${!hasEnoughSpace && !buddyIsInCarpool}">
