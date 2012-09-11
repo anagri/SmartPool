@@ -1,13 +1,11 @@
 package smartpool.functional.page;
 
-import org.hamcrest.BaseMatcher;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import smartpool.util.matchers.ContainsMatcher;
 
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -55,7 +53,8 @@ public class ViewCarpoolPage extends Page {
     }
 
     public void verifyCarpoolDetails() {
-        assertEquals("Carpool carpool-1", carpoolName.getText());
+        assertThat(carpoolName.getText(), contains("Carpool carpool"));
+        assertThat(carpoolName.getText(), contains("1"));
     }
 
     public ProfilePage goToBuddyProfilePage() {
@@ -65,7 +64,8 @@ public class ViewCarpoolPage extends Page {
 
 
     public void verifyDetailsOfNewCarpool(String from) {
-        assertEquals(String.format("Carpool %s - TW", from),carpoolName.getText());
+        assertThat(carpoolName.getText(), contains(String.format("Carpool %s", from)));
+        assertThat(carpoolName.getText(), contains("TW"));
         moreDetailsButtonLink.click();
         waitForElementToVisible(By.id(CARPOOL_CAPACITY_ID));
         assertEquals("4", carpoolCapacity.getText());
