@@ -83,20 +83,20 @@ public class BuddyProfileControllerTest {
 
     @Test
     public void shouldShowErrorPageIfMissingMandatoryInformation() throws Exception {
-        CreateProfileForm invalidForm = new CreateProfileForm(null, null, null, "", "abcd", "", "10:00");
+        CreateProfileForm invalidForm = new CreateProfileForm(null, null, null, "", "", "", "10:00");
         BindException errors = new BindException(invalidForm, "createProfileForm");
 
         ModelAndView modelAndView = buddyProfileController.submit(invalidForm, errors, request);
 
         assertThat(modelAndView.getViewName(), is("buddy/form"));
         assertThat((CreateProfileForm) modelAndView.getModel().get("createProfileForm"),
-                reflectionEquals(new CreateProfileForm("mzhao", "Ming Zhao", "mzhao@thoughtworks.com", "", "abcd", "", "10:00")));
+                reflectionEquals(new CreateProfileForm("mzhao", "Ming Zhao", "mzhao@thoughtworks.com", "", "", "", "10:00")));
         assertThat(errors.hasErrors(), is(true));
     }
 
     @Test
     public void shouldCreateProfileIfInformationIsProvided() throws Exception {
-        CreateProfileForm profileForm = new CreateProfileForm("mzhao", "Ming Zhao", "mzhao@thoughtworks.com", "", "234567809876", "", "");
+        CreateProfileForm profileForm = new CreateProfileForm("mzhao", "Ming Zhao", "mzhao@thoughtworks.com", "", "234567809876", "", "10:00");
         BindException errors = new BindException(profileForm, "createProfileForm");
 
         ModelAndView modelAndView = buddyProfileController.submit(profileForm, errors, request);
