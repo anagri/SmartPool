@@ -5,12 +5,6 @@
     <jsp:param name="title" value="Create Carpool" />
 </jsp:include>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/carpool/create.js"></script>
-<style type="text/css" >
-    .error{
-        color: #f00;
-        font-weight: bold;
-    }
-</style>
     <div>
         <h1 class="header">Create Carpool</h1>
     </div>

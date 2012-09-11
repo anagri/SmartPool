@@ -10,6 +10,11 @@ body {
     padding-right: 100px;
 }
 
+.error{
+    color: #cc0000;
+    display: none;
+}
+
 .header {
     font-size: 24px;
     font-weight: normal;
