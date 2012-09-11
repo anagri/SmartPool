@@ -8,7 +8,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/carpool/search.js"></script>
 
 <div>
-    <label class="header">Search Carpool</label>
+    <h1 class="header">Search Carpool</h1>
 </div>
 
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
@@ -35,7 +35,7 @@
             <div class="leftContent">
                 <h3 style="font-weight: normal;" id="resultsMessage">Your search for "${searchQuery}" returned ${searchResult == null ? 0 : searchResult.size()} result{s}</h3>
                 <c:if test="${searchResult ne null}">
-                    <table id='buddy-table'>
+                    <table id='search-result'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -48,7 +48,11 @@
                         </thead>
                         <c:forEach var="carpool" items="${searchResult}" varStatus="typeStatus">
                             <tr>
-                                <td><a href="../carpool/${carpool.getName()}" id="${carpool.getName()}">${carpool.getName()}</a></td>
+                                <td><a href="../carpool/${carpool.getName()}" id="${carpool.getName()}">
+                                    ${carpool.getFrom()}
+                                    <img src="${pageContext.request.contextPath}/css/img/arrow-sign.jpg" class="small-arrow-sign"/>
+                                    ${carpool.getTo()}
+                                </a></td>
                                 <td>${carpool.getStartPoint()}</td>
                                 <td class="center">${carpool.getStartTime().toString("h:mm a")}</td>
                                 <td class="center">${carpool.getBuddyCount()}</td>
@@ -63,7 +67,7 @@
                     </table>
                 </c:if>
             </div>
-            <div class="rightContent">
+            <div class="routePoints">
                 <div class="marginTop60"><h4 style="font-weight: normal;">Route Points</h4></div>
                 <select id="routePointList" onchange="searchByRoutePoint()">
                     <option value=""></option>

@@ -50,10 +50,10 @@
 
                             <c:choose>
                                 <c:when test="${empty searchQuery}">
-                                    <input type="text" name="query" value="Enter Location" id="searchBox" class="searchText" onclick="this.value=''"/>
+                                    <input type="text" name="query" placeholder="Enter Location" id="searchBox" class="searchText" onclick="this.value=''"/>
                                 </c:when>
                                 <c:otherwise>
-                                    <input type="text" name="query" value="${searchQuery}" id="searchBox" class="searchText" />
+                                    <input type="text" name="query" placeholder="Enter Location" value="${searchQuery}" id="searchBox" class="searchText" />
                                 </c:otherwise>
                             </c:choose>
 
