@@ -53,7 +53,7 @@ public class ViewCarpoolPage extends Page {
     }
 
     public void verifyCarpoolDetails() {
-        assertThat(carpoolName.getText(), contains("Carpool carpool"));
+        assertThat(carpoolName.getText(), contains("Carpool Carpool"));
         assertThat(carpoolName.getText(), contains("1"));
     }
 
