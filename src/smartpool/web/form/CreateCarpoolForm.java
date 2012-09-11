@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CreateCarpoolForm {
     String from;
     String to;
-    String capacity;
+    String capacity="0";
     String proposedStartDate;
     String pickupPoint;
     String pickupTime;

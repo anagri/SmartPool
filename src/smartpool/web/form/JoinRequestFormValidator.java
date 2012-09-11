@@ -29,9 +29,6 @@ public class JoinRequestFormValidator implements Validator {
         if (StringUtils.isBlank(form.pickupPoint)) {
             ValidationUtils.rejectIfEmpty(errors, "pickupPoint", "field.required");
         }
-//        if (StringUtils.isBlank(form.preferredPickupTime)) {
-//            ValidationUtils.rejectIfEmpty(errors, "preferredPickupTime", "field.required");
-//        } else
         if (!form.contactNumber.matches("\\d*")) {
             errors.rejectValue("contactNumber", "field.invalid");
         }

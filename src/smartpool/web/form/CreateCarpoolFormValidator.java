@@ -20,22 +20,22 @@ public class CreateCarpoolFormValidator implements Validator {
 
         if(form.from == null || form.from.equals("")) errors.rejectValue("from", Constants.FIELD_REQUIRED);
         if(form.to == null || form.to.equals("")) errors.rejectValue("to", Constants.FIELD_REQUIRED);
-        if(form.proposedStartDate == null || form.proposedStartDate.equals("")) errors.rejectValue("proposedStartDate", Constants.FIELD_REQUIRED);
+
         if(form.cabType == null || form.cabType.equals("")) errors.rejectValue("cabType", Constants.FIELD_REQUIRED);
         if(form.pickupPoint  == null || form.pickupPoint.equals("")) errors.rejectValue("pickupPoint", Constants.FIELD_REQUIRED);
         if(form.pickupTime  == null || form.pickupTime.equals("")) errors.rejectValue("pickupTime", Constants.FIELD_REQUIRED);
+        else checkForInvalidTime(errors, form.pickupTime, "pickupTime");
         if(form.officeArrivalTime  == null || form.officeArrivalTime.equals("")) errors.rejectValue("officeArrivalTime", Constants.FIELD_REQUIRED);
+        else checkForInvalidTime(errors, form.officeArrivalTime, "officeArrivalTime");
         if(form.officeDepartureTime  == null || form.officeDepartureTime.equals("")) errors.rejectValue("officeDepartureTime", Constants.FIELD_REQUIRED);
+        else checkForInvalidTime(errors,form.officeDepartureTime,"officeDepartureTime");
 
         try{
-            if(form.proposedStartDate != null) Constants.DATE_FORMATTER.parseLocalDate(form.proposedStartDate);
+            if(form.proposedStartDate == null || form.proposedStartDate.equals("")) errors.rejectValue("proposedStartDate", Constants.FIELD_REQUIRED);
+            else if(form.proposedStartDate != null) Constants.DATE_FORMATTER.parseLocalDate(form.proposedStartDate);
         }catch (IllegalArgumentException e){
             errors.rejectValue("proposedStartDate",Constants.FIELD_INVALID);
         }
-
-        checkForInvalidTime(errors, form.pickupTime, "pickupTime");
-        checkForInvalidTime(errors, form.officeArrivalTime, "officeArrivalTime");
-        checkForInvalidTime(errors,form.officeDepartureTime,"officeDepartureTime");
 
         try{
             if(form.capacity != null) Integer.parseInt(form.capacity);
