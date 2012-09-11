@@ -1,4 +1,4 @@
-package smartpool.service;
+package smartpool.builder;
 
 import org.joda.time.LocalTime;
 import smartpool.domain.Buddy;

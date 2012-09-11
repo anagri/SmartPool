@@ -3,6 +3,7 @@ package smartpool.service;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import smartpool.builder.BuddyBuilder;
 import smartpool.domain.Buddy;
 import smartpool.persistence.dao.JoinRequestDao;
 
