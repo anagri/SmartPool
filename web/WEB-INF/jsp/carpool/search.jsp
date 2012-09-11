@@ -40,9 +40,9 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Start Point</th>
-                                <th>Start Time</th>
-                                <th>Buddy Count</th>
-                                <th>Vacancy</th>
+                                <th class="center">Start Time</th>
+                                <th class="center">Buddy Count</th>
+                                <th class="center">Vacancy</th>
                                 <th>Status</th>
                             </tr>
                         </thead>

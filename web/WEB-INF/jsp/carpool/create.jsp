@@ -33,20 +33,17 @@
         </span>
         <span>
             <label>Proposed Start Date*:</label>
-            <input type="text" name="proposedStartDate" required/>
-            <label class="example">(DD/MM/YYYY)</label>
+            <input type="text" name="proposedStartDate" placeholder="DD/MM/YYYY" required/>
             <span><form:errors cssClass="error" path="proposedStartDate" /> </span>
         </span>
         <span>
             <label>Pickup Point*:</label>
-            <input type="text" name="pickupPoint" required/>
-            <label class="example">(Example: Diamond District)</label>
+            <input type="text" name="pickupPoint" placeholder="Example: Diamond District" required/>
             <span><form:errors cssClass="error" path="pickupPoint" /> </span>
         </span>
         <span>
             <label>Pickup Time*:</label>
-            <input type="text" name="pickupTime" required/>
-            <label class="example">(Example: 09:00)</label>
+            <input type="text" name="pickupTime" placeholder="Example: 09:00" required/>
             <span><form:errors cssClass="error" path="pickupTime" /> </span>
         </span>
         <span>
@@ -64,20 +61,17 @@
         </span>
         <span>
             <label>Office Arrival Time*:</label>
-            <input type="text" name="officeArrivalTime" required/>
-            <label class="example">(Example: 10:00)</label>
+            <input type="text" name="officeArrivalTime" placeholder="Example: 10:00" required/>
             <span><form:errors cssClass="error" path="officeArrivalTime" /> </span>
         </span>
         <span>
             <label>Office Departure Time*:</label>
-            <input type="text" name="officeDepartureTime" required/>
-            <label class="example">(Example: 18:00)</label>
+            <input type="text" name="officeDepartureTime" placeholder="Example: 18:00" required/>
             <span><form:errors cssClass="error" path="officeDepartureTime" /> </span>
         </span>
         <span>
             <label>Route Points:</label>
-            <input type="text" name="routePoints" />
-            <label class="example">(Example: Whitefield, Ramagondanhalli, Varthar Road, Marathahalli, HAL Airport, Domlur, Koramangla)</label>
+            <input type="text" name="routePoints" placeholder="Example: Whitefield, Ramagondanhalli, Varthar Road, Marathahalli, HAL Airport, Domlur, Koramangla" />
             <span><form:errors cssClass="error" path="routePoints" /> </span>
         </span>
         <div class="buttonContainer">
