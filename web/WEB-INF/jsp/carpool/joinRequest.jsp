@@ -9,30 +9,24 @@
 
 
 <div class="container">
-    <div class="header">Join Smart Pool: ${carpoolName}</div>
+    <div class="header">Join SmartPool: ${carpoolName}</div>
     <c:if test="${isRequestSent}">
     <span class="warning">You have already sent the request for this carpool</span>
     </c:if>
     <style>
         .error {
             color: #ff0000;
+            font-size: smaller;
         }
 
-        .errorblock {
-            color: #000;
-            background-color: #ffEEEE;
-            border: 3px solid #ff0000;
-            padding: 8px;
-            margin: 16px;
-
-        }
     </style>
     <c:if test="${!isRequestSent}">
     <form:form commandName="joinRequestForm" htmlEscape="true">
+    <div align="center" style="color: red">
     <spring:hasBindErrors name="joinRequestForm">
-        <spring:message code="errors.exist"/>
+        <spring:message code="errors.exist" />
     </spring:hasBindErrors>
-
+    </div>
     <div class="mainContainer">
             <span>
                 <label>Name*</label>
@@ -40,14 +34,16 @@
             </span>
 
             <span>
-                <label>Address</label>
-                <textarea id="addressTextBox" name="address" rows="3" cols="30"
-                          value="${joinRequestForm.address}"> </textarea>
+                <label>Landmark*</label>
+                <input id="addressTextBox" name="address" type="textarea"
+                       value="${joinRequestForm.address}" />
+                <form:errors path="address" cssClass="error"/>
+                <label class="example"><spring:message code="addressExample"/></label>
             </span>
 
             <span>
                 <label>Contact Number*</label>
-                <input id="contactNumberTextBox" name="contactNumber" type="textbox" required="required"
+                <input id="contactNumberTextBox" name="contactNumber" type="textbox"
                        value="${joinRequestForm.contactNumber}"/>
                  <form:errors path="contactNumber" cssClass="error"/>
             </span>
@@ -59,9 +55,10 @@
 
             <span>
                 <label>Preferred Pick Up Point*</label>
-                <input id="pickupPointTextBox" name="pickupPoint" required="required" type="textbox"
+                <input id="pickupPointTextBox" name="pickupPoint" type="textbox"
                        value="${joinRequestForm.pickupPoint}"/>
                 <form:errors path="pickupPoint" cssClass="error"/>
+
             </span>
             <span>
                 <label>Pick Up Time (hh:mm)</label>
@@ -73,10 +70,17 @@
 
         <div class="buttonContainer">
             <c:set var="isDisabled" value="${isRequestSent ? 'disabled' : ''}"/>
-            <a href="<c:url value="/carpool/${carpoolName}" />">Cancel</a>
             <button id="submitFormButton" name="submit" type="submit" ${isDisabled}>Submit</button>
+        <button type="button" value="Cancel" onclick="location.href = '${pageContext.request.contextPath}/carpool/${carpoolName}'">Cancel</button>
         </div>
     </div>
     </form:form>
     </c:if>
-<%@ include file="../footer.jsp" %>
+
+    <%--<div class="buttonContainer">--%>
+        <%--<form action="/smartpool/carpool/${carpoolName}" method="link">--%>
+            <%--<button id="cancelButton" name="cancel" type="submit">Cancel</button>--%>
+        <%--</form>--%>
+    <%--</div>--%>
+
+    <%@ include file="../footer.jsp" %>
