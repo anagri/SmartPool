@@ -27,7 +27,7 @@ public class JoinRequestDaoIT {
 
     @Test
     public void shouldInsertRequestToDB() {
-        joinRequestDao.sendJoinRequest(new JoinRequest(buddyUsername, carpoolName, "Domlur", new LocalTime(9, 0), "diamond district"));
+        joinRequestDao.sendJoinRequest(new JoinRequest(buddyUsername, carpoolName, "diamond district", "Domlur", new LocalTime(9, 0)));
 
         JoinRequest returnedRequest = joinRequestDao.selectUsersRequest(buddyUsername, carpoolName);
         assertThat(returnedRequest, not(nullValue()));
@@ -39,13 +39,13 @@ public class JoinRequestDaoIT {
         Buddy buddy = new Buddy(buddyUsername);
 
         assertFalse(joinRequestDao.isRequestSent(buddy, carpoolName));
-        joinRequestDao.sendJoinRequest(new JoinRequest(buddyUsername, carpoolName, "Domlur", new LocalTime(9, 0), "diamond district"));
+        joinRequestDao.sendJoinRequest(new JoinRequest(buddyUsername, carpoolName, "diamond district", "Domlur", new LocalTime(9, 0)));
         assertTrue(joinRequestDao.isRequestSent(buddy, carpoolName));
     }
 
     @Test
     public void testShouldInsertTimeInProperFormat() throws Exception {
-        JoinRequest joinRequest = new JoinRequest(buddyUsername, carpoolName, "Here", new LocalTime(8, 30), "diamond district");
+        JoinRequest joinRequest = new JoinRequest(buddyUsername, carpoolName, "diamond district", "Here", new LocalTime(8, 30));
 
         joinRequestDao.sendJoinRequest(joinRequest);
 
@@ -55,7 +55,7 @@ public class JoinRequestDaoIT {
 
     @Test
     public void testShouldDeleteUsersJoinRequest() throws Exception {
-        joinRequestDao.sendJoinRequest(new JoinRequest(buddyUsername, carpoolName, "Domlur", new LocalTime(9, 0), "diamond district"));
+        joinRequestDao.sendJoinRequest(new JoinRequest(buddyUsername, carpoolName, "diamond district", "Domlur", new LocalTime(9, 0)));
         joinRequestDao.deleteUsersRequest(buddyUsername, carpoolName);
         assertThat(joinRequestDao.selectUsersRequest(buddyUsername, carpoolName), is(nullValue()));
     }

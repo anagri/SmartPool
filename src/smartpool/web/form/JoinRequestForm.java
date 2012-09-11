@@ -28,11 +28,11 @@ public class JoinRequestForm {
 
     public JoinRequestForm(CarpoolBuddy carpoolBuddy, String carpoolName) {
         this(carpoolBuddy.getBuddy().getUserName(), carpoolName,
-                carpoolBuddy.getBuddy().getAddress(), carpoolBuddy.getBuddy().getContactNumber(), null, null);
+                carpoolBuddy.getBuddy().getAddress(), carpoolBuddy.getBuddy().getContactNumber(), "", "");
     }
 
     public JoinRequest createDomainObject() {
-        return new JoinRequest(username, carpoolName, pickupPoint, LocalTime.parse(preferredPickupTime), address);
+        return new JoinRequest(username, carpoolName, address, pickupPoint, LocalTime.parse(preferredPickupTime));
     }
 
     @SuppressWarnings("unused - used by spring data binding")

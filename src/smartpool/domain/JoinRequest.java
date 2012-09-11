@@ -11,7 +11,7 @@ public class JoinRequest {
     public JoinRequest() {
     }
 
-    public JoinRequest(String username, String carpoolName, String pickupPoint, LocalTime preferredPickupTime, String address) {
+    public JoinRequest(String username, String carpoolName, String address, String pickupPoint, LocalTime preferredPickupTime) {
         this.username = username;
         this.carpoolName = carpoolName;
         this.pickupPoint = pickupPoint;

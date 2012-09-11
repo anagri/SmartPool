@@ -33,7 +33,7 @@ public class JoinRequestFormValidatorTest {
 
     @Test
     public void testShouldAddErrorOnInvalidNumbers() throws Exception {
-        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, "abc", null, null);
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, "abc", "abc", "00:00");
         BindException errors = new BindException(form, "joinRequestForm");
         validator.validate(form, errors);
 
@@ -44,7 +44,7 @@ public class JoinRequestFormValidatorTest {
 
     @Test
     public void testShouldAddErrorIfPickupPointNotProvided() throws Exception {
-        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, valid_contactnumber, null, null);
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, valid_contactnumber, "", "");
 
         BindException errors = new BindException(form, "joinRequestForm");
 
@@ -58,7 +58,7 @@ public class JoinRequestFormValidatorTest {
 
     @Test
     public void shouldAddErrorIfPreferredTimeIsNotInCorrectFormat() throws Exception {
-        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, valid_contactnumber, null, null);
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, valid_contactnumber, "abc", "hfu");
         BindException errors = new BindException(form, "joinRequestForm");
         validator.validate(form, errors);
 
@@ -69,7 +69,7 @@ public class JoinRequestFormValidatorTest {
 
     @Test
     public void shouldAddErrorIfPreferredTimeNotInRange() throws Exception {
-        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, valid_contactnumber, null, null);
+        JoinRequestForm form = new JoinRequestForm(valid_username, "test pool", valid_address, valid_contactnumber, "abc", "26:00");
         BindException errors = new BindException(form, "joinRequestForm");
         validator.validate(form, errors);
 
