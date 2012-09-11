@@ -86,7 +86,7 @@ public class JoinCarPoolController {
             model.put("isRequestSent", requestSent);
             return new ModelAndView("carpool/joinRequest", model);
         } else {
-            joinRequestService.sendJoinRequest(joinRequestForm.createDomainObject());
+            joinRequestService.sendJoinRequest(joinRequestForm.createDomainObject(), buddy);
             return new ModelAndView(new RedirectView("../../carpool/" + carpoolName));
         }
     }

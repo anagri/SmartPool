@@ -19,7 +19,19 @@ public class JoinRequest {
         this.address = address;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public String getCarpoolName() {
         return carpoolName;
+    }
+
+    @Override
+    public String toString() {
+        return  "carpoolName='" + carpoolName + '\'' +
+                ", pickupPoint='" + pickupPoint + '\'' +
+                ", preferredPickupTime=" + preferredPickupTime +
+                ", address='" + address ;
     }
 }

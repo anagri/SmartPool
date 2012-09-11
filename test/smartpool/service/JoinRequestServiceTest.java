@@ -1,11 +1,13 @@
 package smartpool.service;
 
+import org.joda.time.LocalTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import smartpool.builder.BuddyBuilder;
 import smartpool.domain.Buddy;
 import smartpool.domain.CarpoolBuddy;
+import smartpool.domain.JoinRequest;
 import smartpool.persistence.dao.CarpoolBuddyDao;
 import smartpool.persistence.dao.JoinRequestDao;
 
@@ -55,10 +57,17 @@ public class JoinRequestServiceTest {
 
     @Test
     public void shouldSendEmailToList() throws Exception {
-        when(carpoolBuddyDao.getCarpoolBuddiesByCarpoolName("carpool-2")).thenReturn(new ArrayList<CarpoolBuddy>());
-        ArrayList<String> buddyEmailList = joinRequestService.getCarpoolBuddies("carpool-2");
-        when(mailService.sendMailToList(buddyEmailList,"","")).thenReturn(true);
-        assertTrue(joinRequestService.sendEmailToList("carpool-2"));
-        verify(mailService).sendMailToList(buddyEmailList,"","");
+        carpoolName = "carpool-2";
+        JoinRequest joinRequest = new JoinRequest("suganthk", carpoolName, "pickupPoint", new LocalTime(10, 0), "address");
+        when(carpoolBuddyDao.getCarpoolBuddiesByCarpoolName(carpoolName)).thenReturn(new ArrayList<CarpoolBuddy>());
+        ArrayList<String> buddyEmailList = joinRequestService.getCarpoolBuddies(carpoolName);
+        String subject = "New Buddy Request To Join Your Carpool";
+        String message = "Hi\nA new buddy wants to join your carpool. Approve/Reject his request\n" +
+                "Below is the buddy details:\n" +
+                "Buddy Name  :" + buddy.getName() +
+                joinRequest;
+
+        joinRequestService.sendEmailToList(joinRequest, buddy);
+        verify(mailService).sendMailToList(buddyEmailList, subject, message);
     }
 }

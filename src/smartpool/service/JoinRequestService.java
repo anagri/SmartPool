@@ -2,6 +2,7 @@ package smartpool.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import smartpool.common.Constants;
 import smartpool.domain.Buddy;
 import smartpool.domain.CarpoolBuddy;
 import smartpool.domain.JoinRequest;
@@ -9,6 +10,7 @@ import smartpool.persistence.dao.CarpoolBuddyDao;
 import smartpool.persistence.dao.JoinRequestDao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class JoinRequestService {
@@ -23,13 +25,9 @@ public class JoinRequestService {
         this.mailService = mailService;
     }
 
-    public JoinRequestService() {
-        this(new JoinRequestDao(),new CarpoolBuddyDao(),new MailService());
-    }
-
-    public void sendJoinRequest(JoinRequest joinRequest) {
+    public void sendJoinRequest(JoinRequest joinRequest, Buddy buddy) {
         joinrequestDao.sendJoinRequest(joinRequest);
-        sendEmailToList(joinRequest.getCarpoolName());
+        sendEmailToList(joinRequest,buddy);
     }
 
     public boolean isRequestSent(Buddy buddy, String carpoolName) {
@@ -45,8 +43,9 @@ public class JoinRequestService {
         return buddyEmailList;
     }
 
-    public boolean sendEmailToList(String carpoolName) {
-        ArrayList<String> buddyEmailList = getCarpoolBuddies(carpoolName);
-        return mailService.sendMailToList(buddyEmailList, "", "");
+    public void sendEmailToList(JoinRequest joinRequest, Buddy buddy) {
+        List<String> buddyEmailList = getCarpoolBuddies(joinRequest.getCarpoolName());
+        String message = String.format(Constants.NEW_BUDDY_NOTIFICATION_MESSAGE, buddy.getName(), joinRequest);
+        mailService.sendMailToList(buddyEmailList, Constants.NEW_BUDDY_NOTIFICATION_SUBJECT, message);
     }
 }
