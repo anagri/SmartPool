@@ -2,7 +2,7 @@ body {
     background-color: #EEEEEE;
     color: #333333;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 20px;
     padding-top: 20px;
     padding-bottom: 100px;
@@ -12,6 +12,7 @@ body {
 
 .header {
     font-size: 24px;
+    font-weight: normal;
     line-height: 40px;
     color: inherit;
     font-family: inherit;
@@ -21,7 +22,7 @@ body {
 }
 
 button {
-    font-size: 16px;
+    font-size: 14px;
     color: #333333;
     background-color: #0099ff;
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#22DDFF), to(#0099FF));
@@ -47,7 +48,7 @@ button.disabled {
 }
 
 .btn-small {
-    font-size: 14px;
+    font-size: 12px;
     padding: 2px 11px;
     line-height: 17px;
     height: 26px;
@@ -123,7 +124,7 @@ button.disabled {
 }
 
 label{
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .warning{
@@ -139,7 +140,7 @@ input[type="text"] {
     color: #555555;
     background-color: #FFFFFF;
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     height: 27px;
     line-height: 20px;
     margin-bottom: 9px;
@@ -148,4 +149,23 @@ input[type="text"] {
 
 .center{
     text-align: center;
+}
+
+.big-arrow-sign{
+    height: 25px;
+    margin-bottom: 6px;
+}
+
+.small-arrow-sign{
+    height: 15px;
+    margin-bottom: 5px;
+    margin-left: 3px;
+}
+
+td, p, div, span{
+    font-size: 14px;
+}
+
+th{
+    font-size: 15px;
 }

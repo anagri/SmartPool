@@ -16,7 +16,11 @@
     });
 </script>
 <div>
-    <label id="carpoolName" class="header">Carpool ${carpool.getName()}</label>
+    <h1 id="carpoolName" class="header">
+        Carpool ${carpool.getFrom()}
+        <img src="${pageContext.request.contextPath}/css/img/arrow-sign.jpg" class="big-arrow-sign"/>
+         ${carpool.getTo()}
+    </h1>
 
     <div>
         <h2 style="font-weight: normal;">Buddy List</h2>
@@ -25,10 +29,10 @@
             <table class='buddy-table' style="margin-bottom: 4px;">
                 <thead>
                 <tr>
-                    <th>Pickup Sequence</th>
+                    <th class="center">Pickup Sequence</th>
                     <th>Buddy Name</th>
                     <th>Pickup Point</th>
-                    <th>Pickup Time</th>
+                    <th class="center">Pickup Time</th>
                 </tr>
                 </thead>
                 <c:forEach var="carpoolBuddy" items="${carpool.getCarpoolBuddies()}" varStatus="sequence">
@@ -39,7 +43,7 @@
                         <c:if test="${sequence.index==0 && carpool.getCabType() == PERSONAL}"><i class="icon-leaf" style="margin-left: -19px;"></i></c:if>
                         ${buddy.getName()}</a></td>
                         <td>${carpoolBuddy.getPickupPoint()}</td>
-                        <td>${carpoolBuddy.getPickupTime().toString("h:mm a")}</td>
+                        <td class="center">${carpoolBuddy.getPickupTime().toString("h:mm a")}</td>
                     </tr>
                 </c:forEach>
                 <c:forEach var="i" begin="${carpool.getCarpoolBuddies().size()+1}" end="${carpool.getCapacity()}">

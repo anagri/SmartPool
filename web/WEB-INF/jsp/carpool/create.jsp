@@ -12,7 +12,7 @@
     }
 </style>
     <div>
-        <label class="header">Create Carpool</label>
+        <h1 class="header">Create Carpool</h1>
     </div>
 <div class="mainContainer">
     <form:form commandName="createCarpoolForm" htmlEscape="true">
