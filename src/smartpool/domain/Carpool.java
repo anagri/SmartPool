@@ -46,11 +46,13 @@ public class Carpool implements Comparable {
     }
 
     public String getFrom(){
-        return name.split("-")[0];
+        String from = name.split("-")[0];
+        return from.substring(0,1).toUpperCase()+from.substring(1);
     }
 
     public String getTo(){
-        return name.split("-")[1];
+        String to = name.split("-")[1];
+        return to.trim().substring(0,1).toUpperCase()+to.trim().substring(1);
     }
 
     public void setName(String name) {
