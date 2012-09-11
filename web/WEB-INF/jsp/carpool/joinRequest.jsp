@@ -35,8 +35,8 @@
 
             <span>
                 <label>Landmark*</label>
-                <input id="addressTextBox" name="address" type="textarea"
-                       value="${joinRequestForm.address}" />
+                <%--<input id="addressTextBox" name="address" type="textbox" --%>
+                <textarea id="addressTextBox" name="address" rows="5" cols="30" style="margin-top: -13px">${joinRequestForm.address}</textarea> <br/>
                 <form:errors path="address" cssClass="error"/>
                 <label class="example"><spring:message code="addressExample"/></label>
             </span>

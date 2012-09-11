@@ -28,7 +28,7 @@ public class JoinRequestForm {
 
     public JoinRequestForm(CarpoolBuddy carpoolBuddy, String carpoolName) {
         this(carpoolBuddy.getBuddy().getUserName(), carpoolName,
-                carpoolBuddy.getBuddy().getAddress(), carpoolBuddy.getBuddy().getContactNumber(), "", "");
+              "", carpoolBuddy.getBuddy().getContactNumber(), "", "");
     }
 
     public JoinRequest createDomainObject() {
