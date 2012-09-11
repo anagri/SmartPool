@@ -11,12 +11,9 @@ import javax.servlet.http.HttpSession;
 
 @Service
 public class BuddyService {
-    @Autowired
     private BuddyDao buddyDao;
 
-    public BuddyService() {
-    }
-
+    @Autowired
     public BuddyService(BuddyDao buddyDao) {
         this.buddyDao = buddyDao;
     }

@@ -1,6 +1,5 @@
 package smartpool.service;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -22,18 +21,10 @@ public class BuddyServiceTest {
     }
 
     @Test
-    public void shouldGetBuddyFromBuddyDao() throws Exception {
-        Buddy expectedBuddy = new Buddy("prithvin");
-        BuddyService buddyService = new BuddyService(new BuddyDao());
-        Assert.assertEquals(expectedBuddy, buddyService.getBuddy("prithvin"));
-    }
-
-    @Test
     public void shouldInsertIntoDatabase() {
         BuddyService buddyService = new BuddyService(buddyDao);
         Buddy buddy = new CreateProfileForm("new.user", "test", "address", "email", null, null, "09:00").createBuddy();
         buddyService.insert(buddy);
         verify(buddyDao).insertIntoBuddies(buddy);
     }
-
 }
