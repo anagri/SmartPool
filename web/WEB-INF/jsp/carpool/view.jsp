@@ -40,7 +40,7 @@
                     <tr class="seat-occupied">
                         <td class="buddy-sequence">${sequence.index + 1}</td>
                         <td><a href="../buddyProfile/${buddy.getUserName()}" id="${buddy.getUserName()}">
-                        <c:if test="${sequence.index==0 && carpool.getCabType() == PERSONAL}"><i class="icon-leaf" style="margin-left: -19px;"></i></c:if>
+                        <c:if test="${sequence.index==0 && carpool.getCabType() == PERSONAL}"><img src="${pageContext.request.contextPath}/css/img/key.png"  class="car-owner" /></c:if>
                         ${buddy.getName()}</a></td>
                         <td>${carpoolBuddy.getPickupPoint()}</td>
                         <td class="center">${carpoolBuddy.getPickupTime().toString("h:mm a")}</td>
@@ -58,7 +58,7 @@
             </table>
 
             <c:if test="${carpool.getCabType() == PERSONAL}">
-            <span style="font-size: smaller;"><i class="icon-leaf"></i>:carpool lead</span>
+            <span style="font-size: smaller;"><img src="${pageContext.request.contextPath}/css/img/key.png"  class="car-owner" />:carpool lead</span>
             </c:if>
 
             <p style="margin-top:23px;margin-bottom: 6px;">Cab Type:
