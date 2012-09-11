@@ -15,3 +15,20 @@
     margin-top:-13px !important;
     vertical-align: middle;
 }
+
+.routePoints{
+    position: absolute;
+    top:155px;
+    left:622px;
+}
+
+#search-result{
+    width: 900px;
+}
+
+
+#routePointList{
+    position: absolute;
+    top: 52px;
+    left: 158px;
+}
