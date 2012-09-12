@@ -25,14 +25,15 @@ public class CreateProfileFormValidator implements Validator {
         } else if (!form.contactNumber.matches("\\d*")) {
             errors.rejectValue("contactNumber", "field.invalid");
         }
-        if (!form.preferredPickupTime.matches("\\d{1,2}:\\d{2}")) {
-            errors.rejectValue("preferredPickupTime", "field.invalid");
-        } else {
-            try {
-                LocalTime.parse(form.preferredPickupTime);
-            } catch (IllegalFieldValueException e) {
+        if (!StringUtils.isBlank(form.preferredPickupTime))
+            if (!form.preferredPickupTime.matches("\\d{1,2}:\\d{2}")) {
                 errors.rejectValue("preferredPickupTime", "field.invalid");
+            } else {
+                try {
+                    LocalTime.parse(form.preferredPickupTime);
+                } catch (IllegalFieldValueException e) {
+                    errors.rejectValue("preferredPickupTime", "field.invalid");
+                }
             }
-        }
     }
 }
