@@ -14,17 +14,14 @@ import java.util.Properties;
 @Service
 public class MailService {
 
-    private Properties appProperties;
     private Mail mail;
 
     @Autowired
-    public MailService(Properties appProperties) {
-        this.appProperties = appProperties;
+    public MailService() {
         this.mail = new Mail(new MimeMessage(getSession()));
     }
 
-    public MailService(Properties appProperties, Mail mail) {
-        this.appProperties = appProperties;
+    public MailService(Mail mail) {
         this.mail = mail;
     }
 
