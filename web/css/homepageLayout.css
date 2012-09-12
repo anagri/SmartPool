@@ -10,6 +10,7 @@
 .imageContainer{
     height: 80px;
     float: left;
+    margin-top: 40px;
 }
 .searchBar{
     padding-top: 30px;
