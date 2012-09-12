@@ -9,7 +9,7 @@ import org.openqa.selenium.support.How;
 
 import static junit.framework.Assert.assertEquals;
 
-public class ProfilePage extends Page {
+public class ViewProfilePage extends Page {
 
     public static final String PROFILE_NAME_ID = "profileName";
     public static final String PROFILE_PHONE_NUMBER_ID = "profilePhoneNumber";
@@ -28,7 +28,7 @@ public class ProfilePage extends Page {
     @FindBy(how = How.ID, using = PROFILE_BUTTON_ID)
     private WebElement profileButton;
 
-    public ProfilePage(WebDriver webDriver) {
+    public ViewProfilePage(WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -36,23 +36,20 @@ public class ProfilePage extends Page {
     public void waitForThePageToLoad() {
         waitForElementToLoad(By.id(PROFILE_NAME_ID));
     }
-    public String getProfileName()
-    {
+
+    public String getProfileName() {
         return profileName.getText();
     }
 
-    public String getProfilePhoneNumber()
-    {
+    public String getProfilePhoneNumber() {
         return profilePhoneNumber.getText();
     }
 
-    public String getProfileEmail()
-    {
+    public String getProfileEmail() {
         return profileEmail.getText();
     }
 
-    public String getProfileButton()
-    {
+    public String getProfileButton() {
         return profileButton.getText();
     }
 

@@ -21,7 +21,7 @@ public class JoinRequestDaoIT {
     @Before
     public void setUp() throws Exception {
         joinRequestDao = new JoinRequestDao();
-        buddyUsername = "test.twu";
+        buddyUsername = "mzhao";
         carpoolName = "carpool-1";
     }
 

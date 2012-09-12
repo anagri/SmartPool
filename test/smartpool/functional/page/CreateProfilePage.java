@@ -34,13 +34,13 @@ public class CreateProfilePage extends Page {
         waitForElementToLoad(By.name(ADDRESS_NAME));
     }
 
-    public ProfilePage enterProfileDetails() {
+    public ViewProfilePage enterProfileDetails() {
         addressTextArea.sendKeys("ThoughtWorks");
         contactNumberTextBox.sendKeys("1234567890");
         preferredPickupPointTextBox.sendKeys("Ooty Chocolates");
         preferredPickupTimeTextBox.sendKeys("10:00");
         submitButton.click();
-        return new ProfilePage(webDriver);
+        return new ViewProfilePage(webDriver);
     }
 }
 

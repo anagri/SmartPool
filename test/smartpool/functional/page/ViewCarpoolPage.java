@@ -57,9 +57,9 @@ public class ViewCarpoolPage extends Page {
         assertThat(carpoolName.getText(), contains("1"));
     }
 
-    public ProfilePage goToBuddyProfilePage() {
+    public ViewProfilePage goToBuddyProfilePage() {
         ayushtLink.click();
-        return new ProfilePage(webDriver);
+        return new ViewProfilePage(webDriver);
     }
 
 
