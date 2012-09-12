@@ -11,10 +11,16 @@
 }
 
 .buttonContainer {
-    margin-left: 230px;
-    margin-top: 40px;
+    margin-left: 27px;
+    margin-top: 220px;
 }
 .fieldName{
     float: left;
     min-width: 200px;
+    height: 50px;
+}
+.fieldValue{
+    float: left;
+    min-width: 200px;
+    height: 50px;
 }

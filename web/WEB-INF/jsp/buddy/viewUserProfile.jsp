@@ -11,22 +11,22 @@
         <div class="subContainer">
             <span class="fieldName">Name: </span>
 
-            <div id="profileName">${buddyProfile.getName()} </div>
+            <div class="fieldValue" id="profileName">${buddyProfile.getName()} </div>
         </div>
         <div class="subContainer">
             <span class="fieldName">Contact Number:</span>
-            <span id="profilePhoneNumber">${buddyProfile.getContactNumber()}</span>
+            <span class="fieldValue" id="profilePhoneNumber">${buddyProfile.getContactNumber()}</span>
         </div>
 
         <div class="subContainer">
             <span class="fieldName">Email: </span>
-            <span id="profileEmail">${buddyProfile.getEmailId()} </span>
+            <span class="fieldValue" id="profileEmail">${buddyProfile.getEmailId()} </span>
         </div>
 
         <div class="subContainer">
             <span class="fieldName">Preferred Pickup Point: </span>
 
-            <div> ${buddyProfile.getPreferredPickupPoint() == null ? "Not set" : buddyProfile.getPreferredPickupPoint()} </div>
+            <div class="fieldValue"> ${buddyProfile.getPreferredPickupPoint() == null ? "Not set" : buddyProfile.getPreferredPickupPoint()} </div>
         </div>
 
         <div class="subContainer" style="height: 100px">
