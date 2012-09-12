@@ -53,7 +53,7 @@ public class CarpoolTest {
     public void shouldReturnRequestSentIfRequestIsSent() throws Exception {
         carpool.setRequestSent(true);
 
-        assertThat(carpool.getStartLinkText(), is("Request Sent"));
+        assertThat(carpool.getStartLinkText(), is("Request Sent To Admin"));
     }
 
     @Test
