@@ -18,7 +18,7 @@ public class Mail {
         recipientAddress.validate();
         message.setRecipient(Message.RecipientType.TO, recipientAddress);
         message.setSubject(subject);
-        message.setText(messageBody);
+        message.setContent(messageBody,"text/html");
         return message;
     }
 }

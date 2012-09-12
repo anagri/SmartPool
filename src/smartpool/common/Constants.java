@@ -18,8 +18,13 @@ public class Constants {
     public static final String FIELD_REQUIRED = "field.required";
     public static final String FIELD_INVALID = "field.invalid";
 
-    public static final String NEW_BUDDY_NOTIFICATION_SUBJECT = "New Buddy Request To Join Your Carpool";
-    public static final String NEW_BUDDY_NOTIFICATION_MESSAGE = "Hi\nA new buddy wants to join your carpool. Approve/Reject his request\n" +
-                                                                "Below is the buddy details:\n" +
-                                                                "Buddy Name  :%s%s";
+    public static final String NEW_BUDDY_NOTIFICATION_SUBJECT = "SmartPool New Buddy Join Request";
+    public static final String NEW_BUDDY_NOTIFICATION_MESSAGE = "Smartpool Notification Date  :  %s<br /><br />" +
+                                                                "<b>%s</b> has requested to join <b>%s</b><br /><br />"+
+                                                                "<u>Details</u><br /><br />"+
+                                                                "%s<br /><br />"+
+                                                                "Approve : Click on this link %s<br /><br />"+
+                                                                "Disapprove : Click on this link %s<br /><br />"+
+                                                                "----------------------------------------<br /><br />"+
+                                                                "*This is a system generated email. Please DO NOT reply.";
 }

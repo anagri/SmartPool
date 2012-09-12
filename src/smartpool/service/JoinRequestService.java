@@ -9,8 +9,11 @@ import smartpool.domain.JoinRequest;
 import smartpool.persistence.dao.CarpoolBuddyDao;
 import smartpool.persistence.dao.JoinRequestDao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class JoinRequestService {
@@ -45,7 +48,10 @@ public class JoinRequestService {
 
     public void sendEmailToList(JoinRequest joinRequest, Buddy buddy) {
         List<String> buddyEmailList = getCarpoolBuddies(joinRequest.getCarpoolName());
-        String message = String.format(Constants.NEW_BUDDY_NOTIFICATION_MESSAGE, buddy.getName(), joinRequest);
+        String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+        String approveLink="approve link";
+        String disApproveLink="disapprove link";
+        String message = String.format(Constants.NEW_BUDDY_NOTIFICATION_MESSAGE, date, buddy.getName(), joinRequest.getCarpoolName(),joinRequest,approveLink,disApproveLink);
         mailService.sendMailToList(buddyEmailList, Constants.NEW_BUDDY_NOTIFICATION_SUBJECT, message);
     }
 }

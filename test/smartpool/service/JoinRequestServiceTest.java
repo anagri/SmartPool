@@ -11,7 +11,10 @@ import smartpool.domain.JoinRequest;
 import smartpool.persistence.dao.CarpoolBuddyDao;
 import smartpool.persistence.dao.JoinRequestDao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
@@ -61,12 +64,21 @@ public class JoinRequestServiceTest {
         JoinRequest joinRequest = new JoinRequest("suganthk", carpoolName, "address", "pickupPoint", new LocalTime(10, 0));
         when(carpoolBuddyDao.getCarpoolBuddiesByCarpoolName(carpoolName)).thenReturn(new ArrayList<CarpoolBuddy>());
         ArrayList<String> buddyEmailList = joinRequestService.getCarpoolBuddies(carpoolName);
-        String subject = "New Buddy Request To Join Your Carpool";
-        String message = "Hi\nA new buddy wants to join your carpool. Approve/Reject his request\n" +
-                "Below is the buddy details:\n" +
-                "Buddy Name  :" + buddy.getName() +
-                joinRequest;
 
+        String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+        String approveLink="approve link";
+        String disApproveLink="disapprove link";
+
+        String subject = "SmartPool New Buddy Join Request";
+        String message = "Smartpool Notification Date  :  %s<br /><br />" +
+                "<b>%s</b> has requested to join <b>%s</b><br /><br />"+
+                "<u>Details</u><br /><br />"+
+                "%s<br /><br />"+
+                "Approve : Click on this link %s<br /><br />"+
+                "Disapprove : Click on this link %s<br /><br />"+
+                "----------------------------------------<br /><br />"+
+                "*This is a system generated email. Please DO NOT reply.";
+        message = String.format(message,date, buddy.getName(), joinRequest.getCarpoolName(),joinRequest,approveLink,disApproveLink);
         joinRequestService.sendEmailToList(joinRequest, buddy);
         verify(mailService).sendMailToList(buddyEmailList, subject, message);
     }

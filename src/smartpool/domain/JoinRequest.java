@@ -29,9 +29,9 @@ public class JoinRequest {
 
     @Override
     public String toString() {
-        return  "carpoolName='" + carpoolName + '\'' +
-                ", pickupPoint='" + pickupPoint + '\'' +
-                ", preferredPickupTime=" + preferredPickupTime +
-                ", address='" + address ;
+        return  "<table><tr><td><b>Carpool Name</b> </td><td>  :  " + carpoolName +"</td></tr><br /><br />"+
+                "<tr><td><b>Pick-Up Point</b> </td><td>  :  " + pickupPoint +"</td></tr><br /><br />"+
+                "<tr><td><b>Preferred Pickup Time</b> </td><td>  :  " + preferredPickupTime.toString().substring(0,5) +"</td></tr><br /><br />"+
+                "<tr><td><b>Address</b> </td><td>  :  " + address+"</td></tr></table><br /><br />";
     }
 }

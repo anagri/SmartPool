@@ -42,6 +42,6 @@ public class MailTest {
         Mockito.verify(message).setFrom(new InternetAddress("SmartPool"));
         Mockito.verify(message).setRecipient(Message.RecipientType.TO, new InternetAddress("valid@abc.com"));
         Mockito.verify(message).setSubject("subject");
-        Mockito.verify(message).setText("body");
+        Mockito.verify(message).setContent("body","text/html");
     }
 }
