@@ -110,7 +110,7 @@ task setup_database << {
 
 task create_test_data << {
     if (System.getenv('SMARTPOOL_ENV') == 'dev' || System.getenv('SMARTPOOL_ENV') == null) {
-        ant.exec(executable: "dbscripts/createTestData.sh", failifexecutionfails: "true", failonerror: "true") {
+        ant.exec(executable: "dbscripts/createTestData.sh", failifexecutionfails: "true", failonerror: "true", logError: true) {
             arg(value: appProperties['databaseName'])
             arg(value: appProperties['databaseHost'])
         }
