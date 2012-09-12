@@ -35,10 +35,9 @@
 
             <span>
                 <label>Landmark*</label>
-                <textarea id="addressTextBox" name="address" rows="5" cols="30"
+                <textarea placeholder="Example: Diamond District Gate No:8" id="addressTextBox" name="address" rows="5" cols="30"
                           style="margin-top: -13px">${joinRequestForm.address}</textarea> <br/>
                 <form:errors path="address" cssClass="error"/>
-                <label class="example"><spring:message code="addressExample"/></label>
             </span>
 
             <span>
@@ -62,10 +61,9 @@
             </span>
             <span>
                 <label>Pick Up Time (hh:mm)</label>
-                <input id="pickupTimeTextBox" name="preferredPickupTime" type="textbox"
+                <input placeholder="Example: 09:00" id="pickupTimeTextBox" name="preferredPickupTime" type="textbox"
                        value="${joinRequestForm.preferredPickupTime}"/>
                 <form:errors path="preferredPickupTime" cssClass="error"/>
-                <label class="example"><spring:message code="pickupTimeExample"/></label>
             </span>
 
         <div class="buttonContainer">

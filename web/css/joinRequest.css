@@ -1,3 +1,7 @@
 .mainContainer span{
     height: 35px;
 }
+
+.buttonContainer{
+    margin-left: 33px;
+}

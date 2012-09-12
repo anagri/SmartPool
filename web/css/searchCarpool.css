@@ -17,9 +17,9 @@
 }
 
 .routePoints{
-    position: absolute;
-    top:75px;
-    left:1010px;
+    position: relative;
+    top:-180px;
+    left:522px;
 }
 
 #search-result{
@@ -28,7 +28,7 @@
 
 
 #routePointList{
-    position: absolute;
-    top: 52px;
+    position: relative;
+    top: -40px;
     left: 158px;
 }

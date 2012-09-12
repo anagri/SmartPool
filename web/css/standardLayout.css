@@ -19,6 +19,15 @@ h2{
     margin-top: 20px;
 }
 
+.navbar .navbar-inner .container .searchForm button{
+    margin: -12px 0 0 0;
+}
+
+.navbar .navbar-inner .container button{
+    margin: -5px 0 0 0;
+    padding: 3px 5px;
+}
+
 .mainContainer {
     margin: 80px auto;
 }
@@ -33,6 +42,7 @@ h2{
 .mainContainer span{
     display: table-row;
     vertical-align: middle;
+    height: 40px;
 }
 
 .mainContainer input{
@@ -51,6 +61,7 @@ h2{
     text-align: left;
     padding-left: 200px;
     padding-top: 20px;
+    margin-left: 145px;
 }
 
 .error{
@@ -125,7 +136,7 @@ button.disabled {
 .navbar .brand {
     display: block;
     float: left;
-    padding: 10px 5px;
+    padding: 13px 5px 10px 5px;
     margin-right: 40px;
     font-family: monospace;
     font-size: 28px;
@@ -140,7 +151,7 @@ button.disabled {
 }
 
 .navbar-form{
-    margin-top: 4px;
+    margin-top: 11px;
 }
 
 .navbar .nav > li > a {

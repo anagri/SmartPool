@@ -91,7 +91,7 @@
             <p>Office Pickup Time: ${carpool.getOfficeETD().toString("h:mm a")}</p>
 
             <p>
-                Status: ${carpool.getStatus()}
+                Status: ${carpool.getStatusAsString()}
                 <c:if test="${carpool.canStart() && buddyIsInCarpool}">
                     <c:choose>
                         <c:when test="${carpool.getStartLinkText()} == 'Start It'">

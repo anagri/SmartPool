@@ -64,15 +64,14 @@
                                 </c:otherwise>
                             </c:choose>
 
-                            <button type="submit" class="btn searchButton" value="Search"/>
-                            Search</button>
+                            <button type="submit" class="btn">Search</button>
                         </form>
                     </li>
 
                 </ul>
                 <form class="navbar-form pull-right" id="logoutForm" action="${appName}/logout" method="GET">
-                    ${ldapUserName}
-                    <button type="submit" class="btn btn-small" style="margin-top: 4px">Logout</button>
+                   <span id="casName"> ${ldapUserName}</span>
+                    <button type="submit" class="btn">Logout</button>
                 </form>
             </div>
         </div>

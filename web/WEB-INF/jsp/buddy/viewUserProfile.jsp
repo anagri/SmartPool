@@ -1,8 +1,8 @@
 <%@ page import="edu.yale.its.tp.cas.client.filter.CASFilter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../navbar.jsp" flush="true">
-    <jsp:param name="css" value="profileLayout.css"/>
     <jsp:param name="title" value="SmartPool Profile"/>
+    <jsp:param name="css" value="profileLayout.css"/>
 </jsp:include>
 <div class="container">
     <h1>SmartPool Profile</h1>

@@ -17,27 +17,27 @@
         <span>
             <label>From*</label>
             <input type="text" name="from"/>
-            <span><form:errors path="from"/> </span>
+            <form:errors path="from"/>
         </span>
         <span>
             <label>To*</label>
             <input type="text" name="to" required/>
-            <span><form:errors cssClass="error" path="to"/> </span>
+            <form:errors cssClass="error" path="to"/>
         </span>
         <span>
             <label>Proposed Start Date*:</label>
             <input type="text" name="proposedStartDate" placeholder="DD/MM/YYYY" required/>
-            <span><form:errors cssClass="error" path="proposedStartDate"/> </span>
+            <form:errors cssClass="error" path="proposedStartDate"/>
         </span>
         <span>
             <label>Pickup Point*:</label>
             <input type="text" name="pickupPoint" placeholder="Example: Diamond District" required/>
-            <span><form:errors cssClass="error" path="pickupPoint"/> </span>
+            <form:errors cssClass="error" path="pickupPoint"/>
         </span>
         <span>
             <label>Pickup Time*:</label>
             <input type="text" name="pickupTime" placeholder="Example: 09:00" required/>
-            <span><form:errors cssClass="error" path="pickupTime"/> </span>
+            <form:errors cssClass="error" path="pickupTime"/>
         </span>
         <span>
             <label>Cab Type*:</label>
@@ -45,28 +45,28 @@
                 <option value="PERSONAL">Personal</option>
                 <option value="COMPANY">Company</option>
             </select>
-            <span><form:errors cssClass="error" path="cabType"/> </span>
+            <form:errors cssClass="error" path="cabType"/>
         </span>
         <span id="capacity">
             <label>Capacity*</label>
             <input type="text" name="capacity" value="0"/>
-            <span><form:errors cssClass="error" path="capacity"/> </span>
+            <form:errors cssClass="error" path="capacity"/>
         </span>
         <span>
             <label>Office Arrival Time*:</label>
             <input type="text" name="officeArrivalTime" placeholder="Example: 10:00" required/>
-            <span><form:errors cssClass="error" path="officeArrivalTime"/> </span>
+            <form:errors cssClass="error" path="officeArrivalTime"/>
         </span>
         <span>
             <label>Office Departure Time*:</label>
             <input type="text" name="officeDepartureTime" placeholder="Example: 18:00" required/>
-            <span><form:errors cssClass="error" path="officeDepartureTime"/> </span>
+            <form:errors cssClass="error" path="officeDepartureTime"/>
         </span>
         <span>
             <label>Route Points:</label>
             <input type="text" name="routePoints"
                    placeholder="Example: Whitefield, Ramagondanhalli, Varthar Road, Marathahalli, HAL Airport, Domlur, Koramangla"/>
-            <span><form:errors cssClass="error" path="routePoints"/> </span>
+            <form:errors cssClass="error" path="routePoints"/>
         </span>
 
             <div class="buttonContainer">
