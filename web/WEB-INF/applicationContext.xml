@@ -8,6 +8,7 @@
 
     <b:bean id="profileCheckFilter" class="smartpool.web.filter.ProfileCheckFilter"/>
     <b:bean id="casFilter" class="smartpool.web.filter.CasFilter"/>
+    <b:bean id="adminCheckFilter" class="smartpool.web.filter.AdminCheckFilter" />
 
     <b:bean name="joinRequestValidator" class="smartpool.web.form.JoinRequestFormValidator" />
     <b:bean name="createCarpoolValidator" class="smartpool.web.form.CreateCarpoolFormValidator" />
@@ -18,4 +19,5 @@
     </b:bean>
 
     <util:properties id="appProperties" location="classpath:app.properties"/>
+    <util:properties id="adminProperties" location="classpath:admin.properties" />
 </b:beans>

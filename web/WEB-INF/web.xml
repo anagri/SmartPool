@@ -37,6 +37,16 @@
         <url-pattern>/buddyProfile</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>adminCheckFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>adminCheckFilter</filter-name>
+        <url-pattern>/dashboard</url-pattern>
+        <url-pattern>/carpool/*/*/delete</url-pattern>
+    </filter-mapping>
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

@@ -27,4 +27,5 @@ public class Constants {
                                                                 "Disapprove : Click on this link %s<br /><br />"+
                                                                 "----------------------------------------<br /><br />"+
                                                                 "*This is a system generated email. Please DO NOT reply.";
+    public static final String MSG_403 = "Only Admin can access this page.";
 }
