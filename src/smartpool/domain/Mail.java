@@ -13,7 +13,7 @@ public class Mail {
     }
 
     public Message compose(String to, String subject, String messageBody) throws MessagingException {
-        message.setFrom(new InternetAddress("SmartPool"));
+        message.setFrom(new InternetAddress("SmartPool@thoughtworks.com"));
         InternetAddress recipientAddress = new InternetAddress(to);
         recipientAddress.validate();
         message.setRecipient(Message.RecipientType.TO, recipientAddress);

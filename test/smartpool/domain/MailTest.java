@@ -39,7 +39,7 @@ public class MailTest {
     public void shouldComposeAMessage() throws MessagingException {
         mail.compose("valid@abc.com", "subject", "body");
 
-        Mockito.verify(message).setFrom(new InternetAddress("SmartPool"));
+        Mockito.verify(message).setFrom(new InternetAddress("SmartPool@thoughtworks.com"));
         Mockito.verify(message).setRecipient(Message.RecipientType.TO, new InternetAddress("valid@abc.com"));
         Mockito.verify(message).setSubject("subject");
         Mockito.verify(message).setContent("body","text/html");
