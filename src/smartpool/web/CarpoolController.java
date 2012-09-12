@@ -9,10 +9,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import smartpool.domain.Buddy;
 import smartpool.domain.CabType;
 import smartpool.domain.Carpool;
 import smartpool.service.*;
+import smartpool.service.BuddyService;
+import smartpool.service.CarpoolService;
+import smartpool.service.JoinRequestService;
+import smartpool.service.RouteService;
+import smartpool.web.form.CarpoolUpdateForm;
 import smartpool.web.form.CreateCarpoolForm;
 import smartpool.web.form.CreateCarpoolFormValidator;
 
@@ -109,5 +116,11 @@ public class CarpoolController {
         carpoolService.startCarpool(name);
 
         return "redirect:/carpool/" + name;
+
+    }
+    @RequestMapping(value = "/dashboard/update/{carpoolName}", method = RequestMethod.POST)
+    public ModelAndView updateCarpoolAttributes(CarpoolUpdateForm updateForm, @PathVariable String carpoolName, ModelMap model, HttpServletRequest request) {
+        searchByLocation(model, request);
+        return new ModelAndView(new RedirectView("admin/dashboard"), model);
     }
 }
