@@ -74,7 +74,7 @@ public class CarpoolService {
             if (carpoolBuddy == null) continue;
             carpoolBuddyDao.insert(carpoolBuddy,carpool);
         }
-        ArrayList<String> routePoints = carpool.getRoutePoints();
+        List<String> routePoints = carpool.getRoutePoints();
         int sequenceNumber = 0;
         for (String routePoint : routePoints) {
             sequenceNumber++;
@@ -117,5 +117,9 @@ public class CarpoolService {
 
     public boolean isValidCarpool(String carpoolName) {
         return getByName(carpoolName) != null;
+    }
+
+    public void startCarpool(String carpoolName) {
+
     }
 }

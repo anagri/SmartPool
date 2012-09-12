@@ -4,6 +4,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Carpool implements Comparable {
     private String name;
@@ -15,16 +16,18 @@ public class Carpool implements Comparable {
     private int totalCabCharges;
     private CabType cabType;
     private Status status;
-    private ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
+    private List<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
     private int capacity;
-    private ArrayList<String> routePoints = new ArrayList<String>();
+    private List<String> routePoints = new ArrayList<String>();
 
     public Carpool() {
         status = Status.NOT_STARTED;
         capacity = 1;
     }
 
-    public Carpool(String name, LocalDate startDate, CabType cabType, int totalCabCharges, LocalTime officeETA, LocalTime officeETD, Status status, ArrayList<CarpoolBuddy> carpoolBuddies, int capacity, ArrayList<String> routePoints) {
+    public Carpool(String name, LocalDate startDate, CabType cabType, int totalCabCharges,
+                   LocalTime officeETA, LocalTime officeETD, Status status, List<CarpoolBuddy> carpoolBuddies,
+                   int capacity, List<String> routePoints) {
         this.name = name;
         this.startDate = startDate;
         this.cabType = cabType;
@@ -111,7 +114,7 @@ public class Carpool implements Comparable {
         this.status = status;
     }
 
-    public ArrayList<CarpoolBuddy> getCarpoolBuddies() {
+    public List<CarpoolBuddy> getCarpoolBuddies() {
         return carpoolBuddies;
     }
 
@@ -127,7 +130,7 @@ public class Carpool implements Comparable {
         this.capacity = capacity;
     }
 
-    public ArrayList<String> getRoutePoints() {
+    public List<String> getRoutePoints() {
         return routePoints;
     }
 
@@ -199,5 +202,9 @@ public class Carpool implements Comparable {
     public int compareTo(Object o) {
         Carpool carpool = (Carpool) o;
         return this.status.compareTo(carpool.status);
+    }
+
+    public boolean canStart() {
+        return Status.NOT_STARTED.equals(status) && getBuddyCount() > 1;
     }
 }
