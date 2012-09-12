@@ -32,7 +32,7 @@ public class CarpoolController {
     private JoinRequestService joinRequestService;
 
     @Autowired
-    public CarpoolController(CarpoolService carpoolService, JoinRequestService joinRequestService,BuddyService buddyService, RouteService routeService, CreateCarpoolFormValidator validator) {
+    public CarpoolController(CarpoolService carpoolService, JoinRequestService joinRequestService, BuddyService buddyService, RouteService routeService, CreateCarpoolFormValidator validator) {
 
         this.carpoolService = carpoolService;
         this.joinRequestService = joinRequestService;
@@ -80,14 +80,20 @@ public class CarpoolController {
 
     @RequestMapping(value = "/carpool/create", method = RequestMethod.POST)
     public String create(@ModelAttribute CreateCarpoolForm createCarpoolForm, BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
-        validator.validate(createCarpoolForm,bindingResult);
-        if(bindingResult.hasErrors()){
-            model.put("createCarpoolForm",createCarpoolForm);
+        validator.validate(createCarpoolForm, bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.put("createCarpoolForm", createCarpoolForm);
             return "carpool/create";
         }
         Carpool carpool = createCarpoolForm.getDomainObject(buddyService.getCurrentBuddy(request));
         carpoolService.insert(carpool);
         return "redirect:/carpool/" + carpool.getName();
+    }
+
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    public String viewDashboard(ModelMap model, HttpServletRequest request) {
+        searchByLocation(model, request);
+        return "admin/dashboard";
     }
 
 

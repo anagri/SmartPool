@@ -24,6 +24,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.hasItem;
 import static org.junit.matchers.JUnitMatchers.hasItems;
 import static org.mockito.Mockito.*;
 
@@ -173,5 +174,14 @@ public class CarpoolControllerTest {
         assertThat((List<String>) model.get("routePoints"), is(defaultRouteLocations));
     }
 
+    @Test
+    public void shouldGetDashboardURL() throws Exception {
+        assertThat(carpoolController.viewDashboard(model, null),is("admin/dashboard"));
+    }
 
+    @Test
+    public void shouldGetCarpoolForDashboard() throws Exception {
+        carpoolController.viewDashboard(model, request);
+        assertThat((List<Carpool>)model.get("searchResult"),hasItem(expectedCarpool));
+    }
 }
