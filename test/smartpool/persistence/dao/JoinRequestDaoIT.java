@@ -7,9 +7,9 @@ import org.junit.Test;
 import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
+import java.util.UUID;
+
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 public class JoinRequestDaoIT {
@@ -63,5 +63,12 @@ public class JoinRequestDaoIT {
     @After
     public void tearDown() throws Exception {
         joinRequestDao.deleteUsersRequest(buddyUsername, carpoolName);
+    }
+
+    @Test
+    public void shouldAddUniqueIdToRequest() throws Exception {
+        UUID uuid = UUID.randomUUID();
+        joinRequestDao.addUniqueIdToPendingRequest(buddyUsername, carpoolName,uuid);
+        assertThat(joinRequestDao.getUniqueIdFromPendingRequest(buddyUsername, carpoolName),is(uuid));
     }
 }

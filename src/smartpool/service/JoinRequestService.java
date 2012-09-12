@@ -30,7 +30,8 @@ public class JoinRequestService {
 
     public void sendJoinRequest(JoinRequest joinRequest, Buddy buddy) {
         joinrequestDao.sendJoinRequest(joinRequest);
-        sendEmailToList(joinRequest,buddy);
+        joinrequestDao.addUniqueIdToPendingRequest(buddy.getUserName(), joinRequest.getCarpoolName(), null);
+        sendEmailToList(joinRequest, buddy);
     }
 
     public boolean isRequestSent(Buddy buddy, String carpoolName) {

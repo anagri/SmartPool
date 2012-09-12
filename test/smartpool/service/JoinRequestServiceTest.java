@@ -82,4 +82,12 @@ public class JoinRequestServiceTest {
         joinRequestService.sendEmailToList(joinRequest, buddy);
         verify(mailService).sendMailToList(buddyEmailList, subject, message);
     }
+
+    @Test
+    public void shouldAddUniqueId() throws Exception {
+        JoinRequest joinRequest = new JoinRequest("suganthk", carpoolName, "address", "pickupPoint", new LocalTime(10, 0));
+        joinRequestService.sendJoinRequest(joinRequest,new Buddy("mdaliej"));
+
+        verify(joinRequestDao).addUniqueIdToPendingRequest(buddy.getUserName(), carpoolName, null);
+    }
 }

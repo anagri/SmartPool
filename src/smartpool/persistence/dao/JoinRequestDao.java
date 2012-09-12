@@ -8,6 +8,8 @@ import smartpool.data.JoinRequestMapper;
 import smartpool.domain.Buddy;
 import smartpool.domain.JoinRequest;
 
+import java.util.UUID;
+
 @Component
 public class JoinRequestDao {
 
@@ -56,5 +58,30 @@ public class JoinRequestDao {
         } finally {
             session.close();
         }
+    }
+
+    public void addUniqueIdToPendingRequest(String buddyUsername, String carpoolName, UUID uuid) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
+            mapper.addUniqueIdToPendingRequest(buddyUsername, carpoolName,uuid.toString());
+            session.commit();
+        } finally {
+            session.close();
+        }
+
+    }
+
+    public UUID getUniqueIdFromPendingRequest(String buddyUsername, String carpoolName) {
+        String uuid;
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
+            uuid = mapper.getUniqueIdToPendingRequest(buddyUsername, carpoolName);
+            session.commit();
+        } finally {
+            session.close();
+        }
+        return UUID.fromString(uuid);
     }
 }
