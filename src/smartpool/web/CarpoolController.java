@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import smartpool.domain.Buddy;
 import smartpool.domain.CabType;
 import smartpool.domain.Carpool;
-import smartpool.service.BuddyService;
-import smartpool.service.CarpoolService;
-import smartpool.service.JoinRequestService;
-import smartpool.service.RouteService;
+import smartpool.service.*;
 import smartpool.web.form.CreateCarpoolForm;
 import smartpool.web.form.CreateCarpoolFormValidator;
 
@@ -28,16 +25,18 @@ public class CarpoolController {
     private CarpoolService carpoolService;
     private BuddyService buddyService;
     private RouteService routeService;
+    private CarpoolBuddyService carpoolBuddyService;
     private CreateCarpoolFormValidator validator;
     private JoinRequestService joinRequestService;
 
     @Autowired
-    public CarpoolController(CarpoolService carpoolService, JoinRequestService joinRequestService, BuddyService buddyService, RouteService routeService, CreateCarpoolFormValidator validator) {
+    public CarpoolController(CarpoolService carpoolService, JoinRequestService joinRequestService, BuddyService buddyService, RouteService routeService, CarpoolBuddyService carpoolBuddyService, CreateCarpoolFormValidator validator) {
 
         this.carpoolService = carpoolService;
         this.joinRequestService = joinRequestService;
         this.buddyService = buddyService;
         this.routeService = routeService;
+        this.carpoolBuddyService = carpoolBuddyService;
         this.validator = validator;
     }
 
@@ -96,5 +95,9 @@ public class CarpoolController {
         return "admin/dashboard";
     }
 
-
+    @RequestMapping(value = "/carpool/{carpoolName}/{buddyUserName}/delete")
+    public String deleteBuddy(@PathVariable String carpoolName,@PathVariable String buddyUserName, ModelMap model, HttpServletRequest request) {
+        carpoolBuddyService.delete(carpoolName,buddyUserName);
+        return "redirect:/dashboard";
+    }
 }

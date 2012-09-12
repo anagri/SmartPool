@@ -104,7 +104,7 @@ public class CarpoolService {
 
     public void drop(Carpool carpool,CarpoolBuddy buddy) {
             if(hasBuddy(buddy.getBuddy().getUserName(),carpool))
-            carpoolBuddyDao.remove(buddy,carpool.getName());
+            carpoolBuddyDao.remove(buddy.getBuddy().getUserName(),carpool.getName());
     }
 
     public boolean canUserSendRequest(String username, Carpool carpool) {

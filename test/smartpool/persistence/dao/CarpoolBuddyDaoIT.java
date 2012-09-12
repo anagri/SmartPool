@@ -40,6 +40,6 @@ public class CarpoolBuddyDaoIT {
         CarpoolBuddy carpoolBuddy = new CarpoolBuddy(new Buddy("prithvin"),"location",new LocalTime(10,0));
         carpoolBuddyDao.insert(carpoolBuddy, new Carpool("carpool-1"));
         assertThat(carpoolBuddyDao.getCarpoolBuddiesByCarpoolName("carpool-1").contains(carpoolBuddy),equalTo(true));
-        carpoolBuddyDao.remove(carpoolBuddy, "carpool-1");
+        carpoolBuddyDao.remove(carpoolBuddy.getBuddy().getUserName(), "carpool-1");
     }   
 }

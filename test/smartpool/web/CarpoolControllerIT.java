@@ -24,7 +24,7 @@ public class CarpoolControllerIT {
     @Test
     public void shouldSearchForCarpool() {
         initMocks(this);
-        CarpoolController carpoolController = new CarpoolController(new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao()), new JoinRequestService(new JoinRequestDao(), new CarpoolBuddyDao(),mailService), new BuddyService(new BuddyDao()), new RouteService(new RouteDao()), new CreateCarpoolFormValidator());
+        CarpoolController carpoolController = new CarpoolController(new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao()), new JoinRequestService(new JoinRequestDao(), new CarpoolBuddyDao(),mailService), new BuddyService(new BuddyDao()), new RouteService(new RouteDao()), new CarpoolBuddyService(new CarpoolBuddyDao()), new CreateCarpoolFormValidator());
         ModelMap model = new ModelMap();
         request.setAttribute("query", "Sony Centre");
         carpoolController.searchByLocation(model, request);

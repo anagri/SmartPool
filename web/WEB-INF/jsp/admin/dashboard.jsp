@@ -56,7 +56,7 @@
 
                         <td>
                             <ul>
-                                <c:set var="carpoolBuddies" value="${carpool.getCarpoolBuddies()}" scope="request" />
+                                <c:set var="carpool" value="${carpool}" scope="request" />
                                 <jsp:include page="dropBuddy.jsp" flush="true" />
                             </ul>
                         </td>

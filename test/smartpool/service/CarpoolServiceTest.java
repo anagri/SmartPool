@@ -137,7 +137,7 @@ public class CarpoolServiceTest {
         });
         carpoolService.insert(carpool);
         carpoolService.drop(carpool, carpoolBuddy);
-        verify(carpoolBuddyDao).remove(carpool.getCarpoolBuddies().get(0), carpool.getName());
+        verify(carpoolBuddyDao).remove(carpool.getCarpoolBuddies().get(0).getBuddy().getUserName(), carpool.getName());
     }
 
     @Test

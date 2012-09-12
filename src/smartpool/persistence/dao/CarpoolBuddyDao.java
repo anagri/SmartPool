@@ -40,11 +40,11 @@ public class CarpoolBuddyDao {
         sqlSession.close();
     }
 
-    public void remove(CarpoolBuddy carpoolBuddy, String carpool) {
+    public void remove(String buddyUserName, String carpoolName) {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         CarpoolBuddyMapper carpoolBuddyMapper = sqlSession.getMapper(CarpoolBuddyMapper.class);
-        carpoolBuddyMapper.remove(carpoolBuddy.getBuddy().getUserName(),
-                carpool);
+        carpoolBuddyMapper.remove(buddyUserName,
+                carpoolName);
         sqlSession.commit();
         sqlSession.close();
     }

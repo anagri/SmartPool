@@ -48,22 +48,23 @@ public class CarpoolControllerTest {
     private BindingResult errors;
     @Mock
     private JoinRequestService joinRequestService;
+    @Mock
+    private CarpoolBuddyService carpoolBuddyService;
+
+
 
     private ModelMap model;
-
-
-
     private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
+
+
     private ArrayList<Carpool> defaultCarpools;
-
-
     private final CarpoolBuddy testBuddy = new CarpoolBuddy(new Buddy("testBuddy"),"location",new LocalTime(10,30));
     private List<String> defaultRouteLocations;
 
     @Before
     public void setUp() throws Exception {
 
-        carpoolController = new CarpoolController(carpoolService,joinRequestService,buddyService, routeService, createCarpoolFormValidator);
+        carpoolController = new CarpoolController(carpoolService,joinRequestService,buddyService, routeService, carpoolBuddyService, createCarpoolFormValidator);
         when(carpoolService.getByName("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
 
@@ -183,5 +184,21 @@ public class CarpoolControllerTest {
     public void shouldGetCarpoolForDashboard() throws Exception {
         carpoolController.viewDashboard(model, request);
         assertThat((List<Carpool>)model.get("searchResult"),hasItem(expectedCarpool));
+    }
+
+    @Test
+    public void shouldDeleteBuddyFromCarpool() throws Exception {
+        String carpoolName = "carpoolName";
+        String buddyUserName = "buddyUserName";
+        carpoolController.deleteBuddy(carpoolName, buddyUserName, model,request);
+        verify(carpoolBuddyService).delete(carpoolName,buddyUserName);
+    }
+
+    @Test
+    public void shouldRedirectToDashboardAfterDeletingBuddyFromCarpool() throws Exception {
+        String carpoolName = "carpoolName";
+        String buddyUserName = "buddyUserName";
+        String s = carpoolController.deleteBuddy(carpoolName, buddyUserName, model,request);
+        assertThat(s, is("redirect:/dashboard"));
     }
 }
