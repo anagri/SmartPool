@@ -216,4 +216,17 @@ public class Carpool implements Comparable {
     public void setRequestSent(boolean requestSent) {
         this.requestSent = requestSent;
     }
+
+    public String getStartLinkText() {
+        if(!requestSent)
+           return "Start It";
+
+        return "Request Sent To Admin";
+    }
+
+    public String getStartLink() {
+        if(!requestSent)
+            return "/carpool/" + name + "/start";
+        return "";
+    }
 }

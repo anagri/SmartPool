@@ -93,7 +93,14 @@
             <p>
                 Status: ${carpool.getStatus()}
                 <c:if test="${carpool.canStart() && buddyIsInCarpool}">
-                     <a href="<c:out value="/carpool/${carpool.name}/start"/>">Start It</a>
+                    <c:choose>
+                        <c:when test="${carpool.getStartLinkText()} == 'Start It'">
+                            <a href="<c:out value="${pageContext.request.contextPath}/carpool/${carpool.name}/start"/>">${carpool.getStartLinkText()}</a>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="more-info">${carpool.getStartLinkText()}</span>
+                        </c:otherwise>
+                    </c:choose>
                 </c:if>
             </p>
 

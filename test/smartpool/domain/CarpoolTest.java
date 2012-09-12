@@ -15,6 +15,7 @@ public class CarpoolTest {
 
     @Before
     public void setUp() throws Exception {
+        carpool = new Carpool("name");
     }
 
     @Test
@@ -39,5 +40,33 @@ public class CarpoolTest {
         carpool = new Carpool("can start", null, null, 0, null, null, Status.ACTIVE, carpoolBuddies, 4, null);
 
         assertThat(carpool.canStart(), is(false));
+    }
+
+    @Test
+    public void shouldReturnStartItIfRequestNotSent() throws Exception {
+        carpool.setRequestSent(false);
+
+        assertThat(carpool.getStartLinkText(), is("Start It"));
+    }
+
+    @Test
+    public void shouldReturnRequestSentIfRequestIsSent() throws Exception {
+        carpool.setRequestSent(true);
+
+        assertThat(carpool.getStartLinkText(), is("Request Sent"));
+    }
+
+    @Test
+    public void shouldReturnSendRequestLinkIfRequestNotSent() throws Exception {
+        carpool.setRequestSent(false);
+
+        assertThat(carpool.getStartLink(), is("/carpool/"+ carpool.getName() +"/start"));
+    }
+
+    @Test
+    public void shouldReturnEmptyLinkIfRequestSent() throws Exception {
+        carpool.setRequestSent(true);
+
+        assertThat(carpool.getStartLink(), is(""));
     }
 }
