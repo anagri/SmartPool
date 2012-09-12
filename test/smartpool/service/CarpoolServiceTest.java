@@ -208,15 +208,24 @@ public class CarpoolServiceTest {
 
         when(carpoolDao.selectAllCarpools()).thenReturn(carpoolList);
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("");
-        assertThat(carpoolList.get(0),is(carpool1));
+        assertThat(carpoolList.get(0), is(carpool1));
     }
 
     @Test
     public void shouldSetLinkTextToRequestSent() throws Exception {
         Carpool carpool = new Carpool(carpoolName);
         when(carpoolDao.get(carpoolName)).thenReturn(carpool);
-        carpoolService.startCarpool(carpool.getName());
+        carpoolService.updateRequestSent(carpool.getName(), true);
 
         assertThat(carpool.getRequestSent(), is(true));
+    }
+
+    @Test
+    public void shouldUpdateStatus() throws Exception {
+        Carpool carpool = new Carpool(carpoolName);
+        when(carpoolService.getByName(carpoolName)).thenReturn(carpool);
+        carpool.setStatus(Status.NOT_STARTED);
+        carpoolService.updateStatus(carpool.getName(),Status.ACTIVE);
+        assertThat(carpool.getStatus(), is(Status.ACTIVE));
     }
 }

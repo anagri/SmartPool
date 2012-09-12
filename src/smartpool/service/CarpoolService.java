@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
 import smartpool.domain.CarpoolBuddy;
+import smartpool.domain.Status;
 import smartpool.persistence.dao.BuddyDao;
 import smartpool.persistence.dao.CarpoolBuddyDao;
 import smartpool.persistence.dao.CarpoolDao;
@@ -119,9 +120,15 @@ public class CarpoolService {
         return getByName(carpoolName) != null;
     }
 
-    public void startCarpool(String carpoolName) {
-        Carpool carpool = carpoolDao.get(carpoolName);
-        carpool.setRequestSent(true);
-        carpoolDao.update(carpool);
+    public void updateRequestSent(String carpoolName, Boolean requestSent) {
+        Carpool carpool = getByName(carpoolName);
+        carpool.setRequestSent(requestSent);
+        carpoolDao.updateRequestSent(carpool);
+    }
+
+    public void updateStatus(String carpoolName, Status status) {
+        Carpool carpool = getByName(carpoolName);
+        carpool.setStatus(status);
+        carpoolDao.updateStatus(carpool);
     }
 }

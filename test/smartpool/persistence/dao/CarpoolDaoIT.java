@@ -52,7 +52,7 @@ public class CarpoolDaoIT {
     public void shouldUpdateRequestSent() throws Exception {
         Carpool carpool = carpoolDao.get(carpoolName);
         carpool.setRequestSent(true);
-        carpoolDao.update(carpool);
+        carpoolDao.updateRequestSent(carpool);
         assertThat(carpoolDao.get(carpool.getName()).getRequestSent(), is(true));
     }
 

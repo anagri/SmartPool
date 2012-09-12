@@ -49,9 +49,9 @@ public class CarpoolDaoTest {
     @Test
     public void shouldUpdate() throws Exception {
         Carpool carpool = carpoolDao.get(carpoolName);
-        carpoolDao.update(carpool);
+        carpoolDao.updateRequestSent(carpool);
 
-        verify(mockCarpoolMapper).update(carpool);
+        verify(mockCarpoolMapper).updateRequestSent(carpool);
     }
 
     @After

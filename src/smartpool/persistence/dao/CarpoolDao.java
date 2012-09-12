@@ -59,11 +59,22 @@ public class CarpoolDao {
         }
     }
 
-    public void update(Carpool carpool) {
+    public void updateRequestSent(Carpool carpool) {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             CarpoolMapper mapper = session.getMapper(CarpoolMapper.class);
-            mapper.update(carpool);
+            mapper.updateRequestSent(carpool);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    public void updateStatus(Carpool carpool) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            CarpoolMapper mapper = session.getMapper(CarpoolMapper.class);
+            mapper.updateStatus(carpool);
             session.commit();
         } finally {
             session.close();

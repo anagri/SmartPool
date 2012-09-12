@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import smartpool.domain.Buddy;
 import smartpool.domain.CabType;
 import smartpool.domain.Carpool;
+import smartpool.domain.Status;
 import smartpool.service.*;
 import smartpool.service.BuddyService;
 import smartpool.service.CarpoolService;
@@ -112,8 +113,26 @@ public class CarpoolController {
 
     @RequestMapping(value = "/carpool/{name}/start", method = RequestMethod.GET)
     public String startCarpool(@PathVariable String name, HttpServletRequest request) {
-        mailService.sendMailTo("yqhuang@thoughtworks.com", "Request to start carpool " + name, "Please start " + name);
-        carpoolService.startCarpool(name);
+        String domainUrl =  request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+        String accepetLink = domainUrl + "/carpool/" + name + "/acceptStartRequest";
+        String rejectLink = domainUrl  + "/carpool/" + name + "/rejectStartRequest";
+        mailService.sendMailTo("yqhuang@thoughtworks.com", "Request to start carpool " + name,
+                "Please start " + name  + "<br> <a href=" + accepetLink + ">Accept</a> <br> <a href=" + rejectLink + ">Reject</a>");
+        carpoolService.updateRequestSent(name, true);
+
+        return "redirect:/carpool/" + name;
+    }
+
+    @RequestMapping(value = "/carpool/{name}/acceptStartRequest", method = RequestMethod.GET)
+    public String acceptStartRequest(@PathVariable String name, HttpServletRequest request) {
+        carpoolService.updateStatus(name, Status.ACTIVE);
+
+        return "redirect:/carpool/" + name;
+    }
+
+    @RequestMapping(value = "/carpool/{name}/rejectStartRequest", method = RequestMethod.GET)
+    public String rejectStartRequest(@PathVariable String name, HttpServletRequest request) {
+        carpoolService.updateRequestSent(name, false);
 
         return "redirect:/carpool/" + name;
 
