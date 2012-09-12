@@ -1,7 +1,7 @@
 <%@ page import="edu.yale.its.tp.cas.client.filter.CASFilter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../navbar.jsp" flush="true">
-    <jsp:param name="css" value="carpool.css,standardLayout.css"/>
+    <jsp:param name="css" value="dashboard.css,standardLayout.css"/>
     <jsp:param name="title" value="Dashboard"/>
 </jsp:include>
 
@@ -33,56 +33,67 @@
 </script>
 <div class="containerWrapper">
     <div class="leftContent">
-        <c:if test="${searchResult ne null}">
-            <table id='search-result'>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Buddies</th>
-                    <th>Status</th>
-                    <th>Charges</th>
-                    <th>Capacity</th>
-                </tr>
-                </thead>
+        <div id="dashboard">
+            <c:if test="${searchResult ne null}">
+                <span class="carpoolHeaders">
+                    <div>
+                        <span class="carpoolNameColumn">Name</span>
+                        <span class="buddyListColumn">Buddies</span>
+                        <span class="statusColumn">Status</span>
+                        <span class="chargesColumn">Charges</span>
+                        <span class="capacityColumn">Capacity</span>
+                    </div>
+                </span>
                 <c:forEach var="carpool" items="${searchResult}" varStatus="typeStatus">
-                    <tr>
-                        <td><a href="${pageContext.request.contextPath}/carpool/${carpool.getName()}"
-                               id="${carpool.getName()}">
+                    <div class="carpoolRow">
+                        <form action="${pageContext.request.contextPath}/dashboard/update/${carpool.name}" method="post">
+                            <div>
+
+
+                        <span class="carpoolNameColumn"><a
+                                href="${pageContext.request.contextPath}/carpool/${carpool.getName()}"
+                                id="${carpool.getName()}">
                                 ${carpool.getFrom()}
                             <img src="${pageContext.request.contextPath}/css/img/arrow-sign.jpg"
                                  class="small-arrow-sign"/>
                                 ${carpool.getTo()}
-                        </a></td>
+                        </a></span>
 
-                        <td>
+                        <span class="buddyListColumn">
                             <ul>
                                 <c:set var="carpool" value="${carpool}" scope="request" />
                                 <jsp:include page="dropBuddy.jsp" flush="true" />
                             </ul>
-                        </td>
-
-                        <td id="status${typeStatus.count}">
-                            <select id="status-${typeStatus.count}" name="status">
+                        </span>
+                        <span class="statusColumn" id="status${typeStatus.count}">
+                            <select class="carpoolStatusDropdown" id="status-${typeStatus.count}" name="status">
                                 <option value="ACTIVE">Active</option>
                                 <option value="NOT_STARTED">Not Started</option>
                                 <option value="DROPPED">Dropped</option>
                             </select>
                             <script type="text/javascript">
-                                $("#status-" + ${typeStatus.count} + " option").each(function (index, select) {
+                                $("#status-" + ${typeStatus.count} +" option").each(function (index, select) {
                                     if (select.value == '${carpool.getStatus().toString()}') select.selected = true
                                 });
                             </script>
-                        </td>
-                        <td>
-                            <input type="text" style="text-align: right; max-width: 10em" name="totalCabCharges" value="${carpool.getTotalCabCharges()}" />
-                        </td>
-                        <td>
-                            <input type="number" name="capacity" style="text-align: right; max-width: 3em" value="${carpool.getCapacity()}" />
-                        </td>
-                    </tr>
+                        </span>
+                        <span class="chargesColumn">
+                            <input type="text" style="text-align: right; max-width: 10em" name="totalCabCharges"
+                                   value="${carpool.getTotalCabCharges()}"/>
+                        </span>
+                        <span class="capacityColumn">
+                            <input type="number" name="capacity" style="text-align: right; max-width: 3em"
+                                   value="${carpool.getCapacity()}"/>
+                        </span>
+                            <span class="update">
+                                    <button type="submit">Update</button>
+                            </span>
+                            </div>
+                        </form>
+                    </div>
                 </c:forEach>
-            </table>
-        </c:if>
+            </c:if>
+        </div>
     </div>
 </div>
 <%@ include file="../footer.jsp" %>

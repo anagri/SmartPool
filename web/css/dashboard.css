@@ -1,0 +1,86 @@
+.carpoolRow {
+    display: table-row;
+    border-bottom: 1px solid #999;
+    padding: 5px;
+    height: 28px;
+
+}
+
+.carpoolHeaders {
+    display: table-header-group;
+}
+
+
+#dashboard :first-child > span {
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+
+    display: table-cell;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    overflow:hidden;
+
+}
+
+.carpoolStatusDropdown {
+    width: 10em;
+}
+
+.carpoolRow span {
+    display: table-cell;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.carpoolRow ul {
+    display: table;
+}
+
+.carpoolRow li {
+    display: table-row;
+}
+
+#dashboard .carpoolRow:nth-child(odd) {
+    background-color: #ccc;
+}
+
+.carpoolHeaders {
+    background-color: #ccc;
+}
+
+#dashboard {
+    display: table;
+    border: 1px solid #999;
+    margin-bottom: 25px;
+
+}
+
+.buddyListColumn {
+    width: 10em;
+}
+
+.carpoolNameColumn {
+    width: 15em;
+}
+
+.statusColumn {
+    width: 12em;
+}
+
+.chargesColumn {
+    width: 9em;
+}
+
+.capacityColumn {
+    width: 6em;
+}
+
+#dashboard form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
