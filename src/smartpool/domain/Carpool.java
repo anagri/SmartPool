@@ -19,6 +19,7 @@ public class Carpool implements Comparable {
     private List<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
     private int capacity;
     private List<String> routePoints = new ArrayList<String>();
+    private boolean requestSent;
 
     public Carpool() {
         status = Status.NOT_STARTED;
@@ -182,6 +183,11 @@ public class Carpool implements Comparable {
         return true;
     }
 
+    public boolean canStart() {
+        return Status.NOT_STARTED.equals(status) && getBuddyCount() > 1;
+    }
+
+
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
@@ -197,14 +203,17 @@ public class Carpool implements Comparable {
         return result;
     }
 
-
     @Override
     public int compareTo(Object o) {
         Carpool carpool = (Carpool) o;
         return this.status.compareTo(carpool.status);
     }
 
-    public boolean canStart() {
-        return Status.NOT_STARTED.equals(status) && getBuddyCount() > 1;
+    public Boolean getRequestSent() {
+        return requestSent;
+    }
+
+    public void setRequestSent(boolean requestSent) {
+        this.requestSent = requestSent;
     }
 }

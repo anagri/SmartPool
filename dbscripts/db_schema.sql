@@ -29,6 +29,7 @@ CREATE TABLE `carpool` (
   `status` enum('ACTIVE','NOT_STARTED') DEFAULT NULL,
   `total_cab_charge` int(11) DEFAULT NULL,
   `capacity` int(11) DEFAULT NULL,
+  `request_sent` TINYINT(1) DEFAULT false,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
