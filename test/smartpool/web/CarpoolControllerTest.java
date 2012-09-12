@@ -215,7 +215,7 @@ public class CarpoolControllerTest {
         String carpoolName = "carpoolName";
         String buddyUserName = "buddyUserName";
         String s = carpoolController.deleteBuddy(carpoolName, buddyUserName, model,request);
-        assertThat(s, is("redirect:/dashboard"));
+        assertThat(s, is("redirect:/admin/dashboard"));
     }
 
     @Test

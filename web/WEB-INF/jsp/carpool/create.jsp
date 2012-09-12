@@ -9,39 +9,39 @@
     <h1>Create Carpool</h1>
     <div class="mainContainer">
         <form:form commandName="createCarpoolForm" htmlEscape="true">
-            <div>
+            <div align="center" style="color: red">
                 <spring:hasBindErrors name="createCarpoolForm">
                     <spring:message code="errors.exist"/>
                 </spring:hasBindErrors>
             </div>
         <span>
             <label>From*</label>
-            <input type="text" name="from"/>
-            <form:errors path="from"/>
+            <input type="text" name="from" value="${createCarpoolForm.from}"/>
+            <span><form:errors cssClass="error" path="from"/> </span>
         </span>
         <span>
             <label>To*</label>
-            <input type="text" name="to" required/>
-            <form:errors cssClass="error" path="to"/>
+            <input type="text" name="to" value="${createCarpoolForm.to}"/>
+            <span><form:errors cssClass="error" path="to"/> </span>
         </span>
         <span>
             <label>Proposed Start Date*:</label>
-            <input type="text" name="proposedStartDate" placeholder="DD/MM/YYYY" required/>
-            <form:errors cssClass="error" path="proposedStartDate"/>
+            <input type="text" name="proposedStartDate" placeholder="DD/MM/YYYY" value="${createCarpoolForm.proposedStartDate}"/>
+            <span><form:errors cssClass="error" path="proposedStartDate"/> </span>
         </span>
         <span>
             <label>Pickup Point*:</label>
-            <input type="text" name="pickupPoint" placeholder="Example: Diamond District" required/>
-            <form:errors cssClass="error" path="pickupPoint"/>
+            <input type="text" name="pickupPoint" placeholder="Example: Diamond District" value="${createCarpoolForm.pickupPoint}"/>
+            <span><form:errors cssClass="error" path="pickupPoint"/> </span>
         </span>
         <span>
             <label>Pickup Time*:</label>
-            <input type="text" name="pickupTime" placeholder="Example: 09:00" required/>
-            <form:errors cssClass="error" path="pickupTime"/>
+            <input type="text" name="pickupTime" placeholder="Example: 09:00" value="${createCarpoolForm.pickupTime}" />
+            <span><form:errors cssClass="error" path="pickupTime"/> </span>
         </span>
         <span>
             <label>Cab Type*:</label>
-            <select name="cabType">
+            <select name="cabType" style="margin-top: 10px;margin-bottom: 0px;">
                 <option value="PERSONAL">Personal</option>
                 <option value="COMPANY">Company</option>
             </select>
@@ -49,26 +49,25 @@
         </span>
         <span id="capacity">
             <label>Capacity*</label>
-            <input type="text" name="capacity" value="0"/>
-            <form:errors cssClass="error" path="capacity"/>
+            <input type="text" name="capacity" value="0" value="${createCarpoolForm.capacity}"/>
+            <span><form:errors cssClass="error" path="capacity"/> </span>
         </span>
         <span>
             <label>Office Arrival Time*:</label>
-            <input type="text" name="officeArrivalTime" placeholder="Example: 10:00" required/>
-            <form:errors cssClass="error" path="officeArrivalTime"/>
+            <input type="text" name="officeArrivalTime" placeholder="Example: 10:00" value="${createCarpoolForm.officeArrivalTime}"/>
+            <span><form:errors cssClass="error" path="officeArrivalTime"/> </span>
         </span>
         <span>
             <label>Office Departure Time*:</label>
-            <input type="text" name="officeDepartureTime" placeholder="Example: 18:00" required/>
-            <form:errors cssClass="error" path="officeDepartureTime"/>
+            <input type="text" name="officeDepartureTime" placeholder="Example: 18:00" value="${createCarpoolForm.officeDepartureTime}"/>
+            <span><form:errors cssClass="error" path="officeDepartureTime"/> </span>
         </span>
         <span>
             <label>Route Points:</label>
             <input type="text" name="routePoints"
-                   placeholder="Example: Whitefield, Ramagondanhalli, Varthar Road, Marathahalli, HAL Airport, Domlur, Koramangla"/>
-            <form:errors cssClass="error" path="routePoints"/>
+                   placeholder="Example: Whitefield, Ramagondanhalli, Varthar Road, Marathahalli, HAL Airport, Domlur, Koramangla" value="${createCarpoolForm.routePoints}"/>
+            <span><form:errors cssClass="error" path="routePoints"/> </span>
         </span>
-
             <div class="buttonContainer">
                 <button type="submit" name="submit">Submit</button>
             </div>

@@ -67,6 +67,8 @@ h2{
 .error{
     color: #cc0000;
     display: none;
+    margin-top: -10px;
+    margin-bottom: 10px
 }
 
 .header {
@@ -200,7 +202,8 @@ input[type="text"] {
     font-size: 14px;
     height: 27px;
     line-height: 20px;
-    margin-bottom: 9px;
+    margin-bottom: 0px;
+    margin-top: 10px;
     padding: 4px 6px;
 }
 

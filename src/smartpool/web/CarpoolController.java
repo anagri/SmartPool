@@ -98,16 +98,16 @@ public class CarpoolController {
         return "redirect:/carpool/" + carpool.getName();
     }
 
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/dashboard", method = RequestMethod.GET)
     public String viewDashboard(ModelMap model, HttpServletRequest request) {
         searchByLocation(model, request);
         return "admin/dashboard";
     }
 
-    @RequestMapping(value = "/carpool/{carpoolName}/{buddyUserName}/delete")
+    @RequestMapping(value = "/admin/{carpoolName}/{buddyUserName}/delete")
     public String deleteBuddy(@PathVariable String carpoolName,@PathVariable String buddyUserName, ModelMap model, HttpServletRequest request) {
         carpoolBuddyService.delete(carpoolName,buddyUserName);
-        return "redirect:/dashboard";
+        return "redirect:/admin/dashboard";
     }
 
     @RequestMapping(value = "/carpool/{name}/start", method = RequestMethod.GET)

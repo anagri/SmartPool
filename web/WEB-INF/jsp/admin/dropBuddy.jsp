@@ -5,7 +5,7 @@
         <span style="display: table-row;">
             <span style="display: table-cell; min-width: 150px;"> ${buddy.getName()} </span>
             <span style="display: table-cell;">
-                <a href="${pageContext.request.contextPath}/carpool/${requestScope.carpool.getName()}/${buddy.getUserName()}/delete">
+                <a href="${pageContext.request.contextPath}/admin/${requestScope.carpool.getName()}/${buddy.getUserName()}/delete">
                     <i class="icon-remove-circle"></i>
                 </a>
             </span>
