@@ -176,7 +176,7 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldGetDashboardURL() throws Exception {
-        assertThat(carpoolController.viewDashboard(model, null),is("admin/dashboard"));
+        assertThat(carpoolController.viewDashboard(model, request),is("admin/dashboard"));
     }
 
     @Test
