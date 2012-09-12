@@ -32,6 +32,7 @@ public class CarpoolControllerIT {
         RouteService routeService = new RouteService(new RouteDao());
         CreateCarpoolFormValidator validator = new CreateCarpoolFormValidator();
         MailService mailService = new MailService(null);
+        CarpoolBuddyService carpoolBuddyService = new CarpoolBuddyService(new CarpoolBuddyDao());
 
         CarpoolController carpoolController = new CarpoolController(
                 carpoolService,
@@ -39,7 +40,8 @@ public class CarpoolControllerIT {
                 buddyService,
                 routeService,
                 validator,
-                mailService);
+                mailService,
+                carpoolBuddyService);
         ModelMap model = new ModelMap();
         request.setAttribute("query", "Sony Centre");
         carpoolController.searchByLocation(model, request);

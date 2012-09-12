@@ -32,7 +32,7 @@ public class CarpoolController {
 
     @Autowired
     public CarpoolController(CarpoolService carpoolService, JoinRequestService joinRequestService, BuddyService buddyService,
-                             RouteService routeService, CreateCarpoolFormValidator validator, MailService mailService) {
+                             RouteService routeService, CreateCarpoolFormValidator validator, MailService mailService, CarpoolBuddyService carpoolBuddyService) {
         this.carpoolService = carpoolService;
         this.joinRequestService = joinRequestService;
         this.buddyService = buddyService;

@@ -27,6 +27,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.hasItem;
 import static org.junit.matchers.JUnitMatchers.hasItems;
 import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CarpoolControllerTest {
@@ -63,8 +64,8 @@ public class CarpoolControllerTest {
 
     @Before
     public void setUp() throws Exception {
-
-        carpoolController = new CarpoolController(carpoolService, joinRequestService, buddyService, routeService, createCarpoolFormValidator, mailService);
+        initMocks(this);
+        carpoolController = new CarpoolController(carpoolService, joinRequestService, buddyService, routeService, createCarpoolFormValidator, mailService, carpoolBuddyService);
         when(carpoolService.getByName("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
 
@@ -208,6 +209,6 @@ public class CarpoolControllerTest {
         carpoolController.startCarpool("carpool-1", request);
 
         verify(carpoolService).startCarpool("carpool-1");
-        verify(mailService).sendMailTo("admin@carpool.com", "Request to start carpool carpool-1", "Please start carpool-1");
+        verify(mailService).sendMailTo("yqhuang@thoughtworks.com", "Request to start carpool carpool-1", "Please start carpool-1");
     }
 }
