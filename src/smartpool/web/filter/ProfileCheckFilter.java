@@ -31,7 +31,7 @@ public class ProfileCheckFilter extends GenericFilterBean {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         if (!buddyService.exists(extractUsernameFromRequest(request))) {
-            ((HttpServletResponse) servletResponse).sendRedirect(format("%s/buddyProfile/create", request.getContextPath()));
+            response.sendRedirect(format("%s/buddyProfile/create", request.getContextPath()));
             return;
         }
         chain.doFilter(request, response);
