@@ -27,17 +27,19 @@ public class CarpoolController {
     private RouteService routeService;
     private CarpoolBuddyService carpoolBuddyService;
     private CreateCarpoolFormValidator validator;
+    private MailService mailService;
     private JoinRequestService joinRequestService;
 
     @Autowired
-    public CarpoolController(CarpoolService carpoolService, JoinRequestService joinRequestService, BuddyService buddyService, RouteService routeService, CarpoolBuddyService carpoolBuddyService, CreateCarpoolFormValidator validator) {
-
+    public CarpoolController(CarpoolService carpoolService, JoinRequestService joinRequestService, BuddyService buddyService,
+                             RouteService routeService, CreateCarpoolFormValidator validator, MailService mailService) {
         this.carpoolService = carpoolService;
         this.joinRequestService = joinRequestService;
         this.buddyService = buddyService;
         this.routeService = routeService;
         this.carpoolBuddyService = carpoolBuddyService;
         this.validator = validator;
+        this.mailService = mailService;
     }
 
     @RequestMapping(value = "/carpool/{name}", method = RequestMethod.GET)
@@ -99,5 +101,11 @@ public class CarpoolController {
     public String deleteBuddy(@PathVariable String carpoolName,@PathVariable String buddyUserName, ModelMap model, HttpServletRequest request) {
         carpoolBuddyService.delete(carpoolName,buddyUserName);
         return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "/carpool/{name}/start", method = RequestMethod.GET)
+    public String startCarpool(@PathVariable String name, HttpServletRequest request) {
+        mailService.sendMailTo("admin@carpool.com", "Request to start carpool " + name, "Please start " + name);
+        return "redirect:/carpool/" + name;
     }
 }

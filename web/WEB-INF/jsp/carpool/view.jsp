@@ -90,7 +90,12 @@
 
             <p>Office Pickup Time: ${carpool.getOfficeETD().toString("h:mm a")}</p>
 
-            <p>Status: ${carpool.getStatusAsString()}</p>
+            <p>
+                Status: ${carpool.getStatus()}
+                <c:if test="${carpool.canStart() && buddyIsInCarpool}">
+                     <a href="<c:out value="/carpool/${carpool.name}/start"/>">Start It</a>
+                </c:if>
+            </p>
 
             <c:choose>
                 <c:when test="${!hasEnoughSpace && !buddyIsInCarpool}">

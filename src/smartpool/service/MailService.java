@@ -30,11 +30,15 @@ public class MailService {
 
     public void sendMailToList(List<String> emailList, String subject, String messageBody) {
         for(String emailTo : emailList) {
-            try {
-                Transport.send(mail.compose(emailTo, subject, messageBody));
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
+            sendMailTo(emailTo, subject, messageBody);
+        }
+    }
+
+    public void sendMailTo(String emailTo, String subject, String messageBody) {
+        try {
+            Transport.send(mail.compose(emailTo, subject, messageBody));
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
     }
 

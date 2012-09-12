@@ -50,8 +50,8 @@ public class CarpoolControllerTest {
     private JoinRequestService joinRequestService;
     @Mock
     private CarpoolBuddyService carpoolBuddyService;
-
-
+    @Mock
+    private MailService mailService;
 
     private ModelMap model;
     private Carpool expectedCarpool = CarpoolBuilder.CARPOOL_1;
@@ -64,7 +64,7 @@ public class CarpoolControllerTest {
     @Before
     public void setUp() throws Exception {
 
-        carpoolController = new CarpoolController(carpoolService,joinRequestService,buddyService, routeService, carpoolBuddyService, createCarpoolFormValidator);
+        carpoolController = new CarpoolController(carpoolService, joinRequestService, buddyService, routeService, createCarpoolFormValidator, mailService);
         when(carpoolService.getByName("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
 
@@ -200,5 +200,14 @@ public class CarpoolControllerTest {
         String buddyUserName = "buddyUserName";
         String s = carpoolController.deleteBuddy(carpoolName, buddyUserName, model,request);
         assertThat(s, is("redirect:/dashboard"));
+    }
+
+    @Test
+    public void shouldSendEmailAndSetRequestSentStatusToTrue() throws Exception {
+
+        carpoolController.startCarpool("carpool-1", request);
+
+        verify(carpoolService).startCarpool("carpool-1");
+        verify(mailService).sendMailTo("admin@carpool.com", "Request to start carpool carpool-1", "Please start carpool-1");
     }
 }
