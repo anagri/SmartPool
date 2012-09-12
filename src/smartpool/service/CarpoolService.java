@@ -120,6 +120,8 @@ public class CarpoolService {
     }
 
     public void startCarpool(String carpoolName) {
-
+        Carpool carpool = carpoolDao.get(carpoolName);
+        carpool.setRequestSent(true);
+        carpoolDao.update(carpool);
     }
 }

@@ -46,6 +46,14 @@ public class CarpoolDaoTest {
         verify(mockCarpoolMapper).get(carpoolName);
     }
 
+    @Test
+    public void shouldUpdate() throws Exception {
+        Carpool carpool = carpoolDao.get(carpoolName);
+        carpoolDao.update(carpool);
+
+        verify(mockCarpoolMapper).update(carpool);
+    }
+
     @After
     public void tearDown() throws Exception {
         carpoolDao.delete(carpoolName);

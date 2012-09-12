@@ -42,12 +42,15 @@ public class CarpoolServiceTest {
     @Mock
     private CarpoolBuddyDao carpoolBuddyDao;
 
+    private String carpoolName;
+
     @Before
     public void setUp() {
         initMocks(this);
         carpoolService = new CarpoolService(carpoolDao, buddyDao, routeDao, carpoolBuddyDao);
         expectedCarpool = CarpoolBuilder.CARPOOL_1;
         expectedCarpools = Arrays.asList(CarpoolBuilder.CARPOOL_1);
+        carpoolName = "name";
     }
 
     @Test
@@ -98,25 +101,25 @@ public class CarpoolServiceTest {
 
     @Test
     public void shouldInsertIntoDatabase() {
-        carpoolService.insert(new Carpool("name"));
-        verify(carpoolDao).insert(new Carpool("name"));
+        carpoolService.insert(new Carpool(carpoolName));
+        verify(carpoolDao).insert(new Carpool(carpoolName));
     }
 
     @Test
     public void shouldInsertIntoRoutePlanWhileCreatingCarpool() throws Exception {
-        Carpool carpool = new Carpool("name");
+        Carpool carpool = new Carpool(carpoolName);
         ArrayList<String> routePoints = new ArrayList<String>(){{
             add("Domlur");
             add("MG Road");
         }};
         carpool.setRoutePoints(routePoints);
         carpoolService.insert(carpool);
-        verify(routeDao).insert("name", routePoints.get(0), 1);
+        verify(routeDao).insert(carpool.getName(), routePoints.get(0), 1);
     }
 
     @Test
     public void shouldInsertIntoCarpoolBuddy() throws Exception {
-        Carpool carpool = new Carpool("name");
+        Carpool carpool = new Carpool(carpoolName);
         carpool.setCarpoolBuddies(new ArrayList<CarpoolBuddy>() {
             {
                 add(new CarpoolBuddy(new Buddy("name"), "pickupLocation", new LocalTime(10, 0)));
@@ -142,7 +145,7 @@ public class CarpoolServiceTest {
 
     @Test
     public void shouldReturnBuddyListInCarpool() throws Exception {
-        Carpool carpool = new Carpool("name");
+        Carpool carpool = new Carpool(carpoolName);
         when(carpoolDao.get("name")).thenReturn(carpool);
         carpoolService.getByName("name");
         verify(carpoolBuddyDao).getCarpoolBuddiesByCarpoolName(carpool.getName());
@@ -158,7 +161,7 @@ public class CarpoolServiceTest {
 
     @Test
     public void shouldReturnTrueIfLoggedUserIsInTheCarpool() throws Exception {
-        Carpool carpool = new Carpool("name");
+        Carpool carpool = new Carpool(carpoolName);
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
         carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home", "preferredPoint", new LocalTime(10, 30)), "testPoint", Constants.TIME_FORMATTER.parseLocalTime("10:00")));
         carpool.setCarpoolBuddies(carpoolBuddies);
@@ -167,7 +170,7 @@ public class CarpoolServiceTest {
 
     @Test
     public void shouldReturnFalseIfLoggedUserIsNotInTheCarpool() throws Exception {
-        Carpool carpool = new Carpool("name");
+        Carpool carpool = new Carpool(carpoolName);
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
         carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home", "preferredPoint", new LocalTime(10, 30)), "testPoint", Constants.TIME_FORMATTER.parseLocalTime("10:00")));
         carpool.setCarpoolBuddies(carpoolBuddies);
@@ -176,7 +179,7 @@ public class CarpoolServiceTest {
 
     @Test
     public void testFullCarpoolJoinCheckShouldReturnFalse() throws Exception {
-        Carpool carpool = new Carpool("name");
+        Carpool carpool = new Carpool(carpoolName);
         carpool.setCapacity(1);
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
         carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home", "preferredPoint", new LocalTime(10, 30)), "diamond district", new LocalTime(9, 20)));
@@ -185,7 +188,7 @@ public class CarpoolServiceTest {
     }
     @Test
     public void testJoinCheckWhenBuddyAlreadyInCarpoolShouldReturnFalse() throws Exception {
-        Carpool carpool = new Carpool("name");
+        Carpool carpool = new Carpool(carpoolName);
         carpool.setCapacity(3);
         ArrayList<CarpoolBuddy> carpoolBuddies = new ArrayList<CarpoolBuddy>();
         carpoolBuddies.add(new CarpoolBuddy(new Buddy("username", "name", "123", "name@domain.com", "home", "preferredPoint", new LocalTime(10, 30)), "diamond district", new LocalTime(9, 20)));
@@ -206,5 +209,14 @@ public class CarpoolServiceTest {
         when(carpoolDao.selectAllCarpools()).thenReturn(carpoolList);
         List<Carpool> carpools = carpoolService.findAllCarpoolsByLocation("");
         assertThat(carpoolList.get(0),is(carpool1));
+    }
+
+    @Test
+    public void shouldSetLinkTextToRequestSent() throws Exception {
+        Carpool carpool = new Carpool(carpoolName);
+        when(carpoolDao.get(carpoolName)).thenReturn(carpool);
+        carpoolService.startCarpool(carpool.getName());
+
+        assertThat(carpool.getRequestSent(), is(true));
     }
 }
