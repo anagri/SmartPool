@@ -34,8 +34,8 @@
         <span>
             <label>Preferred Pickup Time:</label>
             <input type="text" name="preferredPickupTime" value="${createProfileForm.preferredPickupTime}"/>
-            <label class="example">(Example: 10:00)</label>
             <form:errors path="preferredPickupTime" cssClass="error"/>
+            <label class="example">(Example: 10:00)</label>
         </span>
         <div class="buttonContainer">
             <button type="submit" name="submit">Submit</button>

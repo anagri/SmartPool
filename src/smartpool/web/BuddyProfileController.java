@@ -38,7 +38,7 @@ public class BuddyProfileController {
 
     @RequestMapping(value = "/{userName:.*}", method = RequestMethod.POST)
     public String dropFromCarpool(@PathVariable String userName, ModelMap model, HttpServletRequest request) {
-      //  buddyService.getBuddy(userName).getCarpools().remove("carpool");
+//        buddyService.getBuddy(userName).getCarpools().remove("carpool");
         return "buddy/viewUserProfile";
     }
 
@@ -65,6 +65,7 @@ public class BuddyProfileController {
 
         String username = buddyService.getUserNameFromCAS(request);
         LDAPResultSet ldapResultSet = ldapService.searchByUserName(username);
+
         form.setUsername(username);
         form.setName(ldapResultSet.name);
         form.setEmail(ldapResultSet.email);
@@ -74,7 +75,9 @@ public class BuddyProfileController {
             return new ModelAndView("buddy/form", model);
         }
 
-        buddyService.insert(form.createBuddy());
+        if (!buddyService.exists(username)) {
+            buddyService.insert(form.createBuddy());
+        }
         return new ModelAndView(new RedirectView("/buddyProfile", true));
     }
 }
