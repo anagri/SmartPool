@@ -105,7 +105,7 @@ public class CarpoolController {
 
     @RequestMapping(value = "/carpool/{name}/start", method = RequestMethod.GET)
     public String startCarpool(@PathVariable String name, HttpServletRequest request) {
-        mailService.sendMailTo("admin@carpool.com", "Request to start carpool " + name, "Please start " + name);
+        mailService.sendMailTo("yqhuang@thoughtworks.com", "Request to start carpool " + name, "Please start " + name);
         carpoolService.startCarpool(name);
 
         return "redirect:/carpool/" + name;
