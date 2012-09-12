@@ -56,10 +56,8 @@
 
                         <td>
                             <ul>
-                                <c:forEach var="carpoolBuddy" items="${carpool.getCarpoolBuddies()}" varStatus="buddyIndex">
-                                    <c:set var="buddy" value="${carpoolBuddy.getBuddy()}" />
-                                    <li>${buddy.getName()}</li>
-                                </c:forEach>
+                                <c:set var="carpoolBuddies" value="${carpool.getCarpoolBuddies()}" scope="request" />
+                                <jsp:include page="dropBuddy.jsp" flush="true" />
                             </ul>
                         </td>
 
