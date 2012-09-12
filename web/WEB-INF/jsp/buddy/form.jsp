@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <jsp:include page="../navbar.jsp" flush="true">
-    <jsp:param name="css" value="createCarpool.css"/>
     <jsp:param name="title" value="Create Profile" />
 </jsp:include>
 <div>

@@ -1,13 +1,13 @@
 .mainContainer .subContainer {
+    display: block;
     width: 500px;
 }
 
 .mainContainer .subContainer span {
-    width: 200px;
-}
-
-.mainContainer .subContainer span:last-child {
-    clear: right;
+    min-width: 200px;
+    text-align: left;
+    display: table-cell;
+    padding-right: 20px;
 }
 
 .buttonContainer {

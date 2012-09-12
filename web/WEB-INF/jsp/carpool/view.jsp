@@ -1,25 +1,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../navbar.jsp">
     <jsp:param name="title" value="View Carpool: ${carpool.getName()}"/>
-    <jsp:param name="css" value="carpool.css" />
+    <jsp:param name="css" value="carpool.css"/>
 </jsp:include>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/carpool/view.js"></script>
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         $('.more-info .info').tooltip({
             bodyHandler:function () {
                 return $($(this).parent().find('.more-info-message')).html();
             },
-            showURL: false
+            showURL:false
         });
     });
 </script>
-<div>
-    <h1 id="carpoolName" class="header">
+<div class="container">
+    <h1 id="carpoolName">
         Carpool ${carpool.getFrom()}
         <img src="${pageContext.request.contextPath}/css/img/arrow-sign.jpg" class="big-arrow-sign"/>
-         ${carpool.getTo()}
+        ${carpool.getTo()}
     </h1>
 
     <div>
@@ -36,12 +36,13 @@
                 </tr>
                 </thead>
                 <c:forEach var="carpoolBuddy" items="${carpool.getCarpoolBuddies()}" varStatus="sequence">
-                    <c:set var="buddy" value="${carpoolBuddy.getBuddy()}" />
+                    <c:set var="buddy" value="${carpoolBuddy.getBuddy()}"/>
                     <tr class="seat-occupied">
                         <td class="buddy-sequence">${sequence.index + 1}</td>
                         <td><a href="../buddyProfile/${buddy.getUserName()}" id="${buddy.getUserName()}">
-                        <c:if test="${sequence.index==0 && carpool.getCabType() == PERSONAL}"><img src="${pageContext.request.contextPath}/css/img/key.png"  class="car-owner" /></c:if>
-                        ${buddy.getName()}</a></td>
+                            <c:if test="${sequence.index==0 && carpool.getCabType() == PERSONAL}"><img
+                                    src="${pageContext.request.contextPath}/css/img/key.png" class="car-owner"/></c:if>
+                                ${buddy.getName()}</a></td>
                         <td>${carpoolBuddy.getPickupPoint()}</td>
                         <td class="center">${carpoolBuddy.getPickupTime().toString("h:mm a")}</td>
                     </tr>
@@ -58,30 +59,31 @@
             </table>
 
             <c:if test="${carpool.getCabType() == PERSONAL}">
-            <span style="font-size: smaller;"><img src="${pageContext.request.contextPath}/css/img/key.png"  class="car-owner" />:carpool lead</span>
+                <span style="font-size: smaller;"><img src="${pageContext.request.contextPath}/css/img/key.png"
+                                                       class="car-owner"/>:carpool lead</span>
             </c:if>
 
             <p style="margin-top:23px;margin-bottom: 6px;">Cab Type:
-            <c:choose>
-                <c:when test="${carpool.getCabType() == PERSONAL}">
-                ${carpool.getCabType()}
+                <c:choose>
+                    <c:when test="${carpool.getCabType() == PERSONAL}">
+                        ${carpool.getCabType()}
                 <span class="more-info">
                     <img src="${pageContext.request.contextPath}/css/img/moreinfo.png" class="info"/>
                         <span style="display: none;" class="more-info-message tooltip">
                             Vehicle belongs and is operated by ${carpool.getCarpoolBuddies().get(0).getBuddy().getName()}. 50% of fuel cost is paid by ThoughtWorks.
                         </span>
                     </span>
-                </c:when>
-                <c:when test="${carpool.getCabType() == COMPANY}">
-                    ${carpool.getCabType()}
+                    </c:when>
+                    <c:when test="${carpool.getCabType() == COMPANY}">
+                        ${carpool.getCabType()}
                     <span class="more-info">
                     <img src="${pageContext.request.contextPath}/css/img/moreinfo.png" class="info"/>
                         <span style="display: none;" class="more-info-message tooltip">
                             Vehicle is a cab owned and operated by a cab agency. 50% of cab charges are paid by ThoughtWorks.
                         </span>
                     </span>
-                </c:when>
-            </c:choose>
+                    </c:when>
+                </c:choose>
             </p>
 
             <p>Office Arrival Time: ${carpool.getOfficeETA().toString("h:mm a")}</p>
@@ -101,7 +103,8 @@
                     <span class="status-message">JOIN REQUEST PENDING</span>
                 </c:when>
                 <c:otherwise>
-                    <form method="get" action="join/${carpool.getName()}" class="joinCarpoolButton" action="<c:url value="/carpool/join/${carpool.name}"/>">
+                    <form method="get" action="join/${carpool.getName()}" class="joinCarpoolButton"
+                          action="<c:url value="/carpool/join/${carpool.name}"/>">
                         <button type="submit" id="joinRequestButton" value="Join">Join Carpool</button>
                     </form>
                 </c:otherwise>
@@ -131,7 +134,8 @@
 
                 <p>Capacity:
                     <c:choose>
-                        <c:when test="${carpool.getCapacity() > 0}"><span id="carpoolCapacity">${carpool.getCapacity()}</span></c:when>
+                        <c:when test="${carpool.getCapacity() > 0}"><span
+                                id="carpoolCapacity">${carpool.getCapacity()}</span></c:when>
                         <c:otherwise>To be set</c:otherwise>
                     </c:choose>
                 </p>
