@@ -72,3 +72,16 @@ CREATE TABLE `route` (
   `sequenceNumber` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`carpoolName`,`location`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `pending_request`;
+
+CREATE TABLE `pending_request` (
+  `username` varchar(11) NOT NULL,
+  `carpoolname` varchar(50) NOT NULL,
+  `uid` varchar(50) NOT NULL,
+  KEY `uid`(`uid`),
+  UNIQUE KEY `user_carpool_uid` (`uid`),
+  UNIQUE KEY `user_request` (`username`,`carpoolname`),
+  CONSTRAINT `pending_requests_ibfk_1` FOREIGN KEY (`username`) REFERENCES `buddies` (`username`),
+  CONSTRAINT `pending_requests_ibfk_2` FOREIGN KEY (`carpoolname`) REFERENCES `carpool` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
