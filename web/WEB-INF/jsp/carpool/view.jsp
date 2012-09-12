@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../navbar.jsp">
     <jsp:param name="title" value="View Carpool: ${carpool.getName()}"/>
-    <jsp:param name="css" value="carpool.css,standardLayout.css" />
+    <jsp:param name="css" value="carpool.css" />
 </jsp:include>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/carpool/view.js"></script>

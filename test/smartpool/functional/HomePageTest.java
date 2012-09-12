@@ -12,7 +12,7 @@ public class HomePageTest extends BaseTest {
     @Test
     public void loginAndVerifyWelcomeMessageOnHomePage() {
         HomePage homePage = new LoginPage(webDriver).login();
-        assertThat(homePage.welcomeMessage.getText(), contains("Welcome to SmartPool!"));
+        assertThat(homePage.welcomeMessage.getText(), contains("SmartPool"));
         assertThat(homePage.logoutForm.getText(), contains("Test User"));
     }
 }

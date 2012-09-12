@@ -1,7 +1,7 @@
 <%@ page import="edu.yale.its.tp.cas.client.filter.CASFilter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../navbar.jsp" flush="true">
-    <jsp:param name="css" value="carpool.css,standardLayout.css"/>
+    <jsp:param name="css" value="carpool.css"/>
     <jsp:param name="title" value="Search Carpool" />
 </jsp:include>
 

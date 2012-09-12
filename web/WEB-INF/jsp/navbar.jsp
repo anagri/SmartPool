@@ -12,6 +12,7 @@
     <script src="${pageContext.request.contextPath}/js/jquery.tooltip.js"></script>
 
     <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/standardLayout.css" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/css/searchCarpool.css" rel="stylesheet">
     <c:choose>
         <c:when test="<%=request.getParameter(\"title\") != null %>"><title><%= request.getParameter("title") %></title></c:when>
@@ -45,6 +46,7 @@
                     <li><a href="${appName}/carpool/create" id="createCarpool">Create Carpool</a></li>
                     <li><a href="${appName}/carpool/search" id="listCarpools">Carpools</a></li>
                     <li><a href="${appName}/buddyProfile" id="myProfile">My Profile</a></li>
+                    <li><a href="#notifications">FAQ</a></li>
                     <li>
                         <form action="${appName}/carpool/search" method="GET" class="searchForm">
 
