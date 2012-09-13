@@ -16,6 +16,9 @@
     display: table-header-group;
 }
 
+#capacityTextbox {
+    height: 2em;
+}
 
 #dashboard :first-child > span {
     padding: 5px;

@@ -55,7 +55,7 @@
                         <c:set var="status" value="${updateCarpoolForm.status}"/>
                         <c:set var="capacity" value="${updateCarpoolForm.capacity}"/>
                     </c:if>
-                    <c:if test="${thisEdit eq false}">
+                    <c:if test="${!errors}">
                         <c:set var="charges" value="${carpool.totalCabCharges}"/>
                         <c:set var="status" value="${carpool.getStatus().toString()}"/>
                         <c:set var="capacity" value="${carpool.getCapacity()}"/>
@@ -63,7 +63,7 @@
 
                     <div class="carpoolRow">
                         <form:form commandName="updateCarpoolForm" method="post"
-                                   action="${pageContext.request.contextPath}/dashboard/${carpool.getName()}/update/"
+                                   action="${pageContext.request.contextPath}/admin/dashboard/${carpool.getName()}/update/"
                                    htmlEscape="true">
                             <div>
 
@@ -85,9 +85,8 @@
                                 <select class="carpoolStatusDropdown" id="status-${typeStatus.count}" name="status">
                                     <option value="ACTIVE">Active</option>
                                     <option value="NOT_STARTED">Not Started</option>
-                                    <option value="DROPPED">Dropped</option>
                                 </select>
-                                <span class="errorText"><c:if test="${thisEdit}"><form:errors path="status"/></c:if>&nbsp;</span>
+                                <c:if test="${thisEdit}"><span class="errorText"><form:errors path="status"/></span></c:if>
                                 <script type="text/javascript">
 
                                     $("#status-" + ${typeStatus.count} +" option").each(function (index, select) {
@@ -98,15 +97,15 @@
                             <span class="chargesColumn">
                                 <input type="text" style="text-align: right; max-width: 10em" name="charges"
                                        value="${charges}"/>
-                                <span class="errorText"><c:if test="${thisEdit}"><form:errors path="charges"/></c:if>&nbsp;</span>
+                                <c:if test="${thisEdit}"><span class="errorText"><form:errors path="charges"/></span></c:if>
 
 
                             </span>
                             <span class="capacityColumn">
 
-                                <input type="number" name="capacity" style="text-align: right; max-width: 3em"
+                                <input id="capacityTextbox" type="number" name="capacity" style="text-align: right; max-width: 3em"
                                        value="${capacity}"/>
-                                <span class="errorText"><c:if test="${thisEdit}"><form:errors path="capacity"/></c:if>&nbsp;</span>
+                                <c:if test="${thisEdit}"><span class="errorText"><form:errors path="capacity"/></span></c:if>
 
 
                             </span>
