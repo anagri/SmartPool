@@ -51,7 +51,9 @@ public class CarpoolUpdateFormValidatorTest {
 
     @Test
     public void shouldGiveNoErrorsForDroppedStatus() throws Exception {
-        form.setStatus("DROPPED");
+        form.setCapacity("0");
+        form.setCharges("1000");
+        form.setStatus("NOT_STARTED");
         validator.validate(form, errors);
         Assert.assertThat(errors.hasErrors(), is(false));
     }
