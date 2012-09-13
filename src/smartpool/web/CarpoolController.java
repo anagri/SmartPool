@@ -147,7 +147,10 @@ public class CarpoolController {
                                                 @ModelAttribute("updateCarpoolForm") CarpoolUpdateForm updateForm,
                                                 BindingResult bindingResult,
                                                 ModelMap model, HttpServletRequest request) {
+        if (!carpoolService.isValidCarpool(carpoolName)) {
+            return new ModelAndView(new RedirectView("../../"), model);
 
+        }
         updateValidator.validate(updateForm, bindingResult);
 
         model.put("updateCarpoolForm", updateForm);
