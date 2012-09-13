@@ -82,6 +82,43 @@ public class JoinRequestDao {
         } finally {
             session.close();
         }
-        return UUID.fromString(uuid);
+        return uuid == null? null : UUID.fromString(uuid);
+    }
+
+    public void deletePendingRequest(String uid) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
+            mapper.deletePendingRequest(uid);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
+    public String getBuddyUserNameFromUid(String uid) {
+        String buddyUserName;
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
+            buddyUserName = mapper.getBuddyUserNameFromUid(uid);
+            session.commit();
+        } finally {
+            session.close();
+        }
+        return buddyUserName;
+    }
+
+    public String getCarpoolNameFromUid(String uid) {
+        String carpoolName;
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
+            carpoolName = mapper.getCarpoolNameFromUid(uid);
+            session.commit();
+        } finally {
+            session.close();
+        }
+        return carpoolName;
     }
 }

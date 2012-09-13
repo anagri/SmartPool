@@ -17,12 +17,14 @@ public class JoinRequestDaoIT {
     private JoinRequestDao joinRequestDao;
     private String buddyUsername;
     private String carpoolName;
+    private UUID uid;
 
     @Before
     public void setUp() throws Exception {
         joinRequestDao = new JoinRequestDao();
         buddyUsername = "mzhao";
         carpoolName = "carpool-1";
+        uid = UUID.randomUUID();
     }
 
     @Test
@@ -63,12 +65,33 @@ public class JoinRequestDaoIT {
     @After
     public void tearDown() throws Exception {
         joinRequestDao.deleteUsersRequest(buddyUsername, carpoolName);
+        joinRequestDao.deletePendingRequest(uid.toString());
     }
 
     @Test
     public void shouldAddUniqueIdToRequest() throws Exception {
-        UUID uuid = UUID.randomUUID();
-        joinRequestDao.addUniqueIdToPendingRequest(buddyUsername, carpoolName,uuid);
-        assertThat(joinRequestDao.getUniqueIdFromPendingRequest(buddyUsername, carpoolName),is(uuid));
+        joinRequestDao.addUniqueIdToPendingRequest(buddyUsername, carpoolName, uid);
+        assertThat(joinRequestDao.getUniqueIdFromPendingRequest(buddyUsername, carpoolName),is(uid));
+    }
+
+    @Test
+    public void shouldDeletePendingRequest() throws Exception {
+        joinRequestDao.addUniqueIdToPendingRequest(buddyUsername, carpoolName, uid);
+        joinRequestDao.deletePendingRequest(uid.toString());
+        assertNull(joinRequestDao.getUniqueIdFromPendingRequest(buddyUsername, carpoolName));
+    }
+
+    @Test
+    public void shouldGetBuddyUserNameFromUid() throws Exception {
+        joinRequestDao.addUniqueIdToPendingRequest(buddyUsername, carpoolName, uid);
+        joinRequestDao.getBuddyUserNameFromUid(uid.toString());
+        assertThat(joinRequestDao.getBuddyUserNameFromUid(uid.toString()),equalTo(buddyUsername));
+    }
+
+    @Test
+    public void shouldGetCarpoolNameFromUid() throws Exception {
+        joinRequestDao.addUniqueIdToPendingRequest(buddyUsername, carpoolName, uid);
+        joinRequestDao.getCarpoolNameFromUid(uid.toString());
+        assertThat(joinRequestDao.getCarpoolNameFromUid(uid.toString()),equalTo(carpoolName));
     }
 }

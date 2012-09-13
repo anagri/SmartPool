@@ -34,4 +34,16 @@ public class JoinRequest {
                 "<tr><td><b>Preferred Pickup Time</b> </td><td>  :  " + preferredPickupTime.toString().substring(0,5) +"</td></tr><br /><br />"+
                 "<tr><td><b>Address</b> </td><td>  :  " + address+"</td></tr></table><br /><br />";
     }
+
+    public LocalTime getPreferredPickupTime() {
+        return preferredPickupTime;
+    }
+
+    public String getPickupPoint() {
+        return pickupPoint;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }

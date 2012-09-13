@@ -10,32 +10,31 @@ import smartpool.persistence.dao.CarpoolBuddyDao;
 import smartpool.persistence.dao.JoinRequestDao;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Service
 public class JoinRequestService {
-    private final JoinRequestDao joinrequestDao;
+    private final JoinRequestDao joinRequestDao;
     private final CarpoolBuddyDao carpoolBuddyDao;
     private final MailService mailService;
+    private final Properties appProperties;
 
     @Autowired
-    public JoinRequestService(JoinRequestDao joinrequestDao, CarpoolBuddyDao carpoolBuddyDao, MailService mailService) {
-        this.joinrequestDao = joinrequestDao;
+    public JoinRequestService(JoinRequestDao joinRequestDao, CarpoolBuddyDao carpoolBuddyDao, MailService mailService,Properties appProperties) {
+        this.joinRequestDao = joinRequestDao;
         this.carpoolBuddyDao = carpoolBuddyDao;
         this.mailService = mailService;
+        this.appProperties = appProperties;
     }
 
-    public void sendJoinRequest(JoinRequest joinRequest, Buddy buddy) {
-        joinrequestDao.sendJoinRequest(joinRequest);
-        joinrequestDao.addUniqueIdToPendingRequest(buddy.getUserName(), joinRequest.getCarpoolName(), null);
+    public void sendJoinRequest(JoinRequest joinRequest, Buddy buddy,UUID uuid) {
+        joinRequestDao.sendJoinRequest(joinRequest);
+        joinRequestDao.addUniqueIdToPendingRequest(buddy.getUserName(), joinRequest.getCarpoolName(), uuid);
         sendEmailToList(joinRequest, buddy);
     }
 
     public boolean isRequestSent(Buddy buddy, String carpoolName) {
-        return joinrequestDao.isRequestSent(buddy, carpoolName);
+        return joinRequestDao.isRequestSent(buddy, carpoolName);
     }
 
     public ArrayList<String> getCarpoolBuddies(String carpoolName) {
@@ -50,9 +49,28 @@ public class JoinRequestService {
     public void sendEmailToList(JoinRequest joinRequest, Buddy buddy) {
         List<String> buddyEmailList = getCarpoolBuddies(joinRequest.getCarpoolName());
         String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-        String approveLink="approve link";
-        String disApproveLink="disapprove link";
+
+        String smartPoolUrl = "http://"+appProperties.getProperty("hostName")+":"+appProperties.getProperty("port")+"/"+appProperties.getProperty("applicationName")+"/";
+        String approveLink= smartPoolUrl+String.format(Constants.Approve_Link,joinRequestDao.getUniqueIdFromPendingRequest(buddy.getUserName(),joinRequest.getCarpoolName()));
+        String disApproveLink= smartPoolUrl+String.format(Constants.Disapprove_Link,joinRequestDao.getUniqueIdFromPendingRequest(buddy.getUserName(),joinRequest.getCarpoolName()));
+
         String message = String.format(Constants.NEW_BUDDY_NOTIFICATION_MESSAGE, date, buddy.getName(), joinRequest.getCarpoolName(),joinRequest,approveLink,disApproveLink);
         mailService.sendMailToList(buddyEmailList, Constants.NEW_BUDDY_NOTIFICATION_SUBJECT, message);
+    }
+
+    public void deletePendingRequest(String uid) {
+        joinRequestDao.deletePendingRequest(uid);
+    }
+
+    public String getBuddyUserNameFromUid(String uid) {
+        return joinRequestDao.getBuddyUserNameFromUid(uid);
+    }
+
+    public String getCarpoolNameFromUid(String uid) {
+        return joinRequestDao.getCarpoolNameFromUid(uid);
+    }
+
+    public JoinRequest getJoinRequestByUserNameAndCarpoolName(String userName, String carpoolName) {
+        return joinRequestDao.selectUsersRequest(userName,carpoolName);
     }
 }
