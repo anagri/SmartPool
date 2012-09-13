@@ -131,4 +131,8 @@ public class CarpoolService {
         carpool.setStatus(status);
         carpoolDao.updateStatus(carpool);
     }
+
+    public void updateCarpool(Carpool updated) {
+        carpoolDao.updateCarpool(updated);
+    }
 }

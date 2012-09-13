@@ -80,4 +80,15 @@ public class CarpoolDao {
             session.close();
         }
     }
+
+    public void updateCarpool(Carpool updated) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            CarpoolMapper mapper = session.getMapper(CarpoolMapper.class);
+            mapper.updateCarpool(updated);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
 }

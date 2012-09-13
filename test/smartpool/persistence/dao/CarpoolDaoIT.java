@@ -13,6 +13,7 @@ import static junit.framework.Assert.assertNotNull;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static smartpool.util.matchers.ReflectionMatcher.reflectionEquals;
 
 public class CarpoolDaoIT {
 
@@ -54,6 +55,25 @@ public class CarpoolDaoIT {
         carpool.setRequestSent(true);
         carpoolDao.updateRequestSent(carpool);
         assertThat(carpoolDao.get(carpool.getName()).getRequestSent(), is(true));
+    }
+
+    @Test
+    public void testShouldUpdateCarpool() throws Exception {
+        Carpool originalCarpool = carpoolDao.get(carpoolName);
+        Carpool carpoolUpdates = new Carpool(carpoolName, originalCarpool.getStartDate(), originalCarpool.getCabType(), originalCarpool.getTotalCabCharges(), originalCarpool.getOfficeETA(), originalCarpool.getOfficeETD(), originalCarpool.getStatus(), originalCarpool.getCarpoolBuddies(), originalCarpool.getCapacity(), originalCarpool.getRoutePoints());
+        carpoolUpdates.setStatus(Status.NOT_STARTED);
+        carpoolUpdates.setCapacity(7);
+        carpoolUpdates.setTotalCabCharges(1223);
+        carpoolDao.updateCarpool(carpoolUpdates);
+
+        Carpool updatedCarpool = carpoolDao.get(carpoolName);
+        assertThat(updatedCarpool, reflectionEquals(carpoolUpdates));
+
+        carpoolDao.updateCarpool(originalCarpool);
+
+
+
+
     }
 
     @After

@@ -29,6 +29,17 @@ public interface CarpoolMapper {
     static final String UPDATE_CARPOOL_SET_REQUEST_SENT = "update carpool set request_sent = #{requestSent} where name= #{name}";
     static final String UPDATE_CARPOOL_SET_STATUS = "update carpool set status = #{status} where name= #{name}";
 
+    static final String UPDATE_CARPOOL = "update carpool " +
+            "set start_date = #{startDate, javaType=org.joda.time.LocalDate, jdbcType=DATE, typeHandler=smartpool.data.typeHandler.LocalDateTypeHandler}," +
+            "office_eta = #{officeETA, javaType=org.joda.time.LocalTime, jdbcType=TIME, typeHandler=smartpool.data.typeHandler.LocalTimeTypeHandler}," +
+            "office_etd = #{officeETD, javaType=org.joda.time.LocalTime, jdbcType=TIME, typeHandler=smartpool.data.typeHandler.LocalTimeTypeHandler}," +
+            "cab_type = #{cabType}," +
+            "total_cab_charge = #{totalCabCharges}," +
+            "status = #{status}," +
+            "capacity = #{capacity}," +
+            "request_sent = #{requestSent} " +
+            "where name = #{name}";
+
     @Select(SELECT_ALL)
     @Results(value = {
             @Result(property="name", column="name"),
@@ -68,4 +79,7 @@ public interface CarpoolMapper {
 
     @Update(UPDATE_CARPOOL_SET_STATUS)
     public void updateStatus(Carpool carpool);
+
+    @Update(UPDATE_CARPOOL)
+    void updateCarpool(Carpool updated);
 }
