@@ -89,7 +89,7 @@
                                 <c:if test="${thisEdit}"><span class="errorText"><form:errors path="status"/></span></c:if>
                                 <script type="text/javascript">
 
-                                    $("#status-" + ${typeStatus.count} +" option").each(function (index, select) {
+                                    $("#${carpool.getName()}-status option").each(function (index, select) {
                                         if (select.value == '${status}') select.selected = true
                                     });
                                 </script>
