@@ -1,6 +1,5 @@
 package smartpool.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import smartpool.domain.Mail;
 
@@ -16,8 +15,7 @@ public class MailService {
 
     private Mail mail;
 
-    @Autowired
-    public MailService() {
+    private MailService() {
         this.mail = new Mail(new MimeMessage(getSession()));
     }
 

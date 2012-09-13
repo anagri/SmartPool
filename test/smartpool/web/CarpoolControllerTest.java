@@ -222,7 +222,6 @@ public class CarpoolControllerTest {
     public void shouldSendEmailAndSetRequestSentStatusToTrue() throws Exception {
         carpoolController.startCarpool("carpool-1", request);
         verify(carpoolService).updateRequestSent("carpool-1", true);
-        verify(mailService).sendMailTo("yqhuang@thoughtworks.com", "Request to start carpool carpool-1", "Please start carpool-1");
     }
 
     @Test
@@ -233,6 +232,6 @@ public class CarpoolControllerTest {
 
         carpoolController.acceptStartRequest("carpool-1", request);
 
-        assertThat(carpool.getStatus(), is(Status.ACTIVE));
+        verify(carpoolService).updateStatus(carpool.getName(), Status.ACTIVE);
     }
 }
