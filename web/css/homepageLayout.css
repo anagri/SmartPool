@@ -45,11 +45,12 @@ form {
 }
 
 .links {
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .links p {
     text-align: center;
+    margin:0;
 }
 
 .textcontent {
