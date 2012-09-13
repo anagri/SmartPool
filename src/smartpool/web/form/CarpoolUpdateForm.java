@@ -42,8 +42,10 @@ public class CarpoolUpdateForm {
     }
 
     public Carpool createDomainObject(Carpool original) {
-        Carpool updated = new Carpool(original.getName(), original.getStartDate(), original.getCabType(), Integer.valueOf(charges), original.getOfficeETA(), original.getOfficeETD(), original.getStatus(), original.getCarpoolBuddies(), Integer.valueOf(capacity), original.getRoutePoints());
+        Carpool updated = new Carpool(original.getName(), original.getStartDate(), original.getCabType(), original.getTotalCabCharges(), original.getOfficeETA(), original.getOfficeETD(), original.getStatus(), original.getCarpoolBuddies(), original.getCapacity(), original.getRoutePoints());
         updated.setStatus(Status.valueOf(status));
+        updated.setCapacity(Integer.valueOf(capacity));
+        updated.setTotalCabCharges(Integer.valueOf(charges));
         return updated;
 
     }
