@@ -1,7 +1,13 @@
+<%@ page import="edu.yale.its.tp.cas.client.filter.CASFilter" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="navbar.jsp" flush="true">
     <jsp:param name="css" value="homepageLayout.css"/>
     <jsp:param name="title" value="SmartPool"/>
 </jsp:include>
+
+
+<c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>'/>
+<c:set var="appName" value="${pageContext.request.contextPath}"/>
 
 <div class="mainContainer">
     <span id="welcomeMessage" class="welcomeContainer">
@@ -25,6 +31,23 @@
 
         <p><a href="http://www.marc.org/rideshare/carpooltips.htm#etiquette">Carpool etiquette</a></p>
     </div>
+    <div align="center">
+        <br>
+        <br>
+    <c:forEach var="adminUserName" items="${adminUserNames}">
+        <c:choose>
+            <c:when test="${casUserName eq adminUserName}">
+                <form method="get" action="${appName}/admin/dashboard">
+                        <%--action="<c:url value="admin/dashboard"/>">--%>
+                    <button type="submit" id="dashBoardButton">Go To Admin Dashboard</button>
+                </form>
+            </c:when>
+        </c:choose>
+    </div>
+    </c:forEach>
 </div>
+
+
+
 
 <%@ include file="footer.jsp" %>

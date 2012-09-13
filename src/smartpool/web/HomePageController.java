@@ -9,23 +9,29 @@ import smartpool.service.BuddyService;
 import smartpool.service.LDAPService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Properties;
 
 @RequestMapping("/")
 @Controller
 public class HomePageController {
     private LDAPService ldapService;
     private BuddyService buddyService;
+    private Properties adminProperties;
+
 
     @Autowired
-    public HomePageController(LDAPService ldapService, BuddyService buddyService) {
+    public HomePageController(LDAPService ldapService, BuddyService buddyService, Properties adminProperties) {
         this.ldapService = ldapService;
         this.buddyService = buddyService;
+        this.adminProperties = adminProperties;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(HttpServletRequest request, ModelMap model) {
         String userNameFromCAS = buddyService.getUserNameFromCAS(request);
+        String[] admins = adminProperties.getProperty("admins").split(",");
         request.getSession().setAttribute("ldapUserName", ldapService.searchByUserName(userNameFromCAS).name);
+        model.put("adminUserNames",admins);
         return "index";
     }
 }
