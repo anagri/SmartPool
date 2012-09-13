@@ -94,4 +94,10 @@ public class JoinRequestDaoIT {
         joinRequestDao.getCarpoolNameFromUid(uid.toString());
         assertThat(joinRequestDao.getCarpoolNameFromUid(uid.toString()),equalTo(carpoolName));
     }
+
+    @Test
+    public void shouldReturnTrueForExistingUid() throws Exception {
+        joinRequestDao.addUniqueIdToPendingRequest(buddyUsername, carpoolName, uid);
+        assertTrue(joinRequestDao.isUidPresent(uid.toString()));
+    }
 }

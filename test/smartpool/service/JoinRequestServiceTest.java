@@ -127,4 +127,10 @@ public class JoinRequestServiceTest {
         assertThat(joinRequestService.getJoinRequestByUserNameAndCarpoolName(userName,carpoolName),is(joinRequest));
         verify(joinRequestDao).selectUsersRequest(userName,carpoolName);
     }
+
+    @Test
+    public void shouldCheckForValidUid() throws Exception {
+        joinRequestService.isUidPresent(uuid.toString());
+        verify(joinRequestDao).isUidPresent(uuid.toString());
+    }
 }

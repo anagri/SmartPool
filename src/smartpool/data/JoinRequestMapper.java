@@ -22,7 +22,7 @@ public interface JoinRequestMapper {
     static final String DELETE_PENDING_REQUEST = "delete from pending_request where uid = #{param1}";
     static String SELECT_BUDDY_USERNAME = "select username from pending_request where uid = #{param1}";
     static String SELECT_CARPOOL_NAME = "select carpoolname from pending_request where uid = #{param1} ";
-
+    static String UID_PRESENT = "select count(uid) from pending_request where uid = #{param1} ";
 
     @Select(INSERT_REQUEST)
     void insertRequest(JoinRequest joinRequest);
@@ -56,4 +56,7 @@ public interface JoinRequestMapper {
 
     @Select(SELECT_CARPOOL_NAME)
     String getCarpoolNameFromUid(String uid);
+
+    @Select(UID_PRESENT)
+    Boolean isUidPresent(String uid);
 }

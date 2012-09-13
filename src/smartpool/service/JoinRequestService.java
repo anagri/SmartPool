@@ -73,4 +73,8 @@ public class JoinRequestService {
     public JoinRequest getJoinRequestByUserNameAndCarpoolName(String userName, String carpoolName) {
         return joinRequestDao.selectUsersRequest(userName,carpoolName);
     }
+
+    public boolean isUidPresent(String uid) {
+        return joinRequestDao.isUidPresent(uid);
+    }
 }

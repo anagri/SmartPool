@@ -121,4 +121,17 @@ public class JoinRequestDao {
         }
         return carpoolName;
     }
+
+    public boolean isUidPresent(String uid) {
+        Boolean result;
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            JoinRequestMapper mapper = session.getMapper(JoinRequestMapper.class);
+            result = mapper.isUidPresent(uid);
+            session.commit();
+        } finally {
+            session.close();
+        }
+        return result;
+    }
 }
