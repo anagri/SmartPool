@@ -93,12 +93,16 @@ public class CarpoolControllerTest {
 
     @Test
     public void shouldRedirectToViewCarpool() throws Exception {
-        assertEquals(carpoolController.viewCarpool("carpool", model, request), "carpool/view");
+        String carpoolName = "carpool";
+        when(carpoolService.isValidCarpool(carpoolName)).thenReturn(true);
+        assertEquals(carpoolController.viewCarpool(carpoolName, model, request), "carpool/view");
     }
 
     @Test
     public void shouldHaveCarpoolInstanceInModel() throws Exception {
-        carpoolController.viewCarpool("carpool", model, request);
+        String carpoolName = "carpool";
+        when(carpoolService.isValidCarpool(carpoolName)).thenReturn(true);
+        carpoolController.viewCarpool(carpoolName, model, request);
         Carpool carpoolActual = (Carpool) model.get("carpool");
 
         assertEquals(expectedCarpool, carpoolActual);

@@ -56,6 +56,9 @@ public class CarpoolController {
 
     @RequestMapping(value = "/carpool/{name}", method = RequestMethod.GET)
     public String viewCarpool(@PathVariable String name, ModelMap model, HttpServletRequest request) {
+        if (!carpoolService.isValidCarpool(name)) {
+            return "redirect:search";
+        }
         Carpool carpool = carpoolService.getByName(name);
         String username = buddyService.getUserNameFromCAS(request);
 
