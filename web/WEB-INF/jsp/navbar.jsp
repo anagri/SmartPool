@@ -31,6 +31,7 @@
 <c:set var="casUserName" value='<%=request.getSession().getAttribute(CASFilter.CAS_FILTER_USER)%>'/>
 <c:set var="ldapUserName" value='<%=request.getSession().getAttribute("ldapUserName")%>'/>
 <c:set var="appName" value="${pageContext.request.contextPath}"/>
+<c:set var="isAdmin" value='<%= ((Boolean) request.getSession().getAttribute("isAdmin")) %>'/>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
@@ -45,7 +46,7 @@
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <c:if test="${request.getSession().getAttribute('isAdmin') == false}">
+                    <c:if test='${!isAdmin}'>
                     <li><a href="${appName}/carpool/create" id="createCarpool">Create Carpool</a></li>
                     <li><a href="${appName}/carpool/search" id="listCarpools">Carpools</a></li>
                     <li><a href="${appName}/buddyProfile" id="myProfile">My Profile</a></li>
