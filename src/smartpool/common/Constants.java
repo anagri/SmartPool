@@ -28,4 +28,7 @@ public class Constants {
                                                                 "----------------------------------------<br /><br />"+
                                                                 "*This is a system generated email. Please DO NOT reply.";
     public static final String MSG_403 = "Only Admin can access this page.";
+
+    public static final String Approve_Link = "carpool/approve/%s";
+    public static final String Disapprove_Link = "carpool/disapprove/%s";
 }
