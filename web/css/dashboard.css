@@ -16,7 +16,7 @@
     display: table-header-group;
 }
 
-#capacityTextbox {
+.capacityTextbox {
     height: 2em;
 }
 

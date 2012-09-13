@@ -82,7 +82,7 @@
                                 </ul>
                             </span>
                             <span class="statusColumn" id="status${typeStatus.count}">
-                                <select class="carpoolStatusDropdown" id="status-${typeStatus.count}" name="status">
+                                <select id="${carpool.getName()}-status" class="carpoolStatusDropdown" id="status-${typeStatus.count}" name="status">
                                     <option value="ACTIVE">Active</option>
                                     <option value="NOT_STARTED">Not Started</option>
                                 </select>
@@ -95,7 +95,7 @@
                                 </script>
                             </span>
                             <span class="chargesColumn">
-                                <input type="text" style="text-align: right; max-width: 10em" name="charges"
+                                <input id="${carpool.getName()}-charges" type="text" style="text-align: right; max-width: 10em" name="charges"
                                        value="${charges}"/>
                                 <c:if test="${thisEdit}"><span class="errorText"><form:errors path="charges"/></span></c:if>
 
@@ -103,7 +103,7 @@
                             </span>
                             <span class="capacityColumn">
 
-                                <input id="capacityTextbox" type="number" name="capacity" style="text-align: right; max-width: 3em"
+                                <input id="${carpool.getName()}-capacity" class="capacityTextbox" type="number" name="capacity" style="text-align: right; max-width: 3em"
                                        value="${capacity}"/>
                                 <c:if test="${thisEdit}"><span class="errorText"><form:errors path="capacity"/></span></c:if>
 
