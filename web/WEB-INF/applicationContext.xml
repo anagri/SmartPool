@@ -12,6 +12,7 @@
 
     <b:bean name="joinRequestValidator" class="smartpool.web.form.JoinRequestFormValidator" />
     <b:bean name="createCarpoolValidator" class="smartpool.web.form.CreateCarpoolFormValidator" />
+    <b:bean name="updateCarpoolValidator" class="smartpool.web.form.CarpoolUpdateFormValidator" />
 
     <b:bean id="messageSource"
             class="org.springframework.context.support.ResourceBundleMessageSource">

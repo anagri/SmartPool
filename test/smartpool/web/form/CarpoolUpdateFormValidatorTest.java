@@ -18,7 +18,7 @@ public class CarpoolUpdateFormValidatorTest {
     public void setUp() throws Exception {
         form = new CarpoolUpdateForm();
         validator = new CarpoolUpdateFormValidator();
-        errors = new BindException(form,"carpoolUpdateForm");
+        errors = new BindException(form, "updateCarpoolForm");
     }
 
     @Test
@@ -47,5 +47,12 @@ public class CarpoolUpdateFormValidatorTest {
         form.setCharges("-100");
         validator.validate(form, errors);
         Assert.assertThat(errors.getFieldError("charges").getCode(), is("field.invalid"));
+    }
+
+    @Test
+    public void shouldGiveNoErrorsForDroppedStatus() throws Exception {
+        form.setStatus("DROPPED");
+        validator.validate(form, errors);
+        Assert.assertThat(errors.hasErrors(), is(false));
     }
 }

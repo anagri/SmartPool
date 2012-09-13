@@ -1,5 +1,8 @@
 package smartpool.web.form;
 
+import smartpool.domain.Carpool;
+import smartpool.domain.Status;
+
 public class CarpoolUpdateForm {
     String status;
     String charges;
@@ -12,7 +15,6 @@ public class CarpoolUpdateForm {
     }
 
     public CarpoolUpdateForm() {
-
     }
 
     public String getStatus() {
@@ -37,5 +39,12 @@ public class CarpoolUpdateForm {
 
     public void setCapacity(String capacity) {
         this.capacity = capacity;
+    }
+
+    public Carpool createDomainObject(Carpool original) {
+        Carpool updated = new Carpool(original.getName(), original.getStartDate(), original.getCabType(), Integer.valueOf(charges), original.getOfficeETA(), original.getOfficeETD(), original.getStatus(), original.getCarpoolBuddies(), Integer.valueOf(capacity), original.getRoutePoints());
+        updated.setStatus(Status.valueOf(status));
+        return updated;
+
     }
 }
