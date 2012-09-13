@@ -10,61 +10,61 @@ body {
     padding-right: 100px;
 }
 
-h1{
-    margin-top: 80px;
+h1 {
+    margin-top: 60px;
     margin-bottom: 0;
 }
 
-h2{
+h2 {
     margin-top: 20px;
 }
 
-.navbar .navbar-inner .container .searchForm button{
+.navbar .navbar-inner .container .searchForm button {
     margin: -4px 0 0 0;
 }
 
-.navbar .navbar-inner .container button{
+.navbar .navbar-inner .container button {
     margin: -5px 0 0 0;
     padding: 3px 5px;
 }
 
 .mainContainer {
-    margin: 80px auto;
+    margin: 60px auto;
 }
 
-.mainContainer label{
+.mainContainer label {
     min-width: 200px;
     text-align: right;
     display: table-cell;
     padding-right: 20px;
 }
 
-.mainContainer span{
+.mainContainer span {
     display: table-row;
     vertical-align: middle;
     height: 40px;
 }
 
-.mainContainer input{
+.mainContainer input {
     text-align: left;
     width: 100%;
 }
 
-.mainContainer .example{
+.mainContainer .example {
     font-weight: normal;
     font-size: small;
     text-align: left;
     padding-left: 20px;
 }
 
-.buttonContainer{
+.buttonContainer {
     text-align: left;
     padding-left: 200px;
     padding-top: 20px;
     margin-left: 145px;
 }
 
-.error{
+.error {
     color: #cc0000;
     display: none;
     margin-top: -10px;
@@ -115,7 +115,7 @@ button.disabled {
     height: 26px;
 }
 
-.navbar .container{
+.navbar .container {
     min-width: 1200px;
 }
 
@@ -128,7 +128,7 @@ button.disabled {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr = '#ffffffff', endColorstr = '#fff2f2f2', GradientType = 0);
 }
 
 .nav-collapse.collapse {
@@ -151,7 +151,7 @@ button.disabled {
     display: inline-block;
 }
 
-.navbar-form{
+.navbar-form {
     margin-top: 11px;
 }
 
@@ -181,15 +181,15 @@ button.disabled {
     height: 35px;
 }
 
-label{
+label {
     font-size: 14px;
 }
 
-.warning{
+.warning {
     color: red;
 }
 
-.status-message{
+.status-message {
     color: green;
 }
 
@@ -206,25 +206,25 @@ input[type="text"] {
     padding: 4px 6px;
 }
 
-.center{
+.center {
     text-align: center;
 }
 
-.big-arrow-sign{
+.big-arrow-sign {
     height: 25px;
     margin-bottom: 6px;
 }
 
-.small-arrow-sign{
+.small-arrow-sign {
     height: 15px;
     margin-bottom: 5px;
     margin-left: 3px;
 }
 
-td, p, div, span{
+td, p, div, span {
     font-size: 14px;
 }
 
-th{
+th {
     font-size: 15px;
 }

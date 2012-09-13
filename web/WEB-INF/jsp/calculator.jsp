@@ -15,23 +15,23 @@
         <ul>
             <li><a href="http://www.publictransportation.org/tools/fuelsavings/Pages/default.aspx">Fuel Savings
                 Calculator</a>
-                <br />
+                <br/>
                 Discover the cost saving benefits of taking public transportation.
             </li>
             <li><a href="http://www.publictransportation.org/tools/carbonsavings/Pages/default.aspx">
                 Carbon Savings Calculator</a>
-                <br />
+                <br/>
                 Calculate the carbon dioxide emissions saved by switching to public transportation.
             </li>
             <li><a href="http://www.publictransportation.org/tools/transitsavings/Pages/default.aspx">
                 Transit Savings Report</a>
-                <br />
+                <br/>
                 A monthly report that provides annual and monthly savings incurred by switching from a car to public
                 transit.
             </li>
             <li><a href="http://www.publictransportation.org/tools/transitbenefits/Pages/default.aspx">
                 Transit Benefits Calculator </a>
-                <br />
+                <br/>
                 Measure the benefits of transit investment in your community.
             </li>
         </ul>

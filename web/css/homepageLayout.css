@@ -1,20 +1,22 @@
-.mainContainer{
+.mainContainer {
     width: 350px;
 }
 
-.welcomeContainer h1{
+.welcomeContainer h1 {
     font-size: 45px;
+    margin-top: 40px;
     padding: 25px 0 0 100px;
 }
 
-.imageContainer{
+.imageContainer {
     height: 80px;
     float: left;
     margin-top: 40px;
 }
-.searchBar{
+
+.searchBar {
     padding-top: 30px;
-    width : 350px;
+    width: 350px;
 }
 
 .mainContainer input[type="text"] {
@@ -30,9 +32,11 @@
     width: 300px;
 }
 
-form{margin-bottom: 0;}
+form {
+    margin-bottom: 0;
+}
 
-.helpText{
+.helpText {
     color: #999999;
     height: 13px;
     font-size: 12px;
@@ -40,14 +44,14 @@ form{margin-bottom: 0;}
     padding-right: 50px;
 }
 
-.links{
+.links {
     margin-top: 30px;
 }
 
-.links p{
+.links p {
     text-align: center;
 }
 
-.textcontent{
+.textcontent {
     margin-top: 50px;
 }
