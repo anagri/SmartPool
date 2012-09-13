@@ -24,28 +24,55 @@ public class CarpoolBuddyDao {
     }
 
     public ArrayList<CarpoolBuddy> getCarpoolBuddiesByCarpoolName(String carpoolName) {
+        ArrayList<CarpoolBuddy> carpoolBuddies;
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        CarpoolBuddyMapper carpoolBuddyMapper = sqlSession.getMapper(CarpoolBuddyMapper.class);
-        ArrayList<CarpoolBuddy> carpoolBuddies = carpoolBuddyMapper.getByCarpoolName(carpoolName);
-        sqlSession.close();
+        try{
+            CarpoolBuddyMapper carpoolBuddyMapper = sqlSession.getMapper(CarpoolBuddyMapper.class);
+            carpoolBuddies = carpoolBuddyMapper.getByCarpoolName(carpoolName);
+            sqlSession.commit();
+        }
+        finally {
+            sqlSession.close();
+        }
         return carpoolBuddies;
     }
 
     public void insert(CarpoolBuddy carpoolBuddy, Carpool carpool) {
         carpoolBuddy.getBuddy().addCarpool(carpool);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        CarpoolBuddyMapper carpoolBuddyMapper = sqlSession.getMapper(CarpoolBuddyMapper.class);
-        carpoolBuddyMapper.insert(carpoolBuddy.getBuddy().getUserName(),carpool.getName(),carpoolBuddy.getPickupPoint(),carpoolBuddy.getPickupTime().toString("HH:mm"));
-        sqlSession.commit();
-        sqlSession.close();
+        try{
+            CarpoolBuddyMapper carpoolBuddyMapper = sqlSession.getMapper(CarpoolBuddyMapper.class);
+            carpoolBuddyMapper.insert(carpoolBuddy.getBuddy().getUserName(),carpool.getName(),carpoolBuddy.getPickupPoint(),carpoolBuddy.getPickupTime().toString("HH:mm"));
+            sqlSession.commit();
+        }
+        finally {
+            sqlSession.close();
+        }
     }
 
     public void remove(String buddyUserName, String carpoolName) {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         CarpoolBuddyMapper carpoolBuddyMapper = sqlSession.getMapper(CarpoolBuddyMapper.class);
-        carpoolBuddyMapper.remove(buddyUserName,
-                carpoolName);
+        try{
+        carpoolBuddyMapper.remove(buddyUserName,carpoolName);
         sqlSession.commit();
-        sqlSession.close();
+        }
+        finally {
+            sqlSession.close();
+        }
+    }
+
+    public CarpoolBuddy getCarpoolBuddyFromUsernameAndCarpoolName(String userName, String carpoolName) {
+        CarpoolBuddy carpoolBuddy;
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        CarpoolBuddyMapper carpoolBuddyMapper = sqlSession.getMapper(CarpoolBuddyMapper.class);
+        try{
+            carpoolBuddy = carpoolBuddyMapper.getByUserNameAndCarpoolName(userName,carpoolName);
+            sqlSession.commit();
+        }
+        finally {
+            sqlSession.close();
+        }
+        return carpoolBuddy;
     }
 }
