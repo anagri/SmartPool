@@ -34,6 +34,21 @@ public class HomePageController {
         model.put("adminUserNames",admins);
         return "index";
     }
+
+    @RequestMapping(value = "whycarpool", method = RequestMethod.GET)
+    public String whyCarpool(HttpServletRequest request, ModelMap model) {
+        return "whycarpool";
+    }
+
+    @RequestMapping(value = "etiquette", method = RequestMethod.GET)
+    public String etiquette(HttpServletRequest request, ModelMap model) {
+        return "etiquette";
+    }
+
+    @RequestMapping(value = "calculator", method = RequestMethod.GET)
+    public String calculator(HttpServletRequest request, ModelMap model) {
+        return "calculator";
+    }
 }
 
 
