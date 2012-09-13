@@ -55,7 +55,7 @@ public class JoinCarPoolController {
         }
         carpoolService.canUserSendRequest(username, carpoolName);
 
-        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddyService.getBuddy(username),"pickupPoint",new LocalTime(10, 0));
+        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddyService.getBuddy(username), "pickupPoint", new LocalTime(10, 0));
         JoinRequestForm joinRequestForm = new JoinRequestForm(carpoolBuddy, carpoolName);
         model.put("buddy", carpoolBuddy.getBuddy());
         model.put("carpoolName", carpoolName);
@@ -88,11 +88,10 @@ public class JoinCarPoolController {
             model.put("isRequestSent", requestSent);
             return new ModelAndView("carpool/joinRequest", model);
         } else {
-            joinRequestService.sendJoinRequest(joinRequestForm.createDomainObject(), buddy,generateUid());
+            joinRequestService.sendJoinRequest(joinRequestForm.createDomainObject(), buddy, generateUid());
             return new ModelAndView(new RedirectView("../../carpool/" + carpoolName));
         }
     }
-
 
 
     public boolean isJoinRequestPossible(String username, String carpool) {
@@ -108,19 +107,50 @@ public class JoinCarPoolController {
         return UUID.randomUUID();
     }
 
-    @RequestMapping(value = "carpool/approve/{uid}",method = RequestMethod.GET)
-    public String approveJoinRequest(@PathVariable String uid) {
-        String buddyUserName = joinRequestService.getBuddyUserNameFromUid(uid);
-        String carpoolName = joinRequestService.getCarpoolNameFromUid(uid);
+    @RequestMapping(value = "carpool/approve/{uid}", method = RequestMethod.GET)
+    public ModelAndView approveJoinRequest(@PathVariable String uid) {
+        ModelMap model = new ModelMap();
+        model.put("isUidPresent", joinRequestService.isUidPresent(uid));
+        if (joinRequestService.isUidPresent(uid)) {
 
-        Buddy buddy = buddyService.getBuddy(buddyUserName);
-        JoinRequest joinRequest = joinRequestService.getJoinRequestByUserNameAndCarpoolName(buddyUserName,carpoolName);
-        Carpool carpool = carpoolService.findCarpoolByName(carpoolName);
+            String buddyUserName = joinRequestService.getBuddyUserNameFromUid(uid);
+            String carpoolName = joinRequestService.getCarpoolNameFromUid(uid);
 
-        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddy,joinRequest.getPickupPoint(),joinRequest.getPreferredPickupTime());
-        carpoolBuddyService.insert(carpoolBuddy,carpool);
+            Buddy buddy = buddyService.getBuddy(buddyUserName);
+            JoinRequest joinRequest = joinRequestService.getJoinRequestByUserNameAndCarpoolName(buddyUserName, carpoolName);
+            Carpool carpool = carpoolService.findCarpoolByName(carpoolName);
 
-        joinRequestService.deletePendingRequest(uid);
-        return "carpool/approve";
+            CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddy, joinRequest.getPickupPoint(), joinRequest.getPreferredPickupTime());
+            carpoolBuddyService.insert(carpoolBuddy, carpool);
+
+            joinRequestService.deletePendingRequest(uid);
+            model.put("buddy",buddy);
+            model.put("carpool",carpool);
+            model.put("approve",true);
+        }
+        return new ModelAndView("carpool/approve",model);
     }
+
+    @RequestMapping(value = "carpool/disapprove/{uid}", method = RequestMethod.GET)
+    public ModelAndView disapproveJoinRequest(@PathVariable String uid) {
+        ModelMap model = new ModelMap();
+        model.put("isUidPresent", joinRequestService.isUidPresent(uid));
+        if (joinRequestService.isUidPresent(uid)) {
+            String buddyUserName = joinRequestService.getBuddyUserNameFromUid(uid);
+            String carpoolName = joinRequestService.getCarpoolNameFromUid(uid);
+
+            Buddy buddy = buddyService.getBuddy(buddyUserName);
+            JoinRequest joinRequest = joinRequestService.getJoinRequestByUserNameAndCarpoolName(buddyUserName, carpoolName);
+            Carpool carpool = carpoolService.findCarpoolByName(carpoolName);
+
+            joinRequestService.deletePendingRequest(uid);
+            model.put("buddy",buddy);
+            model.put("carpool",carpool);
+            model.put("approve",false);
+        }
+
+        return new ModelAndView("carpool/approve",model);
+
+    }
+
 }

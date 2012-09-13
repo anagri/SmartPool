@@ -107,13 +107,14 @@ public class JoinCarPoolControllerTest {
     public void shouldReturnToJoinApprove() throws Exception {
         String uuid = UUID.randomUUID().toString();
         String userName = "userName";
+        when(joinRequestService.isUidPresent(uuid)).thenReturn(true);
         when(joinRequestService.getBuddyUserNameFromUid(uuid)).thenReturn(userName);
         String carpoolName = "carpoolName";
         when(joinRequestService.getCarpoolNameFromUid(uuid)).thenReturn(carpoolName);
         JoinRequest joinRequest = new JoinRequest(userName,carpoolName,"address","pickupPoint",new LocalTime());
         when(joinRequestService.getJoinRequestByUserNameAndCarpoolName(userName,carpoolName)).thenReturn(joinRequest);
-        String approveJoin=joinCarPoolController.approveJoinRequest(uuid);
-        assertThat(approveJoin,equalTo("carpool/approve"));
+        ModelAndView approveJoin=joinCarPoolController.approveJoinRequest(uuid);
+        assertThat(approveJoin.getViewName(),equalTo("carpool/approve"));
         verify(joinRequestService).deletePendingRequest(uuid);
     }
 
@@ -122,6 +123,7 @@ public class JoinCarPoolControllerTest {
         String uuid = UUID.randomUUID().toString();
 
         String userName = "userName";
+        when(joinRequestService.isUidPresent(uuid)).thenReturn(true);
         when(joinRequestService.getBuddyUserNameFromUid(uuid)).thenReturn(userName);
         String carpoolName = "carpoolName";
         when(joinRequestService.getCarpoolNameFromUid(uuid)).thenReturn(carpoolName);
@@ -134,7 +136,17 @@ public class JoinCarPoolControllerTest {
         when(buddyService.getBuddy(userName)).thenReturn(buddy);
         CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddy,joinRequest.getPickupPoint(),joinRequest.getPreferredPickupTime());
 
-        joinCarPoolController.approveJoinRequest(uuid.toString());
-        verify(carpoolBuddyService).insert(carpoolBuddy,carpool);
+        ModelAndView modelAndView = joinCarPoolController.approveJoinRequest(uuid.toString());
+        verify(carpoolBuddyService).insert(carpoolBuddy, carpool);
+        assertThat((Boolean)modelAndView.getModel().get("approve"),is(true));
+    }
+
+    @Test
+    public void shouldDisapproveCarpoolJoinRequest() throws Exception {
+        String uid = UUID.randomUUID().toString();
+        when(joinRequestService.isUidPresent(uid)).thenReturn(true);
+        ModelAndView modelAndView = joinCarPoolController.disapproveJoinRequest(uid);
+        verify(joinRequestService).deletePendingRequest(uid);
+        assertThat((Boolean)modelAndView.getModel().get("approve"),is(false));
     }
 }
