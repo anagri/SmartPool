@@ -103,7 +103,7 @@
                             </span>
                             <span class="capacityColumn">
 
-                                <input id="${carpool.getName()}-capacity" class="capacityTextbox" type="number" name="capacity" style="text-align: right; max-width: 3em"
+                                <input id="${carpool.getName()}-capacity" class="capacityTextbox" type="number" name="capacity" style="text-align: right; height: 2em; max-width: 3em"
                                        value="${capacity}"/>
                                 <c:if test="${thisEdit}"><span class="errorText"><form:errors path="capacity"/></span></c:if>
 
