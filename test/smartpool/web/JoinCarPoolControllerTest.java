@@ -1,5 +1,6 @@
 package smartpool.web;
 
+import org.joda.time.LocalTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -9,17 +10,21 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import smartpool.domain.Buddy;
 import smartpool.domain.Carpool;
+import smartpool.domain.CarpoolBuddy;
+import smartpool.domain.JoinRequest;
 import smartpool.service.BuddyService;
+import smartpool.service.CarpoolBuddyService;
 import smartpool.service.CarpoolService;
 import smartpool.service.JoinRequestService;
-import smartpool.service.MailService;
 import smartpool.web.form.JoinRequestForm;
 import smartpool.web.form.JoinRequestFormValidator;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -37,17 +42,19 @@ public class JoinCarPoolControllerTest {
     @Mock
     private CarpoolService carpoolService;
     @Mock
-    private MailService mailService;
+    private CarpoolBuddyService carpoolBuddyService;
 
     private String buddyUserName;
     private Buddy testUser;
     private String carpoolName;
+    private CarpoolBuddy carpoolBuddy;
+    private Buddy buddy;
 
 
     @Before
     public void setup() {
         initMocks(this);
-        joinCarPoolController = new JoinCarPoolController(buddyService, joinRequestService, carpoolService, new JoinRequestFormValidator(),mailService);
+        joinCarPoolController = new JoinCarPoolController(buddyService, joinRequestService, carpoolService, new JoinRequestFormValidator(),carpoolBuddyService);
         model = new ModelMap();
         buddyUserName = "test.twu";
         carpoolName = "carpool-2";
@@ -94,5 +101,40 @@ public class JoinCarPoolControllerTest {
 
         assertThat(expectedURL.getView(), instanceOf(RedirectView.class));
         assertThat(((RedirectView) expectedURL.getView()).getUrl(), is("../../carpool/carpool-2"));
+    }
+
+    @Test
+    public void shouldReturnToJoinApprove() throws Exception {
+        String uuid = UUID.randomUUID().toString();
+        String userName = "userName";
+        when(joinRequestService.getBuddyUserNameFromUid(uuid)).thenReturn(userName);
+        String carpoolName = "carpoolName";
+        when(joinRequestService.getCarpoolNameFromUid(uuid)).thenReturn(carpoolName);
+        JoinRequest joinRequest = new JoinRequest(userName,carpoolName,"address","pickupPoint",new LocalTime());
+        when(joinRequestService.getJoinRequestByUserNameAndCarpoolName(userName,carpoolName)).thenReturn(joinRequest);
+        String approveJoin=joinCarPoolController.approveJoinRequest(uuid);
+        assertThat(approveJoin,equalTo("carpool/approve"));
+        verify(joinRequestService).deletePendingRequest(uuid);
+    }
+
+    @Test
+    public void shouldAddCarpoolBuddyOnApproval() throws Exception {
+        String uuid = UUID.randomUUID().toString();
+
+        String userName = "userName";
+        when(joinRequestService.getBuddyUserNameFromUid(uuid)).thenReturn(userName);
+        String carpoolName = "carpoolName";
+        when(joinRequestService.getCarpoolNameFromUid(uuid)).thenReturn(carpoolName);
+        JoinRequest joinRequest = new JoinRequest(userName,carpoolName,"address","pickupPoint",new LocalTime());
+        when(joinRequestService.getJoinRequestByUserNameAndCarpoolName(userName,carpoolName)).thenReturn(joinRequest);
+
+        Carpool carpool = carpoolService.findCarpoolByName(carpoolName);
+        carpoolBuddy = new CarpoolBuddy();
+        buddy = new Buddy(userName);
+        when(buddyService.getBuddy(userName)).thenReturn(buddy);
+        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddy,joinRequest.getPickupPoint(),joinRequest.getPreferredPickupTime());
+
+        joinCarPoolController.approveJoinRequest(uuid.toString());
+        verify(carpoolBuddyService).insert(carpoolBuddy,carpool);
     }
 }

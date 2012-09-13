@@ -12,15 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import smartpool.domain.Buddy;
+import smartpool.domain.Carpool;
 import smartpool.domain.CarpoolBuddy;
+import smartpool.domain.JoinRequest;
 import smartpool.service.BuddyService;
+import smartpool.service.CarpoolBuddyService;
 import smartpool.service.CarpoolService;
 import smartpool.service.JoinRequestService;
-import smartpool.service.MailService;
 import smartpool.web.form.JoinRequestForm;
 import smartpool.web.form.JoinRequestFormValidator;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 @Controller
 public class JoinCarPoolController {
@@ -28,20 +31,19 @@ public class JoinCarPoolController {
     private JoinRequestService joinRequestService;
     private CarpoolService carpoolService;
     private final JoinRequestFormValidator validator;
-    private MailService mailService;
-
+    private CarpoolBuddyService carpoolBuddyService;
 
     @Autowired
     public JoinCarPoolController(BuddyService buddyService,
                                  JoinRequestService joinRequestService,
                                  CarpoolService carpoolService,
                                  JoinRequestFormValidator validator,
-                                 MailService mailService) {
+                                 CarpoolBuddyService carpoolBuddyService) {
         this.buddyService = buddyService;
         this.joinRequestService = joinRequestService;
         this.carpoolService = carpoolService;
         this.validator = validator;
-        this.mailService = mailService;
+        this.carpoolBuddyService = carpoolBuddyService;
     }
 
 
@@ -53,7 +55,7 @@ public class JoinCarPoolController {
         }
         carpoolService.canUserSendRequest(username, carpoolName);
 
-        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddyService.getBuddy(username),"pickupPoint",new LocalTime(10,00));
+        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddyService.getBuddy(username),"pickupPoint",new LocalTime(10, 0));
         JoinRequestForm joinRequestForm = new JoinRequestForm(carpoolBuddy, carpoolName);
         model.put("buddy", carpoolBuddy.getBuddy());
         model.put("carpoolName", carpoolName);
@@ -86,7 +88,7 @@ public class JoinCarPoolController {
             model.put("isRequestSent", requestSent);
             return new ModelAndView("carpool/joinRequest", model);
         } else {
-            joinRequestService.sendJoinRequest(joinRequestForm.createDomainObject(), buddy);
+            joinRequestService.sendJoinRequest(joinRequestForm.createDomainObject(), buddy,generateUid());
             return new ModelAndView(new RedirectView("../../carpool/" + carpoolName));
         }
     }
@@ -102,4 +104,23 @@ public class JoinCarPoolController {
         return buddyService.getUserNameFromCAS(request);
     }
 
+    public UUID generateUid() {
+        return UUID.randomUUID();
+    }
+
+    @RequestMapping(value = "carpool/approve/{uid}",method = RequestMethod.GET)
+    public String approveJoinRequest(@PathVariable String uid) {
+        String buddyUserName = joinRequestService.getBuddyUserNameFromUid(uid);
+        String carpoolName = joinRequestService.getCarpoolNameFromUid(uid);
+
+        Buddy buddy = buddyService.getBuddy(buddyUserName);
+        JoinRequest joinRequest = joinRequestService.getJoinRequestByUserNameAndCarpoolName(buddyUserName,carpoolName);
+        Carpool carpool = carpoolService.findCarpoolByName(carpoolName);
+
+        CarpoolBuddy carpoolBuddy = new CarpoolBuddy(buddy,joinRequest.getPickupPoint(),joinRequest.getPreferredPickupTime());
+        carpoolBuddyService.insert(carpoolBuddy,carpool);
+
+        joinRequestService.deletePendingRequest(uid);
+        return "carpool/approve";
+    }
 }
