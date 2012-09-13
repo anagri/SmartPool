@@ -106,6 +106,7 @@ public class CarpoolController {
     @RequestMapping(value = "/admin/dashboard", method = RequestMethod.GET)
     public String viewDashboard(@ModelAttribute("updateCarpoolForm") CarpoolUpdateForm updateForm, ModelMap model, HttpServletRequest request) {
         searchByLocation(model, request);
+        model.put("errors", false);
         return "admin/dashboard";
     }
 
@@ -141,12 +142,11 @@ public class CarpoolController {
         return "redirect:/carpool/" + name;
 
     }
-    @RequestMapping(value = "/dashboard/{carpoolName}/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/dashboard/{carpoolName}/update", method = RequestMethod.POST)
     public ModelAndView updateCarpoolAttributes(@PathVariable String carpoolName,
                                                 @ModelAttribute("updateCarpoolForm") CarpoolUpdateForm updateForm,
                                                 BindingResult bindingResult,
                                                 ModelMap model, HttpServletRequest request) {
-        searchByLocation(model, request);
 
         updateValidator.validate(updateForm, bindingResult);
 
@@ -154,11 +154,16 @@ public class CarpoolController {
         model.put("errors", bindingResult.hasErrors());
         model.put("carpoolName", carpoolName);
 
-        if (!bindingResult.hasErrors()) {
-            Carpool carpool = carpoolService.getByName(carpoolName);
-            updateForm.createDomainObject(carpool);
+        if (bindingResult.hasErrors()) {
+            searchByLocation(model, request);
+            return new ModelAndView("admin/dashboard", model);
         }
+        searchByLocation(model, request);
 
-        return new ModelAndView("admin/dashboard", model);
+        Carpool carpool = carpoolService.getByName(carpoolName);
+        Carpool updated = updateForm.createDomainObject(carpool);
+        carpoolService.updateCarpool(updated);
+
+        return new ModelAndView(new RedirectView("../../"), model);
     }
 }
