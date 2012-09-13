@@ -11,6 +11,8 @@ import smartpool.service.LDAPService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.util.Properties;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -22,6 +24,8 @@ public class HomePageControllerTest {
     @Mock
     private BuddyService buddyService;
     @Mock
+    private Properties adminProperties;
+    @Mock
     private HttpServletRequest request;
     @Mock
     private HttpSession session;
@@ -30,13 +34,14 @@ public class HomePageControllerTest {
     @Before
     public void setUp() {
         initMocks(this);
-        homePageController = new HomePageController(ldapService, buddyService);
+        homePageController = new HomePageController(ldapService, buddyService,adminProperties);
     }
     
     @Test
     public void shouldSetLDAPUserNameInSession_OnRequestingToShowTheHomePage() {
         when(buddyService.getUserNameFromCAS(request)).thenReturn("mzhao");
         when(ldapService.searchByUserName("mzhao")).thenReturn(new LDAPResultSet("Ming Zhao", "mzhao@thoughtworks.com"));
+        when(adminProperties.getProperty("admins")).thenReturn("admin");
         when(request.getSession()).thenReturn(session);
 
         homePageController.index(request, new ModelMap());
