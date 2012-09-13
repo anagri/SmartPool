@@ -22,7 +22,6 @@ public class CarpoolControllerIT {
     HttpServletRequest request;
     @Mock
     MailService mailService;
-<<<<<<< HEAD
     @Mock
     Properties appProperties;
     private final CarpoolService carpoolService = new CarpoolService(new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao());
@@ -31,36 +30,24 @@ public class CarpoolControllerIT {
     private final RouteService routeService = new RouteService(new RouteDao());
     private final CarpoolBuddyService carpoolBuddyService = new CarpoolBuddyService(new CarpoolBuddyDao());
     private final CreateCarpoolFormValidator createCarpoolFormValidator = new CreateCarpoolFormValidator();
-=======
     private CarpoolUpdateFormValidator updateValidator;
->>>>>>> #67 - Ming/Sam - Controller uses validation and updates the carpool object.
+
 
     @Test
     public void shouldSearchForCarpool() {
         initMocks(this);
-<<<<<<< HEAD
-        CarpoolController carpoolController = new CarpoolController(carpoolService, joinRequestService, buddyService, routeService,createCarpoolFormValidator,mailService, carpoolBuddyService);
-=======
         updateValidator = new CarpoolUpdateFormValidator();
+        CarpoolController carpoolController = new CarpoolController(carpoolService, joinRequestService, buddyService, routeService,createCarpoolFormValidator,mailService, carpoolBuddyService, updateValidator);
         CarpoolService carpoolService = new CarpoolService(
                 new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao());
         JoinRequestService joinRequestService = new JoinRequestService(
-                new JoinRequestDao(), new CarpoolBuddyDao(), mailService);
+                new JoinRequestDao(), new CarpoolBuddyDao(), mailService, appProperties);
         BuddyService buddyService = new BuddyService(new BuddyDao());
         RouteService routeService = new RouteService(new RouteDao());
         CreateCarpoolFormValidator validator = new CreateCarpoolFormValidator();
         MailService mailService = new MailService(null);
         CarpoolBuddyService carpoolBuddyService = new CarpoolBuddyService(new CarpoolBuddyDao());
 
-        CarpoolController carpoolController = new CarpoolController(
-                carpoolService,
-                joinRequestService,
-                buddyService,
-                routeService,
-                validator,
-                mailService,
-                carpoolBuddyService, updateValidator);
->>>>>>> #67 - Ming/Sam - Controller uses validation and updates the carpool object.
         ModelMap model = new ModelMap();
         request.setAttribute("query", "Sony Centre");
         carpoolController.searchByLocation(model, request);

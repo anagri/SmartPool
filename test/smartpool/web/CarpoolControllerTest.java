@@ -55,6 +55,8 @@ public class CarpoolControllerTest {
     private BindingResult errors;
     @Mock
     private JoinRequestService joinRequestService;
+
+    private CarpoolUpdateFormValidator updateValidator;
     @Mock
     private CarpoolBuddyService carpoolBuddyService;
     @Mock
@@ -65,7 +67,7 @@ public class CarpoolControllerTest {
     private ArrayList<Carpool> defaultCarpools;
     private final CarpoolBuddy testBuddy = new CarpoolBuddy(new Buddy("testBuddy"),"location",new LocalTime(10,30));
     private List<String> defaultRouteLocations;
-    private CarpoolUpdateFormValidator updateValidator;
+    private String carpoolName;
 
     @Before
     public void setUp() throws Exception {
@@ -198,8 +200,12 @@ public class CarpoolControllerTest {
     @Test
     public void shouldRedirectBackToAdminAfterUpdate() {
         CarpoolUpdateForm updateForm = new CarpoolUpdateForm(Status.ACTIVE.toString(), "300", "4");
-        ModelAndView expectedURL = carpoolController.updateCarpoolAttributes("any", updateForm, errors, model, request);
-        assertThat(expectedURL.getViewName(), is("admin/dashboard"));
+        carpoolName = "any";
+        when(carpoolService.getByName(carpoolName)).thenReturn(new Carpool(carpoolName));
+        when(carpoolService.isValidCarpool(carpoolName)).thenReturn(true);
+        ModelAndView expectedURL = carpoolController.updateCarpoolAttributes(carpoolName, updateForm, errors, model, request);
+
+        assertThat(expectedURL.getView(), instanceOf(RedirectView.class));
     }
 
     @Test
@@ -244,7 +250,11 @@ public class CarpoolControllerTest {
     public void testModelShouldShowThatErrorsWereDetected() throws Exception {
         CarpoolUpdateForm updateForm = new CarpoolUpdateForm("Bad Status", "-100", "-1");
         BindException bindingException = new BindException(updateForm, "updateCarpoolForm");
-        ModelAndView afterUpdate = carpoolController.updateCarpoolAttributes("anycarpool", updateForm, bindingException, model, request);
+        Carpool carpool = new Carpool(carpoolName);
+        when(carpoolService.getByName(carpoolName)).thenReturn(carpool);
+        when(carpoolService.isValidCarpool(carpoolName)).thenReturn(true);
+
+        ModelAndView afterUpdate = carpoolController.updateCarpoolAttributes(carpoolName, updateForm, bindingException, model, request);
 
         assertThat((Boolean)model.get("errors"), is(true));
     }
@@ -253,7 +263,11 @@ public class CarpoolControllerTest {
     public void testModelShouldShowNoErrors() throws Exception {
         CarpoolUpdateForm updateForm = new CarpoolUpdateForm(Status.NOT_STARTED.toString(), "100", "3");
         BindException bindingException = new BindException(updateForm, "updateCarpoolForm");
-        ModelAndView afterUpdate = carpoolController.updateCarpoolAttributes("anycarpool", updateForm, bindingException, model, request);
+        Carpool original = new Carpool(carpoolName);
+        when(carpoolService.getByName(carpoolName)).thenReturn(original);
+
+        when(carpoolService.isValidCarpool(carpoolName)).thenReturn(true);
+        ModelAndView afterUpdate = carpoolController.updateCarpoolAttributes(carpoolName, updateForm, bindingException, model, request);
 
         assertThat((Boolean) model.get("errors"), is(false));
     }
