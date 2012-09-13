@@ -21,6 +21,7 @@ import smartpool.service.CarpoolService;
 import smartpool.service.JoinRequestService;
 import smartpool.service.RouteService;
 import smartpool.web.form.CarpoolUpdateForm;
+import smartpool.web.form.CarpoolUpdateFormValidator;
 import smartpool.web.form.CreateCarpoolForm;
 import smartpool.web.form.CreateCarpoolFormValidator;
 
@@ -37,10 +38,12 @@ public class CarpoolController {
     private CreateCarpoolFormValidator validator;
     private MailService mailService;
     private JoinRequestService joinRequestService;
+    private CarpoolUpdateFormValidator updateValidator;
 
     @Autowired
     public CarpoolController(CarpoolService carpoolService, JoinRequestService joinRequestService, BuddyService buddyService,
-                             RouteService routeService, CreateCarpoolFormValidator validator, MailService mailService, CarpoolBuddyService carpoolBuddyService) {
+                             RouteService routeService, CreateCarpoolFormValidator validator, MailService mailService, CarpoolBuddyService carpoolBuddyService,
+                             CarpoolUpdateFormValidator updateValidator) {
         this.carpoolService = carpoolService;
         this.joinRequestService = joinRequestService;
         this.buddyService = buddyService;
@@ -48,6 +51,7 @@ public class CarpoolController {
         this.carpoolBuddyService = carpoolBuddyService;
         this.validator = validator;
         this.mailService = mailService;
+        this.updateValidator = updateValidator;
     }
 
     @RequestMapping(value = "/carpool/{name}", method = RequestMethod.GET)
@@ -100,7 +104,7 @@ public class CarpoolController {
     }
 
     @RequestMapping(value = "/admin/dashboard", method = RequestMethod.GET)
-    public String viewDashboard(ModelMap model, HttpServletRequest request) {
+    public String viewDashboard(@ModelAttribute("updateCarpoolForm") CarpoolUpdateForm updateForm, ModelMap model, HttpServletRequest request) {
         searchByLocation(model, request);
         return "admin/dashboard";
     }
@@ -137,9 +141,24 @@ public class CarpoolController {
         return "redirect:/carpool/" + name;
 
     }
-    @RequestMapping(value = "/dashboard/update/{carpoolName}", method = RequestMethod.POST)
-    public ModelAndView updateCarpoolAttributes(CarpoolUpdateForm updateForm, @PathVariable String carpoolName, ModelMap model, HttpServletRequest request) {
+    @RequestMapping(value = "/dashboard/{carpoolName}/update", method = RequestMethod.POST)
+    public ModelAndView updateCarpoolAttributes(@PathVariable String carpoolName,
+                                                @ModelAttribute("updateCarpoolForm") CarpoolUpdateForm updateForm,
+                                                BindingResult bindingResult,
+                                                ModelMap model, HttpServletRequest request) {
         searchByLocation(model, request);
-        return new ModelAndView(new RedirectView("admin/dashboard"), model);
+
+        updateValidator.validate(updateForm, bindingResult);
+
+        model.put("updateCarpoolForm", updateForm);
+        model.put("errors", bindingResult.hasErrors());
+        model.put("carpoolName", carpoolName);
+
+        if (!bindingResult.hasErrors()) {
+            Carpool carpool = carpoolService.getByName(carpoolName);
+            updateForm.createDomainObject(carpool);
+        }
+
+        return new ModelAndView("admin/dashboard", model);
     }
 }
