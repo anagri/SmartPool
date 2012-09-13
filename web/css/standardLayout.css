@@ -20,7 +20,7 @@ h2{
 }
 
 .navbar .navbar-inner .container .searchForm button{
-    margin: -12px 0 0 0;
+    margin: -4px 0 0 0;
 }
 
 .navbar .navbar-inner .container button{
@@ -140,7 +140,6 @@ button.disabled {
     float: left;
     padding: 13px 5px 10px 5px;
     margin-right: 40px;
-    font-family: monospace;
     font-size: 28px;
     font-weight: bolder;
     color: #eeeeee;
