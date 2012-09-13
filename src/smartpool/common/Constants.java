@@ -31,4 +31,13 @@ public class Constants {
 
     public static final String Approve_Link = "carpool/approve/%s";
     public static final String Disapprove_Link = "carpool/disapprove/%s";
+
+    public static boolean isAdministrator(String currentUser, String[] admins) {
+        for (int adminIndex = 0; adminIndex < admins.length; adminIndex++) {
+            if (admins[adminIndex].equals(currentUser)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

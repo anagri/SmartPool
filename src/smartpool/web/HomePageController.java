@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import smartpool.common.Constants;
 import smartpool.service.BuddyService;
 import smartpool.service.LDAPService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 import java.util.Properties;
 
 @RequestMapping("/")
@@ -31,8 +33,15 @@ public class HomePageController {
         String userNameFromCAS = buddyService.getUserNameFromCAS(request);
         String[] admins = adminProperties.getProperty("admins").split(",");
         request.getSession().setAttribute("ldapUserName", ldapService.searchByUserName(userNameFromCAS).name);
-        model.put("adminUserNames",admins);
-        return "index";
+        model.put("adminUserNames", admins);
+
+        boolean isAdministrator = Constants.isAdministrator(userNameFromCAS, admins);
+        request.getSession().setAttribute("isAdmin", isAdministrator);
+        if (isAdministrator) {
+            return "redirect:admin/dashboard";
+        } else {
+            return "index";
+        }
     }
 
     @RequestMapping(value = "whycarpool", method = RequestMethod.GET)

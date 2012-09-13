@@ -27,13 +27,13 @@ public class AdminCheckFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String currentUser = (String) ((HttpServletRequest) request).getSession().getAttribute(CASFilter.CAS_FILTER_USER);
         String[] admins = adminProperties.getProperty("admins").split(",");
-        for (int adminIndex = 0; adminIndex < admins.length; adminIndex++) {
-            if (admins[adminIndex].equals(currentUser)){
-                chain.doFilter(request,response);
-                return;
-            }
+
+        if (Constants.isAdministrator(currentUser, admins)) {
+            chain.doFilter(request,response);
+            return;
         }
         ((HttpServletResponse) response).sendError(403, Constants.MSG_403);
         chain.doFilter(request,response);
     }
+
 }

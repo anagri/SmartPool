@@ -45,6 +45,7 @@
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
+                    <c:if test="${request.getSession().getAttribute('isAdmin') == false}">
                     <li><a href="${appName}/carpool/create" id="createCarpool">Create Carpool</a></li>
                     <li><a href="${appName}/carpool/search" id="listCarpools">Carpools</a></li>
                     <li><a href="${appName}/buddyProfile" id="myProfile">My Profile</a></li>
@@ -68,6 +69,8 @@
                     </li>
 
                 </ul>
+                </c:if>
+
                 <form class="navbar-form pull-right" id="logoutForm" action="${appName}/logout" method="GET">
                    <span id="casName"> ${ldapUserName}</span>
                     <button type="submit" class="btn">Logout</button>
