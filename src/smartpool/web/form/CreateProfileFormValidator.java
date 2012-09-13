@@ -22,18 +22,20 @@ public class CreateProfileFormValidator implements Validator {
         CreateProfileForm form = (CreateProfileForm) target;
         if (StringUtils.isBlank(form.contactNumber)) {
             rejectIfEmpty(errors, "contactNumber", "field.required");
-        } else if (!form.contactNumber.matches("\\d*")) {
+        } else if (!form.contactNumber.matches("\\d*")||(form.contactNumber.length()<6)) {
             errors.rejectValue("contactNumber", "field.invalid");
         }
-        if (!StringUtils.isBlank(form.preferredPickupTime))
-            if (!form.preferredPickupTime.matches("\\d{1,2}:\\d{2}")) {
+        if (!form.preferredPickupTime.matches("\\d{1,2}:\\d{2}")) {
+            if(StringUtils.isBlank(form.preferredPickupTime))
+                form.preferredPickupTime = "00:00";
+            else
                 errors.rejectValue("preferredPickupTime", "field.invalid");
-            } else {
-                try {
-                    LocalTime.parse(form.preferredPickupTime);
-                } catch (IllegalFieldValueException e) {
-                    errors.rejectValue("preferredPickupTime", "field.invalid");
-                }
+        } else {
+            try {
+                LocalTime.parse(form.preferredPickupTime);
+            } catch (IllegalFieldValueException e) {
+                errors.rejectValue("preferredPickupTime", "field.invalid");
             }
+        }
     }
 }

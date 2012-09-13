@@ -96,7 +96,7 @@ public class BuddyProfileControllerTest {
 
     @Test
     public void shouldCreateProfileIfInformationIsProvided() throws Exception {
-        CreateProfileForm profileForm = new CreateProfileForm("mzhao", "Ming Zhao", "mzhao@thoughtworks.com", "", "234567809876", "", "10:00");
+        CreateProfileForm profileForm = new CreateProfileForm("mzhao", "Ming Zhao", "mzhao@thoughtworks.com", "", "2345678098", "", "10:00");
         BindException errors = new BindException(profileForm, "createProfileForm");
 
         ModelAndView modelAndView = buddyProfileController.submit(profileForm, errors, request);

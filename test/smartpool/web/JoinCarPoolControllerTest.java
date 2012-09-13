@@ -96,7 +96,7 @@ public class JoinCarPoolControllerTest {
         when(carpoolService.isValidCarpool(carpoolName)).thenReturn(true);
         when(carpoolService.canUserSendRequest(buddyUserName, carpoolName)).thenReturn(true);
 
-        JoinRequestForm joinRequest = new JoinRequestForm(buddyUserName, carpoolName, "address", "999999999", "abc", "");
+        JoinRequestForm joinRequest = new JoinRequestForm(buddyUserName, carpoolName, "address", "9999999999", "abc", "");
         ModelAndView expectedURL = joinCarPoolController.submitUserDetails(carpoolName, joinRequest, new BindException(joinRequest, "joinRequest"), request);
 
         assertThat(expectedURL.getView(), instanceOf(RedirectView.class));

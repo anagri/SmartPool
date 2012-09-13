@@ -29,7 +29,7 @@ public class JoinRequestFormValidator implements Validator {
         if (StringUtils.isBlank(form.pickupPoint)) {
             ValidationUtils.rejectIfEmpty(errors, "pickupPoint", "field.required");
         }
-        if (!form.contactNumber.matches("\\d*")) {
+        if (!form.contactNumber.matches("\\d*") || (form.contactNumber.length()<6)) {
             errors.rejectValue("contactNumber", "field.invalid");
         }
         if (!form.preferredPickupTime.matches("\\d{1,2}:\\d{2}")) {
