@@ -1,3 +1,9 @@
+.errors {
+    color: red;
+    text-align: right;
+    vertical-align: top;
+}
+
 .carpoolRow {
     display: table-row;
     border-bottom: 1px solid #999;
@@ -56,9 +62,11 @@
     display: table;
     border: 1px solid #999;
     margin-bottom: 25px;
-
 }
 
+.updateableFields {
+    display: table-row;
+}
 .buddyListColumn {
     width: 10em;
 }
