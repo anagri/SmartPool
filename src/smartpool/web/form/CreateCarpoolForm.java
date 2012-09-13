@@ -48,7 +48,7 @@ public class CreateCarpoolForm {
         ArrayList<String> routePoints = new ArrayList<String>();
         for (String routePoint : this.routePoints.split(",")) {
             String trimmedRoutePoint = routePoint.trim();
-            if (StringUtils.isNotBlank(trimmedRoutePoint)) {
+            if (StringUtils.isNotBlank(trimmedRoutePoint) && !routePoints.contains(routePoint)) {
                 routePoints.add(trimmedRoutePoint);
             }
         }
