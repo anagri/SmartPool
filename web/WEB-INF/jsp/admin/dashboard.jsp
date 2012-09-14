@@ -82,14 +82,14 @@
                                 </ul>
                             </span>
                             <span class="statusColumn" id="status${typeStatus.count}">
-                                <select id="${carpool.getName()}-status" class="carpoolStatusDropdown" id="status-${typeStatus.count}" name="status">
+                                <select id="${carpool.getName().replace(" ", "")}-status" class="carpoolStatusDropdown" id="status-${typeStatus.count}" name="status">
                                     <option value="ACTIVE">Active</option>
                                     <option value="NOT_STARTED">Not Started</option>
                                 </select>
                                 <c:if test="${thisEdit}"><span class="errorText"><form:errors path="status"/></span></c:if>
                                 <script type="text/javascript">
 
-                                    $("#${carpool.getName()}-status option").each(function (index, select) {
+                                    $("#${carpool.getName().replace(" ", "")}-status option").each(function (index, select) {
                                         if (select.value == '${status}') select.selected = true
                                     });
                                 </script>
