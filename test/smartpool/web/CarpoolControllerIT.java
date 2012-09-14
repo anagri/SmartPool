@@ -37,7 +37,7 @@ public class CarpoolControllerIT {
     public void shouldSearchForCarpool() {
         initMocks(this);
         updateValidator = new CarpoolUpdateFormValidator();
-        CarpoolController carpoolController = new CarpoolController(carpoolService, joinRequestService, buddyService, routeService,createCarpoolFormValidator,mailService, carpoolBuddyService, updateValidator);
+        CarpoolController carpoolController = new CarpoolController(carpoolService, joinRequestService, buddyService, routeService,createCarpoolFormValidator,mailService, carpoolBuddyService, appProperties, updateValidator);
         CarpoolService carpoolService = new CarpoolService(
                 new CarpoolDao(), new BuddyDao(), new RouteDao(), new CarpoolBuddyDao());
         JoinRequestService joinRequestService = new JoinRequestService(

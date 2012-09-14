@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import smartpool.builder.CarpoolBuilder;
+import smartpool.common.Constants;
 import smartpool.domain.*;
 import smartpool.service.*;
 import smartpool.web.form.CarpoolUpdateForm;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -32,7 +34,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.hasItem;
 import static org.junit.matchers.JUnitMatchers.hasItems;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -55,7 +58,8 @@ public class CarpoolControllerTest {
     private BindingResult errors;
     @Mock
     private JoinRequestService joinRequestService;
-
+    @Mock
+    private Properties appProperties;
     private CarpoolUpdateFormValidator updateValidator;
     @Mock
     private CarpoolBuddyService carpoolBuddyService;
@@ -69,11 +73,14 @@ public class CarpoolControllerTest {
     private List<String> defaultRouteLocations;
     private String carpoolName;
 
+    public CarpoolControllerTest() {
+    }
+
     @Before
     public void setUp() throws Exception {
         initMocks(this);
         updateValidator = new CarpoolUpdateFormValidator();
-        carpoolController = new CarpoolController(carpoolService, joinRequestService, buddyService, routeService, createCarpoolFormValidator, mailService, carpoolBuddyService, updateValidator);
+        carpoolController = new CarpoolController(carpoolService, joinRequestService, buddyService, routeService, createCarpoolFormValidator, mailService, carpoolBuddyService, appProperties, updateValidator);
         when(carpoolService.getByName("carpool")).thenReturn(expectedCarpool);
         model = new ModelMap();
 
@@ -221,34 +228,49 @@ public class CarpoolControllerTest {
     public void shouldDeleteBuddyFromCarpool() throws Exception {
         String carpoolName = "carpoolName";
         String buddyUserName = "buddyUserName";
-        carpoolController.deleteBuddy(carpoolName, buddyUserName, model,request);
-        verify(carpoolBuddyService).delete(carpoolName,buddyUserName);
+        carpoolController.deleteBuddy(carpoolName, buddyUserName);
+        verify(carpoolBuddyService).delete(carpoolName, buddyUserName);
     }
 
     @Test
     public void shouldRedirectToDashboardAfterDeletingBuddyFromCarpool() throws Exception {
         String carpoolName = "carpoolName";
         String buddyUserName = "buddyUserName";
-        String s = carpoolController.deleteBuddy(carpoolName, buddyUserName, model,request);
+        String s = carpoolController.deleteBuddy(carpoolName, buddyUserName);
         assertThat(s, is("redirect:/admin/dashboard"));
     }
 
     @Test
     public void shouldSendEmailAndSetRequestSentStatusToTrue() throws Exception {
+        when(appProperties.getProperty(Constants.ADMIN_EMAIL)).thenReturn("yqhuang@thoughtworks.com");
+        when(request.getScheme()).thenReturn("http");
+        when(request.getServerName()).thenReturn("localhost");
+        when(request.getServerPort()).thenReturn(9090);
+        when(request.getContextPath()).thenReturn("/smartpool");
+
         carpoolController.startCarpool("carpool-1", request);
         verify(carpoolService).updateRequestSent("carpool-1", true);
+        String acceptLink = "http://localhost:9090/smartpool/carpool/carpool-1/acceptStartRequest";
+        String rejectLink = "http://localhost:9090/smartpool/carpool/carpool-1/rejectStartRequest";
+        verify(mailService).sendMailTo("yqhuang@thoughtworks.com", "Request to start carpool carpool-1", "Please start carpool-1<br> <a href='" + acceptLink + "'>Accept</a> <br> <a href='" + rejectLink + "'>Reject</a>");
     }
 
     @Test
     public void shouldSetCarpoolStatusToActiveWhenAcceptStartRequest() throws Exception {
-        Carpool carpool=new Carpool("carpool-1");
-        carpool.setStatus(Status.NOT_STARTED);
-        when(carpoolService.getByName("carpool-1")).thenReturn(carpool);
+        String carpoolName = "carpool-1";
+        carpoolController.acceptStartRequest(carpoolName);
 
-        carpoolController.acceptStartRequest("carpool-1", request);
-
-        verify(carpoolService).updateStatus(carpool.getName(), Status.ACTIVE);
+        verify(carpoolService).updateStatus(carpoolName, Status.ACTIVE);
     }
+
+    @Test
+    public void shouldSetRequestSentToFalseWhenRejectStartRequest() throws Exception {
+        String carpoolName = "carpool-1";
+        carpoolController.rejectStartRequest(carpoolName);
+
+        verify(carpoolService).updateRequestSent(carpoolName, false);
+    }
+
 
     @Test
     public void testModelShouldShowThatErrorsWereDetected() throws Exception {

@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+import smartpool.common.Constants;
 import smartpool.domain.Buddy;
 import smartpool.domain.CabType;
 import smartpool.domain.Carpool;
 import smartpool.domain.Status;
 import smartpool.service.*;
-import smartpool.service.BuddyService;
-import smartpool.service.CarpoolService;
-import smartpool.service.JoinRequestService;
-import smartpool.service.RouteService;
 import smartpool.web.form.CarpoolUpdateForm;
 import smartpool.web.form.CarpoolUpdateFormValidator;
 import smartpool.web.form.CreateCarpoolForm;
@@ -27,6 +24,7 @@ import smartpool.web.form.CreateCarpoolFormValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Properties;
 
 @Controller
 public class CarpoolController {
@@ -38,12 +36,13 @@ public class CarpoolController {
     private CreateCarpoolFormValidator validator;
     private MailService mailService;
     private JoinRequestService joinRequestService;
+    private Properties appProperties;
     private CarpoolUpdateFormValidator updateValidator;
 
     @Autowired
     public CarpoolController(CarpoolService carpoolService, JoinRequestService joinRequestService, BuddyService buddyService,
-                             RouteService routeService, CreateCarpoolFormValidator validator, MailService mailService, CarpoolBuddyService carpoolBuddyService,
-                             CarpoolUpdateFormValidator updateValidator) {
+                             RouteService routeService, CreateCarpoolFormValidator validator, MailService mailService,
+                             CarpoolBuddyService carpoolBuddyService, Properties appProperties, CarpoolUpdateFormValidator updateValidator) {
         this.carpoolService = carpoolService;
         this.joinRequestService = joinRequestService;
         this.buddyService = buddyService;
@@ -51,6 +50,7 @@ public class CarpoolController {
         this.carpoolBuddyService = carpoolBuddyService;
         this.validator = validator;
         this.mailService = mailService;
+        this.appProperties = appProperties;
         this.updateValidator = updateValidator;
     }
 
@@ -114,32 +114,33 @@ public class CarpoolController {
     }
 
     @RequestMapping(value = "/admin/{carpoolName}/{buddyUserName}/delete")
-    public String deleteBuddy(@PathVariable String carpoolName,@PathVariable String buddyUserName, ModelMap model, HttpServletRequest request) {
+    public String deleteBuddy(@PathVariable String carpoolName,@PathVariable String buddyUserName) {
         carpoolBuddyService.delete(carpoolName,buddyUserName);
         return "redirect:/admin/dashboard";
     }
 
     @RequestMapping(value = "/carpool/{name}/start", method = RequestMethod.GET)
     public String startCarpool(@PathVariable String name, HttpServletRequest request) {
-        String domainUrl =  request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-        String accepetLink = domainUrl + "/carpool/" + name + "/acceptStartRequest";
-        String rejectLink = domainUrl  + "/carpool/" + name + "/rejectStartRequest";
-        mailService.sendMailTo("yqhuang@thoughtworks.com", "Request to start carpool " + name,
-                "Please start " + name  + "<br> <a href=" + accepetLink + ">Accept</a> <br> <a href=" + rejectLink + ">Reject</a>");
-        carpoolService.updateRequestSent(name, true);
+        String domainUrl =  String.format(Constants.APPLICATION_PATH, request.getScheme(), request.getServerName(), request.getServerPort(), request.getContextPath());
+        String acceptLink = String.format(Constants.ACCEPT_START_CARPOOL_REQUEST, domainUrl, name);
+        String rejectLink = String.format(Constants.REJECT_START_CARPOOL_REQUEST, domainUrl, name);
+        String subject = String.format(Constants.START_CARPOOL_NOTIFICATION_SUBJECT, name);
+        String message = String.format(Constants.START_CARPOOL_NOTIFICATION_MESSAGE, name, acceptLink, rejectLink);
 
+        mailService.sendMailTo(appProperties.getProperty(Constants.ADMIN_EMAIL), subject, message);
+        carpoolService.updateRequestSent(name, true);
         return "redirect:/carpool/" + name;
     }
 
     @RequestMapping(value = "/carpool/{name}/acceptStartRequest", method = RequestMethod.GET)
-    public String acceptStartRequest(@PathVariable String name, HttpServletRequest request) {
+    public String acceptStartRequest(@PathVariable String name) {
         carpoolService.updateStatus(name, Status.ACTIVE);
 
         return "redirect:/carpool/" + name;
     }
 
     @RequestMapping(value = "/carpool/{name}/rejectStartRequest", method = RequestMethod.GET)
-    public String rejectStartRequest(@PathVariable String name, HttpServletRequest request) {
+    public String rejectStartRequest(@PathVariable String name) {
         carpoolService.updateRequestSent(name, false);
 
         return "redirect:/carpool/" + name;
