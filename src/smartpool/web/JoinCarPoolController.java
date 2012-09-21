@@ -46,7 +46,6 @@ public class JoinCarPoolController {
         this.carpoolBuddyService = carpoolBuddyService;
     }
 
-
     @RequestMapping(value = "carpool/join/{carpoolName}", method = RequestMethod.GET)
     public String getUserDetails(@PathVariable String carpoolName, ModelMap model, HttpServletRequest request) {
         String username = getCurrentUserNameFromRequest(request);
@@ -76,10 +75,19 @@ public class JoinCarPoolController {
         joinRequestForm.setUsername(username);
         joinRequestForm.setCarpoolName(carpoolName);
         Buddy buddy = buddyService.getBuddy(username);
-
         boolean requestSent = joinRequestService.isRequestSent(buddy, carpoolName);
-
         validator.validate(joinRequestForm, bindingResult);
+        String pickUpTimeStr = joinRequestForm.getPreferredPickupTime();
+        LocalTime pickUpTime;
+        if(pickUpTimeStr.length() < 5) {
+            pickUpTime = new LocalTime(0, 0);
+        } else {
+            pickUpTime = new LocalTime(Integer.parseInt(pickUpTimeStr.substring(0, 2)),
+                                             Integer.parseInt(pickUpTimeStr.substring(3, 5)));
+        }
+        if(pickUpTime.isAfter(carpoolService.getByName(carpoolName).getOfficeETA())){
+            bindingResult.rejectValue("preferredPickupTime", "field.invalid");
+        }
         if (requestSent || bindingResult.hasErrors()) {
             ModelMap model = new ModelMap();
             model.put("buddy", buddy);
@@ -93,11 +101,9 @@ public class JoinCarPoolController {
         }
     }
 
-
-    public boolean isJoinRequestPossible(String username, String carpool) {
-        return carpoolService.isValidCarpool(carpool) && carpoolService.canUserSendRequest(username, carpool);
+    public boolean isJoinRequestPossible(String username, String carpoolName) {
+        return carpoolService.isValidCarpool(carpoolName) && carpoolService.canUserSendRequest(username, carpoolName);
     }
-
 
     private String getCurrentUserNameFromRequest(HttpServletRequest request) {
         return buddyService.getUserNameFromCAS(request);
@@ -140,7 +146,6 @@ public class JoinCarPoolController {
             String carpoolName = joinRequestService.getCarpoolNameFromUid(uid);
 
             Buddy buddy = buddyService.getBuddy(buddyUserName);
-            JoinRequest joinRequest = joinRequestService.getJoinRequestByUserNameAndCarpoolName(buddyUserName, carpoolName);
             Carpool carpool = carpoolService.findCarpoolByName(carpoolName);
 
             joinRequestService.deletePendingRequest(uid);
