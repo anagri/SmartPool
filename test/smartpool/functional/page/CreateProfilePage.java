@@ -9,20 +9,24 @@ import org.openqa.selenium.support.How;
 public class CreateProfilePage extends Page {
 
     public static final String ADDRESS_NAME = "address";
+    public static final String CONTACT_NUMBER = "contactNumber";
+    public static final String PREFERRED_PICKUP_POINT = "preferredPickupPoint";
+    public static final String PREFERRED_PICKUP_TIME = "preferredPickupTime";
+    public static final String SUBMIT = "submit";
 
     @FindBy(how = How.NAME, using = ADDRESS_NAME)
     private WebElement addressTextArea;
 
-    @FindBy(how = How.NAME, using = "contactNumber")
+    @FindBy(how = How.NAME, using = CONTACT_NUMBER)
     private WebElement contactNumberTextBox;
 
-    @FindBy(how = How.NAME, using = "preferredPickupPoint")
+    @FindBy(how = How.NAME, using = PREFERRED_PICKUP_POINT)
     private WebElement preferredPickupPointTextBox;
 
-    @FindBy(how = How.NAME, using = "preferredPickupTime")
+    @FindBy(how = How.NAME, using = PREFERRED_PICKUP_TIME)
     private WebElement preferredPickupTimeTextBox;
 
-    @FindBy(how = How.NAME, using = "submit")
+    @FindBy(how = How.NAME, using = SUBMIT)
     private WebElement submitButton;
 
     public CreateProfilePage(WebDriver webDriver) {
@@ -31,7 +35,7 @@ public class CreateProfilePage extends Page {
 
     @Override
     public void waitForThePageToLoad() {
-        waitForElementToLoad(By.name(ADDRESS_NAME));
+        waitForElementToLoad(By.name(CONTACT_NUMBER));
     }
 
     public ViewProfilePage enterProfileDetails() {
