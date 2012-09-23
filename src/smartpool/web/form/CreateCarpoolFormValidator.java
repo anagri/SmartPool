@@ -18,8 +18,10 @@ public class CreateCarpoolFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         CreateCarpoolForm form = (CreateCarpoolForm) target;
 
-        if(form.from == null || form.from.trim().isEmpty() || form.from.equals("")) errors.rejectValue("from", Constants.FIELD_REQUIRED);
-        if(form.to == null || form.to.trim().isEmpty() || form.to.equals("")) errors.rejectValue("to", Constants.FIELD_REQUIRED);
+        if(form.from == null || form.from.equals("")) errors.rejectValue("from", Constants.FIELD_REQUIRED);
+        else if (form.from.trim().isEmpty())errors.rejectValue("from",Constants.FIELD_INVALID);
+        if(form.to == null || form.to.equals("")) errors.rejectValue("to", Constants.FIELD_REQUIRED);
+        else if (form.to.trim().isEmpty())errors.rejectValue("to",Constants.FIELD_INVALID);
 
         if(form.cabType == null || form.cabType.equals("")) errors.rejectValue("cabType", Constants.FIELD_REQUIRED);
         if(form.pickupPoint  == null || form.pickupPoint.equals("")) errors.rejectValue("pickupPoint", Constants.FIELD_REQUIRED);
